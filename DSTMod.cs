@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 namespace DSTMod_WildFrost
 {
@@ -29,157 +30,14 @@ namespace DSTMod_WildFrost
 
         public override string Description => "A mod that get idea from don't starve";
 
-        private List<object> allCard = new List<object>();
-
         private void CreateModAssets()
         {
             //Code for Status Effects
 
-            //Code for Cards
-            WendyCard();
-            AbigailCard();
-            WortoxCard();
-
-            foreach (var item in allCard)
-            {
-                assets.Add(item);
-            }
-            assets.Add(TribeCreation());
-
-            preLoaded = true;
-        }
-
-        private object TribeCreation()
-        {
-            return new ClassDataBuilder(this)
-                .Create<ClassData>("DST")
-                .WithFlag("Images/DSTFlag.png")
-                .WithSelectSfxEvent(
-                    FMODUnity.RuntimeManager.PathToEventReference("event:/sfx/card/draw_multi")
-                )
-                .SubscribeToAfterAllBuildEvent( 
-                    (data) =>
-                    {
-                        GameObject gameObject =
-                            data.characterPrefab.gameObject.InstantiateKeepName(); 
-                        UnityEngine.Object.DontDestroyOnLoad(gameObject); 
-                        gameObject.name = "Player (dstmod.DST)"; 
-                        data.characterPrefab = gameObject.GetComponent<Character>();
-                        data.id = "dstmod.DST"; 
-
-                        data.leaders = DataList<CardData>(
-                            "wendy",
-                            "wortox",
-                            "Leader1_heal_on_kill"
-                        );
-
-                        //Inventory inventory = ScriptableObject.CreateInstance<Inventory>();
-                        //inventory.deck.list = DataList<CardData>("superMuncher", "SnowGlobe", "Sword", "Gearhammer", "Dart", "EnergyDart", "SunlightDrum", "Junkhead", "IceDice").ToList();
-                        //inventory.upgrades.Add(TryGet<CardUpgradeData>("CardUpgradeCritical"));
-                        //data.startingInventory = inventory;
-
-                        //RewardPool unitPool = CreateRewardPool("DrawUnitPool", "Units", DataList<CardData>(
-                        //    "NakedGnome", "GuardianGnome", "Havok",
-                        //    "Gearhead", "Bear", "TheBaker",
-                        //    "Pimento", "Pootie", "Tusk",
-                        //    "Ditto", "Flash", "TinyTyko"));
-
-                        //RewardPool itemPool = CreateRewardPool("DrawItemPool", "Items", DataList<CardData>(
-                        //    "ShellShield", "StormbearSpirit", "PepperFlag", "SporePack", "Woodhead",
-                        //    "BeepopMask", "Dittostone", "Putty", "Dart", "SharkTooth",
-                        //    "Bumblebee", "Badoo", "Juicepot", "PomDispenser", "LuminShard",
-                        //    "Wrenchy", "Vimifier", "OhNo", "Madness", "Joob"));
-
-                        //RewardPool charmPool = CreateRewardPool("DrawCharmPool", "Charms", DataList<CardUpgradeData>(
-                        //    "CardUpgradeSuperDraw", "CardUpgradeTrash",
-                        //    "CardUpgradeInk", "CardUpgradeOverload",
-                        //    "CardUpgradeMime", "CardUpgradeShellBecomesSpice",
-                        //    "CardUpgradeAimless"));
-
-                        //data.rewardPools = new RewardPool[]
-                        //{
-                        //unitPool,
-                        //itemPool,
-                        //charmPool,
-                        //Extensions.GetRewardPool("GeneralUnitPool"),
-                        //Extensions.GetRewardPool("GeneralItemPool"),
-                        //Extensions.GetRewardPool("GeneralCharmPool"),
-                        //Extensions.GetRewardPool("GeneralModifierPool"),
-                        //Extensions.GetRewardPool("SnowUnitPool"),
-                        //Extensions.GetRewardPool("SnowItemPool"),
-                        //Extensions.GetRewardPool("SnowCharmPool"),
-                        //};
-                    }
-                );
-        }
-
-        private void WendyCard()
-        {
-            List<object> wendy = new List<object>();
-            //Wendy Card
-            wendy.Add(
-                new CardDataBuilder(this)
-                    .CreateUnit("wendy", "Wendy")
-                    .WithCardType("Leader")
-                    .SetSprites("Wendy.png", "Wendy_BG.png")
-                    .SetStats(8, 2, 4)
-                    .SubscribeToAfterAllBuildEvent<CardData>(
-                        delegate(CardData data)
-                        {
-                            data.startWithEffects = new CardData.StatusEffectStacks[1]
-                            {
-                                SStack("When Deployed Summon Abigail", 1),
-                            };
-                            data.createScripts = new CardScript[] //These scripts run when right before Events.OnCardDataCreated
-                            {
-                                GiveUpgrade(), //By our definition, no argument will give a crown
-                                AddRandomHealth(-2, 2),
-                                AddRandomDamage(-1, 1),
-                                AddRandomCounter(-1, 1),
-                            };
-                        }
-                    )
-            );
-
-            //Wendy Effect
-            wendy.Add(
-                StatusCopy("Summon Fallow", "Summon Abigail")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
-                        delegate(StatusEffectData data)
-                        {
-                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("abigail"); //Alternatively, I could've put mhcdc9.wildfrost.dstmod.abigail
-                        }
-                    )
-            );
-            wendy.Add(
-                StatusCopy("Instant Summon Fallow", "Instant Summon Abigail")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
-                        delegate(StatusEffectData data)
-                        {
-                            ((StatusEffectInstantSummon)data).targetSummon =
-                                TryGet<StatusEffectData>("Summon Abigail") as StatusEffectSummon;
-                        }
-                    )
-            );
-            wendy.Add(
-                StatusCopy("When Deployed Summon Wowee", "When Deployed Summon Abigail")
-                    .WithText("When deployed, summon {0}")
-                    .WithTextInsert("<card=tgestudio.wildfrost.dstmod.abigail>")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
-                        delegate(StatusEffectData data)
-                        {
-                            ((StatusEffectApplyXWhenDeployed)data).effectToApply =
-                                TryGet<StatusEffectData>("Instant Summon Abigail");
-                        }
-                    )
-            );
-            allCard.Add(wendy);
-        }
-
-        private void AbigailCard()
-        {
-            List<object> abigail = new List<object>();
-            abigail.Add(
+            //Code for Card
+            #region Abigail Card
+            //Abigail Card
+            assets.Add(
                 new CardDataBuilder(this)
                     .CreateUnit("abigail", "Abigail")
                     .SetSprites("Abigail.png", "Abigail_BG.png")
@@ -196,7 +54,8 @@ namespace DSTMod_WildFrost
                         }
                     )
             );
-            abigail.Add(
+            //Abigal Effect
+            assets.Add(
                 new StatusEffectDataBuilder(this)
                     .Create<StatusEffectTriggerWhenCertainAllyAttacks>(
                         "Trigger When Wendy In Row Attacks"
@@ -220,15 +79,116 @@ namespace DSTMod_WildFrost
                         }
                     )
             );
-            Debug.Log("Abigail Card Created");
-            allCard.Add(abigail);
-        }
+            #endregion
 
-        private void WortoxCard()
-        {
-            List<object> wortox = new List<object>();
+            #region Wendy Card
+            //Wendy Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("wendy", "Wendy")
+                    .WithCardType("Leader")
+                    .SetSprites("Wendy.png", "Wendy_BG.png")
+                    .SetStats(8, 2, 4)
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("When Deployed Summon Abigail", 1),
+                            };
+                            data.createScripts = new CardScript[] //These scripts run when right before Events.OnCardDataCreated
+                            {
+                                GiveUpgrade(), //By our definition, no argument will give a crown
+                                AddRandomHealth(-2, 2),
+                                AddRandomDamage(-1, 1),
+                                AddRandomCounter(-1, 1),
+                            };
+                        }
+                    )
+            );
+            //Wendy Effect
+            assets.Add(
+                StatusCopy("Summon Fallow", "Summon Abigail")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("abigail");
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("Instant Summon Fallow", "Instant Summon Abigail")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectInstantSummon)data).targetSummon =
+                                TryGet<StatusEffectData>("Summon Abigail") as StatusEffectSummon;
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("When Deployed Summon Wowee", "When Deployed Summon Abigail")
+                    .WithText("When deployed, summon {0}")
+                    .WithTextInsert("<card=tgestudio.wildfrost.dstmod.abigail>")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXWhenDeployed)data).effectToApply =
+                                TryGet<StatusEffectData>("Instant Summon Abigail");
+                        }
+                    )
+            );
+            #endregion
+
+            #region Chester Card
+            //Chester Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("chester", "Chester")
+                    .SetSprites("Dummy.png", "Wendy_BG.png")
+                    .SetStats(30, null, 0)
+                    .WithCardType("Summoned")
+                    .WithFlavour("A mobile chest")
+            );
+            //Chester Effect
+            assets.Add(
+                StatusCopy("Summon Plep", "Summon Chester")
+                    .WithText("Summon <card=tgestudio.wildfrost.dstmod.chester>")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate (StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("chester");
+                        }
+                    )
+            );
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("eyeBone", "Eye Bone")
+                    .WithCardType("Item")
+                    .SetSprites("Dummy.png", "Wendy_BG.png")
+                    .SetTraits(TStack("Consume", 1))
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate (CardData data)
+                        {
+                            data.canPlayOnBoard = true;
+                            data.canPlayOnFriendly = true;
+                            data.canShoveToOtherRow = true;
+                            data.needsTarget = true;
+                            data.playOnSlot = true;
+
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Summon Chester", 1)
+                            };
+                   
+                        }
+                    )
+            );
+            #endregion
+
+            #region Wortox Card
             //Wortox Card
-            wortox.Add(
+            assets.Add(
                 new CardDataBuilder(this)
                     .CreateUnit("wortox", "Wortox")
                     .WithCardType("Leader")
@@ -251,7 +211,7 @@ namespace DSTMod_WildFrost
                         }
                     )
             );
-            wortox.Add(
+            assets.Add(
                 StatusCopy("Trigger When Enemy Is Killed", "When Enemy Is Killed Gain Card")
                     .WithText(
                         "When an Enemy is killed, Add <card=tgestudio.wildfrost.dstmod.soul> or <card=tgestudio.wildfrost.dstmod.souls> to hand"
@@ -266,7 +226,7 @@ namespace DSTMod_WildFrost
             );
 
             //Wortox Effect
-            wortox.Add(
+            assets.Add(
                 StatusCopy("Summon Junk", "Summon Soul")
                     .SubscribeToAfterAllBuildEvent<StatusEffectData>(
                         delegate(StatusEffectData data)
@@ -275,7 +235,7 @@ namespace DSTMod_WildFrost
                         }
                     )
             );
-            wortox.Add(
+            assets.Add(
                 StatusCopy("Summon Junk", "Summon Souls")
                     .SubscribeToAfterAllBuildEvent<StatusEffectData>(
                         delegate(StatusEffectData data)
@@ -284,7 +244,7 @@ namespace DSTMod_WildFrost
                         }
                     )
             );
-            wortox.Add(
+            assets.Add(
                 new StatusEffectDataBuilder(this)
                     .Create<StatusEffectInstantSummonRandomSoul>("Instant Summon Soul In Hand")
                     .SubscribeToAfterAllBuildEvent<StatusEffectInstantSummon>(
@@ -300,7 +260,7 @@ namespace DSTMod_WildFrost
             );
 
             //Soul Effect
-            wortox.Add(
+            assets.Add(
                 new StatusEffectDataBuilder(this)
                     .Create<StatusEffectApplyXOnCardPlayed>("On Card Played Heal To Allies")
                     .WithText("Restore {0} to all allies")
@@ -318,7 +278,7 @@ namespace DSTMod_WildFrost
             );
 
             //Soul Card
-            wortox.Add(
+            assets.Add(
                 new CardDataBuilder(this)
                     .CreateItem("souls", "Souls")
                     .SetSprites("Soul.png", "Wendy_BG.png")
@@ -333,15 +293,92 @@ namespace DSTMod_WildFrost
                         }
                     )
             );
-            wortox.Add(
+            assets.Add(
                 new CardDataBuilder(this)
                     .CreateItem("soul", "Soul")
                     .SetSprites("Soul.png", "Wendy_BG.png")
                     .SetTraits(TStack("Zoomlin", 1), TStack("Consume", 1))
                     .SetAttackEffect(SStack("Heal", 3))
             );
-            Debug.Log("Wortox Card Created");
-            allCard.Add(wortox);
+            #endregion
+
+            #region Tribe
+            //Add Tribe
+            assets.Add(
+                TribeCopy("Magic", "DST")
+                    .WithFlag("Images/DSTFlag.png")
+                    .WithSelectSfxEvent(
+                        FMODUnity.RuntimeManager.PathToEventReference("event:/sfx/card/draw_multi")
+                    )
+                    .SubscribeToAfterAllBuildEvent(
+                        (data) =>
+                        {
+                            GameObject gameObject =
+                                data.characterPrefab.gameObject.InstantiateKeepName();
+                            UnityEngine.Object.DontDestroyOnLoad(gameObject);
+                            gameObject.name = "Player (dstmod.DST)";
+                            data.characterPrefab = gameObject.GetComponent<Character>();
+                            data.id = "dstmod.DST";
+
+                            data.leaders = DataList<CardData>(
+                                "wendy",
+                                "wortox",
+                                "Leader1_heal_on_kill"
+                            );
+
+                            Inventory inventory = ScriptableObject.CreateInstance<Inventory>();
+                            inventory.deck.list = DataList<CardData>(
+                                    "eyeBone",
+                                    "SnowGlobe",
+                                    "Sword",
+                                    "Gearhammer",
+                                    "Dart",
+                                    "EnergyDart",
+                                    "SunlightDrum",
+                                    "Junkhead",
+                                    "IceDice"
+                                )
+                                .ToList();
+                            //inventory.upgrades.Add(TryGet<CardUpgradeData>("CardUpgradeCritical"));
+                            data.startingInventory = inventory;
+
+                            //RewardPool unitPool = CreateRewardPool("DrawUnitPool", "Units", DataList<CardData>(
+                            //    "NakedGnome", "GuardianGnome", "Havok",
+                            //    "Gearhead", "Bear", "TheBaker",
+                            //    "Pimento", "Pootie", "Tusk",
+                            //    "Ditto", "Flash", "TinyTyko"));
+
+                            //RewardPool itemPool = CreateRewardPool("DrawItemPool", "Items", DataList<CardData>(
+                            //    "ShellShield", "StormbearSpirit", "PepperFlag", "SporePack", "Woodhead",
+                            //    "BeepopMask", "Dittostone", "Putty", "Dart", "SharkTooth",
+                            //    "Bumblebee", "Badoo", "Juicepot", "PomDispenser", "LuminShard",
+                            //    "Wrenchy", "Vimifier", "OhNo", "Madness", "Joob"));
+
+                            //RewardPool charmPool = CreateRewardPool("DrawCharmPool", "Charms", DataList<CardUpgradeData>(
+                            //    "CardUpgradeTrash",
+                            //    "CardUpgradeInk", "CardUpgradeOverload",
+                            //    "CardUpgradeMime", "CardUpgradeShellBecomesSpice",
+                            //    "CardUpgradeAimless"));
+
+                            //data.rewardPools = new RewardPool[]
+                            //{
+                            //unitPool,
+                            //itemPool,
+                            //charmPool,
+                            //Extensions.GetRewardPool("GeneralUnitPool"),
+                            //Extensions.GetRewardPool("GeneralItemPool"),
+                            //Extensions.GetRewardPool("GeneralCharmPool"),
+                            //Extensions.GetRewardPool("GeneralModifierPool"),
+                            //Extensions.GetRewardPool("SnowUnitPool"),
+                            //Extensions.GetRewardPool("SnowItemPool"),
+                            //Extensions.GetRewardPool("SnowCharmPool"),
+                            //};
+                        }
+                    )
+            );
+            #endregion
+
+            preLoaded = true;
         }
 
         public override List<T> AddAssets<T, Y>()
