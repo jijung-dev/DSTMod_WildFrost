@@ -35,51 +35,7 @@ namespace DSTMod_WildFrost
             //Code for Status Effects
 
             //Code for Card
-            #region Abigail Card
-            //Abigail Card
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateUnit("abigail", "Abigail")
-                    .SetSprites("Abigail.png", "Abigail_BG.png")
-                    .SetStats(4, 3, 0)
-                    .WithCardType("Summoned")
-                    .SetTraits(new CardData.TraitStacks(Get<TraitData>("Barrage"), 1))
-                    .SubscribeToAfterAllBuildEvent<CardData>(
-                        delegate(CardData data)
-                        {
-                            data.startWithEffects = new CardData.StatusEffectStacks[1]
-                            {
-                                SStack("Trigger When Wendy In Row Attacks", 1),
-                            };
-                        }
-                    )
-            );
-            //Abigal Effect
-            assets.Add(
-                new StatusEffectDataBuilder(this)
-                    .Create<StatusEffectTriggerWhenCertainAllyAttacks>(
-                        "Trigger When Wendy In Row Attacks"
-                    )
-                    .WithCanBeBoosted(false)
-                    .WithText("Trigger when {0} in row attacks")
-                    .WithTextInsert("<card=tgestudio.wildfrost.dstmod.wendy>")
-                    .WithType("")
-                    .FreeModify(
-                        delegate(StatusEffectData data)
-                        {
-                            data.isReaction = true;
-                            data.stackable = false;
-                        }
-                    )
-                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
-                        delegate(StatusEffectData data)
-                        {
-                            ((StatusEffectTriggerWhenCertainAllyAttacks)data).ally =
-                                TryGet<CardData>("wendy");
-                        }
-                    )
-            );
-            #endregion
+            #region Leader
 
             #region Wendy Card
             //Wendy Card
@@ -88,7 +44,7 @@ namespace DSTMod_WildFrost
                     .CreateUnit("wendy", "Wendy")
                     .WithCardType("Leader")
                     .SetSprites("Wendy.png", "Wendy_BG.png")
-                    .SetStats(8, 2, 4)
+                    .SetStats(6, 2, 2)
                     .SubscribeToAfterAllBuildEvent<CardData>(
                         delegate(CardData data)
                         {
@@ -99,9 +55,9 @@ namespace DSTMod_WildFrost
                             data.createScripts = new CardScript[] //These scripts run when right before Events.OnCardDataCreated
                             {
                                 GiveUpgrade(), //By our definition, no argument will give a crown
-                                AddRandomHealth(-2, 2),
+                                AddRandomHealth(-1, 2),
                                 AddRandomDamage(-1, 1),
-                                AddRandomCounter(-1, 1),
+                                AddRandomCounter(0, 1),
                             };
                         }
                     )
@@ -140,52 +96,6 @@ namespace DSTMod_WildFrost
             );
             #endregion
 
-            #region Chester Card
-            //Chester Card
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateUnit("chester", "Chester")
-                    .SetSprites("Dummy.png", "Wendy_BG.png")
-                    .SetStats(30, null, 0)
-                    .WithCardType("Summoned")
-                    .WithFlavour("A mobile chest")
-            );
-            //Chester Effect
-            assets.Add(
-                StatusCopy("Summon Plep", "Summon Chester")
-                    .WithText("Summon <card=tgestudio.wildfrost.dstmod.chester>")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
-                        delegate (StatusEffectData data)
-                        {
-                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("chester");
-                        }
-                    )
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("eyeBone", "Eye Bone")
-                    .WithCardType("Item")
-                    .SetSprites("Dummy.png", "Wendy_BG.png")
-                    .SetTraits(TStack("Consume", 1))
-                    .SubscribeToAfterAllBuildEvent<CardData>(
-                        delegate (CardData data)
-                        {
-                            data.canPlayOnBoard = true;
-                            data.canPlayOnFriendly = true;
-                            data.canShoveToOtherRow = true;
-                            data.needsTarget = true;
-                            data.playOnSlot = true;
-
-                            data.startWithEffects = new CardData.StatusEffectStacks[1]
-                            {
-                                SStack("Summon Chester", 1)
-                            };
-                   
-                        }
-                    )
-            );
-            #endregion
-
             #region Wortox Card
             //Wortox Card
             assets.Add(
@@ -193,7 +103,7 @@ namespace DSTMod_WildFrost
                     .CreateUnit("wortox", "Wortox")
                     .WithCardType("Leader")
                     .SetSprites("Wortox.png", "Wendy_BG.png")
-                    .SetStats(5, 1, 2)
+                    .SetStats(6, 2, 2)
                     .SubscribeToAfterAllBuildEvent<CardData>(
                         delegate(CardData data)
                         {
@@ -204,9 +114,9 @@ namespace DSTMod_WildFrost
                             data.createScripts = new CardScript[]
                             {
                                 GiveUpgrade(),
-                                AddRandomHealth(-2, 2),
-                                AddRandomDamage(-1, 1),
-                                AddRandomCounter(-1, 1),
+                                AddRandomHealth(-1, 1),
+                                AddRandomDamage(-1, 2),
+                                AddRandomCounter(0, 1),
                             };
                         }
                     )
@@ -302,6 +212,611 @@ namespace DSTMod_WildFrost
             );
             #endregion
 
+            #endregion
+
+            #region Companion
+
+            #region Abigail Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("abigail", "Abigail")
+                    .SetSprites("Abigail.png", "Abigail_BG.png")
+                    .SetStats(4, 3, 0)
+                    .WithCardType("Summoned")
+                    .SetTraits(new CardData.TraitStacks(Get<TraitData>("Barrage"), 1))
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate (CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Trigger When Wendy Attacks", 1)
+                            };
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectTriggerWhenCertainAllyAttacks>("Trigger When Wendy Attacks")
+                    .WithCanBeBoosted(false)
+                    .WithText("Trigger when {0} attacks")
+                    .WithTextInsert("<card=tgestudio.wildfrost.dstmod.wendy>")
+                    .FreeModify(
+                        delegate(StatusEffectData data)
+                        {
+                            data.isReaction = true;
+                            data.stackable = false;
+                        }
+                    )
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectTriggerWhenCertainAllyAttacks)data).ally =
+                                TryGet<CardData>("wendy");
+                        }
+                    )
+            );
+
+            #endregion
+
+            #region Chester Card
+            //Chester Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("chester", "Chester")
+                    .SetSprites("Chester.png", "Wendy_BG.png")
+                    .SetStats(20, null, 0)
+                    .WithCardType("Summoned")
+                    .WithFlavour("A mobile chest")
+            );
+            //Chester Effect
+            assets.Add(
+                StatusCopy("Summon Plep", "Summon Chester")
+                    .WithText("Summon <card=tgestudio.wildfrost.dstmod.chester>")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("chester");
+                        }
+                    )
+            );
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("eyeBone", "Eye Bone")
+                    .WithCardType("Item")
+                    .SetSprites("EyeBone.png", "Wendy_BG.png")
+                    .SetTraits(TStack("Consume", 1))
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.canPlayOnBoard = true;
+                            data.canPlayOnFriendly = true;
+                            data.canShoveToOtherRow = true;
+                            data.needsTarget = true;
+                            data.playOnSlot = true;
+
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Summon Chester", 1),
+                            };
+                        }
+                    )
+            );
+            #endregion
+
+            #region IceChester Card
+            //Chester Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("iceChester", "Ice Chester")
+                    .SetSprites("IceChester.png", "Wendy_BG.png")
+                    .SetStats(15, null, 0)
+                    .WithCardType("Friendly")
+                    .SetStartWithEffect(SStack("When Hit Apply Snow To Attacker", 2))
+            );
+            #endregion
+
+            #region ShadowChester Card
+            //Chester Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("shadowChester", "Shadow Chester")
+                    .SetSprites("ShadowChester.png", "Wendy_BG.png")
+                    .SetStats(12, null, 0)
+                    .WithCardType("Friendly")
+                    .SetStartWithEffect(SStack("When Hit Apply Demonize To Attacker", 1))
+            );
+            #endregion
+
+            #region Glommer Card
+            //Gloomer Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("glommer", "Glommer")
+                    .SetSprites("Glommer.png", "Wendy_BG.png")
+                    .SetStats(8, null, 4)
+                    .WithCardType("Friendly")
+                    .SetStartWithEffect(SStack("On Turn Add Attack To Allies", 2))
+            );
+            #endregion
+
+            #region Tallbird Card
+
+            #region Tallbird Egg
+            //TallbirdEgg Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("tallbirdEgg", "Tallbird Egg")
+                    .SetSprites("TallBirdEgg.png", "Wendy_BG.png")
+                    .SetStats(1, null, 5)
+                    .WithCardType("Friendly")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[2]
+                            {
+                                SStack("On Turn Summon Smallbird", 1),
+                                SStack("Destroy Self After Turn", 1),
+                            };
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXOnTurn>("On Turn Summon Smallbird")
+                    .WithText("Summon <card=tgestudio.wildfrost.dstmod.smallbird>")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXOnTurn)data).applyToFlags = StatusEffectApplyX
+                                .ApplyToFlags
+                                .Self;
+                            ((StatusEffectApplyXOnTurn)data).effectToApply =
+                                TryGet<StatusEffectData>("Instant Summon Smallbird");
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("Summon Fallow", "Summon Smallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("smallbird");
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("Instant Summon Fallow", "Instant Summon Smallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectInstantSummon)data).targetSummon =
+                                TryGet<StatusEffectData>("Summon Smallbird") as StatusEffectSummon;
+                        }
+                    )
+            );
+            #endregion
+
+            #region BabyTallBird
+            //BabyTallBirdCard
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("smallbird", "Smallbird")
+                    .SetSprites("SmallBird.png", "Wendy_BG.png")
+                    .WithText(
+                        "When <keyword=counter> reaches 0 summon <card=tgestudio.wildfrost.dstmod.smallishTallbird> then destroy self"
+                    )
+                    .SetStats(5, 3, 5)
+                    .WithCardType("Friendly")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[3]
+                            {
+                                SStack("On Turn Summon Smallish Tallbird", 1),
+                                SStack("Destroy Self After Counter Turn", 1),
+                                SStack("Trigger When Ally Is Hit", 1),
+                            };
+                        }
+                    )
+            );
+            //BabyTallBird Effect
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXOnCounterTurn>("On Turn Summon Smallish Tallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXOnCounterTurn)data).applyToFlags =
+                                StatusEffectApplyX.ApplyToFlags.Self;
+                            ((StatusEffectApplyXOnCounterTurn)data).effectToApply =
+                                TryGet<StatusEffectData>("Instant Summon Smallish Tallbird");
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this).Create<StatusEffectDestroySelfAfterCounterTurn>(
+                    "Destroy Self After Counter Turn"
+                )
+            );
+            assets.Add(
+                StatusCopy("Summon Fallow", "Summon Smallish Tallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>(
+                                "smallishTallbird"
+                            );
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("Instant Summon Fallow", "Instant Summon Smallish Tallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectInstantSummon)data).targetSummon =
+                                TryGet<StatusEffectData>("Summon Smallish Tallbird")
+                                as StatusEffectSummon;
+                        }
+                    )
+            );
+            #endregion
+
+            #region SmallishTallBird
+            //SmallishTallBird Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("smallishTallbird", "Smallish Tallbird")
+                    .WithText(
+                        "When <keyword=counter> reaches 0 summon <card=tgestudio.wildfrost.dstmod.tallbird> then destroy self"
+                    )
+                    .SetSprites("SmallishBird.png", "Wendy_BG.png")
+                    .SetStats(8, 5, 5)
+                    .WithCardType("Friendly")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[3]
+                            {
+                                SStack("On Turn Summon Tallbird", 1),
+                                SStack("Destroy Self After Counter Turn", 1),
+                                SStack("Trigger When Ally Is Hit", 1),
+                            };
+                        }
+                    )
+            );
+            //JuvenileTallBird Effect
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXOnCounterTurn>("On Turn Summon Tallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXOnCounterTurn)data).applyToFlags =
+                                StatusEffectApplyX.ApplyToFlags.Self;
+                            ((StatusEffectApplyXOnCounterTurn)data).effectToApply =
+                                TryGet<StatusEffectData>("Instant Summon Tallbird");
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("Summon Fallow", "Summon Tallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>("tallbird");
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy("Instant Summon Fallow", "Instant Summon Tallbird")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectInstantSummon)data).targetSummon =
+                                TryGet<StatusEffectData>("Summon Tallbird") as StatusEffectSummon;
+                        }
+                    )
+            );
+            #endregion
+
+            #region TallBird
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("tallbird", "Tallbird")
+                    .SetSprites("TallBird.png", "Wendy_BG.png")
+                    .SetStats(18, 10, 4)
+                    .WithCardType("Friendly")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("MultiHit", 1),
+                            };
+                        }
+                    )
+            );
+            #endregion
+
+            #endregion
+
+            #region FriendlyFly Card
+            //Gloomer Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("friendlyFly", "Friendly Fly")
+                    .SetSprites("FriendFly.png", "Wendy_BG.png")
+                    .SetStats(2, null, 4)
+                    .WithCardType("Friendly")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("On Turn Boost Allies Effect", 1),
+                            };
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXOnTurn>("On Turn Boost Allies Effect")
+                    .WithText("Boost allies effect by <{a}>")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXOnTurn)data).applyToFlags = StatusEffectApplyX
+                                .ApplyToFlags
+                                .Allies;
+                            ((StatusEffectApplyXOnTurn)data).effectToApply =
+                                TryGet<StatusEffectData>("Increase Effects");
+                        }
+                    )
+            );
+            #endregion
+
+            #region RabbitMan Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("rabbitMan", "Rabbit Man")
+                    .SetSprites("Dummy.png", "Wendy_BG.png")
+                    .SetStats(8, 6, 3)
+                    .WithCardType("Friendly")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[2]
+                            {
+                                SStack("After Hit Escape", 1),
+                                SStack("After Hit Summon Rabbit Man Injured In Hand", 1),
+                            };
+                        }
+                    )
+            );
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateUnit("rabbitManInjured", "Rabbit Man Injured")
+                    .SetSprites("Dummy.png", "Wendy_BG.png")
+                    .SetStats(8, 6, 3)
+                    .WithCardType("Friendly")
+                    //.Traits(TStack("Injured", 1))
+                    //.SubscribeToAfterAllBuildEvent<CardData>(
+                    //    delegate (CardData data)
+                    //    {
+                    //        data.traits = new List<CardData.TraitStacks>()
+                    //        {
+                    //            TStack("Injured", 1)
+                    //        };
+                    //        //data.attackEffects = new CardData.StatusEffectStacks[1]
+                    //        //{
+                    //        //    SStack("Injury", 1),
+                    //        //};
+                    //    }
+                    //)
+            );
+            assets.Add(
+                StatusCopy("Summon Junk", "Summon Rabbit Man Injured")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectSummon)data).summonCard = TryGet<CardData>(
+                                "rabbitManInjured"
+                            );
+                        }
+                    )
+            );
+            assets.Add(
+                StatusCopy(
+                        "Instant Summon Junk In Hand",
+                        "Instant Summon Rabbit Man Injured In Hand"
+                    )
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectInstantSummon)data).targetSummon =
+                                TryGet<StatusEffectSummon>("Summon Rabbit Man Injured");
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXWhenHit>("After Hit Escape")
+                    .WithText("After hit escape from the battle")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXWhenHit)data).applyToFlags = StatusEffectApplyX
+                                .ApplyToFlags
+                                .Self;
+                            ((StatusEffectApplyXWhenHit)data).effectToApply =
+                                TryGet<StatusEffectData>("Escape");
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXWhenHit>("After Hit Summon Rabbit Man Injured In Hand")
+                    .WithText("Lmao After hit escape from the battle")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXWhenHit)data).applyToFlags = StatusEffectApplyX
+                                .ApplyToFlags
+                                .Self;
+                            ((StatusEffectApplyXWhenHit)data).effectToApply =
+                                TryGet<StatusEffectData>("Instant Summon Rabbit Man Injured In Hand");
+                        }
+                    )
+            );
+            #endregion
+
+            #endregion
+
+            #region Items
+
+            #region Spear Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("spear", "Spear")
+                    .SetSprites("Spear.png", "Wendy_BG.png")
+                    .SetStats(null, 2, 0)
+                    .WithCardType("Item")
+            );
+            #endregion
+
+            #region HamBat Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("hamBat", "Ham Bat")
+                    .SetStats(null, 4, 0)
+                    .SetSprites("HamBat.png", "Wendy_BG.png")
+                    .WithCardType("Item")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate(CardData data)
+                        {
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("On Card Played Reduce Attack", 1),
+                            };
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXOnCardPlayed>("On Card Played Reduce Attack")
+                    .WithText("Reduce <keyword=attack> by <{a}> when played")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate(StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXOnCardPlayed)data).applyToFlags = StatusEffectApplyX
+                                .ApplyToFlags
+                                .Self;
+                            ((StatusEffectApplyXOnCardPlayed)data).effectToApply =
+                                TryGet<StatusEffectData>("Reduce Attack");
+                        }
+                    )
+            );
+            #endregion
+
+            #region IceStaff Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("iceStaff", "Ice Staff")
+                    .SetSprites("IceStaff.png", "Wendy_BG.png")
+                    .WithCardType("Item")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate (CardData data)
+                        {
+                            data.attackEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Snow", 1)
+                            };
+                            data.startWithEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("On Card Played Increase Snow", 1)
+                            };
+                        }
+                    )
+            );
+            assets.Add(
+                new StatusEffectDataBuilder(this)
+                    .Create<StatusEffectApplyXOnCardPlayed>("On Card Played Increase Snow")
+                    .WithText("Increase <keyword=snow> by 1 when played")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectData>(
+                        delegate (StatusEffectData data)
+                        {
+                            ((StatusEffectApplyXOnCardPlayed)data).applyToFlags = StatusEffectApplyX
+                                .ApplyToFlags
+                                .Self;
+                            ((StatusEffectApplyXOnCardPlayed)data).effectToApply =
+                                TryGet<StatusEffectData>("Increase Effects");
+                        }
+                    )
+            );
+            #endregion
+
+            #region WalkingCane Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("walkingCane", "Walking Cane")
+                    .SetDamage(1)
+                    .SetSprites("WalkingCane.png", "Wendy_BG.png")
+                    .WithCardType("Item")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate (CardData data)
+                        {
+                            data.attackEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Reduce Counter", 3)
+                            }; 
+                        }
+                    )
+            );
+            #endregion
+
+            #region LogSuit Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("logSuit", "Log Suit")
+                    .SetSprites("LogSuit.png", "Wendy_BG.png")
+                    .WithCardType("Item")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate (CardData data)
+                        {
+                            data.attackEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Shell", 2)
+                            };
+                        }
+                    )
+            );
+            #endregion
+
+            #region BoosterShot Card
+            assets.Add(
+                new CardDataBuilder(this)
+                    .CreateItem("boosterShot", "Booster Shot")
+                    .SetSprites("BoosterShot.png", "Wendy_BG.png")
+                    .WithCardType("Item")
+                    .SubscribeToAfterAllBuildEvent<CardData>(
+                        delegate (CardData data)
+                        {
+                            data.traits = new List<CardData.TraitStacks>()
+                            {
+                                TStack("Consume", 1)
+                            };
+                            data.attackEffects = new CardData.StatusEffectStacks[1]
+                            {
+                                SStack("Increase Max Health", 2)
+                            };
+                        }
+                    )
+            );
+            #endregion
+
+            #endregion
+
             #region Tribe
             //Add Tribe
             assets.Add(
@@ -329,24 +844,37 @@ namespace DSTMod_WildFrost
                             Inventory inventory = ScriptableObject.CreateInstance<Inventory>();
                             inventory.deck.list = DataList<CardData>(
                                     "eyeBone",
-                                    "SnowGlobe",
-                                    "Sword",
-                                    "Gearhammer",
-                                    "Dart",
-                                    "EnergyDart",
-                                    "SunlightDrum",
-                                    "Junkhead",
-                                    "IceDice"
+                                    "tallbirdEgg",
+                                    "spear",
+                                    "spear",
+                                    "spear",
+                                    "hamBat",
+                                    "iceStaff",
+                                    "logSuit",
+                                    "boosterShot",
+                                    "walkingCane"
                                 )
                                 .ToList();
                             //inventory.upgrades.Add(TryGet<CardUpgradeData>("CardUpgradeCritical"));
                             data.startingInventory = inventory;
 
-                            //RewardPool unitPool = CreateRewardPool("DrawUnitPool", "Units", DataList<CardData>(
-                            //    "NakedGnome", "GuardianGnome", "Havok",
-                            //    "Gearhead", "Bear", "TheBaker",
-                            //    "Pimento", "Pootie", "Tusk",
-                            //    "Ditto", "Flash", "TinyTyko"));
+                            RewardPool unitPool = CreateRewardPool(
+                                "DrawUnitPool",
+                                "Units",
+                                DataList<CardData>(
+                                    "iceChester",
+                                    "shadowChester",
+                                    "friendlyFly",
+                                    "glommer",
+                                    "TheBaker",
+                                    "Pimento",
+                                    "Pootie",
+                                    "Tusk",
+                                    "Ditto",
+                                    "Flash",
+                                    "TinyTyko"
+                                )
+                            );
 
                             //RewardPool itemPool = CreateRewardPool("DrawItemPool", "Items", DataList<CardData>(
                             //    "ShellShield", "StormbearSpirit", "PepperFlag", "SporePack", "Woodhead",
@@ -360,19 +888,18 @@ namespace DSTMod_WildFrost
                             //    "CardUpgradeMime", "CardUpgradeShellBecomesSpice",
                             //    "CardUpgradeAimless"));
 
-                            //data.rewardPools = new RewardPool[]
-                            //{
-                            //unitPool,
-                            //itemPool,
-                            //charmPool,
-                            //Extensions.GetRewardPool("GeneralUnitPool"),
-                            //Extensions.GetRewardPool("GeneralItemPool"),
-                            //Extensions.GetRewardPool("GeneralCharmPool"),
-                            //Extensions.GetRewardPool("GeneralModifierPool"),
-                            //Extensions.GetRewardPool("SnowUnitPool"),
-                            //Extensions.GetRewardPool("SnowItemPool"),
-                            //Extensions.GetRewardPool("SnowCharmPool"),
-                            //};
+                            data.rewardPools = new RewardPool[]
+                            {
+                                unitPool,
+                                //itemPool,
+                                //charmPool,
+                                Extensions.GetRewardPool("GeneralUnitPool"),
+                                Extensions.GetRewardPool("GeneralItemPool"),
+                                Extensions.GetRewardPool("GeneralCharmPool"),
+                                Extensions.GetRewardPool("GeneralModifierPool"),
+                                //Extensions.GetRewardPool("SnowUnitPool"),
+                                //Extensions.GetRewardPool("SnowCharmPool"),
+                            };
                         }
                     )
             );
@@ -474,6 +1001,8 @@ namespace DSTMod_WildFrost
             return builder;
         }
 
+        #region Leader Stuffs
+
         public void UnloadFromClasses()
         {
             List<ClassData> tribes = AddressableLoader.GetGroup<ClassData>("ClassData");
@@ -540,6 +1069,9 @@ namespace DSTMod_WildFrost
             return counter;
         }
 
+        #endregion
+
+        #region Tribe Stuffs
         private RewardPool CreateRewardPool(string name, string type, DataFile[] list)
         {
             RewardPool pool = ScriptableObject.CreateInstance<RewardPool>();
@@ -561,6 +1093,7 @@ namespace DSTMod_WildFrost
         public string TribeDescKey => GUID + ".TribeDesc";
 
         //Call this method in Load()
+
         private void CreateLocalizedStrings()
         {
             StringTable uiText = LocalizationHelper.GetCollection(
@@ -576,7 +1109,9 @@ namespace DSTMod_WildFrost
                     + "To survive, we must be wise. To falter is to be forgotten."
             ); //Create the description.
         }
+        #endregion
 
+        #region Patching Stuffs
         [HarmonyPatch(typeof(References), nameof(References.Classes), MethodType.Getter)]
         static class FixClassesGetter
         {
@@ -670,22 +1205,35 @@ namespace DSTMod_WildFrost
                     .StringReference = collection.GetString(DSTMod.Instance.TribeTitleKey);
             }
         }
+        #endregion
     }
-
     //Status Effect Class
     public class StatusEffectTriggerWhenCertainAllyAttacks : StatusEffectTriggerWhenAllyAttacks
     {
         //Cannot change allyInRow or againstTarget without some publicizing. Abigail is sad :(
-
+        public bool useName = true;
         public CardData ally;
+
+        public CardType allyCardType;
 
         public override bool RunHitEvent(Hit hit)
         {
             //Debug.Log(hit.attacker?.name);
-            if (hit.attacker?.name == ally.name)
+            if (useName)
             {
-                return base.RunHitEvent(hit);
+                if (hit.attacker?.name == ally.name)
+                {
+                    return base.RunHitEvent(hit);
+                }
             }
+            else
+            {
+                if (hit.attacker?.data.cardType == allyCardType)
+                {
+                    return base.RunHitEvent(hit);
+                }
+            }
+
             return false;
         }
     }
@@ -712,6 +1260,82 @@ namespace DSTMod_WildFrost
             {
                 return SoulsCard;
             }
+        }
+    }
+
+    public class StatusEffectApplyXOnCounterTurn : StatusEffectApplyX
+    {
+        [SerializeField]
+        public bool trueOnTurn;
+
+        public bool turnTaken;
+
+        public override void Init()
+        {
+            base.OnCardPlayed += CheckCardPlay;
+            base.OnTurn += CheckTurn;
+        }
+
+        public override bool RunCardPlayedEvent(Entity entity, Entity[] targets)
+        {
+            if (
+                entity.counter.current <= 0
+                && !turnTaken
+                && target.enabled
+                && entity == target
+                && Battle.IsOnBoard(target)
+            )
+            {
+                if (trueOnTurn)
+                {
+                    turnTaken = true;
+                    return false;
+                }
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool RunPostApplyStatusEvent(StatusEffectApply apply)
+        {
+            return base.RunPostApplyStatusEvent(apply);
+        }
+
+        public IEnumerator CheckCardPlay(Entity entity, Entity[] targets)
+        {
+            return Run(GetTargets());
+        }
+
+        public override bool RunTurnEvent(Entity entity)
+        {
+            if (entity.counter.current <= 0 && trueOnTurn && turnTaken && entity == target)
+            {
+                return Battle.IsOnBoard(target);
+            }
+            return false;
+        }
+
+        public IEnumerator CheckTurn(Entity entity)
+        {
+            yield return Run(GetTargets());
+            turnTaken = false;
+        }
+    }
+
+    public class StatusEffectDestroySelfAfterCounterTurn : StatusEffectData
+    {
+        public bool cardPlayed;
+
+        public override bool RunCardPlayedEvent(Entity entity, Entity[] targets)
+        {
+            if (!cardPlayed && entity.counter.current <= 0 && entity == target && !target.silenced)
+            {
+                ActionQueue.Add(new ActionKill(entity));
+                cardPlayed = true;
+            }
+
+            return false;
         }
     }
 }
