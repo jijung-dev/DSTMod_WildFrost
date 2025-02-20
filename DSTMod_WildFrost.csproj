@@ -438,10 +438,20 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:\SteamLibrary\steamapps\common\Wildfrost\Modded\Wildfrost_Data\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="VFX_Tests">
+      <HintPath>D:\SteamLibrary\steamapps\workshop\content\1811990\3157544232\VFX_Tests.dll</HintPath>
+    </Reference>
+    <Reference Include="WildfrostHopeMod.Utils">
+      <HintPath>D:\SteamLibrary\steamapps\workshop\content\1811990\3157544232\WildfrostHopeMod.Utils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSTMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomStatusEffects\**\*.cs" />
+    <Compile Include="PatchingScript\**\*.cs" />
+    <Compile Include="Cards\**\*.cs" />
+    <Compile Include="StatusEffects\**\*.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
