@@ -45,6 +45,9 @@
     <Reference Include="Assembly-CSharp-Publicized">
       <HintPath>D:\SteamLibrary\steamapps\common\Wildfrost\Modded\Wildfrost_Data\Managed\Assembly-CSharp-Publicized.dll</HintPath>
     </Reference>
+    <Reference Include="BattleEditor">
+      <HintPath>D:\SteamLibrary\steamapps\workshop\content\1811990\3158900413\BattleEditor.dll</HintPath>
+    </Reference>
     <Reference Include="DeadExtensions">
       <HintPath>D:\SteamLibrary\steamapps\common\Wildfrost\Modded\Wildfrost_Data\Managed\DeadExtensions.dll</HintPath>
     </Reference>

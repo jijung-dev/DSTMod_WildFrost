@@ -1,43 +1,45 @@
 using System.Collections;
 using UnityEngine;
+
 public class StatusEffectResource : StatusEffectData
 {
-	public CardData[] allowedCards;
-	public override void Init()
-	{
-		base.OnHit += Check;
-	}
+    public CardData[] allowedCards;
 
-	public override bool RunHitEvent(Hit hit)
-	{
-		if (hit.target == target && hit.damage > 0)
-		{
-			return !hit.nullified;
-		}
+    public override void Init()
+    {
+        base.OnHit += Check;
+    }
 
-		return false;
-	}
+    public override bool RunHitEvent(Hit hit)
+    {
+        if (hit.target == target && hit.damage > 0)
+        {
+            return !hit.nullified;
+        }
 
-	public IEnumerator Check(Hit hit)
-	{
-		foreach (CardData card in allowedCards)
-		{
-			if (hit.attacker?.name == card.name)
-			{
-				count -= hit.damage;
-			}
-			else
-			{
-				hit.damageBlocked = hit.damage;
-				hit.damage = 0;
-			}
-		}
+        return false;
+    }
 
-		if (count <= 0)
-		{
-			yield return Remove();
-		}
+    public IEnumerator Check(Hit hit)
+    {
+        foreach (CardData card in allowedCards)
+        {
+            if (hit.attacker?.name == card.name)
+            {
+                count -= hit.damage;
+            }
+            else
+            {
+                hit.damageBlocked = hit.damage;
+                hit.damage = 0;
+            }
+        }
 
-		target.PromptUpdate();
-	}
+        if (count <= 0)
+        {
+            yield return Remove();
+        }
+
+        target.PromptUpdate();
+    }
 }

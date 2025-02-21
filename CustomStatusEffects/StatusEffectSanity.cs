@@ -10,7 +10,8 @@ namespace DSTMod_WildFrost
     public class StatusEffectSanity : StatusEffectData
     {
         [SerializeField]
-        public CardAnimation buildupAnimation = ScriptableObject.CreateInstance<CardAnimationOverburn>();
+        public CardAnimation buildupAnimation =
+            ScriptableObject.CreateInstance<CardAnimationOverburn>();
         public StatusEffectSummon[] shadowEnemy;
 
         public bool Insaniting;
@@ -82,6 +83,7 @@ namespace DSTMod_WildFrost
                 ScriptableObject.CreateInstance<StatusEffectInstantSummonRandom>();
             summonRan.randomCards = shadowEnemy;
             summonRan.summonPosition = StatusEffectInstantSummon.Position.EnemyRow;
+
             summonRan.type = "dst.sanity";
             Hit hit = new Hit(applier, target, 0);
             hit.AddStatusEffect(summonRan, 1);
