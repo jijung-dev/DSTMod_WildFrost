@@ -7,20 +7,22 @@ using UnityEngine;
 
 namespace DSTMod_WildFrost
 {
-    public class StatusEffectSanity : StatusEffectData
+    public class StatusEffectHeat : StatusEffectData
     {
         [SerializeField]
         public CardAnimation buildupAnimation =
             ScriptableObject.CreateInstance<CardAnimationOverburn>();
-        public StatusEffectSummon[] shadowEnemy;
+        public StatusEffectData overheatingEffect;
+        public StatusEffectData freezeEffect;
+        public StatusEffectData frozeEffect;
 
-        public StatusEffectData summonRan;
-
-        public bool Insaniting;
+        public bool Overheating;
 
         public override void Init()
         {
             base.OnStack += Stack;
+            base.OnBegin += Begin;
+
             Events.OnEntityDisplayUpdated += EntityDisplayUpdated;
         }
 
@@ -37,6 +39,21 @@ namespace DSTMod_WildFrost
             }
         }
 
+        public IEnumerator Begin()
+        {
+            StatusEffectData freezeEffectData = target.FindStatus(freezeEffect);
+            if ((bool)freezeEffectData)
+            {
+                yield return freezeEffectData.Remove();
+            }
+
+            StatusEffectData frozeEffectData = target.FindStatus(frozeEffect);
+            if ((bool)frozeEffectData)
+            {
+                yield return frozeEffectData.Remove();
+            }
+        }
+
         public IEnumerator Stack(int stacks)
         {
             Check();
@@ -45,14 +62,14 @@ namespace DSTMod_WildFrost
 
         public void Check()
         {
-            if (count >= target.hp.current && !Insaniting)
+            if (count >= target.hp.max && !Overheating)
             {
                 ActionQueue.Stack(
-                    new ActionSequence(SummonEnemy())
+                    new ActionSequence(Overheat())
                     {
                         fixedPosition = true,
                         priority = eventPriority,
-                        note = "Sanity",
+                        note = "Overheating",
                     }
                 );
                 ActionQueue.Stack(
@@ -60,32 +77,45 @@ namespace DSTMod_WildFrost
                     {
                         fixedPosition = true,
                         priority = eventPriority,
-                        note = "Clear Sanity",
+                        note = "Clear Heating",
                     }
                 );
-                Insaniting = true;
+                Overheating = true;
             }
         }
 
-        public IEnumerator SummonEnemy()
+        public IEnumerator RemoveFreeze(StatusEffectData statusEffect)
+        {
+            yield return statusEffect.Remove();
+        }
+
+        public IEnumerator Overheat()
         {
             if (!this || !target || !target.alive)
             {
                 yield break;
             }
 
-            Routine.Clump clump = new Routine.Clump();
-
-            Hit hit = new Hit(applier, target, 0) { damageType = "dst.sanity" };
-
-            hit.AddStatusEffect(summonRan, 1);
-            clump.Add(hit.Process());
-
             if ((bool)buildupAnimation)
             {
                 yield return buildupAnimation.Routine(target);
             }
 
+            Routine.Clump clump = new Routine.Clump();
+
+            // var instantSummonRandomEffect = ScriptableObject.CreateInstance<instant>();
+            // Hit hit = new Hit(applier, target, 0)
+            // {
+            //     damageType = "the statusType"
+            // };
+            // hit.AddStatusEffect(instantSummonRandomEffect, 1);
+
+            Hit hit = new Hit(applier, target, 0) { damageType = "dst.overheating" };
+
+            //if (target.hp.max > 1)
+            hit.AddStatusEffect(overheatingEffect, 1);
+
+            clump.Add(hit.Process());
             clump.Add(Sequences.Wait(0.3f));
             yield return clump.WaitForEnd();
         }
@@ -95,7 +125,7 @@ namespace DSTMod_WildFrost
             if ((bool)this && (bool)target && target.alive)
             {
                 yield return Remove();
-                Insaniting = false;
+                Overheating = false;
             }
         }
     }

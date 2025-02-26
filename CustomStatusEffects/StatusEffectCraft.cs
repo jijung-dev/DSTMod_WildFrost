@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class StatusEffectCraft : StatusEffectData
 {
-    public string cardToRequire = "";
+    public string cardToRequire = "tgestudio.wildfrost.dstmod.chest";
     public NoTargetTypeExt requireType;
 
     public bool running;
-
-    public readonly List<Entity> toDestroy = new List<Entity>();
+    public StatusEffectData removeEffect;
+    public Entity chest = null;
 
     public override void Init()
     {
@@ -38,7 +38,6 @@ public class StatusEffectCraft : StatusEffectData
         }
 
         int amount = GetAmount();
-        Events.CheckRecycleAmount(target, ref amount);
         if (amount > 0 && !GetTargets(amount))
         {
             NoTargetTextSystemExt noTargetTextSystemExt = new NoTargetTextSystemExt();
@@ -52,58 +51,40 @@ public class StatusEffectCraft : StatusEffectData
 
     public override bool RunPreTriggerEvent(Trigger trigger)
     {
-        return toDestroy.Count > 0;
+        int amount = GetAmount();
+        return amount > 0 && GetTargets(amount) && trigger.entity.name == target.name;
     }
 
     public IEnumerator EntityPreTrigger(Trigger trigger)
     {
         running = true;
-        foreach (Entity item in toDestroy)
-        {
-            target.curveAnimator.Ping();
-            yield return item.Kill();
-        }
+        if(!(bool)chest) yield break;
 
-        toDestroy.Clear();
+        yield return chest.FindStatus(removeEffect).RemoveStacks(GetAmount(), false);
+
         running = false;
     }
 
     public bool GetTargets(int requiredAmount)
     {
-        bool flag = false;
-        toDestroy.Clear();
-        foreach (Entity item in References.Player.handContainer)
-        {
-            if (item.data.name == cardToRequire)
+        if (chest == null)
+            foreach (Entity card in References.Battle.cards)
             {
-                toDestroy.Add(item);
-                if (--requiredAmount <= 0)
+                if (card.data.name == cardToRequire)
                 {
-                    flag = true;
+                    Debug.Log("[ Don't Frostbite ] Found the Chest");
+                    chest = card;
                     break;
                 }
             }
-        }
+        
+        var effectData = chest.FindStatus(removeEffect);
 
-        if (!flag)
+        if (!(bool)effectData || effectData?.GetAmount() < requiredAmount)
         {
-            toDestroy.Clear();
+            return false;
         }
 
-        return flag;
-    }
-
-    public bool IsEnoughJunkInHand()
-    {
-        int num = GetAmount();
-        foreach (Entity item in References.Player.handContainer)
-        {
-            if (item.data.name == cardToRequire && --num <= 0)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 }

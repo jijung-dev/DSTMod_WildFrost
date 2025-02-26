@@ -22,6 +22,9 @@ public class StatusEffectResource : StatusEffectData
 
     public IEnumerator Check(Hit hit)
     {
+        if (allowedCards == null)
+            yield break;
+
         foreach (CardData card in allowedCards)
         {
             if (hit.attacker?.name == card.name)
