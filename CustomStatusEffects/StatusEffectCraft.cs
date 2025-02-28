@@ -58,7 +58,8 @@ public class StatusEffectCraft : StatusEffectData
     public IEnumerator EntityPreTrigger(Trigger trigger)
     {
         running = true;
-        if(!(bool)chest) yield break;
+        if (!(bool)chest)
+            yield break;
 
         yield return chest.FindStatus(removeEffect).RemoveStacks(GetAmount(), false);
 
@@ -77,7 +78,7 @@ public class StatusEffectCraft : StatusEffectData
                     break;
                 }
             }
-        
+
         var effectData = chest.FindStatus(removeEffect);
 
         if (!(bool)effectData || effectData?.GetAmount() < requiredAmount)

@@ -6,6 +6,7 @@ namespace DSTMod_WildFrost
     public class StatusEffectApplyXBeforeBattle : StatusEffectApplyX
     {
         private bool isApplied;
+        public bool checkBeforeSpawn;
 
         public override void Init()
         {
@@ -15,10 +16,12 @@ namespace DSTMod_WildFrost
 
         public override bool RunEnableEvent(Entity entity)
         {
+            if (checkBeforeSpawn && Battle.IsOnBoard(entity))
+                return false;
+
             if (!isApplied && entity == target)
             {
                 isApplied = true;
-                Debug.LogWarning("Start the process");
                 return true;
             }
 
@@ -42,8 +45,6 @@ namespace DSTMod_WildFrost
 
         public IEnumerator Activate(Entity entity)
         {
-            Debug.LogWarning("Doing?");
-
             yield return Run(GetTargets(null));
         }
 

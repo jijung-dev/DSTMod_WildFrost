@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -133,13 +134,11 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         bool result = false;
         container = null;
         shoveData = null;
-        CardContainer[] array = References.Battle.rows[References.Battle.player].ToArray();
+        CardSlot[] slots = References.Battle.allSlots.ToArray();
 
-        if (array != null && array.Length != 0)
+        if (slots != null)
         {
-            CardContainer[] array2 = array;
-
-            container = array2[slotID];
+            container = slots[slotID];
             result = true;
         }
 
