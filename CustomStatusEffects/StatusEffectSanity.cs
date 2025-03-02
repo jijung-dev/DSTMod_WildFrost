@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using WildfrostHopeMod.VFX;
 
 namespace DSTMod_WildFrost
 {
@@ -13,7 +14,6 @@ namespace DSTMod_WildFrost
         public CardAnimation buildupAnimation =
             ScriptableObject.CreateInstance<CardAnimationOverburn>();
         public StatusEffectSummon[] shadowEnemy;
-
         public StatusEffectData summonRan;
 
         public bool Insaniting;
@@ -81,11 +81,12 @@ namespace DSTMod_WildFrost
             hit.AddStatusEffect(summonRan, 1);
             clump.Add(hit.Process());
 
+            VFXMod.instance.SFX.TryPlaySoundFromPath(DSTMod.Instance.ImagePath("Sanity_Apply.wav"));
+
             if ((bool)buildupAnimation)
             {
                 yield return buildupAnimation.Routine(target);
             }
-
             clump.Add(Sequences.Wait(0.3f));
             yield return clump.WaitForEnd();
         }

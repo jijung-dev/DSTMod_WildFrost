@@ -40,11 +40,10 @@ public class StatusEffectCraft : StatusEffectData
         int amount = GetAmount();
         if (amount > 0 && !GetTargets(amount))
         {
-            NoTargetTextSystemExt noTargetTextSystemExt = new NoTargetTextSystemExt();
             allow = false;
             if (NoTargetTextSystem.Exists())
             {
-                new Routine(noTargetTextSystemExt._Run(target, requireType, amount));
+                new Routine(NoTargetTextSystemExt.Run(target, requireType));
             }
         }
     }

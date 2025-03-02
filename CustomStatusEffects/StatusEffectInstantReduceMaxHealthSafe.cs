@@ -4,7 +4,12 @@ public class StatusEffectInstantReduceMaxHealthSafe : StatusEffectInstantReduceM
 {
 	public override IEnumerator Process()
 	{
-		if (target.hp.max > 1)
-			yield return base.Process();
+		if (target.hp.max - GetAmount() <= 1)
+		{
+			target.hp.max = GetAmount() + 1;
+			target.hp.current = GetAmount() + 1;
+			target.PromptUpdate();
+		}
+		yield return base.Process();
 	}
 }

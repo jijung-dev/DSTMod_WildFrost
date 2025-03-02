@@ -1,13 +1,17 @@
+using System.Linq;
+using UnityEngine;
+
 public class StatusEffectApplyXWhenCardDestroyedWithLimit : StatusEffectApplyXWhenCardDestroyed
 {
 	public int litmitCount;
+	public TraitData traitToLimit;
 	public override bool RunEntityDestroyedEvent(Entity entity, DeathType deathType)
 	{
-		var statusEffect = target.FindStatus(effectToApply);
+		var statusEffect = target.traits.FirstOrDefault(r => r.data = traitToLimit);
 
-		if ((bool)statusEffect)
+		if (statusEffect != null)
 		{
-			if (statusEffect.count <= litmitCount)
+			if (statusEffect.count < litmitCount)
 			{
 				return base.RunEntityDestroyedEvent(entity, deathType);
 			}

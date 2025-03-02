@@ -9,9 +9,6 @@ namespace DSTMod_WildFrost
 {
     public class StatusEffectHeat : StatusEffectData
     {
-        [SerializeField]
-        public CardAnimation buildupAnimation =
-            ScriptableObject.CreateInstance<CardAnimationOverburn>();
         public StatusEffectData overheatingEffect;
         public StatusEffectData freezeEffect;
         public StatusEffectData frozeEffect;
@@ -94,11 +91,6 @@ namespace DSTMod_WildFrost
             if (!this || !target || !target.alive)
             {
                 yield break;
-            }
-
-            if ((bool)buildupAnimation)
-            {
-                yield return buildupAnimation.Routine(target);
             }
 
             Routine.Clump clump = new Routine.Clump();

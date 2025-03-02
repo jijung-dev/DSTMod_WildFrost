@@ -16,6 +16,7 @@ namespace DSTMod_WildFrost
         public override void Init()
         {
             base.OnHit += Hit;
+            base.OnEntityDestroyed += RemoveEffect;
         }
 
         public override bool RunHitEvent(Hit hit)
@@ -30,7 +31,7 @@ namespace DSTMod_WildFrost
 
         public IEnumerator Hit(Hit hit)
         {
-            while (hit.counterReduction > 0 && count > 0)
+            while (hit.counterReduction > 0 && count > 0 && Battle.IsOnBoard(hit.target))
             {
                 if ((bool)buildupAnimation)
                 {
@@ -39,6 +40,13 @@ namespace DSTMod_WildFrost
                 hit.counterReduction--;
             }
             if (count <= 0)
+            {
+                yield return Remove();
+            }
+        }
+        public IEnumerator RemoveEffect(Entity entity, DeathType deathType)
+        {
+            if (entity == target)
             {
                 yield return Remove();
             }

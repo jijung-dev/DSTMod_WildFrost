@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StatusEffectResource : StatusEffectData
 {
-    public CardData[] allowedCards;
+    public TargetConstraint[] allowedCards;
 
     public override void Init()
     {
@@ -25,9 +25,10 @@ public class StatusEffectResource : StatusEffectData
         if (allowedCards == null)
             yield break;
 
-        foreach (CardData card in allowedCards)
+        foreach (var card in allowedCards)
         {
-            if (hit.attacker?.name == card.name)
+            if (hit.attacker == null) yield break;
+            if (card.Check(hit.attacker))
             {
                 count -= hit.damage;
             }

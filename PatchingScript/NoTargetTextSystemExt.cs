@@ -10,14 +10,14 @@ namespace DSTMod_WildFrost.PatchingScript
 {
     public class NoTargetTextSystemExt
     {
-        private Vector2 shakeDurationRange;
-        private Vector3 shakeAmount;
-        private AnimationCurve shakeCurve;
-        private TMP_Text textElement;
+        private static Vector2 shakeDurationRange;
+        private static Vector3 shakeAmount;
+        private static AnimationCurve shakeCurve;
+        private static TMP_Text textElement;
 
         public NoTargetTextSystemExt() { }
 
-        public IEnumerator _Run(Entity entity, NoTargetTypeExt type, int args)
+        public static IEnumerator Run(Entity entity, NoTargetTypeExt type)
         {
             shakeDurationRange = NoTargetTextSystem.instance.shakeDurationRange;
             shakeAmount = NoTargetTextSystem.instance.shakeAmount;
@@ -34,25 +34,28 @@ namespace DSTMod_WildFrost.PatchingScript
                     1f,
                     num
                 );
-                textElement.text = (type == NoTargetTypeExt.None) ? "" : GetStringType(type, args);
+                textElement.text = (type == NoTargetTypeExt.None) ? "" : GetStringType(type);
                 NoTargetTextSystem.instance.PopText(entity.transform.position);
                 yield return new WaitForSeconds(num);
             }
         }
 
-        public string GetStringType(NoTargetTypeExt type, int args)
+        public static string GetStringType(NoTargetTypeExt type)
         {
             string text;
             switch (type)
             {
                 case NoTargetTypeExt.RequireGold:
-                    text = $"Require {args} Gold";
+                    text = $"Require Gold";
                     break;
                 case NoTargetTypeExt.RequireRock:
-                    text = $"Require {args} Rock";
+                    text = $"Require Rock";
                     break;
                 case NoTargetTypeExt.RequireWood:
-                    text = $"Require {args} Wood";
+                    text = $"Require Wood";
+                    break;
+                case NoTargetTypeExt.CantShove:
+                    text = $"Cannot Shove";
                     break;
                 default:
                     text = "";
@@ -65,6 +68,7 @@ namespace DSTMod_WildFrost.PatchingScript
     public enum NoTargetTypeExt
     {
         None,
+        CantShove,
         RequireRock,
         RequireGold,
         RequireWood,

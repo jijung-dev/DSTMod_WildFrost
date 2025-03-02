@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DSTMod_WildFrost
 {
-    public class StatusEffectApplyXToYWhenDestroyedByCertainCards : StatusEffectApplyXWhenDestroyed
+    public class StatusEffectApplyXToUnitWhenDestroyedByCertainCards : StatusEffectApplyXWhenDestroyed
     {
         public TargetConstraint[] cardConstrains;
         public Entity chest;
@@ -34,7 +34,7 @@ namespace DSTMod_WildFrost
 
             Routine.Clump clump = new Routine.Clump();
 
-            Hit hit = new Hit(chest, chest);
+            Hit hit = new Hit(applier, chest);
             hit.AddStatusEffect(effectToApply, GetAmount());
 
             clump.Add(hit.Process());
