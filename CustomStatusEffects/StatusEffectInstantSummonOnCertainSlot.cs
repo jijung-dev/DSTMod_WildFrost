@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,22 +20,30 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         public Range() { }
     }
     public bool canSummonMultiple;
+    public List<int> multiSummonCheck = new List<int>();
+    public StatusEffectSummonNoAnimation targetSummonNoAnimation;
     public StatusEffectSummon targetSummon;
     public bool summonCopy;
     public bool buildingToSummon;
     public bool isRandom;
-    public Range randomRange;
+    public bool isEnemySide;
+    public Range randomRange => new Range(minRandomRange, maxRandomRange);
+    public int maxRandomRange;
+    public int minRandomRange;
     public bool queue = true;
     public int slotID;
     public Entity toSummon;
     public StatusEffectData[] withEffects;
+    int amountToSpawn = 0;
 
     public override IEnumerator Process()
     {
+        amountToSpawn = 1;
         if (canSummonMultiple)
         {
             Routine.Clump clump = new Routine.Clump();
             int amount = GetAmount();
+            amountToSpawn = Check(References.Battle.allSlots.ToArray());
             for (int i = 0; i < amount; i++)
             {
                 if (summonCopy)
@@ -67,6 +77,7 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         {
             yield return TrySummon();
         }
+        multiSummonCheck.Clear();
 
         yield return base.Process();
     }
@@ -87,10 +98,10 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         Card card = null;
         if (CanSummon(out var container, out var _))
         {
-            card = targetSummon.CreateCardCopy(target.data, container, applier.display.hover.controller);
+            card = targetSummon != null ? targetSummon.CreateCardCopy(target.data, container, applier.display.hover.controller) : targetSummonNoAnimation.CreateCardCopy(target.data, container, applier.display.hover.controller);
             card.entity.startingEffectsApplied = true;
             yield return card.UpdateData();
-            yield return targetSummon.CopyStatsAndEffects(card.entity, toCopy);
+            yield return targetSummon != null ? targetSummon.CopyStatsAndEffects(card.entity, toCopy) : targetSummonNoAnimation.CopyStatsAndEffects(card.entity, toCopy);
         }
 
         buildingToSummon = false;
@@ -112,7 +123,9 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
             }
 
             int amount = GetAmount();
-            yield return toSummon
+            if (targetSummon != null)
+            {
+                yield return toSummon
                 ? targetSummon.SummonPreMade(
                     toSummon,
                     container,
@@ -139,13 +152,44 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
                             amount
                         )
                 );
+            }
+            else
+            {
+                yield return toSummon
+                ? targetSummonNoAnimation.SummonPreMade(
+                    toSummon,
+                    container,
+                    applier.display.hover.controller,
+                    applier,
+                    withEffects,
+                    amount
+                )
+                : (
+                    summonCopy
+                        ? targetSummonNoAnimation.SummonCopy(
+                            target,
+                            container,
+                            applier.display.hover.controller,
+                            applier,
+                            withEffects,
+                            amount
+                        )
+                        : targetSummonNoAnimation.Summon(
+                            container,
+                            applier.display.hover.controller,
+                            applier,
+                            withEffects,
+                            amount
+                        )
+                );
+            }
         }
         else if (NoTargetTextSystem.Exists())
         {
             if ((bool)toSummon)
             {
                 toSummon.RemoveFromContainers();
-                Object.Destroy(toSummon);
+                UnityEngine.Object.Destroy(toSummon);
             }
 
             yield return NoTargetTextSystem.Run(target, NoTargetType.NoSpaceToSummon);
@@ -175,10 +219,7 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         out Dictionary<Entity, List<CardSlot>> shoveData
     )
     {
-        bool result = false;
-        container = null;
-        shoveData = null;
-        result = CanSummonInEnemyRow(out container, out shoveData);
+        bool result = CanSummonInSlotID(out container, out shoveData);
 
         return result;
     }
@@ -198,7 +239,7 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         return entity.actualContainers.RandomItem();
     }
 
-    public bool CanSummonInEnemyRow(
+    public bool CanSummonInSlotID(
         out CardContainer container,
         out Dictionary<Entity, List<CardSlot>> shoveData
     )
@@ -206,26 +247,51 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         container = null;
         shoveData = null;
         CardSlot[] slots = References.Battle.allSlots.ToArray();
-        List<int> freeSlots = new List<int>();
+        if (amountToSpawn <= 0) return false;
 
         if (isRandom)
         {
-            if (randomRange == null) randomRange = new Range(0, slots.Count());
-
-            for (int i = randomRange.min; i < randomRange.max; i++)
+            if (randomRange == null) throw new NullReferenceException("No Random Range Found!");
+            do
             {
-                if (slots[i].GetTop() != null) continue;
-                freeSlots.Add(i);
-            }
-            slotID = freeSlots[Random.Range(0, freeSlots.Count)];
+                slotID = GetRandomInt(randomRange.min, randomRange.max);
+            } while (slotID == 3 || slotID == 7 || multiSummonCheck.Contains(slotID));
         }
 
-        if (slots[slotID].GetTop() != null)
+        Entity top = slots[slotID].GetTop();
+
+        if (top == null || ShoveSystem.CanShove(top, target.owner.entity, out shoveData))
         {
-            return false;
+            amountToSpawn--;
+            multiSummonCheck.Add(slotID);
+            container = slots[slotID];
+            return true;
         }
+        return false;
+    }
+    public static int GetRandomInt(int min, int max)
+    {
+        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+        {
+            byte[] data = new byte[4]; // 4 bytes for an int
+            rng.GetBytes(data);
+            int value = BitConverter.ToInt32(data, 0) & int.MaxValue; // Ensure positive number
+            return min + (value % (max - min + 1)); // Scale to range
+        }
+    }
+    public int Check(CardSlot[] slots)
+    {
+        int flag = 0;
+        if (!isRandom && !isEnemySide) { minRandomRange = 0; maxRandomRange = 7; }
 
-        container = slots[slotID];
-        return true;
+        for (int i = randomRange.min; i < randomRange.max; i++)
+        {
+            if (slots[i].GetTop() == null)
+            {
+                flag++;
+            }
+        }
+        Debug.LogWarning($"{flag} free slot to spawn nice");
+        return flag;
     }
 }

@@ -52,7 +52,7 @@ namespace DSTMod_WildFrost
 
         public bool Check(Entity entity)
         {
-            if (entity != target || entity?.lastHit.attacker == null)
+            if (entity == null || entity != target || entity?.lastHit?.attacker == null)
                 return false;
 
             foreach (var cardData in cardConstrains)

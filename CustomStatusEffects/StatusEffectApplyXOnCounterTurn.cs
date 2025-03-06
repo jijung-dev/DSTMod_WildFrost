@@ -32,7 +32,7 @@ namespace DSTMod_WildFrost
         public override bool RunTurnEndEvent(Entity entity)
         {
             isApplied = false;
-            return base.RunTurnEvent(entity);
+            return base.RunTurnEndEvent(entity);
         }
 
         public override bool RunTurnEvent(Entity entity)
