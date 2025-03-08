@@ -27,7 +27,8 @@ public class StatusEffectResource : StatusEffectData
 
         foreach (var card in allowedCards)
         {
-            if (hit.attacker == null) yield break;
+            if (hit.attacker == null)
+                yield break;
             if (card.Check(hit.attacker))
             {
                 count -= hit.damage;

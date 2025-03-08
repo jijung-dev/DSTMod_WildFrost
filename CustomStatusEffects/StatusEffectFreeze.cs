@@ -12,8 +12,7 @@ namespace DSTMod_WildFrost
     public class StatusEffectFreeze : StatusEffectData
     {
         [SerializeField]
-        public CardAnimation buildupAnimation =
-            ScriptableObject.CreateInstance<CardAnimationOverburn>();
+        public CardAnimation buildupAnimation = ScriptableObject.CreateInstance<CardAnimationOverburn>();
         public StatusEffectData tempTrait;
         public StatusEffectData heatEffect;
         public StatusEffectData frozeEffect;

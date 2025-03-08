@@ -12,13 +12,16 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
     {
         public int min;
         public int max;
+
         public Range(int min, int max)
         {
             this.min = min;
             this.max = max;
         }
+
         public Range() { }
     }
+
     public bool canSummonMultiple;
     public List<int> multiSummonCheck = new List<int>();
     public StatusEffectSummonNoAnimation targetSummonNoAnimation;
@@ -62,16 +65,18 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         {
             if (summonCopy)
             {
-                new Routine(CreateCopy(target, delegate (Entity e)
-                {
-                    toSummon = e;
-                }));
+                new Routine(
+                    CreateCopy(
+                        target,
+                        delegate(Entity e)
+                        {
+                            toSummon = e;
+                        }
+                    )
+                );
             }
 
-            ActionQueue.Stack(new ActionSequence(TrySummon())
-            {
-                note = "Instant Summon"
-            }, fixedPosition: true);
+            ActionQueue.Stack(new ActionSequence(TrySummon()) { note = "Instant Summon" }, fixedPosition: true);
         }
         else
         {
@@ -81,27 +86,37 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
 
         yield return base.Process();
     }
+
     public IEnumerator CreateCopyAndTrySummon()
     {
-        yield return CreateCopy(target, delegate (Entity e)
-        {
-            toSummon = e;
-        });
+        yield return CreateCopy(
+            target,
+            delegate(Entity e)
+            {
+                toSummon = e;
+            }
+        );
         if ((bool)toSummon)
         {
             yield return TrySummon();
         }
     }
+
     public IEnumerator CreateCopy(Entity toCopy, UnityAction<Entity> onComplete)
     {
         buildingToSummon = true;
         Card card = null;
         if (CanSummon(out var container, out var _))
         {
-            card = targetSummon != null ? targetSummon.CreateCardCopy(target.data, container, applier.display.hover.controller) : targetSummonNoAnimation.CreateCardCopy(target.data, container, applier.display.hover.controller);
+            card =
+                targetSummon != null
+                    ? targetSummon.CreateCardCopy(target.data, container, applier.display.hover.controller)
+                    : targetSummonNoAnimation.CreateCardCopy(target.data, container, applier.display.hover.controller);
             card.entity.startingEffectsApplied = true;
             yield return card.UpdateData();
-            yield return targetSummon != null ? targetSummon.CopyStatsAndEffects(card.entity, toCopy) : targetSummonNoAnimation.CopyStatsAndEffects(card.entity, toCopy);
+            yield return targetSummon != null
+                ? targetSummon.CopyStatsAndEffects(card.entity, toCopy)
+                : targetSummonNoAnimation.CopyStatsAndEffects(card.entity, toCopy);
         }
 
         buildingToSummon = false;
@@ -126,62 +141,22 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
             if (targetSummon != null)
             {
                 yield return toSummon
-                ? targetSummon.SummonPreMade(
-                    toSummon,
-                    container,
-                    applier.display.hover.controller,
-                    applier,
-                    withEffects,
-                    amount
-                )
-                : (
-                    summonCopy
-                        ? targetSummon.SummonCopy(
-                            target,
-                            container,
-                            applier.display.hover.controller,
-                            applier,
-                            withEffects,
-                            amount
-                        )
-                        : targetSummon.Summon(
-                            container,
-                            applier.display.hover.controller,
-                            applier,
-                            withEffects,
-                            amount
-                        )
-                );
+                    ? targetSummon.SummonPreMade(toSummon, container, applier.display.hover.controller, applier, withEffects, amount)
+                    : (
+                        summonCopy
+                            ? targetSummon.SummonCopy(target, container, applier.display.hover.controller, applier, withEffects, amount)
+                            : targetSummon.Summon(container, applier.display.hover.controller, applier, withEffects, amount)
+                    );
             }
             else
             {
                 yield return toSummon
-                ? targetSummonNoAnimation.SummonPreMade(
-                    toSummon,
-                    container,
-                    applier.display.hover.controller,
-                    applier,
-                    withEffects,
-                    amount
-                )
-                : (
-                    summonCopy
-                        ? targetSummonNoAnimation.SummonCopy(
-                            target,
-                            container,
-                            applier.display.hover.controller,
-                            applier,
-                            withEffects,
-                            amount
-                        )
-                        : targetSummonNoAnimation.Summon(
-                            container,
-                            applier.display.hover.controller,
-                            applier,
-                            withEffects,
-                            amount
-                        )
-                );
+                    ? targetSummonNoAnimation.SummonPreMade(toSummon, container, applier.display.hover.controller, applier, withEffects, amount)
+                    : (
+                        summonCopy
+                            ? targetSummonNoAnimation.SummonCopy(target, container, applier.display.hover.controller, applier, withEffects, amount)
+                            : targetSummonNoAnimation.Summon(container, applier.display.hover.controller, applier, withEffects, amount)
+                    );
             }
         }
         else if (NoTargetTextSystem.Exists())
@@ -198,12 +173,7 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         yield return null;
     }
 
-    public static IEnumerator ApplyEffects(
-        Entity applier,
-        Entity entity,
-        IEnumerable<StatusEffectData> effects,
-        int count
-    )
+    public static IEnumerator ApplyEffects(Entity applier, Entity entity, IEnumerable<StatusEffectData> effects, int count)
     {
         Hit hit = new Hit(applier, entity, 0) { countsAsHit = false, canRetaliate = false };
         foreach (StatusEffectData effect in effects)
@@ -214,10 +184,7 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         yield return hit.Process();
     }
 
-    public bool CanSummon(
-        out CardContainer container,
-        out Dictionary<Entity, List<CardSlot>> shoveData
-    )
+    public bool CanSummon(out CardContainer container, out Dictionary<Entity, List<CardSlot>> shoveData)
     {
         bool result = CanSummonInSlotID(out container, out shoveData);
 
@@ -239,19 +206,18 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         return entity.actualContainers.RandomItem();
     }
 
-    public bool CanSummonInSlotID(
-        out CardContainer container,
-        out Dictionary<Entity, List<CardSlot>> shoveData
-    )
+    public bool CanSummonInSlotID(out CardContainer container, out Dictionary<Entity, List<CardSlot>> shoveData)
     {
         container = null;
         shoveData = null;
         CardSlot[] slots = References.Battle.allSlots.ToArray();
-        if (amountToSpawn <= 0) return false;
+        if (amountToSpawn <= 0)
+            return false;
 
         if (isRandom)
         {
-            if (randomRange == null) throw new NullReferenceException("No Random Range Found!");
+            if (randomRange == null)
+                throw new NullReferenceException("No Random Range Found!");
             do
             {
                 slotID = GetRandomInt(randomRange.min, randomRange.max);
@@ -269,6 +235,7 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
         }
         return false;
     }
+
     public static int GetRandomInt(int min, int max)
     {
         using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
@@ -279,14 +246,19 @@ public class StatusEffectInstantSummonOnCertainSlot : StatusEffectInstant
             return min + (value % (max - min + 1)); // Scale to range
         }
     }
+
     public int Check(CardSlot[] slots)
     {
         int flag = 0;
-        if (!isRandom && !isEnemySide) { minRandomRange = 0; maxRandomRange = 7; }
+        if (!isRandom && !isEnemySide)
+        {
+            minRandomRange = 0;
+            maxRandomRange = 7;
+        }
 
         for (int i = randomRange.min; i < randomRange.max; i++)
         {
-            if (slots[i].GetTop() == null)
+            if (slots[i].Empty)
             {
                 flag++;
             }

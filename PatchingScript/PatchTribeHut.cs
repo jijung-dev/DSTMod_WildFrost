@@ -24,30 +24,21 @@ namespace DSTMod_WildFrost
             flagDisplay.SetAvailable();
             flagDisplay.SetUnlocked();
 
-            TribeDisplaySequence sequence2 = GameObject.FindObjectOfType<TribeDisplaySequence>(
-                true
-            );
+            TribeDisplaySequence sequence2 = GameObject.FindObjectOfType<TribeDisplaySequence>(true);
             GameObject gameObject2 = GameObject.Instantiate(sequence2.displays[1].gameObject);
-            gameObject2.transform.SetParent(
-                sequence2.displays[2].gameObject.transform.parent,
-                false
-            );
+            gameObject2.transform.SetParent(sequence2.displays[2].gameObject.transform.parent, false);
             sequence2.tribeNames = sequence2.tribeNames.Append(TribeName).ToArray();
             sequence2.displays = sequence2.displays.Append(gameObject2).ToArray();
 
             Button button = flagDisplay.GetComponentInChildren<Button>();
-            button.onClick.SetPersistentListenerState(
-                0,
-                UnityEngine.Events.UnityEventCallState.Off
-            );
+            button.onClick.SetPersistentListenerState(0, UnityEngine.Events.UnityEventCallState.Off);
             button.onClick.AddListener(() =>
             {
                 sequence2.Run(TribeName);
             });
 
             //(SfxOneShot)
-            gameObject2.GetComponent<SfxOneshot>().eventRef =
-                FMODUnity.RuntimeManager.PathToEventReference("event:/sfx/card/draw_multi");
+            gameObject2.GetComponent<SfxOneshot>().eventRef = FMODUnity.RuntimeManager.PathToEventReference("event:/sfx/card/draw_multi");
 
             //0: Flag (ImageSprite)
             gameObject2.transform.GetChild(0).GetComponent<ImageSprite>().SetSprite(tribe.flag);
@@ -62,30 +53,19 @@ namespace DSTMod_WildFrost
             gameObject2.transform.GetChild(2).localScale *= 1.2f;
 
             //3: Textbox (Image)
-            gameObject2.transform.GetChild(3).GetComponent<Image>().color = new Color(
-                0.12f,
-                0.47f,
-                0.57f
-            );
+            gameObject2.transform.GetChild(3).GetComponent<Image>().color = new Color(0.12f, 0.47f, 0.57f);
 
             //3-0: Text (LocalizedString)
-            StringTable collection = LocalizationHelper.GetCollection(
-                "UI Text",
-                SystemLanguage.English
+            StringTable collection = LocalizationHelper.GetCollection("UI Text", SystemLanguage.English);
+            gameObject2.transform.GetChild(3).GetChild(0).GetComponent<LocalizeStringEvent>().StringReference = collection.GetString(
+                DSTMod.Instance.TribeDescKey
             );
-            gameObject2
-                .transform.GetChild(3)
-                .GetChild(0)
-                .GetComponent<LocalizeStringEvent>()
-                .StringReference = collection.GetString(DSTMod.Instance.TribeDescKey);
 
             //4:Title Ribbon (Image)
             //4-0: Text (LocalizedString)
-            gameObject2
-                .transform.GetChild(4)
-                .GetChild(0)
-                .GetComponent<LocalizeStringEvent>()
-                .StringReference = collection.GetString(DSTMod.Instance.TribeTitleKey);
+            gameObject2.transform.GetChild(4).GetChild(0).GetComponent<LocalizeStringEvent>().StringReference = collection.GetString(
+                DSTMod.Instance.TribeTitleKey
+            );
         }
     }
 }

@@ -28,12 +28,7 @@ namespace DSTMod_WildFrost.PatchingScript
             {
                 yield return Sequences.WaitForAnimationEnd(entity);
                 float num = shakeDurationRange.Random();
-                entity.curveAnimator.Move(
-                    shakeAmount.WithX(shakeAmount.x.WithRandomSign()),
-                    shakeCurve,
-                    1f,
-                    num
-                );
+                entity.curveAnimator.Move(shakeAmount.WithX(shakeAmount.x.WithRandomSign()), shakeCurve, 1f, num);
                 textElement.text = (type == NoTargetTypeExt.None) ? "" : GetStringType(type);
                 NoTargetTextSystem.instance.PopText(entity.transform.position);
                 yield return new WaitForSeconds(num);

@@ -13,7 +13,8 @@ namespace DSTMod_WildFrost
             {
                 var effect = target.FindStatus(effectToReduce);
 
-                if (!(bool)effect) yield break;
+                if (!(bool)effect)
+                    yield break;
 
                 target.FindStatus(effectToReduce).count -= GetAmount();
 

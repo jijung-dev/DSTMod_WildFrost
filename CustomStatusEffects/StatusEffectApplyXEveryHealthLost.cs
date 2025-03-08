@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StatusEffectApplyXEveryYHealthLost : StatusEffectApplyX
 {
-	public int healthLost;
+    public int healthLost;
     public bool active;
 
     public int currentHealth;
@@ -32,12 +32,8 @@ public class StatusEffectApplyXEveryYHealthLost : StatusEffectApplyX
             int num = currentHealth - target.hp.current;
             if (num >= healthLost && target.enabled && !target.silenced && (!targetMustBeAlive || (target.alive && Battle.IsOnBoard(target))))
             {
-            	currentHealth -= healthLost;
-                ActionQueue.Stack(new ActionSequence(HealthLost(-num))
-                {
-                    note = base.name,
-                    priority = eventPriority
-                }, fixedPosition: true);
+                currentHealth -= healthLost;
+                ActionQueue.Stack(new ActionSequence(HealthLost(-num)) { note = base.name, priority = eventPriority }, fixedPosition: true);
             }
         }
     }

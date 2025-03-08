@@ -3,10 +3,7 @@ using HarmonyLib;
 
 namespace DSTMod_WildFrost
 {
-    [HarmonyPatch(
-        typeof(WildfrostMod.DebugLoggerTextWriter),
-        nameof(WildfrostMod.DebugLoggerTextWriter.WriteLine)
-    )]
+    [HarmonyPatch(typeof(WildfrostMod.DebugLoggerTextWriter), nameof(WildfrostMod.DebugLoggerTextWriter.WriteLine))]
     class PatchHarmony
     {
         static bool Prefix()
@@ -16,7 +13,6 @@ namespace DSTMod_WildFrost
         }
 
         static void Postfix() =>
-            HarmonyLib.Tools.Logger.ChannelFilter =
-                HarmonyLib.Tools.Logger.LogChannel.Warn | HarmonyLib.Tools.Logger.LogChannel.Error;
+            HarmonyLib.Tools.Logger.ChannelFilter = HarmonyLib.Tools.Logger.LogChannel.Warn | HarmonyLib.Tools.Logger.LogChannel.Error;
     }
 }

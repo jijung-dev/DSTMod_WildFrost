@@ -43,7 +43,12 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
 
     public void ActionPerform(PlayAction action)
     {
-        if (target.silenced || !(action is ActionTriggerAgainst actionTriggerAgainst) || !actionTriggerAgainst.targetContainer || !(actionTriggerAgainst.entity == target))
+        if (
+            target.silenced
+            || !(action is ActionTriggerAgainst actionTriggerAgainst)
+            || !actionTriggerAgainst.targetContainer
+            || !(actionTriggerAgainst.entity == target)
+        )
         {
             return;
         }
@@ -99,7 +104,14 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
         yield return null;
     }
 
-    public IEnumerator Summon(CardContainer container, CardController controller, Entity summonedBy, StatusEffectData[] withEffects = null, int withEffectsAmount = 0, UnityAction<Entity> onComplete = null)
+    public IEnumerator Summon(
+        CardContainer container,
+        CardController controller,
+        Entity summonedBy,
+        StatusEffectData[] withEffects = null,
+        int withEffectsAmount = 0,
+        UnityAction<Entity> onComplete = null
+    )
     {
         if (!container)
         {
@@ -107,10 +119,15 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
         }
 
         Entity entity = null;
-        yield return CreateCard(summonCard, container, controller, delegate (Entity e)
-        {
-            entity = e;
-        });
+        yield return CreateCard(
+            summonCard,
+            container,
+            controller,
+            delegate(Entity e)
+            {
+                entity = e;
+            }
+        );
         if (withEffectsAmount > 0 && withEffects != null)
         {
             foreach (StatusEffectData effectData in withEffects)
@@ -128,29 +145,47 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
             ActionQueue.Stack(new ActionSequence(Animate(entity)), fixedPosition: true);
         }
 
-        ActionQueue.Stack(new ActionSequence(ShoveIfNecessary(entity, container))
-        {
-            note = "Shove If Necessary"
-        }, fixedPosition: true);
+        ActionQueue.Stack(new ActionSequence(ShoveIfNecessary(entity, container)) { note = "Shove If Necessary" }, fixedPosition: true);
         ActionQueue.Stack(new ActionRunEnableEvent(entity), fixedPosition: true);
         ActionQueue.Stack(new ActionMove(entity, container), fixedPosition: true);
         Events.InvokeEntitySummoned(entity, summonedBy);
         onComplete?.Invoke(entity);
     }
 
-    public IEnumerator SummonCopy(Entity toCopy, CardContainer container, CardController controller, Entity summonedBy, StatusEffectData[] withEffects = null, int withEffectsAmount = 0, UnityAction<Entity> onComplete = null)
+    public IEnumerator SummonCopy(
+        Entity toCopy,
+        CardContainer container,
+        CardController controller,
+        Entity summonedBy,
+        StatusEffectData[] withEffects = null,
+        int withEffectsAmount = 0,
+        UnityAction<Entity> onComplete = null
+    )
     {
         Entity entity = null;
-        yield return CreateCard(toCopy.data, container, controller, delegate (Entity e)
-        {
-            entity = e;
-            e.startingEffectsApplied = true;
-        });
+        yield return CreateCard(
+            toCopy.data,
+            container,
+            controller,
+            delegate(Entity e)
+            {
+                entity = e;
+                e.startingEffectsApplied = true;
+            }
+        );
         yield return CopyStatsAndEffects(entity, toCopy);
         yield return SummonPreMade(entity, container, controller, summonedBy, withEffects, withEffectsAmount, onComplete);
     }
 
-    public IEnumerator SummonPreMade(Entity preMade, CardContainer container, CardController controller, Entity summonedBy, StatusEffectData[] withEffects = null, int withEffectsAmount = 0, UnityAction<Entity> onComplete = null)
+    public IEnumerator SummonPreMade(
+        Entity preMade,
+        CardContainer container,
+        CardController controller,
+        Entity summonedBy,
+        StatusEffectData[] withEffects = null,
+        int withEffectsAmount = 0,
+        UnityAction<Entity> onComplete = null
+    )
     {
         if (withEffectsAmount > 0 && withEffects != null)
         {
@@ -178,7 +213,12 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
 
     public static IEnumerator ShoveIfNecessary(Entity entity, CardContainer container)
     {
-        if (container is CardSlot cardSlot && !cardSlot.Empty && ShoveSystem.CanShove(cardSlot.GetTop(), entity, out var shoveData) && shoveData != null)
+        if (
+            container is CardSlot cardSlot
+            && !cardSlot.Empty
+            && ShoveSystem.CanShove(cardSlot.GetTop(), entity, out var shoveData)
+            && shoveData != null
+        )
         {
             yield return ShoveSystem.DoShove(shoveData, updatePositions: true);
         }
@@ -188,7 +228,9 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
     {
         toCopy.data.TryGetCustomData("splitOriginalId", out var value, toCopy.data.id);
         entity.data.SetCustomData("splitOriginalId", value);
-        List<StatusEffectData> list = toCopy.statusEffects.Where((StatusEffectData e) => e.count > e.temporary && !e.IsNegativeStatusEffect() && (e.HasDescOrIsKeyword || e.isStatus)).ToList();
+        List<StatusEffectData> list = toCopy
+            .statusEffects.Where((StatusEffectData e) => e.count > e.temporary && !e.IsNegativeStatusEffect() && (e.HasDescOrIsKeyword || e.isStatus))
+            .ToList();
         foreach (Entity.TraitStacks trait in toCopy.traits)
         {
             foreach (StatusEffectData passiveEffect in trait.passiveEffects)
@@ -208,8 +250,7 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
             yield return StatusEffectSystem.Apply(entity, item.applier, item, item.count - item.temporary);
         }
 
-        entity.attackEffects = (from a in CardData.StatusEffectStacks.Stack(entity.attackEffects, toCopy.attackEffects)
-                                select a.Clone()).ToList();
+        entity.attackEffects = (from a in CardData.StatusEffectStacks.Stack(entity.attackEffects, toCopy.attackEffects) select a.Clone()).ToList();
         entity.damage = toCopy.damage;
         entity.hp = toCopy.hp;
         entity.counter = toCopy.counter;
@@ -224,7 +265,7 @@ public class StatusEffectSummonNoAnimation : StatusEffectData
     {
         AsyncOperationHandle<GameObject> handle = effectPrefabRef.InstantiateAsync(entity.transform);
         yield return handle;
-        
+
         CreateCardAnimation component = new GameObject().AddComponent(createCardAnimation.GetType()) as CreateCardAnimation;
         if ((object)component != null)
         {

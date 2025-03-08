@@ -11,8 +11,7 @@ namespace DSTMod_WildFrost
     public class StatusEffectSanity : StatusEffectData
     {
         [SerializeField]
-        public CardAnimation buildupAnimation =
-            ScriptableObject.CreateInstance<CardAnimationOverburn>();
+        public CardAnimation buildupAnimation = ScriptableObject.CreateInstance<CardAnimationOverburn>();
         public StatusEffectSummon[] shadowEnemy;
         public StatusEffectData summonRan;
 

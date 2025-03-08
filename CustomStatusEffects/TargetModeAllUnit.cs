@@ -3,16 +3,14 @@ using System.Linq;
 
 public class TargetModeAllUnit : TargetMode
 {
-	 public TargetConstraint[] constraints;
+    public TargetConstraint[] constraints;
 
     public override bool NeedsTarget => false;
 
     public override Entity[] GetPotentialTargets(Entity entity, Entity target, CardContainer targetContainer)
     {
         HashSet<Entity> hashSet = new HashSet<Entity>();
-        hashSet.AddRange(from e in Battle.GetAllUnits()
-                         where (bool)e && e.enabled && e.alive && e.canBeHit && CheckConstraints(e)
-                         select e);
+        hashSet.AddRange(from e in Battle.GetAllUnits() where (bool)e && e.enabled && e.alive && e.canBeHit && CheckConstraints(e) select e);
         if (hashSet.Count <= 0)
         {
             return null;
@@ -24,7 +22,7 @@ public class TargetModeAllUnit : TargetMode
     public override Entity[] GetSubsequentTargets(Entity entity, Entity target, CardContainer targetContainer)
     {
         HashSet<Entity> hashSet = new HashSet<Entity>();
-        hashSet.AddRange(Battle.GetCardsOnBoard(target.owner));
+        hashSet.AddRange(Battle.GetAllUnits());
         hashSet.Remove(entity);
         if (hashSet.Count <= 0)
         {

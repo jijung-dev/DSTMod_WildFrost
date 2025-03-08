@@ -1,11 +1,7 @@
 using System;
 using HarmonyLib;
 
-[HarmonyPatch(
-    typeof(BoardDisplay),
-    "SetUp",
-    new Type[] { typeof(CampaignNode), typeof(CardController) }
-)]
+[HarmonyPatch(typeof(BoardDisplay), "SetUp", new Type[] { typeof(CampaignNode), typeof(CardController) })]
 internal static class PatchSlots
 {
     internal static void Prefix(BoardDisplay __instance)

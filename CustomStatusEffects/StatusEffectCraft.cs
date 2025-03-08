@@ -25,14 +25,7 @@ public class StatusEffectCraft : StatusEffectData
 
     public void CheckAction(ref PlayAction action, ref bool allow)
     {
-        if (
-            running
-            || !target.enabled
-            || target.silenced
-            || !allow
-            || !(action is ActionTrigger actionTrigger)
-            || !(actionTrigger.entity == target)
-        )
+        if (running || !target.enabled || target.silenced || !allow || !(action is ActionTrigger actionTrigger) || !(actionTrigger.entity == target))
         {
             return;
         }

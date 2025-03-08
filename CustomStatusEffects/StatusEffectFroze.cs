@@ -10,8 +10,7 @@ namespace DSTMod_WildFrost
 {
     public class StatusEffectFroze : StatusEffectData
     {
-        public CardAnimation buildupAnimation =
-            ScriptableObject.CreateInstance<CardAnimationOverburn>();
+        public CardAnimation buildupAnimation = ScriptableObject.CreateInstance<CardAnimationOverburn>();
 
         public override void Init()
         {
@@ -44,6 +43,7 @@ namespace DSTMod_WildFrost
                 yield return Remove();
             }
         }
+
         public IEnumerator RemoveEffect(Entity entity, DeathType deathType)
         {
             if (entity == target)
