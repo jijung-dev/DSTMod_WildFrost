@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 
 public class StatusEffectInstantGainCard : StatusEffectInstant
 {
@@ -13,11 +14,14 @@ public class StatusEffectInstantGainCard : StatusEffectInstant
 
         for (int i = 0; i < amount; i++)
         {
-            CardData data = cardGain.Clone();
+            CardData data = cardGain.Clone(runCreateScripts: false);
             Card card = CardManager.Get(data, References.Battle.playerCardController, References.Player, inPlay: true, true);
             yield return card.UpdateData();
+            References.Player.handContainer.Add(card.entity);
+            References.Player.handContainer.SetChildPosition(card.entity);
             ActionQueue.Stack(new ActionMove(card.entity, References.Player.handContainer), fixedPosition: true);
             ActionQueue.Stack(new ActionRunEnableEvent(card.entity), fixedPosition: true);
+            ActionQueue.Stack(new ActionReveal(card.entity), fixedPosition: true);
 
             card.entity.curveAnimator.Ping();
         }

@@ -200,7 +200,7 @@ namespace DSTMod_WildFrost
             assets.Add(
                 new CardDataBuilder(this)
                     .CreateUnit("scienceMachine", "Science Machine")
-                    .SetStats(null, null, 3)
+                    .SetStats(null, null, 5)
                     .SetSprites("ScienceMachine.png", "Wendy_BG.png")
                     .WithCardType("Clunker")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -208,7 +208,7 @@ namespace DSTMod_WildFrost
                         data.isEnemyClunker = false;
                         data.startWithEffects = new CardData.StatusEffectStacks[]
                         {
-                            SStack("On Turn Reduce Counter For Allies", 2),
+                            SStack("On Turn Reduce Counter For Allies", 1),
                             SStack("When Destroyed By Hammer Gain Rock", 1),
                             SStack("When Destroyed By Hammer Gain Wood", 1),
                         };
@@ -376,6 +376,7 @@ namespace DSTMod_WildFrost
                         .SetSprite("Nodes/SpiderNode.png")
                         .SetNameRef("Spider Den")
                         .EnemyDictionary(
+                            ('B', "berryBush"),
                             ('S', "spider"),
                             ('W', "spiderWarrior"),
                             ('N', "spiderNest"),
@@ -384,13 +385,15 @@ namespace DSTMod_WildFrost
                             ('T', "smallTree")
                         )
                         .StartWavePoolData(0, "Wave 1: Stone In")
-                        .ConstructWaves(3, 0, "TSR", "RST")
+                        .ConstructWaves(5, 0, "SRTSB", "BTRSS")
                         .StartWavePoolData(1, "Wave 2: Tree In")
-                        .ConstructWaves(3, 2, "STS", "SSN", "SRS")
+                        .ConstructWaves(4, 2, "SWSB", "SSNB")
                         .StartWavePoolData(3, "Wave 4: Nest In")
-                        .ConstructWaves(4, 7, "RTSN", "SRSN", "STSN")
+                        .ConstructWaves(4, 7, "STSN", "SRSW", "STSW", "SRSN")
                         .StartWavePoolData(4, "Wave 5: Queen In")
                         .ConstructWaves(4, 9, "TSNQ", "RSQN", "WSQ")
+                        .StartWavePoolData(5, "Wave 6: Queen In")
+                        .ConstructWaves(4, 9, "WB", "SSB", "NB")
                         .AddBattleToLoader()
                         .LoadBattle(0, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
                 )
@@ -592,7 +595,7 @@ namespace DSTMod_WildFrost
                 (
                     7,
                     new BattleDataEditor(this, "Fuelweaver", 0)
-                        .SetSprite("Nodes/FuelweaverNode.png")
+                        .SetSprite("Nodes/FuelweaverNode.png", 200)
                         .SetNameRef("Odd Skeleton")
                         .EnemyDictionary(
                             ('S', "smallTree"),
@@ -620,8 +623,6 @@ namespace DSTMod_WildFrost
             );
             #endregion
         }
-
-        public Sprite defaultSprite;
 
         // TODO: Custom starting deck for leader
         public IEnumerator CampaignInit()

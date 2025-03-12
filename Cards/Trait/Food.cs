@@ -1,4 +1,5 @@
 using Deadpan.Enums.Engine.Components.Modding;
+using Steamworks.Ugc;
 using UnityEngine;
 
 public class Food : DataBase
@@ -26,9 +27,14 @@ public class Food : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("food");
-                    data.effects = new StatusEffectData[] { TryGet<StatusEffectData>("Destroy After Use"), TryGet<StatusEffectData>("Free Action") };
-                    data.overrides = new TraitData[] { TryGet<TraitData>("Food") };
+                    data.effects = new StatusEffectData[] 
+                    { 
+                        TryGet<StatusEffectData>("Free Action"), 
+                        TryGet<StatusEffectData>("Destroy After Use"), 
+                    };
+                    data.overrides = new TraitData[] { TryGet<TraitData>("Consumable") };
                 })
         );
+
     }
 }
