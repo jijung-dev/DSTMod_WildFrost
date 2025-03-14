@@ -42,8 +42,15 @@ namespace DSTMod_WildFrost
 
         private void CreateTargetConstraint()
         {
-            allConstraint.Add("noChopable", ScriptableObject.CreateInstance<TargetConstraintNotHasTrait>());
-            allConstraint.Add("noMineable", ScriptableObject.CreateInstance<TargetConstraintNotHasTrait>());
+            var notHasTrait = ScriptableObject.CreateInstance<TargetConstraintHasTrait>();
+            notHasTrait.not = true;
+            var notHasStatus = ScriptableObject.CreateInstance<TargetConstraintHasStatus>();
+            notHasStatus.not = true;
+            var notIsSpecific = ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>();
+            notIsSpecific.not = true;
+
+            allConstraint.Add("noChopable", ScriptableObject.Instantiate<TargetConstraintHasTrait>(notHasTrait));
+            allConstraint.Add("noMineable", ScriptableObject.Instantiate<TargetConstraintHasTrait>(notHasTrait));
             allConstraint.Add("hammerOnly", ScriptableObject.CreateInstance<TargetConstraintHasTrait>());
             allConstraint.Add("pickaxeOnly", ScriptableObject.CreateInstance<TargetConstraintHasTrait>());
             allConstraint.Add("axeOnly", ScriptableObject.CreateInstance<TargetConstraintHasTrait>());
@@ -51,24 +58,25 @@ namespace DSTMod_WildFrost
 
             allConstraint.Add("buildingOnly", ScriptableObject.CreateInstance<TargetConstraintHasStatus>());
             allConstraint.Add("clunkerOnly", ScriptableObject.CreateInstance<TargetConstraintHasStatus>());
-            allConstraint.Add("noChestHealth", ScriptableObject.CreateInstance<TargetConstraintNotHasStatus>());
-            allConstraint.Add("noBuilding", ScriptableObject.CreateInstance<TargetConstraintNotHasStatus>());
+            allConstraint.Add("noChestHealth", ScriptableObject.Instantiate<TargetConstraintHasStatus>(notHasStatus));
+            allConstraint.Add("noBuilding", ScriptableObject.Instantiate<TargetConstraintHasStatus>(notHasStatus));
 
             allConstraint.Add("abigailOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("floorOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
             allConstraint.Add("dflyOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
             allConstraint.Add("toadstoolOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
             allConstraint.Add("sandCastleOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
             allConstraint.Add("fuelweaverOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
             allConstraint.Add("chestOnly", ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("noDfly", ScriptableObject.CreateInstance<TargetConstraintIsNotSpecificCard>());
-            allConstraint.Add("noToadstool", ScriptableObject.CreateInstance<TargetConstraintIsNotSpecificCard>());
-            allConstraint.Add("noBoomshroom", ScriptableObject.CreateInstance<TargetConstraintIsNotSpecificCard>());
+            allConstraint.Add("noDfly", ScriptableObject.Instantiate<TargetConstraintIsSpecificCard>(notIsSpecific));
+            allConstraint.Add("noToadstool", ScriptableObject.Instantiate<TargetConstraintIsSpecificCard>(notIsSpecific));
+            allConstraint.Add("noBoomshroom", ScriptableObject.Instantiate<TargetConstraintIsSpecificCard>(notIsSpecific));
         }
 
         private void ApplyConstraint()
         {
-            ((TargetConstraintNotHasTrait)allConstraint["noChopable"]).trait = TryGet<TraitData>("Chopable");
-            ((TargetConstraintNotHasTrait)allConstraint["noMineable"]).trait = TryGet<TraitData>("Mineable");
+            ((TargetConstraintHasTrait)allConstraint["noChopable"]).trait = TryGet<TraitData>("Chopable");
+            ((TargetConstraintHasTrait)allConstraint["noMineable"]).trait = TryGet<TraitData>("Mineable");
             ((TargetConstraintHasTrait)allConstraint["hammerOnly"]).trait = TryGet<TraitData>("HammerType");
             ((TargetConstraintHasTrait)allConstraint["pickaxeOnly"]).trait = TryGet<TraitData>("PickaxeType");
             ((TargetConstraintHasTrait)allConstraint["axeOnly"]).trait = TryGet<TraitData>("AxeType");
@@ -76,10 +84,11 @@ namespace DSTMod_WildFrost
 
             ((TargetConstraintHasStatus)allConstraint["buildingOnly"]).status = TryGet<StatusEffectData>("Building Health");
             ((TargetConstraintHasStatus)allConstraint["clunkerOnly"]).status = TryGet<StatusEffectData>("Scrap");
-            ((TargetConstraintNotHasStatus)allConstraint["noBuilding"]).status = TryGet<StatusEffectData>("Building Health");
-            ((TargetConstraintNotHasStatus)allConstraint["noChestHealth"]).status = TryGet<StatusEffectData>("Chest Health");
+            ((TargetConstraintHasStatus)allConstraint["noBuilding"]).status = TryGet<StatusEffectData>("Building Health");
+            ((TargetConstraintHasStatus)allConstraint["noChestHealth"]).status = TryGet<StatusEffectData>("Chest Health");
 
             ((TargetConstraintIsSpecificCard)allConstraint["abigailOnly"]).allowedCards = new CardData[] { TryGet<CardData>("abigail") };
+            ((TargetConstraintIsSpecificCard)allConstraint["floorOnly"]).allowedCards = new CardData[] { TryGet<CardData>("floor") };
             ((TargetConstraintIsSpecificCard)allConstraint["dflyOnly"]).allowedCards = new CardData[]
             {
                 TryGet<CardData>("dragonfly"),
@@ -93,17 +102,17 @@ namespace DSTMod_WildFrost
             ((TargetConstraintIsSpecificCard)allConstraint["sandCastleOnly"]).allowedCards = new CardData[] { TryGet<CardData>("sandCastle") };
             ((TargetConstraintIsSpecificCard)allConstraint["fuelweaverOnly"]).allowedCards = new CardData[] { TryGet<CardData>("ancientFuelweaver") };
             ((TargetConstraintIsSpecificCard)allConstraint["chestOnly"]).allowedCards = new CardData[] { TryGet<CardData>("chest") };
-            ((TargetConstraintIsNotSpecificCard)allConstraint["noDfly"]).allowedCards = new CardData[]
+            ((TargetConstraintIsSpecificCard)allConstraint["noDfly"]).allowedCards = new CardData[]
             {
                 TryGet<CardData>("dragonfly"),
                 TryGet<CardData>("dragonflyEnraged"),
             };
-            ((TargetConstraintIsNotSpecificCard)allConstraint["noToadstool"]).allowedCards = new CardData[]
+            ((TargetConstraintIsSpecificCard)allConstraint["noToadstool"]).allowedCards = new CardData[]
             {
                 TryGet<CardData>("toadstool"),
                 TryGet<CardData>("toadstoolEnraged"),
             };
-            ((TargetConstraintIsNotSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
+            ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
         }
 
         private void CreateModAssets()
@@ -197,80 +206,128 @@ namespace DSTMod_WildFrost
             #endregion
 
             #region Science Machine
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateUnit("scienceMachine", "Science Machine")
-                    .SetStats(null, null, 5)
-                    .SetSprites("ScienceMachine.png", "Wendy_BG.png")
-                    .WithCardType("Clunker")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.isEnemyClunker = false;
-                        data.startWithEffects = new CardData.StatusEffectStacks[]
-                        {
-                            SStack("On Turn Reduce Counter For Allies", 1),
-                            SStack("When Destroyed By Hammer Gain Rock", 1),
-                            SStack("When Destroyed By Hammer Gain Wood", 1),
-                        };
-                        data.traits = new List<CardData.TraitStacks>() { TStack("Building", 1), TStack("Super Unmovable", 1) };
-                    })
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("scienceMachineBlueprint", "Science Machine Blueprint")
-                    .WithText("Place <card=tgestudio.wildfrost.dstmod.scienceMachine>")
-                    .SetSprites("Blueprint.png", "Wendy_BG.png")
-                    .WithCardType("Item")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        var floorOnly = ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>();
-                        floorOnly.name = "floorOnly";
-                        floorOnly.allowedCards = new CardData[] { TryGet<CardData>("floor") };
-                        data.targetConstraints = new TargetConstraint[] { floorOnly };
+            // assets.Add(
+            //     new CardDataBuilder(this)
+            //         .CreateUnit("scienceMachine", "Science Machine")
+            //         .SetStats(null, null, 5)
+            //         .SetSprites("ScienceMachine.png", "Wendy_BG.png")
+            //         .WithCardType("Clunker")
+            //         .SubscribeToAfterAllBuildEvent<CardData>(data =>
+            //         {
+            //             data.startWithEffects = new CardData.StatusEffectStacks[]
+            //             {
+            //                 SStack("On Turn Reduce Counter For Allies", 1),
+            //                 SStack("When Destroyed By Hammer Gain Rock", 1),
+            //                 SStack("When Destroyed By Hammer Gain Wood", 1),
+            //             };
+            //             data.traits = new List<CardData.TraitStacks>() { TStack("Building", 1), TStack("Super Unmovable", 1) };
+            //         })
+            // );
+            // assets.Add(
+            //     new CardDataBuilder(this)
+            //         .CreateItem("scienceMachineBlueprint", "Science Machine Blueprint")
+            //         .WithText("Place <card=tgestudio.wildfrost.dstmod.scienceMachine>")
+            //         .SetSprites("Blueprint.png", "Wendy_BG.png")
+            //         .WithCardType("Item")
+            //         .SubscribeToAfterAllBuildEvent<CardData>(data =>
+            //         {
+            //             var floorOnly = ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>();
+            //             floorOnly.name = "floorOnly";
+            //             floorOnly.allowedCards = new CardData[] { TryGet<CardData>("floor") };
+            //             data.targetConstraints = new TargetConstraint[] { floorOnly };
 
-                        data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };
-                        data.attackEffects = new CardData.StatusEffectStacks[]
-                        {
-                            SStack("Instant Summon Hammer In Hand", 1),
-                            SStack("Build Science Machine", 1),
-                            SStack("Reduce Chest Health", 1),
-                        };
-                        data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Require Wood", 1), SStack("Require Rock", 1) };
-                    })
-            );
-            assets.Add(
-                new StatusEffectDataBuilder(this)
-                    .Create<StatusEffectNextPhaseExt>("Build Science Machine")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectNextPhaseExt>(data =>
-                    {
-                        data.preventDeath = true;
-                        data.nextPhase = TryGet<CardData>("scienceMachine");
-                        data.animation = TryGet<StatusEffectNextPhase>("SoulboundBossPhase2").animation;
-                    })
-            );
-            assets.Add(
-                StatusCopy("Summon Fallow", "Summon Science Machine")
-                    .WithText("Summon <card=tgestudio.wildfrost.dstmod.scienceMachine>")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
-                    {
-                        CardType cardType = TryGet<CardType>("Clunker");
-                        cardType.canRecall = false;
-                        data.setCardType = cardType;
-                        data.summonCard = TryGet<CardData>("scienceMachine");
-                    })
-            );
-            assets.Add(
-                new StatusEffectDataBuilder(this)
-                    .Create<StatusEffectApplyXOnTurn>("On Turn Reduce Counter For Allies")
-                    .WithText("Reduce <keyword=counter> by <{a}> for allies")
-                    .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
-                    {
-                        data.effectToApply = TryGet<StatusEffectData>("Reduce Counter");
-                        data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies;
-                    })
-            );
+            //             data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };
+            //             data.attackEffects = new CardData.StatusEffectStacks[]
+            //             {
+            //                 SStack("Instant Summon Hammer In Hand", 1),
+            //                 SStack("Build Science Machine", 1),
+            //                 SStack("Reduce Chest Health", 1),
+            //             };
+            //             data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Require Wood", 1), SStack("Require Rock", 1) };
+            //         })
+            // );
+            // assets.Add(
+            //     new StatusEffectDataBuilder(this)
+            //         .Create<StatusEffectNextPhaseExt>("Build Science Machine")
+            //         .SubscribeToAfterAllBuildEvent<StatusEffectNextPhaseExt>(data =>
+            //         {
+            //             data.preventDeath = true;
+            //             data.nextPhase = TryGet<CardData>("scienceMachine");
+            //             data.animation = TryGet<StatusEffectNextPhase>("SoulboundBossPhase2").animation;
+            //         })
+            // );
+            // assets.Add(
+            //     StatusCopy("Summon Fallow", "Summon Science Machine")
+            //         .WithText("Summon <card=tgestudio.wildfrost.dstmod.scienceMachine>")
+            //         .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
+            //         {
+            //             CardType cardType = TryGet<CardType>("Clunker");
+            //             cardType.canRecall = false;
+            //             data.setCardType = cardType;
+            //             data.summonCard = TryGet<CardData>("scienceMachine");
+            //         })
+            // );
+            // assets.Add(
+            //     new StatusEffectDataBuilder(this)
+            //         .Create<StatusEffectApplyXOnTurn>("On Turn Reduce Counter For Allies")
+            //         .WithText("Reduce <keyword=counter> by <{a}> for allies")
+            //         .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
+            //         {
+            //             data.effectToApply = TryGet<StatusEffectData>("Reduce Counter");
+            //             data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies;
+            //         })
+            // );
 
             #endregion
+            // assets.Add(
+            //     new CardDataBuilder(this)
+            //         .CreateUnit("crockPot", "Crock Pot")
+            //         .SetStats(null, null, 0)
+            //         .SetSprites("Dummy.png", "Wendy_BG.png")
+            //         .WithCardType("Clunker")
+            //         .SubscribeToAfterAllBuildEvent<CardData>(data =>
+            //         {
+            //             data.startWithEffects = new CardData.StatusEffectStacks[]
+            //             {
+            //                 SStack("When Destroyed By Hammer Gain Rock", 1),
+            //                 SStack("When Destroyed By Hammer Gain Wood", 1),
+            //             };
+            //             data.traits = new List<CardData.TraitStacks>() { TStack("Building", 1), TStack("Super Unmovable", 1) };
+            //         })
+            // );
+            // assets.Add(
+            //     new CardDataBuilder(this)
+            //         .CreateItem("crockPotBlueprint", "Crock Pot Blueprint")
+            //         .WithText("Place <card=tgestudio.wildfrost.dstmod.crockPot>")
+            //         .SetSprites("Blueprint.png", "Wendy_BG.png")
+            //         .WithCardType("Item")
+            //         .SubscribeToAfterAllBuildEvent<CardData>(data =>
+            //         {
+            //             var floorOnly = ScriptableObject.CreateInstance<TargetConstraintIsSpecificCard>();
+            //             floorOnly.name = "floorOnly";
+            //             floorOnly.allowedCards = new CardData[] { TryGet<CardData>("floor") };
+            //             data.targetConstraints = new TargetConstraint[] { floorOnly };
+
+            //             data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };
+            //             data.attackEffects = new CardData.StatusEffectStacks[]
+            //             {
+            //                 SStack("Instant Summon Hammer In Hand", 1),
+            //                 SStack("Build Crock Pot", 1),
+            //                 SStack("Reduce Chest Health", 1),
+            //             };
+            //             data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Require Wood", 1), SStack("Require Rock", 1) };
+            //         })
+            // );
+            // assets.Add(
+            //     new StatusEffectDataBuilder(this)
+            //         .Create<StatusEffectNextPhaseExt>("Build Crock Pot")
+            //         .SubscribeToAfterAllBuildEvent<StatusEffectNextPhaseExt>(data =>
+            //         {
+            //             data.preventDeath = true;
+            //             data.nextPhase = TryGet<CardData>("crockPot");
+            //             data.animation = TryGet<StatusEffectNextPhase>("SoulboundBossPhase2").animation;
+            //         })
+            // );
 
             #region Testing Stuffs
             assets.Add(

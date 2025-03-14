@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\SteamLibrary\steamapps\common\Wildfrost\Modded\Wildfrost_Data\StreamingAssets\Mods\DSTMod_WildFrost\</OutputPath>
+    <OutputPath>C:\Users\VTP\Desktop\DSTMod_WildFrost\OutPut\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -457,4 +457,7 @@
     <Compile Include="StatusEffects\**\*.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="PostBuild" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\SteamLibrary\steamapps\common\Wildfrost\Modded\Wildfrost_Data\StreamingAssets\Mods\DSTMod_WildFrost\" />
+  </Target>
 </Project>

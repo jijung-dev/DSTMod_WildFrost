@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Deadpan.Enums.Engine.Components.Modding;
+using HarmonyLib;
 using static CardData;
 
 public abstract class ConsumableBase : DataBase
@@ -12,6 +13,7 @@ public abstract class ConsumableBase : DataBase
         None,
         Consumable,
         Food,
+        Cooked,
     }
 
     public class ConsumableInstance
@@ -20,21 +22,23 @@ public abstract class ConsumableBase : DataBase
         public string _title;
         public string _spriteName;
         public (string name, int amount)[] _withEffects;
+        public string _cookedTitle;
         public ConsumeType _consumeType;
 
-        public ConsumableInstance(string name, string title, string spriteName, (string name, int amount)[] withEffects, ConsumeType consumeType)
+        public ConsumableInstance(string name, string title, string spriteName, (string name, int amount)[] withEffects, ConsumeType consumeType, string cookedTitle)
         {
             _name = name;
             _title = title;
             _spriteName = spriteName;
             _withEffects = withEffects;
+            _cookedTitle = cookedTitle;
             _consumeType = consumeType;
         }
     }
 
-    public ConsumableInstance Create(string name, string title, string spriteName, (string name, int amount)[] withEffects, ConsumeType consumeType)
+    public ConsumableInstance Create(string name, string title, string spriteName, (string name, int amount)[] withEffects, ConsumeType consumeType, string cookedTitle = "")
     {
-        return new ConsumableInstance(name, title, spriteName, withEffects, consumeType);
+        return new ConsumableInstance(name, title, spriteName, withEffects, consumeType, cookedTitle);
     }
 
     public override void CreateCard()
@@ -50,35 +54,32 @@ public abstract class ConsumableBase : DataBase
                         delegate (CardData data)
                         {
                             data.canPlayOnEnemy = false;
-                            data.canPlayOnHand = false;
                         }
                     )
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
+                        if (!string.IsNullOrEmpty(item._cookedTitle))
+                        {
+                            data.startWithEffects = new StatusEffectStacks[] { SStack("When Target Crock Pot Gain " + item._cookedTitle, 1) };
+                        }
                         data.attackEffects = item._withEffects.Select(e => mod.SStack(e.name, e.amount)).ToArray();
                         data.traits = new List<TraitStacks>() { GetConsumeTrait(item._consumeType) };
                     })
             );
             CreateStatusEffect(item);
+            if (!string.IsNullOrEmpty(item._cookedTitle))
+            {
+                CreateCookFoodStatusEffect(item);
+            }
         }
     }
 
     private void CreateStatusEffect(ConsumableInstance item)
     {
-        // string effectTitle = "Gain " + item._title + " When Destroyed";
-        // assets.Add(
-        //     new StatusEffectDataBuilder(mod)
-        //         .Create<StatusEffectGainCardWhenDestroyed>(effectTitle)
-        //         .SubscribeToAfterAllBuildEvent<StatusEffectGainCardWhenDestroyed>(data =>
-        //         {
-        //             data.cardGain = TryGet<CardData>(item._name);
-        //         })
-        // );
         assets.Add(
             StatusCopy("Summon Junk", "Summon " + item._title)
                 .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
                 {
-                    //data.gainTrait = TryGet<StatusEffectData>("Temporary Noomlin");
                     data.summonCard = TryGet<CardData>(item._name);
                 })
         );
@@ -91,12 +92,28 @@ public abstract class ConsumableBase : DataBase
                     data.targetSummon = TryGet<StatusEffectSummon>("Summon " + item._title);
                 })
         );
+        if (item._consumeType != ConsumeType.Cooked)
+            assets.Add(
+                new StatusEffectDataBuilder(mod)
+                    .Create<StatusEffectApplyXWhenDestroyed>("Gain " + item._title + " When Destroyed")
+                    .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
+                    {
+                        data.effectToApply = TryGet<StatusEffectData>("Instant " + item._title + " In Hand");
+                        data.targetMustBeAlive = false;
+                        data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    })
+            );
+    }
+    private void CreateCookFoodStatusEffect(ConsumableInstance item)
+    {
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenDestroyed>("Gain " + item._title + " When Destroyed")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
+                .Create<StatusEffectApplyXWhenTargetCertainCard>("When Target Crock Pot Gain " + item._cookedTitle)
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenTargetCertainCard>(data =>
                 {
-                    data.effectToApply = TryGet<StatusEffectData>("Instant " + item._title + " In Hand");
+                    data.hasAnimation = true;
+                    data.constraints = new TargetConstraintIsSpecificCard[] { new TargetConstraintIsSpecificCard() { allowedCards = new CardData[] { TryGet<CardData>("crockPot") } } };
+                    data.effectToApply = TryGet<StatusEffectData>("Instant " + item._cookedTitle + " In Hand");
                     data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                 })
@@ -112,6 +129,8 @@ public abstract class ConsumableBase : DataBase
                 return TStack("Food", 1);
             case ConsumeType.Consumable:
                 return TStack("Consumable", 1);
+            case ConsumeType.Cooked:
+                return TStack("Cooked", 1);
             default:
                 throw new System.Exception($"Not found ConsumeType: {_consumeType}");
         }

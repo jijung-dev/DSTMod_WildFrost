@@ -54,7 +54,6 @@ public class FloorCard : DataBase
                 .Create<StatusEffectInstantFillSlots>("Instant Summon Floor")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantFillSlots>(data =>
                 {
-                    //data.targetSummonNoAnimation = TryGet<StatusEffectSummonNoAnimation>("Summon Floor");
                     data.withCards = new CardData[] { TryGet<CardData>("floor") };
                     data.slotID = 3;
                 })

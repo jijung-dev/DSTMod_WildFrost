@@ -1,3 +1,4 @@
+using System.Linq;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class Other : DataBase
                 {
                     data.targetMode = ScriptableObject.CreateInstance<TargetModeAllUnit>();
                 })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod).Create<StatusEffectResistX>("ByPassConstraint").WithType("dstmod.ByPass")
         );
     }
 }

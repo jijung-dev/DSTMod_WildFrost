@@ -44,8 +44,6 @@ public class ChestCard : DataBase
                 .Create<StatusEffectInstantFillSlots>("Instant Summon Chest")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantFillSlots>(data =>
                 {
-                    data.isEnemy = true;
-                    //data.targetSummonNoAnimation = TryGet<StatusEffectSummonNoAnimation>("Summon Chest");
                     data.withCards = new CardData[] { TryGet<CardData>("chest") };
                     data.slotID = 7;
                 })

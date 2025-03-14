@@ -47,8 +47,8 @@ public class Overheat : DataBase
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
                 .WithApplyVFX(mod.ImagePath("Icons/Heat_Apply.gif"))
-                .WithApplySFX(mod.ImagePath("Heat_Apply.wav"))
-                .WithEffectDamageSFX(mod.ImagePath("Heat_Apply.wav"))
+                .WithApplySFX(mod.ImagePath("Heat_Attack.wav"))
+                .WithEffectDamageSFX(mod.ImagePath("Heat_Attack.wav"))
                 .WithKeywords(iconKeywordOrNull: "overheat")
         );
     }

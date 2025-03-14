@@ -15,6 +15,7 @@ public class Boomshroom : DataBase
                     var type = TryGet<CardType>("Clunker");
                     type.canRecall = false;
                     data.cardType = type;
+                    data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Destroy Self After Counter Turn", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Kaboom", 1) };
                 })

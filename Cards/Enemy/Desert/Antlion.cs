@@ -34,6 +34,7 @@ public class Antlion : DataBase
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Chest Health", 1), SStack("Immune To Everything", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Super Unmovable", 1) };
                 })
