@@ -25,7 +25,14 @@ public abstract class ConsumableBase : DataBase
         public string _cookedTitle;
         public ConsumeType _consumeType;
 
-        public ConsumableInstance(string name, string title, string spriteName, (string name, int amount)[] withEffects, ConsumeType consumeType, string cookedTitle)
+        public ConsumableInstance(
+            string name,
+            string title,
+            string spriteName,
+            (string name, int amount)[] withEffects,
+            ConsumeType consumeType,
+            string cookedTitle
+        )
         {
             _name = name;
             _title = title;
@@ -36,7 +43,14 @@ public abstract class ConsumableBase : DataBase
         }
     }
 
-    public ConsumableInstance Create(string name, string title, string spriteName, (string name, int amount)[] withEffects, ConsumeType consumeType, string cookedTitle = "")
+    public ConsumableInstance Create(
+        string name,
+        string title,
+        string spriteName,
+        (string name, int amount)[] withEffects,
+        ConsumeType consumeType,
+        string cookedTitle = ""
+    )
     {
         return new ConsumableInstance(name, title, spriteName, withEffects, consumeType, cookedTitle);
     }
@@ -51,7 +65,7 @@ public abstract class ConsumableBase : DataBase
                     .SetSprites(item._spriteName, "Wendy_BG.png")
                     .WithCardType("Item")
                     .FreeModify(
-                        delegate (CardData data)
+                        delegate(CardData data)
                         {
                             data.canPlayOnEnemy = false;
                         }
@@ -104,6 +118,7 @@ public abstract class ConsumableBase : DataBase
                     })
             );
     }
+
     private void CreateCookFoodStatusEffect(ConsumableInstance item)
     {
         assets.Add(
@@ -112,13 +127,15 @@ public abstract class ConsumableBase : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenTargetCertainCard>(data =>
                 {
                     data.hasAnimation = true;
-                    data.constraints = new TargetConstraintIsSpecificCard[] { new TargetConstraintIsSpecificCard() { allowedCards = new CardData[] { TryGet<CardData>("crockPot") } } };
+                    data.constraints = new TargetConstraintIsSpecificCard[]
+                    {
+                        new Scriptable<TargetConstraintIsSpecificCard>(r => r.allowedCards = new CardData[] { TryGet<CardData>("crockPot") }),
+                    };
                     data.effectToApply = TryGet<StatusEffectData>("Instant " + item._cookedTitle + " In Hand");
                     data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                 })
         );
-
     }
 
     TraitStacks GetConsumeTrait(ConsumeType _consumeType)

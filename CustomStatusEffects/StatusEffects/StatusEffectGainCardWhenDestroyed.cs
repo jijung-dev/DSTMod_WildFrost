@@ -4,10 +4,12 @@ public class StatusEffectGainCardWhenDestroyed : StatusEffectInstantGainCard
 {
     public bool sacrificed;
     public bool consumed;
+
     public override void Init()
     {
         base.OnEntityDestroyed += EntityDestroyed;
     }
+
     public override bool RunEntityDestroyedEvent(Entity entity, DeathType deathType)
     {
         if (entity == target)
@@ -26,6 +28,7 @@ public class StatusEffectGainCardWhenDestroyed : StatusEffectInstantGainCard
         }
         yield return Process();
     }
+
     public bool CheckDeathType(DeathType deathType)
     {
         if (consumed && deathType != DeathType.Consume)

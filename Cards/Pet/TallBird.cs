@@ -26,7 +26,7 @@ public class TallBird : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("smallbird", "Smallbird")
                 .SetSprites("SmallBird.png", "Wendy_BG.png")
-                .SetStats(5, 3, 5)
+                .SetStats(3, 2, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate(CardData data)
@@ -44,7 +44,7 @@ public class TallBird : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("smallishTallbird", "Smallish Tallbird")
                 .SetSprites("SmallishBird.png", "Wendy_BG.png")
-                .SetStats(8, 5, 5)
+                .SetStats(5, 4, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate(CardData data)
@@ -62,12 +62,12 @@ public class TallBird : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("tallbird", "Tallbird")
                 .SetSprites("TallBird.png", "Wendy_BG.png")
-                .SetStats(10, 7, 4)
+                .SetStats(8, 3, 4)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate(CardData data)
                     {
-                        data.startWithEffects = new CardData.StatusEffectStacks[1] { SStack("MultiHit", 1) };
+                        data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1), SStack("Trigger When Ally Is Hit", 1) };
                     }
                 )
         );

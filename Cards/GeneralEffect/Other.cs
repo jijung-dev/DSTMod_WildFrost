@@ -15,11 +15,9 @@ public class Other : DataBase
                 .WithText("Hit All Units On Board")
                 .SubscribeToAfterAllBuildEvent<StatusEffectChangeTargetMode>(data =>
                 {
-                    data.targetMode = ScriptableObject.CreateInstance<TargetModeAllUnit>();
+                    data.targetMode = new Scriptable<TargetModeAllUnit>();
                 })
         );
-        assets.Add(
-            new StatusEffectDataBuilder(mod).Create<StatusEffectResistX>("ByPassConstraint").WithType("dstmod.ByPass")
-        );
+        assets.Add(new StatusEffectDataBuilder(mod).Create<StatusEffectResistX>("ByPassHasHealthConstraint").WithType("dstmod.ByPassHasHealth"));
     }
 }

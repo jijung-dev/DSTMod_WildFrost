@@ -5,7 +5,7 @@ public class LeaderExt
 {
     public static CardScript GiveUpgrade(string name = "Crown")
     {
-        CardScriptGiveUpgrade script = ScriptableObject.CreateInstance<CardScriptGiveUpgrade>();
+        CardScriptGiveUpgrade script = new Scriptable<CardScriptGiveUpgrade>();
         script.name = $"Give {name}";
         script.upgradeData = DSTMod.Instance.TryGet<CardUpgradeData>(name);
         return script;
@@ -13,7 +13,7 @@ public class LeaderExt
 
     public static CardScript AddRandomHealth(int min, int max)
     {
-        CardScriptAddRandomHealth health = ScriptableObject.CreateInstance<CardScriptAddRandomHealth>();
+        CardScriptAddRandomHealth health = new Scriptable<CardScriptAddRandomHealth>();
         health.name = "Random Health";
         health.healthRange = new Vector2Int(min, max);
         return health;
@@ -21,7 +21,7 @@ public class LeaderExt
 
     public static CardScript AddRandomDamage(int min, int max)
     {
-        CardScriptAddRandomDamage damage = ScriptableObject.CreateInstance<CardScriptAddRandomDamage>();
+        CardScriptAddRandomDamage damage = new Scriptable<CardScriptAddRandomDamage>();
         damage.name = "Give Damage";
         damage.damageRange = new Vector2Int(min, max);
         return damage;
@@ -29,7 +29,7 @@ public class LeaderExt
 
     public static CardScript AddRandomCounter(int min, int max)
     {
-        CardScriptAddRandomCounter counter = ScriptableObject.CreateInstance<CardScriptAddRandomCounter>();
+        CardScriptAddRandomCounter counter = new Scriptable<CardScriptAddRandomCounter>();
         counter.name = "Give Counter";
         counter.counterRange = new Vector2Int(min, max);
         return counter;

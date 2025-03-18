@@ -72,7 +72,7 @@ public class Dragonfly : DataBase
                 {
                     data.preventDeath = true;
                     data.nextPhase = TryGet<CardData>("dragonflyEnraged");
-                    data.animation = new CardAnimationPing();
+                    data.animation = new Scriptable<CardAnimationPing>();
                 })
         );
         assets.Add(

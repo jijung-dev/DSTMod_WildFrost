@@ -12,7 +12,7 @@ public class KittyKit : DataBase
                 .SetSprites("Kittykit.png", "Wendy_BG.png")
                 .WithText("Gain 3-6<keyword=blings>")
                 .SetTraits(TStack("Greed", 1))
-                .SetStartWithEffect(SStack("Gain Gold Range (3-6)", 1))
+                .SetAttackEffect(SStack("Gain Gold Range (3-6)", 1))
                 .SetStats(5, 1, 3)
                 .WithCardType("Friendly")
         );

@@ -63,6 +63,13 @@ public class Immune : DataBase
                         TryGet<StatusEffectData>("Haze"),
                         TryGet<StatusEffectData>("Block"),
                         TryGet<StatusEffectData>("Null"),
+                        TryGet<StatusEffectData>("Cleanse"),
+                        TryGet<StatusEffectData>("Budge"),
+                        TryGet<StatusEffectData>("Boost Effects"),
+                        TryGet<StatusEffectData>("Increase Effects"),
+                        TryGet<StatusEffectData>("Increase Attack"),
+                        TryGet<StatusEffectData>("Increase Max Health"),
+                        TryGet<StatusEffectData>("Increase Max Counter"),
                         TryGet<StatusEffectData>("Temporary Summoned"),
                     };
                 })

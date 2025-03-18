@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
 using UnityEngine;
@@ -5,6 +6,34 @@ using WildfrostHopeMod.VFX;
 
 public class Sanity : DataBase
 {
+    public override void CreateCard()
+    {
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateUnit("crawlingHorror", "Crawling Horror")
+                .SetSprites("CrawlingHorror.png", "Wendy_BG.png")
+                .SetStats(8, 2, 4)
+                .WithCardType("Enemy")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Shadow Align", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2) };
+                })
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateUnit("terrorbeak", "Terrorbeak")
+                .SetSprites("TerrorBeak.png", "Wendy_BG.png")
+                .SetStats(5, 4, 3)
+                .WithCardType("Enemy")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Shadow Align", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3) };
+                })
+        );
+    }
+
     protected override void CreateKeyword()
     {
         assets.Add(
@@ -35,29 +64,6 @@ public class Sanity : DataBase
                     };
                 })
                 .Subscribe_WithStatusIcon("sanity icon")
-        );
-
-        assets.Add(
-            new CardDataBuilder(mod)
-                .CreateUnit("crawlingHorror", "Crawling Horror")
-                .SetSprites("CrawlingHorror.png", "Wendy_BG.png")
-                .SetStats(8, 2, 4)
-                .WithCardType("Enemy")
-                .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2), SStack("Immune To Sanity", 1) };
-                })
-        );
-        assets.Add(
-            new CardDataBuilder(mod)
-                .CreateUnit("terrorbeak", "Terrorbeak")
-                .SetSprites("TerrorBeak.png", "Wendy_BG.png")
-                .SetStats(5, 4, 3)
-                .WithCardType("Enemy")
-                .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3), SStack("Immune To Sanity", 1) };
-                })
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)

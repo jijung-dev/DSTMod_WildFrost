@@ -11,7 +11,12 @@ public class Consumbale : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("consumable");
-                    data.effects = new StatusEffectData[] { TryGet<StatusEffectData>("Destroy After Use"), TryGet<StatusEffectData>("Free Action") };
+                    data.effects = new StatusEffectData[]
+                    {
+                        TryGet<StatusEffectData>("Destroy After Use"),
+                        TryGet<StatusEffectData>("Free Action"),
+                        TryGet<StatusEffectData>("Kill Self When Redraw Hit"),
+                    };
                     data.overrides = new TraitData[] { TryGet<TraitData>("Food") };
                 })
         );
@@ -24,7 +29,7 @@ public class Consumbale : DataBase
                 .Create("consumable")
                 .WithTitle("Consumable")
                 .WithShowName(true)
-                .WithDescription("Consume, Free Action|Cannot be cooked")
+                .WithDescription("Consume, Free Action, Destroy self when <Redraw Bell> is hit|Cannot be cooked")
                 .WithTitleColour(new Color(1f, 0.57f, 0.21f))
                 .WithNoteColour(new Color(0.65f, 0.65f, 0.65f))
                 .WithBodyColour(new Color(1f, 1f, 1f))

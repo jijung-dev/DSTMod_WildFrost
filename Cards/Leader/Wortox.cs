@@ -11,16 +11,11 @@ public class Wortox : DataBase
                 .CreateUnit("wortox", "Wortox")
                 .WithCardType("Leader")
                 .SetSprites("Wortox.png", "Wendy_BG.png")
-                .SetStats(10, 3, 4)
+                .SetStats(10, 4, 4)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("When Enemy Is Killed Gain Random Soul", 1) };
-                    data.createScripts = new CardScript[]
-                    {
-                        LeaderExt.GiveUpgrade(),
-                        LeaderExt.AddRandomHealth(0, 1),
-                        LeaderExt.AddRandomDamage(0, 1),
-                    };
+                    data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade(), LeaderExt.AddRandomHealth(0, 1) };
                 })
         );
         assets.Add(

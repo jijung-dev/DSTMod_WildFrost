@@ -10,7 +10,7 @@ namespace DSTMod_WildFrost
 {
     public class StatusEffectFroze : StatusEffectData
     {
-        public CardAnimation buildupAnimation = ScriptableObject.CreateInstance<CardAnimationOverburn>();
+        public CardAnimation buildupAnimation = new Scriptable<CardAnimationOverburn>();
 
         public override void Init()
         {

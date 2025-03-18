@@ -38,6 +38,8 @@ public abstract class DataBase
 
     protected virtual void CreateIcon() { }
 
+    protected virtual void CreateOther() { }
+
     public List<object> Create()
     {
         CreateStatusEffect();
@@ -45,6 +47,7 @@ public abstract class DataBase
         CreateKeyword();
         CreateIcon();
         CreateCard();
+        CreateOther();
         return assets;
     }
 

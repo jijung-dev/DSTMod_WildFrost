@@ -12,9 +12,7 @@ public class CanCook : DataBase
                 .Create("cancook")
                 .WithTitle("Can Cook")
                 .WithShowName(true)
-                .WithDescription(
-                    "Can cook food"
-                )
+                .WithDescription("Use <keyword=dstmod.food> on this to gain <keyword=dstmod.cooked> card".Process())
                 .WithTitleColour(new Color(0.65f, 0.41f, 0.34f))
                 .WithNoteColour(new Color(0.88f, 0.33f, 0.96f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
@@ -30,10 +28,7 @@ public class CanCook : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("cancook");
-                    data.effects = new StatusEffectData[]
-                    {
-                        TryGet<StatusEffectData>("ByPassConstraint")
-                    };
+                    data.effects = new StatusEffectData[] { TryGet<StatusEffectData>("ByPassHasHealthConstraint") };
                 })
         );
     }
