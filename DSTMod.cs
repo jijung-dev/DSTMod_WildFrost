@@ -822,7 +822,7 @@ namespace DSTMod_WildFrost
         private void CreateLocalizedStrings()
         {
             StringTable uiText = LocalizationHelper.GetCollection("UI Text", SystemLanguage.English);
-            uiText.SetString(TribeTitleKey, "The Survival"); //Create the title
+            uiText.SetString(TribeTitleKey, "The Survivor"); //Create the title
             uiText.SetString(
                 TribeDescKey,
                 "The night devours the unprepared. The earth offers life but demands struggle. We gather, hunt, and build to see another day. "
