@@ -14,6 +14,7 @@ public class BunnyMan : DataBase
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[2]
                     {
                         SStack("After Hit Escape", 1),

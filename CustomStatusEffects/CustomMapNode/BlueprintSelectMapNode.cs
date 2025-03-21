@@ -27,11 +27,12 @@ public class BlueprintSelectMapNode : DataBase
                         data.mapNodePrefab = mapNode;
 
                         data.curseCards = 0;
+                        //name + Blueprint
                         data.force = new List<CardData>()
                         {
                             DSTMod.Instance.TryGet<CardData>("crockPotBlueprint"),
                             DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
-                            DSTMod.Instance.TryGet<CardData>("crockPotBlueprint"),
+                            DSTMod.Instance.TryGet<CardData>("firePitBlueprint"),
                         };
 
                         // Campaign campaign = Object.FindObjectOfType<Campaign>();

@@ -17,7 +17,7 @@ namespace DSTMod_WildFrost.PatchingScript
 
         public NoTargetTextSystemExt() { }
 
-        public static IEnumerator Run(Entity entity, NoTargetTypeExt type)
+        public static IEnumerator Run(Entity entity, NoTargetTypeExt type, CardData requireCard = null)
         {
             shakeDurationRange = NoTargetTextSystem.instance.shakeDurationRange;
             shakeAmount = NoTargetTextSystem.instance.shakeAmount;
@@ -29,13 +29,13 @@ namespace DSTMod_WildFrost.PatchingScript
                 yield return Sequences.WaitForAnimationEnd(entity);
                 float num = shakeDurationRange.Random();
                 entity.curveAnimator.Move(shakeAmount.WithX(shakeAmount.x.WithRandomSign()), shakeCurve, 1f, num);
-                textElement.text = (type == NoTargetTypeExt.None) ? "" : GetStringType(type);
+                textElement.text = (type == NoTargetTypeExt.None) ? "" : GetStringType(type, requireCard);
                 NoTargetTextSystem.instance.PopText(entity.transform.position);
                 yield return new WaitForSeconds(num);
             }
         }
 
-        public static string GetStringType(NoTargetTypeExt type)
+        public static string GetStringType(NoTargetTypeExt type, CardData requireCard)
         {
             string text;
             switch (type)
@@ -52,6 +52,9 @@ namespace DSTMod_WildFrost.PatchingScript
                 case NoTargetTypeExt.CantShove:
                     text = $"Cannot Shove";
                     break;
+                case NoTargetTypeExt.RequireCard:
+                    text = $"Require {requireCard.title}";
+                    break;
                 default:
                     text = "";
                     break;
@@ -67,5 +70,6 @@ namespace DSTMod_WildFrost.PatchingScript
         RequireRock,
         RequireGold,
         RequireWood,
+        RequireCard,
     }
 }

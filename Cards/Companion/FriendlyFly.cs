@@ -12,6 +12,7 @@ public class FriendlyFly : DataBase
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Turn Boost Random Ally Effect", 1) };
                 })
         );

@@ -13,6 +13,7 @@ public class Pearl : DataBase
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[1] { SStack("On Turn Reduce Counter To Allies", 1) };
                 })
         );

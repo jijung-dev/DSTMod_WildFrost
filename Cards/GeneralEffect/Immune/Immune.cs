@@ -38,6 +38,22 @@ public class Immune : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmune>("Immune To Freeze")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
+                {
+                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Freezing") };
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmune>("Immune To Overheat")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
+                {
+                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Overheat") };
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectImmune>("Immune To Everything")
                 .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
                 {
@@ -66,10 +82,13 @@ public class Immune : DataBase
                         TryGet<StatusEffectData>("Cleanse"),
                         TryGet<StatusEffectData>("Budge"),
                         TryGet<StatusEffectData>("Boost Effects"),
+                        TryGet<StatusEffectData>("Reduce Effects"),
                         TryGet<StatusEffectData>("Increase Effects"),
                         TryGet<StatusEffectData>("Increase Attack"),
                         TryGet<StatusEffectData>("Increase Max Health"),
                         TryGet<StatusEffectData>("Increase Max Counter"),
+                        TryGet<StatusEffectData>("Reduce Counter"),
+                        TryGet<StatusEffectData>("Reduce Max Counter"),
                         TryGet<StatusEffectData>("Temporary Summoned"),
                     };
                 })

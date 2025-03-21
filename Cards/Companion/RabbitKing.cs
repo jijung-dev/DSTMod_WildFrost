@@ -16,6 +16,7 @@ public class RabbitKing : DataBase
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[2]
                     {
                         SStack("Neutral On Turn Summon BRK On Destroyed Summon WRB", 1),

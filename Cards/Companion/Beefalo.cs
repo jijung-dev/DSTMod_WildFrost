@@ -14,6 +14,7 @@ public class Beefalo : DataBase
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.unitPool);
                     data.traits = new List<CardData.TraitStacks>() { TStack("Knockback", 1), TStack("Pigheaded", 1) };
                 })
         );

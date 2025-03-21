@@ -20,4 +20,24 @@ public class Bee : DataBase
                 })
         );
     }
+    protected override void CreateStatusEffect()
+    {
+        assets.Add(
+            StatusCopy("Instant Summon Fallow", "Instant Summon Bee")
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantSummon>(data =>
+                {
+                    data.targetSummon = TryGet<StatusEffectSummon>("Summon Bee");
+                    data.summonPosition = StatusEffectInstantSummon.Position.InFrontOfOrOtherRow;
+                })
+        );
+        assets.Add(
+            StatusCopy("Summon Fallow", "Summon Bee")
+                .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
+                {
+                    data.setCardType = TryGet<CardType>("Enemy");
+                    data.summonCard = TryGet<CardData>("bee");
+                })
+        );
+    }
+
 }

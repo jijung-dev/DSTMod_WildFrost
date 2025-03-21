@@ -42,6 +42,9 @@ namespace DSTMod_WildFrost
 
         public Dictionary<string, TargetConstraint> allConstraint = new Dictionary<string, TargetConstraint>();
 
+        public RewardPool itemPool => CreateRewardPool("DstItemPool", "Items", DataList<CardData>());
+        public RewardPool unitPool => CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
+
         private void CreateTargetConstraint()
         {
             allConstraint.Add("noChopable", new Scriptable<TargetConstraintHasTrait>(x => x.not = true));
@@ -152,28 +155,6 @@ namespace DSTMod_WildFrost
                                 .ToList();
                             //inventory.upgrades.Add(TryGet<CardUpgradeData>("CardUpgradeCritical"));
                             data.startingInventory = inventory;
-
-                            RewardPool unitPool = CreateRewardPool(
-                                "DstUnitPool",
-                                "Units",
-                                DataList<CardData>(
-                                    "iceChester",
-                                    "shadowChester",
-                                    "friendlyFly",
-                                    "glommer",
-                                    "bunnyman",
-                                    "pigman",
-                                    "pearl",
-                                    "beefalo",
-                                    "fortuitousRabbit"
-                                )
-                            );
-
-                            RewardPool itemPool = CreateRewardPool(
-                                "DstItemPool",
-                                "Items",
-                                DataList<CardData>("trident", "fireStaff", "wateringCan", "sewingKit", "panFlute", "garland", "logSuit", "darkSword")
-                            );
 
                             //RewardPool charmPool = CreateRewardPool("DrawCharmPool", "Charms", DataList<CardUpgradeData>(
                             //    "CardUpgradeTrash",

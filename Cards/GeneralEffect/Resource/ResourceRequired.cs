@@ -10,6 +10,16 @@ public class ResourceRequired : DataBase
     {
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectCraft>("Require Rabbit")
+                .WithText("Require <{a}> <card=dstmod.rabbit>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
+                {
+                    data.requireType = NoTargetTypeExt.RequireCard;
+                    data.requireCard = TryGet<CardData>("rabbit");
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Rock")
                 .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.rock>")
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
@@ -38,6 +48,27 @@ public class ResourceRequired : DataBase
                     data.removeEffect = TryGet<StatusEffectData>("Gold");
                 })
         );
+        assets.Add(
+			StatusCopy("Lose Scrap", "Lose Require Wood")
+				.SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
+				{
+					data.statusToLose = TryGet<StatusEffectData>("Require Wood");
+				})
+		);
+        assets.Add(
+			StatusCopy("Lose Scrap", "Lose Require Rock")
+				.SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
+				{
+					data.statusToLose = TryGet<StatusEffectData>("Require Rock");
+				})
+		);
+        assets.Add(
+			StatusCopy("Lose Scrap", "Lose Require Gold")
+				.SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
+				{
+					data.statusToLose = TryGet<StatusEffectData>("Require Gold");
+				})
+		);
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Hammer Gain Rock")

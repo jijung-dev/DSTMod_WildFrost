@@ -13,7 +13,7 @@ public class Wetness : DataBase
                 .Create("wetness")
                 .WithTitle("Wetness")
                 .WithShowName(false)
-                .WithDescription("Each stack have 10% of slipping and card doesn't work|Max 10 stacks")
+                .WithDescription("Each stack adds 10% chance for card to not play on use")
                 .WithTitleColour(new Color(0.00f, 0.37f, 0.68f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(true)

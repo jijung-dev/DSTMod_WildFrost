@@ -14,6 +14,7 @@ public abstract class BuildingBase : DataBase
         Gold,
         Rock,
         Wood,
+        Rabbit,
     }
 
     public class BuildingInstance
@@ -25,6 +26,7 @@ public abstract class BuildingBase : DataBase
         public (string name, int amount)[] _withEffects;
         public (string name, int amount)[] _withTraits;
         public (ResourceRequire name, int amount)[] _resourceRequired;
+        public bool _isPool;
 
         public BuildingInstance(
             string name,
@@ -33,7 +35,8 @@ public abstract class BuildingBase : DataBase
             (string name, int amount)[] withEffects,
             (string name, int amount)[] withTraits,
             (ResourceRequire name, int amount)[] resourceRequired,
-            int[] stats
+            int[] stats,
+            bool isPool
         )
         {
             _name = name;
@@ -43,6 +46,7 @@ public abstract class BuildingBase : DataBase
             _withEffects = withEffects;
             _withTraits = withTraits;
             _resourceRequired = resourceRequired;
+            _isPool = isPool;
         }
     }
 
@@ -53,10 +57,11 @@ public abstract class BuildingBase : DataBase
         (string name, int amount)[] withEffects,
         (string name, int amount)[] withTraits,
         (ResourceRequire name, int amount)[] resourceRequired,
-        int[] stats
+        int[] stats,
+        bool isPool = true
     )
     {
-        return new BuildingInstance(name, title, spriteName, withEffects, withTraits, resourceRequired, stats);
+        return new BuildingInstance(name, title, spriteName, withEffects, withTraits, resourceRequired, stats, isPool);
     }
 
     public override void CreateCard()
@@ -85,6 +90,9 @@ public abstract class BuildingBase : DataBase
                     .WithCardType("Item")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
+                        if (item._isPool)
+                            data.WithPools(mod.itemPool);
+
                         data.targetConstraints = new TargetConstraint[] { mod.TryGetConstraint("floorOnly") };
 
                         data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };
@@ -120,7 +128,11 @@ public abstract class BuildingBase : DataBase
         List<StatusEffectStacks> statusEffects = new List<StatusEffectStacks>();
         if (item._withEffects != null)
             statusEffects.AddRange(item._withEffects?.Select(e => mod.SStack(e.name, e.amount)));
-        statusEffects.AddRange(item._resourceRequired.Select(e => mod.SStack("When Destroyed By Hammer Gain " + e.name.ToString(), e.amount)));
+
+        statusEffects.AddRange(item._resourceRequired
+            .Where(e => e.name != ResourceRequire.Rabbit)
+            .Select(e => mod.SStack("When Destroyed By Hammer Gain " + e.name.ToString(), e.amount))
+        );
         return statusEffects.ToArray();
     }
 

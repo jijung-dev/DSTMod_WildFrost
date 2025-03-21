@@ -13,6 +13,7 @@ public class PigMan : DataBase
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.unitPool);
                     data.traits = new List<CardData.TraitStacks>() { TStack("Smackback", 1), TStack("Pigheaded", 1) };
                 })
         );
