@@ -30,7 +30,7 @@ public class BuildingFactory : BuildingBase
                 Create(
                     "firePit",
                     "Fire Pit",
-                    "Dummy.png",
+                    "FirePit.png",
                     SStack(("While Active Freeze Immune To Allies", 1)),
                     null,
                     new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 1) },
@@ -40,7 +40,7 @@ public class BuildingFactory : BuildingBase
                 Create(
                     "tent",
                     "Tent",
-                    "Dummy.png",
+                    "Tent.png",
                     SStack(("On Turn Reduce Sanity Allies", 2), ("On Turn Heal Allies", 1)),
                     null,
                     new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 2) },
@@ -49,8 +49,8 @@ public class BuildingFactory : BuildingBase
                 Create(
                     "trap",
                     "Trap",
-                    "Dummy.png",
-                    SStack(("On Turn Summon Rabbit In Hand",1)),
+                    "Trap.png",
+                    SStack(("On Turn Summon Rabbit In Hand", 1)),
                     null,
                     new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 1) },
                     new[] { 0, 0, 5 },
@@ -59,28 +59,28 @@ public class BuildingFactory : BuildingBase
                 Create(
                     "iceFlingomatic",
                     "Ice Flingomatic",
-                    "Dummy.png",
-                    SStack(("While Active Overheat Immune To Allies",1),("On Turn Snow Random Enemies",3)),
+                    "IceFlingomatic.png",
+                    SStack(("While Active Overheat Immune To Allies", 1), ("On Turn Snow Random Enemies", 3)),
                     null,
-                    new[] { (ResourceRequire.Rock, 2), (ResourceRequire.Wood, 1), (ResourceRequire.Gold, 1)},
+                    new[] { (ResourceRequire.Rock, 2), (ResourceRequire.Wood, 1), (ResourceRequire.Gold, 1) },
                     new[] { 0, 0, 5 }
                 ),
                 Create(
                     "prestihatitator",
                     "Prestihatitator",
-                    "Dummy.png",
-                    SStack(("While Active Increase Attack To Allies",4),("On Turn Apply Sanity Allies",2)),
+                    "Prestihatitator.png",
+                    SStack(("While Active Increase Attack To Allies", 4), ("On Turn Apply Sanity Allies", 2)),
                     null,
-                    new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 2), (ResourceRequire.Gold, 1), (ResourceRequire.Rabbit, 1)},
+                    new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 2), (ResourceRequire.Gold, 1), (ResourceRequire.Rabbit, 1) },
                     new[] { 0, 0, 3 }
                 ),
                 Create(
                     "potterWheel",
-                    "Potter Wheel",
-                    "Dummy.png",
-                    SStack(("On Turn Summon Statue In Hand",1),("Require Rock",1)),
+                    "Potter's Wheel",
+                    "PotterWheel.png",
+                    SStack(("On Turn Summon Statue In Hand", 1), ("Require Rock", 1)),
                     null,
-                    new[] { (ResourceRequire.Rock, 2), (ResourceRequire.Wood, 1)},
+                    new[] { (ResourceRequire.Rock, 2), (ResourceRequire.Wood, 1) },
                     new[] { 0, 0, 8 }
                 ),
             }

@@ -15,8 +15,7 @@ public class ConsumableFatory : ConsumableBase
                 Create("redCap", "Red Cap", "RedCap.png", SStack(("Heal", 2), ("Sanity", 2)), ConsumeType.Food, "Cooked Red Cap"),
                 Create("cactusFlesh", "Cactus Flesh", "CactusFlesh.png", SStack(("Heal", 1)), ConsumeType.Food, "Cooked Cactus Flesh"),
                 Create("monsterMeat", "Monster Meat", "MonsterMeat.png", SStack(("Heal", 1), ("Sanity", 2)), ConsumeType.Food, "Monster Lasagna"),
-                Create("morsel", "Morsel", "Dummy.png", SStack(("Sanity", 1)), ConsumeType.Food, "Cooked Morsel"),
-
+                Create("morsel", "Morsel", "Morsel.png", SStack(("Sanity", 1)), ConsumeType.Food, "Cooked Morsel"),
                 Create("taffy", "Taffy", "Taffy.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("roastedBerries", "Roasted Berries", "RoastedBerries.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("roastedJuicyBerries", "Roasted Juicy Berries", "RoastedJuicyBerries.png", SStack(("Heal", 2)), ConsumeType.Cooked),
@@ -31,8 +30,7 @@ public class ConsumableFatory : ConsumableBase
                     ConsumeType.Cooked
                 ),
                 Create("monsterLasagna", "Monster Lasagna", "MonsterLasagna.png", SStack(("Heal", 2), ("Sanity", 2)), ConsumeType.Cooked),
-                Create("cookedMorsel", "Cooked Morsel", "Dummy.png", SStack(("Heal", 1)), ConsumeType.Cooked),
-
+                Create("cookedMorsel", "Cooked Morsel", "CookedMorsel.png", SStack(("Heal", 1)), ConsumeType.Cooked),
                 Create("lightBulb", "Light Bulb", "LightBulb.png", SStack(("Heal", 1)), ConsumeType.Consumable),
                 Create("foliage", "Foliage", "Foliage.png", SStack(("Heal", 1)), ConsumeType.Consumable),
                 Create("lesserGlowBerry", "Lesser Glow Berry", "LesserGlowBerry.png", SStack(("Heal", 2), ("Sanity", 1)), ConsumeType.Consumable),

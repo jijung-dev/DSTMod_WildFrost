@@ -42,8 +42,8 @@ namespace DSTMod_WildFrost
 
         public Dictionary<string, TargetConstraint> allConstraint = new Dictionary<string, TargetConstraint>();
 
-        public RewardPool itemPool => CreateRewardPool("DstItemPool", "Items", DataList<CardData>());
-        public RewardPool unitPool => CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
+        public RewardPool itemPool;
+        public RewardPool unitPool;
 
         private void CreateTargetConstraint()
         {
@@ -122,6 +122,8 @@ namespace DSTMod_WildFrost
                     assets.AddRange(instance.Create());
                 }
             }
+            itemPool = CreateRewardPool("DstItemPool", "Items", DataList<CardData>());
+            unitPool = CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
             #region Tribe
             //Add Tribe
             assets.Add(

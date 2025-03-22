@@ -20,6 +20,7 @@ public class Bee : DataBase
                 })
         );
     }
+
     protected override void CreateStatusEffect()
     {
         assets.Add(
@@ -39,5 +40,4 @@ public class Bee : DataBase
                 })
         );
     }
-
 }

@@ -26,6 +26,7 @@ public class StatusEffectCraft : StatusEffectData
     {
         Events.OnCheckAction -= CheckAction;
     }
+
     public override bool RunCardPlayedEvent(Entity entity, Entity[] targets)
     {
         if (target.enabled)
@@ -75,16 +76,19 @@ public class StatusEffectCraft : StatusEffectData
             }
         }
     }
+
     public override bool RunPreTriggerEvent(Trigger trigger)
     {
         int amount = GetAmount();
         return amount > 0 && trigger.entity.name == target.name;
     }
+
     public override bool RunCardMoveEvent(Entity entity)
     {
         int amount = GetAmount();
         return amount > 0 && entity.name == target.name;
     }
+
     private IEnumerator EntityCardMove(Entity entity)
     {
         yield return entity.FindStatus(this)?.Remove();
@@ -92,10 +96,12 @@ public class StatusEffectCraft : StatusEffectData
         entity.display.promptUpdateDescription = true;
         entity.PromptUpdate();
     }
+
     public IEnumerator EntityPreTrigger(Trigger trigger)
     {
         return Clear();
     }
+
     public IEnumerator Clear()
     {
         running = true;
@@ -124,7 +130,8 @@ public class StatusEffectCraft : StatusEffectData
 
     public bool GetTargets(int requiredAmount)
     {
-        if (removeEffect == null) return true;
+        if (removeEffect == null)
+            return true;
 
         if (chest == null)
             foreach (Entity card in References.Battle.cards)
@@ -146,9 +153,11 @@ public class StatusEffectCraft : StatusEffectData
 
         return true;
     }
+
     public bool GetTargetCards(int requiredAmount)
     {
-        if (requireCard == null) return true;
+        if (requireCard == null)
+            return true;
 
         foreach (Entity item in References.Player.handContainer)
         {

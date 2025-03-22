@@ -12,6 +12,7 @@ public class DarkSword : DataBase
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.canPlayOnFriendly = false;
                     data.canPlayOnHand = false;
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("When Played Apply Sanity To Allies In Row", 4) };

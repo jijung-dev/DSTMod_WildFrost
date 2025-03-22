@@ -49,26 +49,26 @@ public class ResourceRequired : DataBase
                 })
         );
         assets.Add(
-			StatusCopy("Lose Scrap", "Lose Require Wood")
-				.SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
-				{
-					data.statusToLose = TryGet<StatusEffectData>("Require Wood");
-				})
-		);
+            StatusCopy("Lose Scrap", "Lose Require Wood")
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
+                {
+                    data.statusToLose = TryGet<StatusEffectData>("Require Wood");
+                })
+        );
         assets.Add(
-			StatusCopy("Lose Scrap", "Lose Require Rock")
-				.SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
-				{
-					data.statusToLose = TryGet<StatusEffectData>("Require Rock");
-				})
-		);
+            StatusCopy("Lose Scrap", "Lose Require Rock")
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
+                {
+                    data.statusToLose = TryGet<StatusEffectData>("Require Rock");
+                })
+        );
         assets.Add(
-			StatusCopy("Lose Scrap", "Lose Require Gold")
-				.SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
-				{
-					data.statusToLose = TryGet<StatusEffectData>("Require Gold");
-				})
-		);
+            StatusCopy("Lose Scrap", "Lose Require Gold")
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantLoseX>(data =>
+                {
+                    data.statusToLose = TryGet<StatusEffectData>("Require Gold");
+                })
+        );
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Hammer Gain Rock")

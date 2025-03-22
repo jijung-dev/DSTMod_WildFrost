@@ -12,6 +12,7 @@ public class WateringCan : DataBase
                 .SetTraits(TStack("Noomlin", 1), TStack("Barrage", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Freezing", 1) };
                 })
         );

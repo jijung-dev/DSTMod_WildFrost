@@ -13,6 +13,7 @@ public class Trident : DataBase
                 .SetStartWithEffect(SStack("Hit All Enemies", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.needsTarget = false;
                 })
         );

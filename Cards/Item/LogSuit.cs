@@ -11,6 +11,7 @@ public class LogSuit : DataBase
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shell", 5) };
                 })
         );

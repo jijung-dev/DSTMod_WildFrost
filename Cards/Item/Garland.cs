@@ -12,6 +12,7 @@ public class Garland : DataBase
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Sanity", 3) };
                 })
         );

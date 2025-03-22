@@ -129,9 +129,9 @@ public abstract class BuildingBase : DataBase
         if (item._withEffects != null)
             statusEffects.AddRange(item._withEffects?.Select(e => mod.SStack(e.name, e.amount)));
 
-        statusEffects.AddRange(item._resourceRequired
-            .Where(e => e.name != ResourceRequire.Rabbit)
-            .Select(e => mod.SStack("When Destroyed By Hammer Gain " + e.name.ToString(), e.amount))
+        statusEffects.AddRange(
+            item._resourceRequired.Where(e => e.name != ResourceRequire.Rabbit)
+                .Select(e => mod.SStack("When Destroyed By Hammer Gain " + e.name.ToString(), e.amount))
         );
         return statusEffects.ToArray();
     }

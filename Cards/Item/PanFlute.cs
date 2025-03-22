@@ -11,6 +11,7 @@ public class PanFlute : DataBase
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Snow All Enemies", 1) };
                     data.needsTarget = false;
                 })

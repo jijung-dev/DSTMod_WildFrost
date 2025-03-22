@@ -11,6 +11,7 @@ public class SewingKit : DataBase
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.targetConstraints = new TargetConstraint[] { TryGetConstraint("clunkerOnly") };
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Instant Add Scrap", 1) };
                 })

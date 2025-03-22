@@ -12,6 +12,7 @@ public class FireStaff : DataBase
                 .SetTraits(TStack("Consume", 1), TStack("Aimless", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(mod.itemPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 4) };
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Overheat", 2) };
                 })
