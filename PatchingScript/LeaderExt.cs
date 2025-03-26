@@ -1,3 +1,4 @@
+using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
 using UnityEngine;
 
@@ -33,5 +34,27 @@ public class LeaderExt
         counter.name = "Give Counter";
         counter.counterRange = new Vector2Int(min, max);
         return counter;
+    }
+    public static CardScript AddRandomSprite(string[] sprites)
+    {
+        CardScriptSetSprite sprite = new Scriptable<CardScriptSetSprite>();
+        sprite.name = "Give Sprite";
+        sprite.sprites = sprites;
+        sprite.isRandom = true;
+        return sprite;
+    }
+}
+public class CardScriptSetSprite : CardScript
+{
+    public string[] sprites;
+    public bool isRandom;
+    public override void Run(CardData target)
+    {
+        int ran = 0;
+        if (isRandom)
+        {
+            ran = Random.Range(0, sprites.Length);
+        }
+        target.mainSprite = DSTMod.Instance.ImagePath(sprites[ran]).ToSprite();
     }
 }

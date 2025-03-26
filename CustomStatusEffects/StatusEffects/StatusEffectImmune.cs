@@ -1,3 +1,7 @@
+using System.Linq;
+using DSTMod_WildFrost;
+
+
 public class StatusEffectImmune : StatusEffectData
 {
     public StatusEffectData[] immuneTo;
@@ -5,12 +9,24 @@ public class StatusEffectImmune : StatusEffectData
     public override bool RunApplyStatusEvent(StatusEffectApply apply)
     {
         if ((bool)apply.effectData && apply.target == target)
-            if (immuneTo.Contains(apply.effectData))
+            foreach (StatusEffectData item in immuneTo)
             {
-                apply.effectData = null;
-                apply.count = 0;
-            }
+                bool isBypass = false;
+                for (int i = 0; i < target.statusEffects.Count; i++)
+                {
+                    if (target.statusEffects[i] is StatusEffectBypass bypass && bypass.effect == item)
+                    {
+                        isBypass = true;
+                        break;
+                    }
+                }
 
+                if (item == apply.effectData && !isBypass)
+                {
+                    apply.effectData = null;
+                    apply.count = 0;
+                }
+            }
         return false;
     }
 }

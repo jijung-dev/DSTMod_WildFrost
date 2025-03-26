@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DSTMod_WildFrost;
 using UnityEngine;
 using static HitFlashSystem;
 
@@ -12,6 +13,7 @@ public class StatusEffectNextPhaseExt : StatusEffectData
     public bool goToNextPhase;
 
     public bool activated;
+    public StatusEffectData byCertainEffect;
 
     public override void Init()
     {
@@ -35,6 +37,11 @@ public class StatusEffectNextPhaseExt : StatusEffectData
     {
         if (!activated && hit.target == target && target.hp.current <= 0)
         {
+            if (byCertainEffect != null && hit.statusEffects.Any(r => r.data == byCertainEffect))
+            {
+                preventDeath = true;
+                return false;
+            }
             TryActivate();
         }
 

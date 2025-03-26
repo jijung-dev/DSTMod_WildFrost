@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DSTMod_WildFrost.PatchingScript;
 using UnityEngine;
+using static Ext;
 
 public class StatusEffectCraft : StatusEffectData
 {
@@ -63,7 +63,7 @@ public class StatusEffectCraft : StatusEffectData
                 allow = false;
                 if (NoTargetTextSystem.Exists())
                 {
-                    new Routine(NoTargetTextSystemExt.Run(target, requireType));
+                    Ext.PopupText(target, requireType);
                 }
             }
             if (!GetTargetCards(amount))
@@ -71,7 +71,7 @@ public class StatusEffectCraft : StatusEffectData
                 allow = false;
                 if (NoTargetTextSystem.Exists())
                 {
-                    new Routine(NoTargetTextSystemExt.Run(target, requireType, requireCard));
+                    Ext.PopupText(target, requireType);
                 }
             }
         }

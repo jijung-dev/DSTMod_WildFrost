@@ -77,7 +77,7 @@ public class Dragonfly : DataBase
         );
         assets.Add(
             StatusCopy("When Shell Applied To Self Gain Spice Instead", "When Overheat Applied To Self Gain Spice Instead")
-                .WithText("When <keyword=dstmod.overheat>'d, gain 2X<keyword=dstmod.overheat>'d <keyword=spice> instead".Process())
+                .WithText("When <keyword=dstmod.overheat>'d, gain 2X<keyword=spice> instead".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenYAppliedTo>(data =>
                 {
                     data.whenAppliedTypes = new string[] { "dst.overheat" };

@@ -19,6 +19,18 @@ public class Overheat : DataBase
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)
         );
+        assets.Add(
+            new KeywordDataBuilder(mod)
+                .Create("overheatresist")
+                .WithTitle("Overheat Resist")
+                .WithShowName(false)
+                .WithDescription(
+                    "Immune to <keyword=dstmod.overheat>".Process()
+                )
+                .WithTitleColour(new Color(0.94f, 0.58f, 0.24f))
+                .WithBodyColour(new Color(1f, 1f, 1f))
+                .WithCanStack(false)
+        );
     }
 
     protected override void CreateStatusEffect()
@@ -35,6 +47,15 @@ public class Overheat : DataBase
                 })
                 .Subscribe_WithStatusIcon("overheat icon")
         );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmune>("Immune To Overheat")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
+                {
+                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Overheat") };
+                })
+                .Subscribe_WithStatusIcon("overheat resist icon")
+        );
     }
 
     protected override void CreateIcon()
@@ -50,6 +71,13 @@ public class Overheat : DataBase
                 .WithApplySFX(mod.ImagePath("Heat_Attack.wav"))
                 .WithEffectDamageSFX(mod.ImagePath("Heat_Attack.wav"))
                 .WithKeywords(iconKeywordOrNull: "overheat")
+        );
+        assets.Add(
+            new StatusIconBuilder(mod)
+                .Create(name: "overheat resist icon", statusType: "dst.overheatresist", mod.ImagePath("Icons/Overheat_Resist.png"))
+                .WithIconGroupName(StatusIconBuilder.IconGroups.counter)
+                .WithTextboxSprite()
+                .WithKeywords(iconKeywordOrNull: "overheatresist")
         );
     }
 }

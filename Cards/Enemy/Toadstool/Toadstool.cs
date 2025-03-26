@@ -106,7 +106,7 @@ public class Toadstool : DataBase
         );
         assets.Add(
             StatusCopy("When Shell Applied To Self Gain Spice Instead", "When Shroom Applied To Self Heal Instead")
-                .WithText("When <keyword=shroom>'d, restore 2x<keyword=shroom>'d <keyword=health> instead")
+                .WithText("When <keyword=shroom>'d, restore 2x<keyword=health> instead")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenYAppliedTo>(data =>
                 {
                     data.whenAppliedTypes = new string[] { "shroom" };

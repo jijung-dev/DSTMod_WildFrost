@@ -16,8 +16,7 @@ public class Sanity : DataBase
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Shadow Align", 1) };
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2), SStack("Immune To Sanity", 1) };
                 })
         );
         assets.Add(
@@ -28,8 +27,7 @@ public class Sanity : DataBase
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Shadow Align", 1) };
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3), SStack("Immune To Sanity", 1) };
                 })
         );
     }
@@ -45,6 +43,18 @@ public class Sanity : DataBase
                 .WithTitleColour(new Color(0.34f, 0f, 0.63f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(true)
+        );
+        assets.Add(
+            new KeywordDataBuilder(mod)
+                .Create("sanityresist")
+                .WithTitle("Sanity Resist")
+                .WithShowName(false)
+                .WithDescription(
+                    "Immune to <keyword=dstmod.sanity>".Process()
+                )
+                .WithTitleColour(new Color(0.34f, 0f, 0.63f))
+                .WithBodyColour(new Color(1f, 1f, 1f))
+                .WithCanStack(false)
         );
     }
 
@@ -64,6 +74,15 @@ public class Sanity : DataBase
                     };
                 })
                 .Subscribe_WithStatusIcon("sanity icon")
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmune>("Immune To Sanity")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
+                {
+                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Sanity") };
+                })
+                .Subscribe_WithStatusIcon("sanity resist icon")
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
@@ -109,6 +128,13 @@ public class Sanity : DataBase
                 .WithApplySFX(mod.ImagePath("Sanity_Attack.wav"), 0.1f)
                 //.WithApplySFX(ImagePath("Sanity_Attack.wav"), 0.1f)
                 .WithKeywords(iconKeywordOrNull: "sanity")
+        );
+        assets.Add(
+            new StatusIconBuilder(mod)
+                .Create(name: "sanity resist icon", statusType: "dst.sanityresist", mod.ImagePath("Icons/Sanity_Resist.png"))
+                .WithIconGroupName(StatusIconBuilder.IconGroups.counter)
+                .WithTextboxSprite()
+                .WithKeywords(iconKeywordOrNull: "sanityresist")
         );
     }
 }

@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Linq;
 using DSTMod_WildFrost;
-using DSTMod_WildFrost.PatchingScript;
 using HarmonyLib;
 using UnityEngine;
+using static Ext;
 
 [HarmonyPatch(typeof(ShoveSystem))]
 public class StatusEffectUnshovable : StatusEffectData
@@ -53,7 +53,7 @@ public class StatusEffectUnshovable : StatusEffectData
             if (NoTargetTextSystem.Exists() && !isPlayed)
             {
                 isPlayed = true;
-                new Routine(NoTargetTextSystemExt.Run(target, NoTargetTypeExt.CantShove));
+                Ext.PopupText(target, NoTargetTypeExt.CantShove);
             }
             flag = false;
         }

@@ -704,27 +704,9 @@ namespace DSTMod_WildFrost
             Events.OnEntityCreated += FixImage;
             Events.OnCampaignInit += CampaignInit;
             Events.OnCampaignLoadPreset += InsertNodeViaPreset;
-            Events.OnInspectEnd += Fix;
 
             GameMode gameMode = TryGet<GameMode>("GameModeNormal");
             gameMode.classes = gameMode.classes.Append(TryGet<ClassData>("DST")).ToArray();
-        }
-
-        private void Fix(Entity arg0)
-        {
-            var g = GameObject.FindObjectOfType<InspectSystem>();
-
-            // foreach (RectTransform item2 in g.rightPopGroup)
-            // {
-            //     if (item2.name.Contains("="))
-            //     {
-            //         foreach (RectTransform item in item2)
-            //         {
-            //             item.SetParent(g.rightPopGroup.transform);
-            //         }
-            //         GameObject.DestroyImmediate(item2.gameObject);
-            //     }
-            // }
         }
 
         public override void Unload()
@@ -813,6 +795,13 @@ namespace DSTMod_WildFrost
                     + "We craft tools, weave armor, and wield spears. Kin and foes walk this land, but hunger is our greatest enemy."
                     + "To survive, we must be wise. To falter is to be forgotten."
             ); //Create the description.
+
+            StringTable tooltipText = LocalizationHelper.GetCollection("Tooltips", SystemLanguage.English);
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirewood","Require Wood");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requiregold","Require Gold");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirerock","Require Rock");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirerabbit","Require Rabbit");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.cannotshove","Cannot Shove");
         }
         #endregion
     }

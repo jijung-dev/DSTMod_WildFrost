@@ -103,7 +103,7 @@ public class BuildingFactory : BuildingBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnTurn>("On Turn Apply Sanity Allies")
-                .WithText("Apply <keyword=counter> by <{a}> to allies")
+                .WithText("Apply <keyword=dstmod.sanity> by <{a}> to allies".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Sanity");

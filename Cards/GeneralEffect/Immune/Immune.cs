@@ -12,44 +12,13 @@ public class Immune : DataBase
                     data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Temporary Summoned") };
                 })
         );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectImmune>("Immune To Overheat")
-                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
-                {
-                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Overheat") };
-                })
-        );
+        
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectImmune>("Immune To Shroom")
                 .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
                 {
                     data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Shroom") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectImmune>("Immune To Sanity")
-                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
-                {
-                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Sanity") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectImmune>("Immune To Freeze")
-                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
-                {
-                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Freezing") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectImmune>("Immune To Overheat")
-                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
-                {
-                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Overheat") };
                 })
         );
         assets.Add(
@@ -90,6 +59,9 @@ public class Immune : DataBase
                         TryGet<StatusEffectData>("Reduce Counter"),
                         TryGet<StatusEffectData>("Reduce Max Counter"),
                         TryGet<StatusEffectData>("Temporary Summoned"),
+                        TryGet<StatusEffectData>("Immune To Sanity"),
+                        TryGet<StatusEffectData>("Immune To Overheat"),
+                        TryGet<StatusEffectData>("Immune To Freeze"),
                     };
                 })
         );

@@ -19,6 +19,18 @@ public class Freeze : DataBase
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)
         );
+        assets.Add(
+            new KeywordDataBuilder(mod)
+                .Create("freezeresist")
+                .WithTitle("Freeze Resist")
+                .WithShowName(false)
+                .WithDescription(
+                    "Immune to <keyword=dstmod.freeze>".Process()
+                )
+                .WithTitleColour(new Color(0.60f, 0.81f, 0.98f))
+                .WithBodyColour(new Color(1f, 1f, 1f))
+                .WithCanStack(false)
+        );
     }
 
     protected override void CreateStatusEffect()
@@ -36,6 +48,16 @@ public class Freeze : DataBase
                 })
                 .Subscribe_WithStatusIcon("freeze icon")
         );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmune>("Immune To Freeze")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
+                {
+                    data.stackable = false;
+                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Freezing") };
+                })
+                .Subscribe_WithStatusIcon("freeze resist icon")
+        );
     }
 
     protected override void CreateIcon()
@@ -50,6 +72,13 @@ public class Freeze : DataBase
                 .WithApplyVFX(mod.ImagePath("Icons/Freeze_Apply.gif"))
                 .WithApplySFX(mod.ImagePath("Freeze_Apply.wav"))
                 .WithKeywords(iconKeywordOrNull: "freeze")
+        );
+        assets.Add(
+            new StatusIconBuilder(mod)
+                .Create(name: "freeze resist icon", statusType: "dst.freezeresist", mod.ImagePath("Icons/Freeze_Resist.png"))
+                .WithIconGroupName(StatusIconBuilder.IconGroups.counter)
+                .WithTextboxSprite()
+                .WithKeywords(iconKeywordOrNull: "freezeresist")
         );
     }
 }
