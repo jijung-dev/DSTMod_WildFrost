@@ -10,7 +10,6 @@ public class LightFlower : DataBase
                 .SetSprites("LightFlower.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
                 .SetStats(1, null, 0)
-                .WithText("When destroyed gain <card=dstmod.lightBulb>".Process())
                 .WithValue(1 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

@@ -14,8 +14,8 @@ public class CaveSpider : DataBase
                 .WithValue(2 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1) };
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Frontline", 1), TStack("Monster", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1), SStack("Gain Monster Meat When Destroyed", 1) };
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Frontline", 1) };
                 })
         );
     }

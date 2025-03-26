@@ -10,7 +10,6 @@ public class Fern : DataBase
                 .SetSprites("Fern.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
                 .SetStats(1, null, 0)
-                .WithText("When destroyed gain <card=dstmod.foliage>".Process())
                 .WithValue(1 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

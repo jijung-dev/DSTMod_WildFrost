@@ -10,7 +10,6 @@ public class RedMushtree : DataBase
                 .CreateUnit("redMushtree", "Red Mushtree")
                 .SetStats(null, null, 0)
                 .SetSprites("RedMushtree.png", "Wendy_BG.png")
-                .WithText("When destroyed gain <card=dstmod.redCap>".Process())
                 .WithCardType("Clunker")
                 .WithValue(2 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

@@ -13,7 +13,6 @@ public class Statue : DataBase
                 .SetStats(null, null, 0)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    //data.createScripts = new CardScript[] { LeaderExt.AddRandomSprite(new string[] { "Dummy.png", "Wortox.png" }) };
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 2), SStack("When Destroyed Gain Rock To Chest", 1) };
                 })
         );

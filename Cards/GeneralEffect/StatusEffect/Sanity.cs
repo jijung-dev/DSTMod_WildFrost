@@ -16,7 +16,8 @@ public class Sanity : DataBase
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2), SStack("Immune To Sanity", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Immune To Sanity", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2), };
                 })
         );
         assets.Add(
@@ -27,7 +28,8 @@ public class Sanity : DataBase
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3), SStack("Immune To Sanity", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Immune To Sanity", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3), };
                 })
         );
     }

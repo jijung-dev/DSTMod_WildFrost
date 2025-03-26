@@ -65,7 +65,7 @@ public abstract class ConsumableBase : DataBase
                     .SetSprites(item._spriteName, "Wendy_BG.png")
                     .WithCardType("Item")
                     .FreeModify(
-                        delegate(CardData data)
+                        delegate (CardData data)
                         {
                             data.canPlayOnEnemy = false;
                         }
@@ -110,8 +110,10 @@ public abstract class ConsumableBase : DataBase
             assets.Add(
                 new StatusEffectDataBuilder(mod)
                     .Create<StatusEffectApplyXWhenDestroyed>("Gain " + item._title + " When Destroyed")
+                    .WithText($"Drop <card=dstmod.{item._name}>".Process())
                     .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
                     {
+                        data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
                         data.effectToApply = TryGet<StatusEffectData>("Instant " + item._title + " In Hand");
                         data.targetMustBeAlive = false;
                         data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;

@@ -66,6 +66,7 @@ namespace DSTMod_WildFrost
             allConstraint.Add("sandCastleOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("fuelweaverOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("chestOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("noDfly", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noToadstool", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noBoomshroom", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
@@ -111,6 +112,7 @@ namespace DSTMod_WildFrost
                 TryGet<CardData>("toadstoolEnraged"),
             };
             ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
+            ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
         }
 
         private void CreateModAssets()
@@ -139,7 +141,7 @@ namespace DSTMod_WildFrost
                             data.characterPrefab = gameObject.GetComponent<Character>();
                             data.id = "dstmod.DST";
 
-                            data.leaders = DataList<CardData>("wendy", "wortox", "Leader1_heal_on_kill");
+                            data.leaders = DataList<CardData>("wendy", "wortox", "winona");
 
                             Inventory inventory = new Scriptable<Inventory>();
                             inventory.deck.list = DataList<CardData>(
@@ -569,6 +571,24 @@ namespace DSTMod_WildFrost
             References.LeaderData.startWithEffects = References
                 .LeaderData.startWithEffects.Concat(new[] { SStack("Summon Chest Before Battle", 1), SStack("Summon Floor Before Battle", 1) })
                 .ToArray();
+
+            if (References.LeaderData.original == TryGet<CardData>("wendy"))
+            {
+                References.PlayerData.inventory.deck.list.AddRange(
+                    DataList<CardData>(
+                        "abigailFlower"
+                        ).Select(c => c.Clone())
+                    );
+            }
+            if (References.LeaderData.original == TryGet<CardData>("winona"))
+            {
+                References.PlayerData.inventory.deck.list.AddRange(
+                    DataList<CardData>(
+                        "catapult",
+                        "catapult"
+                        ).Select(c => c.Clone())
+                    );
+            }
         }
 
         // {
@@ -797,11 +817,11 @@ namespace DSTMod_WildFrost
             ); //Create the description.
 
             StringTable tooltipText = LocalizationHelper.GetCollection("Tooltips", SystemLanguage.English);
-            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirewood","Require Wood");
-            tooltipText.SetString("tgestudio.wildfrost.dstmod.requiregold","Require Gold");
-            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirerock","Require Rock");
-            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirerabbit","Require Rabbit");
-            tooltipText.SetString("tgestudio.wildfrost.dstmod.cannotshove","Cannot Shove");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirewood", "Require Wood");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requiregold", "Require Gold");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirerock", "Require Rock");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.requirerabbit", "Require Rabbit");
+            tooltipText.SetString("tgestudio.wildfrost.dstmod.cannotshove", "Cannot Shove");
         }
         #endregion
     }

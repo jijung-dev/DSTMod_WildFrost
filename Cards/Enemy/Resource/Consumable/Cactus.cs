@@ -9,7 +9,6 @@ public class Cactus : DataBase
                 .CreateUnit("cactus", "Cactus")
                 .SetStats(3, null, 0)
                 .SetSprites("Cactus.png", "Wendy_BG.png")
-                .WithText("When destroyed gain <card=dstmod.cactusFlesh>".Process())
                 .WithCardType("Friendly")
                 .WithValue(1 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

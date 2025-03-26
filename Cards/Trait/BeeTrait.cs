@@ -10,7 +10,6 @@ public class BeeTrait : DataBase
                 .Create("bee")
                 .WithTitle("Bee")
                 .WithShowName(true)
-                .WithDescription("When destroyed gain <card=tgestudio.wildfrost.dstmod.honey>")
                 .WithTitleColour(new Color(1.00f, 0.6353f, 0f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)

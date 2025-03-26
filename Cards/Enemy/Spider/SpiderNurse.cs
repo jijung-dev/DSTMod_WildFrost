@@ -15,7 +15,7 @@ public class SpiderNurse : DataBase
                 .WithValue(4 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Monster", 2) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };
                 })
         );
     }

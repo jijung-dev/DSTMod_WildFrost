@@ -16,7 +16,7 @@ public class Wendy : DataBase
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mourning Glory", 1) };
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("When Deployed Summon Abigail", 1),
+                        //SStack("When Deployed Summon Abigail", 1),
                         SStack("When Abigail Destroyed Mourning Glory", 1),
                     };
                     data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade(), LeaderExt.AddRandomHealth(0, 1) };
@@ -32,21 +32,6 @@ public class Wendy : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
                 {
                     data.summonCard = TryGet<CardData>("abigail");
-                })
-        );
-        assets.Add(
-            StatusCopy("Instant Summon Fallow", "Instant Summon Abigail")
-                .SubscribeToAfterAllBuildEvent<StatusEffectInstantSummon>(data =>
-                {
-                    data.targetSummon = TryGet<StatusEffectSummon>("Summon Abigail");
-                })
-        );
-        assets.Add(
-            StatusCopy("When Deployed Summon Wowee", "When Deployed Summon Abigail")
-                .WithText("When deployed, summon <card=dstmod.abigail>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDeployed>(data =>
-                {
-                    data.effectToApply = TryGet<StatusEffectData>("Instant Summon Abigail");
                 })
         );
     }

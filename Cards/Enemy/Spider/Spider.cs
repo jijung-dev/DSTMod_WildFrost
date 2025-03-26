@@ -15,7 +15,8 @@ public class Spider : DataBase
                 .WithValue(2 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Monster", 1), TStack("Aimless", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };
+                    data.traits = new List<CardData.TraitStacks>() {TStack("Aimless", 1) };
                 })
         );
     }

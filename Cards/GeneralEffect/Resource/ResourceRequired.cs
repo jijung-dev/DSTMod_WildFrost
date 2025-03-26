@@ -15,7 +15,7 @@ public class ResourceRequired : DataBase
                 .WithText("Require <{a}> <card=dstmod.rabbit>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
-                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require2") };
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
                     data.requireType = NoTargetTypeExt.RequireRabbit;
                     data.requireCard = TryGet<CardData>("rabbit");
                 })
@@ -34,7 +34,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Wood")
-                //.WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood>")
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -113,8 +113,10 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Rock")
+                .WithText("Drop <keyword=dstmod.rock>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
                     data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
 
@@ -125,8 +127,10 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Gold")
+                .WithText("Drop <keyword=dstmod.gold>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
                     data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
 
@@ -137,8 +141,10 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Axe Gain Wood")
+                .WithText("Drop <keyword=dstmod.wood>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
                     data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
 
@@ -152,7 +158,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new KeywordDataBuilder(mod)
                 .Create("require")
-                .WithDescription("Requires resources in <card=dstmod.chest> to play, remove the effects afterwards".Process())
+                .WithDescription("\"Require\" resources in Chest or card in hand to play, remove the effect/card afterwards")
                 .WithTitleColour(new Color(0.2588235f, 0.06666667f, 0.1294118f, 1f))
                 .WithBodyColour(new Color(0.4313726f, 0.2f, 0.1921569f, 1f))
                 .WithPanelColour(new Color(0.9058824f, 0.8274511f, 0.6784314f, 0.9411765f))
@@ -163,21 +169,6 @@ public class ResourceRequired : DataBase
                 .WithShow(false)
                 .SubscribeToAfterAllBuildEvent(data => data.panelSprite = TryGet<KeywordData>("Active").panelSprite)
         );
-        assets.Add(
-            new KeywordDataBuilder(mod)
-                .Create("require2")
-                .WithDescription("Requires <card=dstmod.rabbit> in hand to play, remove the card afterwards".Process())
-                .WithTitleColour(new Color(0.2588235f, 0.06666667f, 0.1294118f, 1f))
-                .WithBodyColour(new Color(0.4313726f, 0.2f, 0.1921569f, 1f))
-                .WithPanelColour(new Color(0.9058824f, 0.8274511f, 0.6784314f, 0.9411765f))
-                .WithNoteColour(new Color(0.4313726f, 0.2f, 0.1921569f, 1f))
-                .WithIconTint(new Color(1f, 0.792156862745098f, 0.3411764705882353f))
-                .WithCanStack(false)
-                .WithShowIcon(false)
-                .WithShow(false)
-                .SubscribeToAfterAllBuildEvent(data => data.panelSprite = TryGet<KeywordData>("Active").panelSprite)
-        );
-
     }
 
 }

@@ -9,7 +9,6 @@ public class BerryBush : DataBase
                 .CreateUnit("berryBush", "Berry Bush")
                 .SetStats(2, null, 0)
                 .SetSprites("BerryBush.png", "Wendy_BG.png")
-                .WithText("When destroyed gain <card=dstmod.berries>".Process())
                 .WithCardType("Friendly")
                 .WithValue(1 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

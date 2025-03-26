@@ -14,8 +14,8 @@ public class RedHound : DataBase
                 .SetStartWithEffect(SStack("MultiHit", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("When Destroyed Overheat All Enemies", 3) };
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Monster", 1), TStack("Wild", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1), SStack("When Destroyed Overheat All Enemies", 3) };
+                    data.traits = new List<CardData.TraitStacks>() {TStack("Wild", 1) };
                 })
                 .WithCardType("Enemy")
                 .WithValue(4 * 50)

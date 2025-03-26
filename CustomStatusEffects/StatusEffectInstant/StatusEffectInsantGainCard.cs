@@ -17,8 +17,8 @@ public class StatusEffectInstantGainCard : StatusEffectInstant
             CardData data = cardGain.Clone(runCreateScripts: false);
             Card card = CardManager.Get(data, References.Battle.playerCardController, References.Player, inPlay: true, true);
             yield return card.UpdateData();
-            References.Player.handContainer.Add(card.entity);
-            References.Player.handContainer.SetChildPosition(card.entity);
+            References.Player.drawContainer.Add(card.entity);
+            References.Player.drawContainer.SetChildPosition(card.entity);
             ActionQueue.Stack(new ActionMove(card.entity, References.Player.handContainer), fixedPosition: true);
             ActionQueue.Stack(new ActionRunEnableEvent(card.entity), fixedPosition: true);
             ActionQueue.Stack(new ActionReveal(card.entity), fixedPosition: true);

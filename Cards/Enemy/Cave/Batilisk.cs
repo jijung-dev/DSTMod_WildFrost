@@ -16,7 +16,8 @@ public class Batilisk : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Take Health", 2) };
-                    data.traits = new List<CardData.TraitStacks>() { TStack("Aimless", 1), TStack("Monster", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] {SStack("Gain Monster Meat When Destroyed", 1)};
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Aimless", 1)};
                 })
         );
     }
