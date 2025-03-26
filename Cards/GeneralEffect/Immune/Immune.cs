@@ -12,7 +12,7 @@ public class Immune : DataBase
                     data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Temporary Summoned") };
                 })
         );
-        
+
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectImmune>("Immune To Shroom")

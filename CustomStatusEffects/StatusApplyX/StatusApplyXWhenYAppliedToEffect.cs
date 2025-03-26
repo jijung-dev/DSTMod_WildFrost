@@ -28,7 +28,16 @@ public class StatusEffectApplyXWhenYAppliedToEffect : StatusEffectApplyX
 
     public override bool RunApplyStatusEvent(StatusEffectApply apply)
     {
-        if ((adjustAmount || instead) && target.enabled && !TargetSilenced() && (target.alive || !targetMustBeAlive) && (bool)apply.effectData && apply.count > 0 && CheckType(apply.effectData) && CheckTarget(apply.target))
+        if (
+            (adjustAmount || instead)
+            && target.enabled
+            && !TargetSilenced()
+            && (target.alive || !targetMustBeAlive)
+            && (bool)apply.effectData
+            && apply.count > 0
+            && CheckType(apply.effectData)
+            && CheckTarget(apply.target)
+        )
         {
             if (instead)
             {
@@ -47,7 +56,14 @@ public class StatusEffectApplyXWhenYAppliedToEffect : StatusEffectApplyX
 
     public override bool RunPostApplyStatusEvent(StatusEffectApply apply)
     {
-        if (target.enabled && !TargetSilenced() && (bool)apply.effectData && apply.count > 0 && CheckType(apply.effectData) && CheckTarget(apply.target))
+        if (
+            target.enabled
+            && !TargetSilenced()
+            && (bool)apply.effectData
+            && apply.count > 0
+            && CheckType(apply.effectData)
+            && CheckTarget(apply.target)
+        )
         {
             return CheckAmount(apply);
         }

@@ -88,6 +88,7 @@ public abstract class BuildingBase : DataBase
                     .WithText($"Place <card=dstmod.{item._name}>".Process())
                     .SetSprites("Blueprint.png", "Wendy_BG.png")
                     .WithCardType("Item")
+                    .WithValue(GetResourcePrice(item))
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
                         if (item._isPool)
@@ -121,6 +122,28 @@ public abstract class BuildingBase : DataBase
                     data.animation = TryGet<StatusEffectNextPhase>("SoulboundBossPhase2").animation;
                 })
         );
+    }
+
+    int GetResourcePrice(BuildingInstance item)
+    {
+        int price = 0;
+        foreach (var resource in item._resourceRequired)
+        {
+            switch (resource.name)
+            {
+                case ResourceRequire.Wood:
+                case ResourceRequire.Rock:
+                    price += 30;
+                    break;
+                case ResourceRequire.Rabbit:
+                case ResourceRequire.Gold:
+                    price += 40;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return price;
     }
 
     StatusEffectStacks[] GetBuildingStatusEffect(BuildingInstance item)

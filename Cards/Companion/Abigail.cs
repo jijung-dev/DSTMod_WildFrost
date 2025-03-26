@@ -27,14 +27,14 @@ public class Abigail : DataBase
                 .CreateItem("abigailFlower", "Abigail's Flower")
                 .SetSprites("abigailFlower.png", "Wendy_BG.png")
                 .FreeModify(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.playOnSlot = true;
                         data.canPlayOnEnemy = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };
                         data.startWithEffects = new CardData.StatusEffectStacks[1] { SStack("Summon Abigail", 1) };
@@ -51,7 +51,7 @@ public class Abigail : DataBase
                 .Create<StatusEffectTriggerWhenCertainAllyAttacks>("Trigger When Wendy Attacks")
                 .WithText("Trigger when <card=dstmod.wendy> attacks".Process())
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.isReaction = true;
                         data.stackable = false;
@@ -67,29 +67,27 @@ public class Abigail : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXWhenDestroyed>("Gain Abigail Flower When Destroyed")
-                .WithText("Gain <card=dstmod.abigailFlower>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(
-                    delegate (StatusEffectApplyXWhenDestroyed data)
-                    {
-                        data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
-                        data.targetMustBeAlive = false;
-                        data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-                        data.effectToApply = TryGet<StatusEffectData>("Instant Gain Abigail Flower");
-                    }
-                )
+                .WithText("Drop <card=dstmod.abigailFlower>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
+                {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
+                    data.targetMustBeAlive = false;
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.effectToApply = TryGet<StatusEffectData>("Instant Gain Abigail Flower");
+                })
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantGainCard>("Instant Gain Abigail Flower")
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate (StatusEffectInstantGainCard data)
+                    delegate(StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("abigailFlower");
                     }

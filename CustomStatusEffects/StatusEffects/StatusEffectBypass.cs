@@ -1,4 +1,4 @@
 public class StatusEffectBypass : StatusEffectData
 {
-	public StatusEffectData effect;
+    public StatusEffectData effect;
 }

@@ -35,6 +35,7 @@ public class LeaderExt
         counter.counterRange = new Vector2Int(min, max);
         return counter;
     }
+
     public static CardScript AddRandomSprite(string[] sprites)
     {
         CardScriptSetSprite sprite = new Scriptable<CardScriptSetSprite>();
@@ -44,10 +45,12 @@ public class LeaderExt
         return sprite;
     }
 }
+
 public class CardScriptSetSprite : CardScript
 {
     public string[] sprites;
     public bool isRandom;
+
     public override void Run(CardData target)
     {
         int ran = 0;

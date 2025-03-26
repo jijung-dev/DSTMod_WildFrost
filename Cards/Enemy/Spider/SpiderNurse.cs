@@ -12,7 +12,7 @@ public class SpiderNurse : DataBase
                 .SetStats(5, 1, 3)
                 .SetStartWithEffect(SStack("On Turn Heal Allies", 1))
                 .WithCardType("Enemy")
-                .WithValue(4 * 50)
+                .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };

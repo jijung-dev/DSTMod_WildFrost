@@ -13,7 +13,7 @@ public class SpiderNest : DataBase
                 .SetStats(6, null, 4)
                 .SetTraits(TStack("Backline", 1), TStack("Unmovable", 1))
                 .WithCardType("Enemy")
-                .WithValue(4 * 50)
+                .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.canShoveToOtherRow = false;

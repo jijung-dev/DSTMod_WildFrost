@@ -10,7 +10,7 @@ public class JuicyBerryBush : DataBase
                 .SetStats(5, null, 0)
                 .SetSprites("JuicyBerryBush.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
-                .WithValue(2 * 50)
+                .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Juicy Berries When Destroyed", 3) };

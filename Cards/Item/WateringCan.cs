@@ -10,6 +10,7 @@ public class WateringCan : DataBase
                 .SetSprites("WateringCan.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Noomlin", 1), TStack("Barrage", 1))
+                .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

@@ -9,6 +9,7 @@ public class PanFlute : DataBase
                 .CreateItem("panFlute", "Pan Flute")
                 .SetSprites("PanFlute.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

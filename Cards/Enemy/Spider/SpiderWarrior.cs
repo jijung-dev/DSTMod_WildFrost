@@ -11,7 +11,7 @@ public class SpiderWarrior : DataBase
                 .SetSprites("SpiderWarrior.png", "Wendy_BG.png")
                 .SetStats(6, 3, 3)
                 .WithCardType("Enemy")
-                .WithValue(4 * 50)
+                .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };

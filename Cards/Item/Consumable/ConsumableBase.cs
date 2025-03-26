@@ -65,7 +65,7 @@ public abstract class ConsumableBase : DataBase
                     .SetSprites(item._spriteName, "Wendy_BG.png")
                     .WithCardType("Item")
                     .FreeModify(
-                        delegate (CardData data)
+                        delegate(CardData data)
                         {
                             data.canPlayOnEnemy = false;
                         }
@@ -102,15 +102,18 @@ public abstract class ConsumableBase : DataBase
                 .Create<StatusEffectInstantSummon>("Instant " + item._title + " In Hand")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantSummon>(data =>
                 {
+                    data.canSummonMultiple = true;
                     data.summonPosition = StatusEffectInstantSummon.Position.Hand;
                     data.targetSummon = TryGet<StatusEffectSummon>("Summon " + item._title);
                 })
         );
         if (item._consumeType != ConsumeType.Cooked)
+        {
+            var gainText = "Drop <{a}> <card=dstmod." + item._name + ">";
             assets.Add(
                 new StatusEffectDataBuilder(mod)
                     .Create<StatusEffectApplyXWhenDestroyed>("Gain " + item._title + " When Destroyed")
-                    .WithText($"Drop <card=dstmod.{item._name}>".Process())
+                    .WithText(gainText.Process())
                     .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
                     {
                         data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
@@ -119,6 +122,7 @@ public abstract class ConsumableBase : DataBase
                         data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     })
             );
+        }
     }
 
     private void CreateCookFoodStatusEffect(ConsumableInstance item)

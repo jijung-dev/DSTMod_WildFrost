@@ -10,6 +10,7 @@ public class Garland : DataBase
                 .CreateItem("garland", "Garland")
                 .SetSprites("Garland.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

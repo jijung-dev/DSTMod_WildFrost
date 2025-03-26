@@ -11,7 +11,7 @@ public class Stalagmite : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("Stalagmite.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
-                .WithValue(2 * 50)
+                .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;

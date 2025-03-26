@@ -10,6 +10,7 @@ public class BatBat : DataBase
                 .SetStats(null, 4, 0)
                 .SetSprites("BatBat.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(40)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

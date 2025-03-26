@@ -11,6 +11,7 @@ public class LuxuryFan : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("LuxuryFan.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);
@@ -25,7 +26,7 @@ public class LuxuryFan : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantReduceCertainEffect>("Reduce Overheat")
-                .WithText("Reduce <keyword=dstmod.Overheat> by <{a}>".Process())
+                .WithText("Reduce <keyword=dstmod.overheat> by <{a}>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantReduceCertainEffect>(data =>
                 {
                     data.effectToReduce = TryGet<StatusEffectData>("Overheat");

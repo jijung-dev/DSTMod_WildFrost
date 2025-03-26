@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Deadpan.Enums.Engine.Components.Modding;
+using TMPro;
 using UnityEngine;
 
 namespace DSTMod_WildFrost
 {
     public class StatusEffectFroze : StatusEffectData
     {
-        public CardAnimation buildupAnimation = new Scriptable<CardAnimationOverburn>();
-
         public override void Init()
         {
             base.OnHit += Hit;
@@ -32,11 +31,13 @@ namespace DSTMod_WildFrost
         {
             while (hit.counterReduction > 0 && count > 0 && Battle.IsOnBoard(hit.target))
             {
-                if ((bool)buildupAnimation)
+                NoTargetTextSystem noText = NoTargetTextSystem.instance;
+                if (noText != null)
                 {
-                    yield return buildupAnimation.Routine(target);
+                    float num = noText.shakeDurationRange.Random();
+                    hit.target.curveAnimator.Move(noText.shakeAmount.WithX(noText.shakeAmount.x.WithRandomSign()), noText.shakeCurve, 1f, num);
+                    hit.counterReduction--;
                 }
-                hit.counterReduction--;
             }
             if (count <= 0)
             {

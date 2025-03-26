@@ -11,7 +11,6 @@ public class SporecapSnow : DataBase
                 .SetStats(null, null, 3)
                 .SetSprites("Sporecap.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
-                .WithValue(2 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;

@@ -24,9 +24,7 @@ public class Overheat : DataBase
                 .Create("overheatresist")
                 .WithTitle("Overheat Resist")
                 .WithShowName(false)
-                .WithDescription(
-                    "Immune to <keyword=dstmod.overheat>".Process()
-                )
+                .WithDescription("Immune to <keyword=dstmod.overheat>".Process())
                 .WithTitleColour(new Color(0.94f, 0.58f, 0.24f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)

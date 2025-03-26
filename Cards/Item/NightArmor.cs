@@ -10,6 +10,7 @@ public class NightArmor : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("NightArmor.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

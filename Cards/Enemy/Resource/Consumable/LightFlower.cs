@@ -10,7 +10,7 @@ public class LightFlower : DataBase
                 .SetSprites("LightFlower.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
                 .SetStats(1, null, 0)
-                .WithValue(1 * 50)
+                .WithValue(1 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Light Bulb When Destroyed", 1) };

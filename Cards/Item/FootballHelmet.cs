@@ -8,8 +8,9 @@ public class FootballHelmet : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("footballHelmet", "Football Helmet")
                 .SetStats(null, null, 0)
-                .SetSprites("FooballHelmet.png", "Wendy_BG.png")
+                .SetSprites("FootballHelmet.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

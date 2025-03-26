@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using BattleEditor;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
 
 public abstract class DataBase
 {
     protected List<object> assets = new List<object>();
+    protected List<(int, BattleDataEditor)> battleAssets = new List<(int, BattleDataEditor)>();
+
     public static readonly List<Type> subclasses;
 
     protected DSTMod mod => DSTMod.Instance;
@@ -40,7 +43,9 @@ public abstract class DataBase
 
     protected virtual void CreateOther() { }
 
-    public List<object> Create()
+    protected virtual void CreateBattle() { }
+
+    public List<object> CreateAssest()
     {
         CreateStatusEffect();
         CreateTrait();
@@ -49,6 +54,12 @@ public abstract class DataBase
         CreateCard();
         CreateOther();
         return assets;
+    }
+
+    public List<(int, BattleDataEditor)> CreateBattleAsset()
+    {
+        CreateBattle();
+        return battleAssets;
     }
 
     static DataBase()

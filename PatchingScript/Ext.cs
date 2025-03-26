@@ -52,13 +52,14 @@ public static class Ext
 
         return desitation;
     }
+
     public static void PopupText(Entity entity, NoTargetTypeExt requireType)
     {
         NoTargetTextSystem noText = NoTargetTextSystem.instance;
         if (noText != null)
         {
             TMP_Text text = noText.textElement;
-            
+
             float num = noText.shakeDurationRange.Random();
             entity.curveAnimator.Move(noText.shakeAmount.WithX(noText.shakeAmount.x.WithRandomSign()), noText.shakeCurve, 1f, num);
 
@@ -67,6 +68,7 @@ public static class Ext
             noText.PopText(entity.transform.position);
         }
     }
+
     public static string GetStringType(NoTargetTypeExt type)
     {
         string text;
@@ -93,6 +95,7 @@ public static class Ext
         }
         return text;
     }
+
     public enum NoTargetTypeExt
     {
         None,

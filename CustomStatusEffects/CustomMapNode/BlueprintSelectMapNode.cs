@@ -30,7 +30,7 @@ public class BlueprintSelectMapNode : DataBase
                         //name + Blueprint
                         data.force = new List<CardData>()
                         {
-                            DSTMod.Instance.TryGet<CardData>("crockPotBlueprint"),
+                            DSTMod.Instance.TryGet<CardData>("trapBlueprint"),
                             DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
                             DSTMod.Instance.TryGet<CardData>("firePitBlueprint"),
                         };

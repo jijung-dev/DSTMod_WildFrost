@@ -17,7 +17,7 @@ public class Sanity : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Immune To Sanity", 1) };
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2), };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 2) };
                 })
         );
         assets.Add(
@@ -29,7 +29,7 @@ public class Sanity : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Immune To Sanity", 1) };
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3), };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3) };
                 })
         );
     }
@@ -51,9 +51,7 @@ public class Sanity : DataBase
                 .Create("sanityresist")
                 .WithTitle("Sanity Resist")
                 .WithShowName(false)
-                .WithDescription(
-                    "Immune to <keyword=dstmod.sanity>".Process()
-                )
+                .WithDescription("Immune to <keyword=dstmod.sanity>".Process())
                 .WithTitleColour(new Color(0.34f, 0f, 0.63f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)

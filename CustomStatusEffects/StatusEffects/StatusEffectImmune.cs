@@ -1,7 +1,6 @@
 using System.Linq;
 using DSTMod_WildFrost;
 
-
 public class StatusEffectImmune : StatusEffectData
 {
     public StatusEffectData[] immuneTo;

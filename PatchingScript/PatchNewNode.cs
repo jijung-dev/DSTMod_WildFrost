@@ -79,7 +79,7 @@ namespace DSTMod_WildFrost
         static bool Prefix(EventRoutineCurseItems __instance)
         {
             if (__instance.node.positionIndex == 1)
-                __instance.cardScale = 1f;
+                __instance.cardScale = 0.8f;
             return true;
         }
     }

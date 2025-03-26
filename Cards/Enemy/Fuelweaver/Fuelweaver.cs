@@ -19,7 +19,7 @@ public class Fuelweaver : DataBase
                         SStack("CaveFuelweaver", 1),
                         SStack("Pre Turn Fill Player Board With Floral", 1),
                         SStack("On Turn Apply Sanity To Everything", 4),
-                        SStack("Immune To Sanity", 1)
+                        SStack("Immune To Sanity", 1),
                     };
                 })
         );
@@ -46,7 +46,11 @@ public class Fuelweaver : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 5) };
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Turn Fill Board With Woven Shadow", 1), SStack("Immune To Sanity", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("On Turn Fill Board With Woven Shadow", 1),
+                        SStack("Immune To Sanity", 1),
+                    };
                 })
         );
     }

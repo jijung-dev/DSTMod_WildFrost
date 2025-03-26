@@ -117,13 +117,15 @@ namespace DSTMod_WildFrost
 
         private void CreateModAssets()
         {
-            foreach (Type type in DataBase.subclasses)
+            var subclass = DataBase.subclasses;
+            foreach (Type type in subclass)
             {
                 if (Activator.CreateInstance(type) is DataBase instance)
                 {
-                    assets.AddRange(instance.Create());
+                    assets.AddRange(instance.CreateAssest());
                 }
             }
+
             itemPool = CreateRewardPool("DstItemPool", "Items", DataList<CardData>());
             unitPool = CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
             #region Tribe
@@ -279,98 +281,14 @@ namespace DSTMod_WildFrost
 
         private void CreateBattleAssets()
         {
-            #region Spider Den
-            battleAssets.Add(
-                (
-                    0,
-                    new BattleDataEditor(this, "Spider Den", 0)
-                        .SetSprite("Nodes/SpiderNode.png")
-                        .SetNameRef("Spider Den")
-                        .EnemyDictionary(
-                            ('B', "berryBush"),
-                            ('S', "spider"),
-                            ('W', "spiderWarrior"),
-                            ('N', "spiderNest"),
-                            ('Q', "spiderQueen"),
-                            ('R', "stone"),
-                            ('T', "smallTree")
-                        )
-                        .StartWavePoolData(0, "Wave 1: Stone In")
-                        .ConstructWaves(5, 0, "SRTSB", "BTRSS")
-                        .StartWavePoolData(1, "Wave 2: Tree In")
-                        .ConstructWaves(4, 2, "SWSB", "SSNB")
-                        .StartWavePoolData(3, "Wave 4: Nest In")
-                        .ConstructWaves(4, 7, "STSN", "SRSW", "STSW", "SRSN")
-                        .StartWavePoolData(4, "Wave 5: Queen In")
-                        .ConstructWaves(4, 9, "TSNQ", "RSQN", "WSQ")
-                        .StartWavePoolData(5, "Wave 6: Queen In")
-                        .ConstructWaves(4, 9, "WB", "SSB", "NB")
-                        .AddBattleToLoader()
-                        .LoadBattle(0, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
-                )
-            );
-            #endregion
-
-            #region Hound Mound
-            battleAssets.Add(
-                (
-                    1,
-                    new BattleDataEditor(this, "Dog Spawner", 0)
-                        .SetSprite("Nodes/HoundNode.png")
-                        .SetNameRef("Hound Mound")
-                        .EnemyDictionary(
-                            ('H', "hound"),
-                            ('R', "redHound"),
-                            ('B', "blueHound"),
-                            ('L', "varglet"),
-                            ('V', "varg"),
-                            ('S', "stone"),
-                            ('T', "smallTree")
-                        )
-                        .StartWavePoolData(0, "Wave 1: Stone In")
-                        .ConstructWaves(3, 0, "THS", "SHT")
-                        .StartWavePoolData(1, "Wave 2: Tree In")
-                        .ConstructWaves(3, 2, "TRH", "SBH", "SRH", "TBH")
-                        .StartWavePoolData(3, "Wave 4: Nest In")
-                        .ConstructWaves(4, 7, "LHST")
-                        .StartWavePoolData(4, "Wave 5: Queen In")
-                        .ConstructWaves(4, 9, "VSTH", "VSB", "VTR", "VTB", "VSR")
-                        .AddBattleToLoader()
-                        .LoadBattle(1, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
-                )
-            );
-            #endregion
-
-            #region Deerclops
-            battleAssets.Add(
-                (
-                    2,
-                    new BattleDataEditor(this, "DeerClops", 0)
-                        .SetSprite("Nodes/DeerclopsNode.png")
-                        .SetNameRef("DeerClops")
-                        .EnemyDictionary(
-                            ('H', "hound"),
-                            ('B', "blueHound"),
-                            ('S', "spider"),
-                            ('N', "spiderNest"),
-                            ('D', "deerclops"),
-                            ('R', "stone"),
-                            ('T', "smallTree"),
-                            ('G', "goldOre")
-                        )
-                        .StartWavePoolData(0, "Wave 1: Stone In")
-                        .ConstructWaves(6, 0, "HTDRB", "STDRN")
-                        .StartWavePoolData(1, "Wave 2: Tree In")
-                        .ConstructWaves(4, 2, "BSG", "HBG", "NSG", "SBG")
-                        .StartWavePoolData(2, "Wave 3: Spider In")
-                        .ConstructWaves(4, 5, "BSRN", "HBTH")
-                        .StartWavePoolData(3, "Wave 4: Nest In")
-                        .ConstructWaves(4, 7, "T", "R", "G")
-                        .AddBattleToLoader()
-                        .LoadBattle(2, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
-                )
-            );
-            #endregion
+            var subclass = DataBase.subclasses;
+            foreach (Type type in subclass)
+            {
+                if (Activator.CreateInstance(type) is DataBase instance)
+                {
+                    battleAssets.AddRange(instance.CreateBattleAsset());
+                }
+            }
 
             #region Antlion
             battleAssets.Add(
@@ -574,20 +492,11 @@ namespace DSTMod_WildFrost
 
             if (References.LeaderData.original == TryGet<CardData>("wendy"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(
-                    DataList<CardData>(
-                        "abigailFlower"
-                        ).Select(c => c.Clone())
-                    );
+                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("abigailFlower").Select(c => c.Clone()));
             }
             if (References.LeaderData.original == TryGet<CardData>("winona"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(
-                    DataList<CardData>(
-                        "catapult",
-                        "catapult"
-                        ).Select(c => c.Clone())
-                    );
+                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("catapult", "catapult").Select(c => c.Clone()));
             }
         }
 

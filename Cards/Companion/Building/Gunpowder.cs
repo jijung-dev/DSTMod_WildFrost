@@ -20,14 +20,11 @@ public class Gunpowder : DataBase
                     {
                         SStack("Scrap", 2),
                         SStack("Destroy Self After Counter Turn", 1),
-                        SStack("Temporary Froze", 1)
+                        SStack("Temporary Froze", 1),
                     };
                 })
         );
     }
 
-    protected override void CreateStatusEffect()
-    {
-
-    }
+    protected override void CreateStatusEffect() { }
 }

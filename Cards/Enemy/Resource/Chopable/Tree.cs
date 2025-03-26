@@ -11,7 +11,7 @@ public class Tree : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("Tree.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
-                .WithValue(4 * 50)
+                .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;

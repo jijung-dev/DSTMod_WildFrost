@@ -10,7 +10,7 @@ public class MysteriousPlant : DataBase
                 .SetSprites("MysteriousPlant.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
                 .SetStats(1, null, 0)
-                .WithValue(1 * 50)
+                .WithValue(1 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Lesser Glow Berry When Destroyed", 1) };

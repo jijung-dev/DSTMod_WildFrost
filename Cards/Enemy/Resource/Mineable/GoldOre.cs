@@ -11,7 +11,7 @@ public class GoldOre : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("GoldOre.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
-                .WithValue(4 * 50)
+                .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;

@@ -10,6 +10,7 @@ public class FireStaff : DataBase
                 .SetSprites("FireStaff.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Consume", 1), TStack("Aimless", 1))
+                .WithValue(50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

@@ -113,7 +113,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Rock")
-                .WithText("Drop <keyword=dstmod.rock>".Process())
+                .WithText("Drop <{a}> <keyword=dstmod.rock>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
@@ -127,7 +127,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Gold")
-                .WithText("Drop <keyword=dstmod.gold>".Process())
+                .WithText("Drop <{a}> <keyword=dstmod.gold>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
@@ -141,7 +141,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Axe Gain Wood")
-                .WithText("Drop <keyword=dstmod.wood>".Process())
+                .WithText("Drop <{a}> <keyword=dstmod.wood>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
@@ -153,6 +153,7 @@ public class ResourceRequired : DataBase
                 })
         );
     }
+
     protected override void CreateKeyword()
     {
         assets.Add(
@@ -170,5 +171,4 @@ public class ResourceRequired : DataBase
                 .SubscribeToAfterAllBuildEvent(data => data.panelSprite = TryGet<KeywordData>("Active").panelSprite)
         );
     }
-
 }

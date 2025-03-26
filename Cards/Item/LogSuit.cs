@@ -9,6 +9,7 @@ public class LogSuit : DataBase
                 .CreateItem("logSuit", "Log Suit")
                 .SetSprites("LogSuit.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

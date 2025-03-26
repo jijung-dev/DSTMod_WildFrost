@@ -9,6 +9,7 @@ public class SewingKit : DataBase
                 .CreateItem("sewingKit", "Sewing Kit")
                 .SetSprites("SewingKit.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);

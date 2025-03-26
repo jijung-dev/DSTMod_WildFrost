@@ -13,7 +13,7 @@ public class SpiderQueen : DataBase
                 .SetStats(12, 2, 4)
                 .SetTraits(TStack("Smackback", 1))
                 .WithCardType("Miniboss")
-                .WithValue(13 * 50)
+                .WithValue(15 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[1] { SStack("On Counter Turn Summon Spiders With Nurse", 1) };

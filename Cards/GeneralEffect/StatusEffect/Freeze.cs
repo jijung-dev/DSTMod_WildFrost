@@ -24,9 +24,7 @@ public class Freeze : DataBase
                 .Create("freezeresist")
                 .WithTitle("Freeze Resist")
                 .WithShowName(false)
-                .WithDescription(
-                    "Immune to <keyword=dstmod.freeze>".Process()
-                )
+                .WithDescription("Immune to <keyword=dstmod.freeze>".Process())
                 .WithTitleColour(new Color(0.60f, 0.81f, 0.98f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)
