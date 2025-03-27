@@ -9,6 +9,7 @@ public class BeeTrait : DataBase
             new KeywordDataBuilder(mod)
                 .Create("bee")
                 .WithTitle("Bee")
+                .WithDescription("A bee a cute little bee")
                 .WithShowName(true)
                 .WithTitleColour(new Color(1.00f, 0.6353f, 0f))
                 .WithBodyColour(new Color(1f, 1f, 1f))

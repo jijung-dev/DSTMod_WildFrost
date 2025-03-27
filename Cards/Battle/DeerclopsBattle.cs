@@ -1,6 +1,6 @@
 using BattleEditor;
 
-public class DeerClops : DataBase
+public class DeerclopsBattle : DataBase
 {
     protected override void CreateBattle()
     {

@@ -13,6 +13,8 @@ public class MysteriousPlant : DataBase
                 .WithValue(1 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    CardType type = TryGet<CardType>("Friendly");
+                    type.canRecall = false;
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Lesser Glow Berry When Destroyed", 1) };
                 })
         );

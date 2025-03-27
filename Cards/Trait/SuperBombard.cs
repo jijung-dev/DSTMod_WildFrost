@@ -25,21 +25,7 @@ public class SuperBombard : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("superbombard");
-                    data.effects = new StatusEffectData[] { TryGet<StatusEffectData>("Bombard 3") };
-                })
-        );
-    }
-
-    protected override void CreateStatusEffect()
-    {
-        assets.Add(
-            StatusCopy("Bombard 2", "Bombard 3")
-                .SubscribeToAfterAllBuildEvent<StatusEffectBombard>(data =>
-                {
-                    data.hitFriendlyChance = 0;
-                    data.targetCountRange = new Vector2Int();
-                    data.maxFrontTargets = 1;
-                    data.delayAfter = 0.05f;
+                    data.effects = new StatusEffectData[] { TryGet<StatusEffectData>("Bombard 1") };
                 })
         );
     }
