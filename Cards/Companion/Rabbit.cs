@@ -9,7 +9,6 @@ public class Rabbit : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("rabbit", "Rabbit")
                 .SetSprites("Rabbit.png", "Wendy_BG.png")
-                .WithText("Gain <card=dstmod.morsel> when destroyed".Process())
                 .SetStats(2, null, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

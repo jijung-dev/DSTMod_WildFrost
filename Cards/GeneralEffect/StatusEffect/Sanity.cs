@@ -72,6 +72,7 @@ public class Sanity : DataBase
                         TryGet<StatusEffectSummon>("Summon Crawling Horror"),
                         TryGet<StatusEffectSummon>("Summon Terrorbeak"),
                     };
+                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintHasHealth>() };
                 })
                 .Subscribe_WithStatusIcon("sanity icon")
         );

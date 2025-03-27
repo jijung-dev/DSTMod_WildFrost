@@ -12,13 +12,11 @@ public class DeerClops : DataBase
                     .SetNameRef("DeerClops")
                     .EnemyDictionary(
                         ('E', "berryBush"),
-
                         ('H', "hound"),
                         ('B', "blueHound"),
                         ('S', "spider"),
                         ('N', "spiderNest"),
                         ('D', "deerclops"),
-						
                         ('R', "stone"),
                         ('M', "smallTree"),
                         ('T', "tree")

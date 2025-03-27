@@ -22,6 +22,7 @@ public class StatusEffectInstantGainCard : StatusEffectInstant
             ActionQueue.Stack(new ActionMove(card.entity, References.Player.handContainer), fixedPosition: true);
             ActionQueue.Stack(new ActionRunEnableEvent(card.entity), fixedPosition: true);
             ActionQueue.Stack(new ActionReveal(card.entity), fixedPosition: true);
+            card.entity.flipper.FlipUp();
 
             card.entity.curveAnimator.Ping();
         }

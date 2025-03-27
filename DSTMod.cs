@@ -67,6 +67,7 @@ namespace DSTMod_WildFrost
             allConstraint.Add("fuelweaverOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("chestOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("wolfgangOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("noDfly", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noToadstool", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noBoomshroom", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
@@ -113,6 +114,7 @@ namespace DSTMod_WildFrost
             };
             ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
             ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
+            ((TargetConstraintIsSpecificCard)allConstraint["wolfgangOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wolfgang") };
         }
 
         private void CreateModAssets()
@@ -143,7 +145,7 @@ namespace DSTMod_WildFrost
                             data.characterPrefab = gameObject.GetComponent<Character>();
                             data.id = "dstmod.DST";
 
-                            data.leaders = DataList<CardData>("wendy", "wortox", "winona");
+                            data.leaders = DataList<CardData>("wendy", "wortox", "winona", "wolfgang");
 
                             Inventory inventory = new Scriptable<Inventory>();
                             inventory.deck.list = DataList<CardData>(
@@ -497,6 +499,10 @@ namespace DSTMod_WildFrost
             if (References.LeaderData.original == TryGet<CardData>("winona"))
             {
                 References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("catapult", "catapult").Select(c => c.Clone()));
+            }
+            if (References.LeaderData.original == TryGet<CardData>("wolfgang"))
+            {
+                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("dumbbell", "dumbbell", "goldenDumbbell", "marbell").Select(c => c.Clone()));
             }
         }
 

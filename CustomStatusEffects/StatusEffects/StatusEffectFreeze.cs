@@ -67,7 +67,15 @@ namespace DSTMod_WildFrost
 
         public void Check()
         {
-            if (count >= target.hp.max && !Freezing)
+            var effect = target.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>("Scrap"));
+            int current =
+                target.hp.max == 0
+                    ? (bool)effect
+                        ? effect.count
+                        : target.hp.max
+                    : target.hp.max;
+
+            if (count >= current && !Freezing)
             {
                 ActionQueue.Stack(
                     new ActionSequence(Freeze())
