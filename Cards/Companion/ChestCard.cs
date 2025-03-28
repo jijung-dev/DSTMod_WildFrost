@@ -30,6 +30,23 @@ public class ChestCard : DataBase
     {
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmuneToEverythingBeside>("Chest Immune To Everything")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmuneToEverythingBeside>(data =>
+                {
+                    data.bypass = new StatusEffectData[]
+                    {
+                        TryGet<StatusEffectData>("Chest Health"),
+                        TryGet<StatusEffectData>("Low Priority Position"),
+                        TryGet<StatusEffectData>("Unshovable"),
+                        TryGet<StatusEffectData>("Unmovable"),
+                        TryGet<StatusEffectData>("Rock"),
+                        TryGet<StatusEffectData>("Gold"),
+                        TryGet<StatusEffectData>("Wood"),
+                    };
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXBeforeBattle>("Summon Chest Before Battle")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXBeforeBattle>(data =>
                 {

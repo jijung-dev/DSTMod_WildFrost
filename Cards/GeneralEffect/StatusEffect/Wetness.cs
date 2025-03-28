@@ -28,6 +28,7 @@ public class Wetness : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectWetness>(data =>
                 {
                     data.type = "dst.wetness";
+                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsItem>() };
                 })
                 .Subscribe_WithStatusIcon("wetness icon")
         );

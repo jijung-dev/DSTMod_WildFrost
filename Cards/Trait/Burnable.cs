@@ -19,19 +19,6 @@ public class Burnable : DataBase
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 2), SStack("When Destroyed Gain Charcoal", 1) };
                 })
         );
-        assets.Add(
-            new CardDataBuilder(mod)
-                .CreateItem("charcoal", "Charcoal")
-                .SetSprites("Stick.png", "Wendy_BG.png")
-                .SetStats(null, null, 0)
-                .WithCardType("Item")
-                .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Double Overheat", 1) };
-                    }
-                )
-        );
     }
 
     protected override void CreateKeyword()
@@ -87,14 +74,7 @@ public class Burnable : DataBase
                     data.cardGain = TryGet<CardData>("charcoal");
                 })
         );
-        assets.Add(
-            StatusCopy("Double Spice", "Double Overheat")
-                .WithText("Double the target's <keyword=dstmod.overheat>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectInstantDoubleX>(data =>
-                {
-                    data.statusToDouble = TryGet<StatusEffectData>("Overheat");
-                })
-        );
+        
     }
 
     protected override void CreateTrait()

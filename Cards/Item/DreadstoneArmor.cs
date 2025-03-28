@@ -1,20 +1,20 @@
 using Deadpan.Enums.Engine.Components.Modding;
 
-public class NightArmor : DataBase
+public class DreadstoneArmor : DataBase
 {
     public override void CreateCard()
     {
         assets.Add(
             new CardDataBuilder(mod)
-                .CreateItem("nightArmor", "Night Armor")
+                .CreateItem("dreadstoneArmor", "Dreadstone Armor")
                 .SetStats(null, null, 0)
-                .SetSprites("NightArmor.png", "Wendy_BG.png")
+                .SetSprites("DreadstoneArmor.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.WithPools(mod.itemPool);
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 4), SStack("Shell", 6) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Block", 2), SStack("Null", 3) };
                 })
         );
     }

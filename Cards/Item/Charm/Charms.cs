@@ -64,5 +64,25 @@ public class Charms : DataBase
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
                 })
         );
+        assets.Add(
+            new CardUpgradeDataBuilder(mod)
+                .Create("CardUpgradePickAndAxe")
+                .AddPool("GeneralCharmPool")
+                .WithType(CardUpgradeData.Type.Charm)
+                .WithImage("Icons/PickAxe_Charm.png")
+                .WithTitle("Pick/Axe")
+                .WithText("Gain <keyword=dstmod.pickaxetype> and <keyword=dstmod.axetype> but reduce max <keyword=attack> by 2")
+                .WithTier(4)
+                .SubscribeToAfterAllBuildEvent(data =>
+                {
+                    data.effects = new CardData.StatusEffectStacks[] { SStack("Reduce Attack", 2) };
+                    data.giveTraits = new CardData.TraitStacks[] { TStack("PickaxeType", 1), TStack("AxeType", 1) };
+                    data.targetConstraints = new TargetConstraint[]
+                    {
+                        new Scriptable<TargetConstraintIsUnit>(),
+                        new Scriptable<TargetConstraintDoesDamage>()
+                    };
+                })
+        );
     }
 }

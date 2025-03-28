@@ -11,7 +11,7 @@ namespace DSTMod_WildFrost
         public override void Init()
         {
             base.OnEnable += Activate;
-            base.OnCardMove += CheckCardMove;
+            //base.OnCardMove += CheckCardMove;
         }
 
         public override bool RunEnableEvent(Entity entity)
@@ -38,10 +38,10 @@ namespace DSTMod_WildFrost
             return false;
         }
 
-        public IEnumerator CheckCardMove(Entity entity)
-        {
-            return Run(GetTargets());
-        }
+        // public IEnumerator CheckCardMove(Entity entity)
+        // {
+        //     return Run(GetTargets());
+        // }
 
         public IEnumerator Activate(Entity entity)
         {

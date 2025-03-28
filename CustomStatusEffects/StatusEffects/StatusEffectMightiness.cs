@@ -39,6 +39,7 @@ public class StatusEffectMightiness : StatusEffectData
     {
         int amount = 1;
         Events.InvokeStatusEffectCountDown(this, ref amount);
+        attack = target.damage.max;
         if (amount != 0 && (bool)target && target.enabled && entity == target && count > 1)
         {
             count -= amount;
@@ -50,9 +51,9 @@ public class StatusEffectMightiness : StatusEffectData
 
     public override bool RunApplyStatusEvent(StatusEffectApply apply)
     {
+        attack = target.damage.max;
         if (!(bool)apply.effectData || apply.target != target || !(apply.effectData is StatusEffectMightiness))
             return false;
-        attack = target.damage.max;
         int current = apply.count + count;
         if (current >= 10)
         {

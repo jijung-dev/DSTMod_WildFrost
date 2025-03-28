@@ -291,14 +291,6 @@ namespace DSTMod_WildFrost
                     battleAssets.AddRange(instance.CreateBattleAsset());
                 }
             }
-
-            #region Toadstool
-            
-            #endregion
-
-            #region Fuelweaver
-            
-            #endregion
         }
 
         private void InsertNodeViaPreset(ref string[] preset)

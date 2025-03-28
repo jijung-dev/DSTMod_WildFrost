@@ -65,6 +65,7 @@ public class Sanity : DataBase
                 .Create<StatusEffectSanity>("Sanity")
                 .SubscribeToAfterAllBuildEvent<StatusEffectSanity>(data =>
                 {
+                    data.offensive = true;
                     data.type = "dst.sanity";
                     data.summonRan = TryGet<StatusEffectData>("Instant Summon Random Shadow Creature");
                     data.shadowEnemy = new StatusEffectSummon[2]

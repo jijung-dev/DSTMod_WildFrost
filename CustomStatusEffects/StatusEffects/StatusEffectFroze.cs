@@ -15,12 +15,21 @@ namespace DSTMod_WildFrost
         {
             base.OnHit += Hit;
             base.OnEntityDestroyed += RemoveEffect;
-            Events.OnCheckAction += CheckAction;
         }
 
-        public void OnDestroy()
+        public override bool RunPreTriggerEvent(Trigger trigger)
         {
-            Events.OnCheckAction -= CheckAction;
+            if (trigger.entity == target && count > 0)
+            {
+                trigger.nullified = true;
+                NoTargetTextSystem noText = NoTargetTextSystem.instance;
+                if (noText != null)
+                {
+                    float num = noText.shakeDurationRange.Random();
+                    target.curveAnimator.Move(noText.shakeAmount.WithX(noText.shakeAmount.x.WithRandomSign()), noText.shakeCurve, 1f, num);
+                }
+            }
+            return false;
         }
 
         public override bool RunHitEvent(Hit hit)
@@ -31,19 +40,6 @@ namespace DSTMod_WildFrost
             }
 
             return false;
-        }
-        public void CheckAction(ref PlayAction action, ref bool allow)
-        {
-            if (allow && !target.silenced && action is ActionTrigger actionTrigger && Battle.IsOnBoard(target) && target == actionTrigger.entity && count > 0)
-            {
-                NoTargetTextSystem noText = NoTargetTextSystem.instance;
-                if (noText != null)
-                {
-                    float num = noText.shakeDurationRange.Random();
-                    actionTrigger.entity.curveAnimator.Move(noText.shakeAmount.WithX(noText.shakeAmount.x.WithRandomSign()), noText.shakeCurve, 1f, num);
-                }
-                allow = false;
-            }
         }
 
         public IEnumerator Hit(Hit hit)
