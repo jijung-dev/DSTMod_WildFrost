@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,54 @@ namespace DSTMod_WildFrost
             return true;
         }
 
+        // static bool Prefix(ref IEnumerator __result, StatusEffectInstantSummon __instance)
+        // {
+        //     List<CardContainer> rows = GetRows(__instance.summonPosition, __instance.target);
+        //     if (rows == null)
+        //     {
+        //         return true;
+        //     }
+        //     Debug.LogWarning("What2");
+
+        //     List<CardSlot> list = new List<CardSlot>();
+        //     foreach (CardContainer item in rows)
+        //     {
+        //         if (item is CardSlotLane cardSlotLane)
+        //         {
+        //             Debug.LogWarning("What3");
+        //             list.AddRange(cardSlotLane.slots.Where((CardSlot slot) => slot.Empty));
+        //         }
+        //     }
+        //     Debug.LogWarning("What4");
+        //     var actionCount = ActionQueue.GetActions().OfType<ActionSequence>().Count(r => r.Name.Contains("Instant Summon"));
+        //     if (list.Count < actionCount)
+        //     {
+        //         Debug.LogWarning("No space so nuh uh");
+        //         __result = TrySummon(__instance);
+        //         return false;
+        //     }
+        //     Debug.LogWarning("What5");
+        //     return true;
+        // }
+        // public static IEnumerator TrySummon(StatusEffectInstantSummon __instance)
+        // {
+        //     if (__instance.buildingToSummon)
+        //     {
+        //         yield return new WaitUntil(() => __instance.toSummon);
+        //     }
+        //     if (NoTargetTextSystem.Exists())
+        //     {
+        //         if ((bool)__instance.toSummon)
+        //         {
+        //             __instance.toSummon.RemoveFromContainers();
+        //             UnityEngine.Object.Destroy(__instance.toSummon);
+        //         }
+
+        //         yield return NoTargetTextSystem.Run(__instance.target, NoTargetType.NoSpaceToSummon);
+        //     }
+        //     yield return null;
+        // }
+
         public static List<CardContainer> GetRows(Position position, Entity target)
         {
             switch (position)
@@ -53,7 +102,7 @@ namespace DSTMod_WildFrost
                 case Position.Hand:
                     return null;
                 default:
-                    throw new Exception("Nuh uh");
+                    throw new Exception("Row not found");
             }
         }
     }

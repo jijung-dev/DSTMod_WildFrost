@@ -23,7 +23,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Rock")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.rock>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.rock><hiddencard=dstmod.chest>")
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -34,7 +34,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Wood")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood><hiddencard=dstmod.chest>")
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -45,7 +45,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Gold")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.gold>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.gold><hiddencard=dstmod.chest>")
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -113,7 +113,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Rock")
-                .WithText("Drop <{a}> <keyword=dstmod.rock>".Process())
+                .WithText("Drop <{a}> <keyword=dstmod.rock><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
@@ -127,7 +127,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Gold")
-                .WithText("Drop <{a}> <keyword=dstmod.gold>".Process())
+                .WithText("Drop <{a}> <keyword=dstmod.gold><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
@@ -141,7 +141,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Axe Gain Wood")
-                .WithText("Drop <{a}> <keyword=dstmod.wood>".Process())
+                .WithText("Drop <{a}> <keyword=dstmod.wood><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };

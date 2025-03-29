@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Dead;
 using Deadpan.Enums.Engine.Components.Modding;
@@ -15,7 +16,7 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, EventRoutineCurseItems __instance, Entity entity)
         {
-            if (__instance.node.positionIndex == 1)
+            if (__instance.node.type.letter == "p")
             {
                 __result = TakeCard(__instance, entity);
                 return false;
@@ -43,7 +44,7 @@ namespace DSTMod_WildFrost
 
             __instance.cards.Clear();
             SaveCollection<string> saveCollection = __instance.data.Get<SaveCollection<string>>("cards");
-            ;
+
             saveCollection.Remove(index);
             __instance.data["cards"] = saveCollection;
             __instance.curses.RemoveAt(index);
@@ -78,7 +79,7 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(EventRoutineCurseItems __instance)
         {
-            if (__instance.node.positionIndex == 1)
+            if (__instance.node.type.letter == "p")
                 __instance.cardScale = 0.8f;
             return true;
         }
@@ -89,7 +90,7 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, EventRoutineCurseItems __instance)
         {
-            if (__instance.node.positionIndex == 1)
+            if (__instance.node.type.letter == "p")
             {
                 __result = Run(__instance);
                 return false;
@@ -144,6 +145,24 @@ namespace DSTMod_WildFrost
             {
                 __instance.node.SetCleared();
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(CampaignNodeTypeCurseItems), nameof(CampaignNodeTypeCurseItems.SetUp), typeof(CampaignNode))]
+    class PatchNewNodePopulate
+    {
+        static bool Prefix(ref IEnumerator __result, CampaignNodeTypeCurseItems __instance, CampaignNode node)
+        {
+            if (node.type.letter == "p")
+            {
+                __instance.force = new List<CardData>()
+                {
+                    DSTMod.Instance.TryGet<CardData>("trapBlueprint"),
+                    DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
+                    DSTMod.Instance.TryGet<CardData>("firePitBlueprint"),
+                };
+            }
+            return true;
         }
     }
 }

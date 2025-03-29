@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Deadpan.Enums.Engine.Components.Modding;
 using HarmonyLib;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
 using static CardData;
 
 public abstract class ConsumableBase : DataBase
@@ -23,6 +26,7 @@ public abstract class ConsumableBase : DataBase
         public string _spriteName;
         public (string name, int amount)[] _withEffects;
         public string _cookedTitle;
+        public string _cookedName;
         public ConsumeType _consumeType;
 
         public ConsumableInstance(
@@ -31,7 +35,8 @@ public abstract class ConsumableBase : DataBase
             string spriteName,
             (string name, int amount)[] withEffects,
             ConsumeType consumeType,
-            string cookedTitle
+            string cookedTitle,
+            string cookedName
         )
         {
             _name = name;
@@ -39,6 +44,7 @@ public abstract class ConsumableBase : DataBase
             _spriteName = spriteName;
             _withEffects = withEffects;
             _cookedTitle = cookedTitle;
+            _cookedName = cookedName;
             _consumeType = consumeType;
         }
     }
@@ -49,10 +55,11 @@ public abstract class ConsumableBase : DataBase
         string spriteName,
         (string name, int amount)[] withEffects,
         ConsumeType consumeType,
-        string cookedTitle = ""
+        string cookedTitle = "",
+        string cookedName = ""
     )
     {
-        return new ConsumableInstance(name, title, spriteName, withEffects, consumeType, cookedTitle);
+        return new ConsumableInstance(name, title, spriteName, withEffects, consumeType, cookedTitle, cookedName);
     }
 
     public override void CreateCard()
@@ -72,9 +79,14 @@ public abstract class ConsumableBase : DataBase
                     )
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
-                        if (!string.IsNullOrEmpty(item._cookedTitle))
+                        if (!string.IsNullOrEmpty(item._cookedTitle) && !string.IsNullOrEmpty(item._cookedName))
                         {
                             data.startWithEffects = new StatusEffectStacks[] { SStack("When Target Crock Pot Gain " + item._cookedTitle, 1) };
+                            string card = "<hiddencard=dstmod." + item._cookedName + ">";
+
+                            StringTable collection = LocalizationHelper.GetCollection("Cards", new LocaleIdentifier(SystemLanguage.English));
+                            collection.SetString(data.name + "_text", card.Process());
+                            data.textKey = collection.GetString(data.name + "_text");
                         }
                         data.attackEffects = item._withEffects.Select(e => mod.SStack(e.name, e.amount)).ToArray();
                         data.traits = new List<TraitStacks>() { GetConsumeTrait(item._consumeType) };

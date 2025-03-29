@@ -85,7 +85,7 @@ public abstract class BuildingBase : DataBase
             assets.Add(
                 new CardDataBuilder(mod)
                     .CreateItem(item._name + "Blueprint", item._title + " Blueprint")
-                    .WithText($"Place <card=dstmod.{item._name}>".Process())
+                    .WithText($"Place <card=dstmod.{item._name}><hiddencard=dstmod.floor>".Process())
                     .SetSprites("Blueprint.png", "Wendy_BG.png")
                     .WithCardType("Item")
                     .WithValue(GetResourcePrice(item))

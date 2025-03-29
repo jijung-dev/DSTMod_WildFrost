@@ -14,9 +14,9 @@ public class CampaignNodeTypeBlueprint : CampaignNodeTypeEvent
 
         List<CardData> list = new List<CardData>()
         {
-            DSTMod.Instance.TryGet<CardData>("crockPotBlueprint"),
             DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
-            DSTMod.Instance.TryGet<CardData>("crockPotBlueprint"),
+            DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
+            DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
         };
         List<CardData> list2 = new List<CardData>();
 

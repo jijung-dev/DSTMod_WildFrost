@@ -41,7 +41,7 @@ public class Sanity : DataBase
                 .Create("sanity")
                 .WithTitle("Sanity")
                 .WithShowName(false)
-                .WithDescription("When more than or equal to health summon <Shadow Creature> at the enemy side")
+                .WithDescription("When more than or equal to health summon <Shadow Creature> at the enemy side".Process())
                 .WithTitleColour(new Color(0.34f, 0f, 0.63f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(true)
@@ -68,11 +68,6 @@ public class Sanity : DataBase
                     data.offensive = true;
                     data.type = "dst.sanity";
                     data.summonRan = TryGet<StatusEffectData>("Instant Summon Random Shadow Creature");
-                    data.shadowEnemy = new StatusEffectSummon[2]
-                    {
-                        TryGet<StatusEffectSummon>("Summon Crawling Horror"),
-                        TryGet<StatusEffectSummon>("Summon Terrorbeak"),
-                    };
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintHasHealth>() };
                 })
                 .Subscribe_WithStatusIcon("sanity icon")

@@ -20,48 +20,22 @@ namespace DSTMod_WildFrost
         public override void Init()
         {
             base.OnStack += Stack;
-            Events.OnEntityDisplayUpdated += EntityDisplayUpdated;
-        }
-
-        public void OnDestroy()
-        {
-            Events.OnEntityDisplayUpdated -= EntityDisplayUpdated;
-        }
-
-        public void EntityDisplayUpdated(Entity entity)
-        {
-            if (entity == target && target.enabled)
-            {
-                Check();
-            }
         }
 
         public IEnumerator Stack(int stacks)
         {
-            Check();
-            yield return null;
+            yield return Check();
         }
 
-        public void Check()
+        public IEnumerator Check()
         {
-            if (count >= target.hp.current && !Insaniting)
+            var effect2 = target.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>("Bloomness"));
+            int current = effect2 != null ? effect2.count : target.hp.current;
+
+            if (count >= current && !Insaniting)
             {
-                ActionQueue.Stack(
-                    new ActionSequence(SummonEnemy())
-                    {
-                        fixedPosition = true,
-                        priority = eventPriority,
-                        note = "Sanity",
-                    }
-                );
-                ActionQueue.Stack(
-                    new ActionSequence(Clear())
-                    {
-                        fixedPosition = true,
-                        priority = eventPriority,
-                        note = "Clear Sanity",
-                    }
-                );
+                yield return SummonEnemy();
+                yield return Clear();
                 Insaniting = true;
             }
         }
@@ -80,13 +54,12 @@ namespace DSTMod_WildFrost
             hit.AddStatusEffect(summonRan, 1);
             clump.Add(hit.Process());
 
-            VFXMod.instance.SFX.TryPlaySoundFromPath(DSTMod.Instance.ImagePath("Sanity_Apply.wav"));
+            //VFXMod.instance.SFX.TryPlaySoundFromPath(DSTMod.Instance.ImagePath("Sanity_Apply.wav"));
 
-            if ((bool)buildupAnimation)
-            {
-                yield return buildupAnimation.Routine(target);
-            }
-            clump.Add(Sequences.Wait(0.3f));
+            // if ((bool)buildupAnimation)
+            // {
+            //     yield return buildupAnimation.Routine(target);
+            // }
             yield return clump.WaitForEnd();
         }
 

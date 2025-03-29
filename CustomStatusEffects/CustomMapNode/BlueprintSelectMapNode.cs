@@ -12,12 +12,12 @@ public class BlueprintSelectMapNode : DataBase
     {
         assets.Add(
             mod.NodeCopy("CampaignNodeCurseItems", "CampaignNodeBlueprintSelect")
-                .WithZoneName("Blueprint") //The name of the CampaignNode associated to the map node. Used for special event replacement.
-                .WithCanEnter(true) //Needs to be true to be interactable
-                .WithInteractable(true) //Needs to be true to be interactable
-                .WithMustClear(true) //If you want this node unskippable, replace this line with .WithMustClear(true)
-                .WithCanLink(true) //See below.
-                .WithLetter("p") //See below.
+                .WithZoneName("Blueprint")
+                .WithCanEnter(true)
+                .WithInteractable(true)
+                .WithMustClear(true)
+                .WithCanLink(true)
+                .WithLetter("p")
                 .SubscribeToAfterAllBuildEvent(
                     (CampaignNodeTypeCurseItems data) =>
                     {
@@ -28,16 +28,12 @@ public class BlueprintSelectMapNode : DataBase
 
                         data.curseCards = 0;
                         //name + Blueprint
-                        data.force = new List<CardData>()
-                        {
-                            DSTMod.Instance.TryGet<CardData>("trapBlueprint"),
-                            DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
-                            DSTMod.Instance.TryGet<CardData>("firePitBlueprint"),
-                        };
-
-                        // Campaign campaign = Object.FindObjectOfType<Campaign>();
-                        // CharacterRewards characterRewards = campaign.GetComponent<CharacterRewards>();
-                        // data.illegalCards = characterRewards.poolLookup["Items"].current.Cast<CardData>().ToArray();
+                        // data.force = new List<CardData>()
+                        // {
+                        //     DSTMod.Instance.TryGet<CardData>("trapBlueprint"),
+                        //     DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
+                        //     DSTMod.Instance.TryGet<CardData>("firePitBlueprint"),
+                        // };
 
                         StringTable uiText = LocalizationHelper.GetCollection("UI Text", SystemLanguage.English);
                         string key = mapNode.name + "Ribbon";

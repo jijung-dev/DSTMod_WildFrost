@@ -12,7 +12,9 @@ public class Mightiness : DataBase
                 .Create("mightiness")
                 .WithTitle("Mightiness")
                 .WithShowName(false)
-                .WithDescription("At 7+ <keyword=dstmod.mightiness> became <Mighty>, At 3- <keyword=dstmod.mightiness> became <Wimpy>|Max 10 stacks".Process())
+                .WithDescription(
+                    "At 7+ <keyword=dstmod.mightiness> became <Mighty>, At 3- <keyword=dstmod.mightiness> became <Wimpy>|Max 10 stacks, countdown each turn".Process()
+                )
                 .WithTitleColour(new Color(0.07f, 0.43f, 0.17f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)

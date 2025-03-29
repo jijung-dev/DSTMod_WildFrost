@@ -70,6 +70,8 @@ public class ActionChangePhaseExt : PlayAction
         yield return entity.display.UpdateData(doPing: true);
         entity.alive = true;
         yield return StatusEffectSystem.EntityEnableEvent(entity);
+        PauseMenu.Unblock();
+        DeckpackBlocker.Unblock();
     }
 
     public static IEnumerator EnableBehaviour(Behaviour system)

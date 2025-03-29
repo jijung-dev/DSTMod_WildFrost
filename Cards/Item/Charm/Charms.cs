@@ -80,7 +80,7 @@ public class Charms : DataBase
                     data.targetConstraints = new TargetConstraint[]
                     {
                         new Scriptable<TargetConstraintIsUnit>(),
-                        new Scriptable<TargetConstraintDoesDamage>()
+                        new Scriptable<TargetConstraintDoesDamage>(),
                     };
                 })
         );

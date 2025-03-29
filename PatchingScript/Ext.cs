@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
@@ -15,7 +17,7 @@ public static class Ext
     {
         return Regex.Replace(
             text,
-            @"<(card|keyword)=dstmod\.(.*?)>",
+            @"<(card|keyword|hiddencard)=dstmod\.(.*?)>",
             match =>
             {
                 string prefix = match.Groups[1].Value;
@@ -24,6 +26,23 @@ public static class Ext
                 return $"<{prefix}=tgestudio.wildfrost.dstmod.{name}>";
             }
         );
+    }
+
+    public static string RemoveHidden(string text)
+    {
+        StringBuilder sb = new StringBuilder(text);
+        int start;
+
+        while ((start = sb.ToString().IndexOf("<hiddencard=")) != -1)
+        {
+            int end = sb.ToString().IndexOf(">", start);
+            if (end == -1)
+                break; // Safety check
+
+            sb.Remove(start, end - start + 1);
+        }
+
+        return string.Join("\n", sb.ToString().Split('\n').Where(line => !string.IsNullOrWhiteSpace(line)));
     }
 
     public static T CopyAdd<T>(this GameObject desitation, T org)

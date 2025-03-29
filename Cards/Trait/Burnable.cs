@@ -74,7 +74,6 @@ public class Burnable : DataBase
                     data.cardGain = TryGet<CardData>("charcoal");
                 })
         );
-        
     }
 
     protected override void CreateTrait()

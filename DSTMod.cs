@@ -68,6 +68,7 @@ namespace DSTMod_WildFrost
             allConstraint.Add("chestOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wolfgangOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("wormwoodOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("noDfly", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noToadstool", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noBoomshroom", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
@@ -115,6 +116,7 @@ namespace DSTMod_WildFrost
             ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
             ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
             ((TargetConstraintIsSpecificCard)allConstraint["wolfgangOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wolfgang") };
+            ((TargetConstraintIsSpecificCard)allConstraint["wormwoodOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wormwood") };
         }
 
         private void CreateModAssets()
@@ -145,7 +147,7 @@ namespace DSTMod_WildFrost
                             data.characterPrefab = gameObject.GetComponent<Character>();
                             data.id = "dstmod.DST";
 
-                            data.leaders = DataList<CardData>("wendy", "wortox", "winona", "wolfgang");
+                            data.leaders = DataList<CardData>("wendy", "wortox", "winona", "wolfgang", "wormwood");
 
                             Inventory inventory = new Scriptable<Inventory>();
                             inventory.deck.list = DataList<CardData>(
@@ -301,7 +303,6 @@ namespace DSTMod_WildFrost
             //Line 3: Zone (Snow Tundra, Ice Caves, Frostlands)
             char letter = 'S'; //S is for Snowdwell, b is for non-boss, B is for boss.
             int targetAmount = 1; //Stop after the 1st S.
-
             for (int i = 0; i < preset[0].Length; i++)
             {
                 if (preset[0][i] == letter)
@@ -340,7 +341,13 @@ namespace DSTMod_WildFrost
             }
             if (References.LeaderData.original == TryGet<CardData>("wolfgang"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("dumbbell", "dumbbell", "goldenDumbbell", "marbell").Select(c => c.Clone()));
+                References.PlayerData.inventory.deck.list.AddRange(
+                    DataList<CardData>("dumbbell", "dumbbell", "goldenDumbbell", "marbell").Select(c => c.Clone())
+                );
+            }
+            if (References.LeaderData.original == TryGet<CardData>("wormwood"))
+            {
+                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("compostWrap").Select(c => c.Clone()));
             }
         }
 

@@ -10,6 +10,7 @@ public class RabbitKing : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("fortuitousRabbit", "Fortuitous Rabbit")
                 .SetSprites("scareRabbit.png", "Wendy_BG.png")
+                .WithText("<hiddencard=dstmod.wrathfulRabbitKing><hiddencard=dstmod.benevolentRabbitKing>")
                 .SetTraits(TStack("Fragile", 1))
                 .SetStats(1, null, 8)
                 .WithText("<keyword=dstmod.neutral>".Process())
