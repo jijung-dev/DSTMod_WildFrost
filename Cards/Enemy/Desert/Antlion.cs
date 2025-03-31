@@ -11,7 +11,7 @@ public class Antlion : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("antlion", "Antlion")
                 .SetSprites("Antlion.png", "Wendy_BG.png")
-                .SetStats(30, 6, 4)
+                .SetStats(30, 5, 3)
                 .WithCardType("Miniboss")
                 .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

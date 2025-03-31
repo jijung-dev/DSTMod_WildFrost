@@ -14,7 +14,7 @@ public class Bloomness : DataBase
                 .WithTitle("Bloomness")
                 .WithShowName(false)
                 .WithDescription(
-                    "At 5+ <keyword=dstmod.bloomness> became <Bloom I>, At 10+ <keyword=dstmod.bloomness> became <Bloom II>, At 17+ <keyword=dstmod.bloomness> became <Bloom III>|Increase by 1 every turn \nMax 20 stacks \nTake damage from <sprite name=dst.overheat> instead".Process()
+                    "At 5+ <keyword=dstmod.bloomness> became <Bloom I>, At 10+ <keyword=dstmod.bloomness> became <Bloom II>, At 17+ <keyword=dstmod.bloomness> became <Bloom III>|Increase by 1 every turn \nMax 20 stacks \nTake damage from <sprite name=dst.overheat> instead, When Froze increase <sprite name=counter> by 4 instead".Process()
                 )
                 .WithTitleColour(new Color(0.07f, 0.43f, 0.17f))
                 .WithBodyColour(new Color(1f, 1f, 1f))

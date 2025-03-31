@@ -10,12 +10,11 @@ public class Spider : DataBase
                 .CreateUnit("spider", "Spider")
                 .SetSprites("Spider.png", "Wendy_BG.png")
                 .SetStats(4, 1, 3)
-                .SetStartWithEffect(SStack("MultiHit", 1))
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1), SStack("MultiHit", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Aimless", 1) };
                 })
         );

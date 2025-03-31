@@ -9,7 +9,7 @@ public class CaveSpider : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("caveSpider", "Cave Spider")
                 .SetSprites("CaveSpider.png", "Wendy_BG.png")
-                .SetStats(8, 1, 3)
+                .SetStats(8, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(300)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

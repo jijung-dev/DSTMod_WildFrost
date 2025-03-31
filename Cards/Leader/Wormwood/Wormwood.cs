@@ -21,6 +21,7 @@ public class Wormwood : DataBase
                         SStack("ByPassHasHealthConstraint", 1),
                         SStack("On Turn Apply Teeth To Self", 1),
                         SStack("When Overheat Applied To Self Gain Reduce Bloomness Instead", 1),
+                        SStack("When Froze Applied To Self Gain Increase Max Counter Instead", 1),
                     };
                     data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade() };
                 })
@@ -51,10 +52,32 @@ public class Wormwood : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenYAppliedToEffect>("When Froze Applied To Self Gain Increase Max Counter Instead")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenYAppliedToEffect>(data =>
+                {
+                    data.instead = true;
+                    data.whenAppliedToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.whenAppliedEffect = new StatusEffectData[] { TryGet<StatusEffectData>("Temporary Froze") };
+                    data.effectToApply = TryGet<StatusEffectData>("Increase Counter");
+                    data.adjustAmount = true;
+                    data.addAmount = 3;
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantReduceCertainEffect>("Reduce Bloomness")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantReduceCertainEffect>(data =>
                 {
                     data.effectToReduce = TryGet<StatusEffectData>("Bloomness");
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectInstantIncreaseCounter>("Increase Counter")
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantIncreaseCounter>(data =>
+                {
+                    data.stackable = true;
                 })
         );
     }

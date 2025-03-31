@@ -15,7 +15,7 @@ public class Lavae : DataBase
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("When Destroyed Apply Overheat To Enemies", 1),
+                        SStack("When Destroyed Apply Overheat To Enemies", 3),
                         SStack("When Destroyed Apply Spice To DFly", 2),
                         SStack("Immune To Summoned", 1),
                     };

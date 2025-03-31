@@ -11,7 +11,7 @@ public class Dragonfly : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("dragonfly", "Dragonfly")
                 .SetSprites("Dragonfly.png", "Wendy_BG.png")
-                .SetStats(25, 3, 4)
+                .SetStats(30, 3, 4)
                 .WithCardType("Boss")
                 .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -28,7 +28,7 @@ public class Dragonfly : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("dragonflyEnraged", "Dragonfly Enraged")
                 .SetSprites("DragonflyEnraged.png", "Wendy_BG.png")
-                .SetStats(20, 2, 4)
+                .SetStats(25, 2, 4)
                 .WithCardType("Boss")
                 .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -37,7 +37,7 @@ public class Dragonfly : DataBase
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Hit All Units", 1),
-                        SStack("When Overheat Applied To Self Gain Spice Instead", 2),
+                        SStack("When Overheat Applied To Self Gain Spice Instead", 1),
                         SStack("Immune To Damage From DFly", 1),
                         SStack("MultiHit", 1),
                     };

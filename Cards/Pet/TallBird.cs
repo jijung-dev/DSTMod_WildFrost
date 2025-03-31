@@ -11,7 +11,6 @@ public class TallBird : DataBase
                 .CreateUnit("tallbirdEgg", "Tallbird Egg")
                 .SetSprites("TallBirdEgg.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.smallbird>".Process())
-                .IsPet("", true)
                 .SetStats(1, null, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -47,7 +46,7 @@ public class TallBird : DataBase
                 .CreateUnit("smallishTallbird", "Smallish Tallbird")
                 .WithText("<hiddencard=dstmod.tallbird>".Process())
                 .SetSprites("SmallishBird.png", "Wendy_BG.png")
-                .SetStats(5, 4, 6)
+                .SetStats(5, 3, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate(CardData data)
@@ -65,7 +64,7 @@ public class TallBird : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("tallbird", "Tallbird")
                 .SetSprites("TallBird.png", "Wendy_BG.png")
-                .SetStats(8, 3, 4)
+                .SetStats(8, 2, 4)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate(CardData data)

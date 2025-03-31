@@ -10,12 +10,11 @@ public class Varglet : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("varglet", "Varglet")
                 .SetSprites("Varglet.png", "Wendy_BG.png")
-                .SetStats(6, 2, 5)
+                .SetStats(8, 3, 5)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("On Counter Turn Summon Hounds", 1),
                         SStack("Gain Monster Meat When Destroyed", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Wild", 1), TStack("Smackback", 1) };

@@ -10,7 +10,7 @@ public class SpiderNest : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("spiderNest", "Spider Nest")
                 .SetSprites("SpiderNest.png", "Wendy_BG.png")
-                .SetStats(6, null, 4)
+                .SetStats(8, null, 4)
                 .SetTraits(TStack("Backline", 1), TStack("Unmovable", 1))
                 .WithCardType("Enemy")
                 .WithValue(4 * 36)

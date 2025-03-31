@@ -10,7 +10,7 @@ public class SpiderQueen : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("spiderQueen", "Spider Queen")
                 .SetSprites("SpiderQueen.png", "Wendy_BG.png")
-                .SetStats(12, 2, 4)
+                .SetStats(15, 2, 4)
                 .SetTraits(TStack("Smackback", 1))
                 .WithCardType("Miniboss")
                 .WithValue(15 * 36)

@@ -10,7 +10,7 @@ public class Deerclops : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("deerclops", "Deerclops")
                 .SetSprites("Deerclops.png", "Wendy_BG.png")
-                .SetStats(25, 4, 4)
+                .SetStats(30, 4, 4)
                 .SetTraits(TStack("Knockback", 1))
                 .WithCardType("Boss")
                 .WithValue(13 * 50)

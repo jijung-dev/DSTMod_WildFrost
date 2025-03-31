@@ -24,7 +24,7 @@ public class BeeQueen : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("beeQueenEnraged", "Bee Queen Enraged")
                 .SetSprites("BeeQueenEnraged.png", "Wendy_BG.png")
-                .SetStats(15, 2, 6)
+                .SetStats(25, 2, 5)
                 .WithCardType("Miniboss")
                 .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

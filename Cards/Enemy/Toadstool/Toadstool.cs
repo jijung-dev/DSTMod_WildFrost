@@ -8,7 +8,7 @@ public class Toadstool : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("toadstool", "Toadstool")
                 .SetSprites("Toadstool.png", "Wendy_BG.png")
-                .SetStats(25, null, 5)
+                .SetStats(30, null, 5)
                 .WithCardType("Miniboss")
                 .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -26,7 +26,7 @@ public class Toadstool : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("toadstoolEnraged", "Toadstool Enraged")
                 .SetSprites("ToadstoolEnraged.png", "Wendy_BG.png")
-                .SetStats(15, 1, 5)
+                .SetStats(30, 1, 5)
                 .WithCardType("Miniboss")
                 .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

@@ -9,12 +9,12 @@ public class SpiderWarrior : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("spiderWarrior", "Spider Warrior")
                 .SetSprites("SpiderWarrior.png", "Wendy_BG.png")
-                .SetStats(6, 3, 3)
+                .SetStats(6, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1), SStack("MultiHit", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Frontline", 1) };
                 })
         );

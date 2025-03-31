@@ -11,13 +11,13 @@ public class BlueHound : DataBase
                 .CreateUnit("blueHound", "Blue Hound")
                 .SetSprites("HoundIce.png", "Wendy_BG.png")
                 .SetStats(5, 1, 3)
-                .SetStartWithEffect(SStack("MultiHit", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("When Destroyed Freezing All Enemies", 3),
                         SStack("Gain Monster Meat When Destroyed", 1),
+                        SStack("MultiHit", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Wild", 1) };
                 })

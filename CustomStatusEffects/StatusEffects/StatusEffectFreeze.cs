@@ -69,7 +69,7 @@ namespace DSTMod_WildFrost
         {
             var effect = target.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>("Scrap"));
             var effect2 = target.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>("Bloomness"));
-            int current = target.hp.max == 0 ? (effect != null ? effect.count : target.hp.max) : (effect2 != null ? effect2.count : target.hp.max);
+            int current = target.hp.max == 0 ? (effect != null ? effect.count : (effect2 != null ? effect2.count : target.hp.max)) : target.hp.max;
 
             if (count >= current && !Freezing)
             {
