@@ -60,6 +60,7 @@ public class MourningGlory : DataBase
                 .FreeModify(
                     delegate(StatusEffectData data)
                     {
+                        data.stackable = true;
                         data.canBeBoosted = false;
                     }
                 )

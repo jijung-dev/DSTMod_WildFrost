@@ -16,7 +16,7 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, EventRoutineCurseItems __instance, Entity entity)
         {
-            if (__instance.node.type.letter == "p")
+            if (__instance.node.type.letter == "=" || __instance.node.type.letter == "^")
             {
                 __result = TakeCard(__instance, entity);
                 return false;
@@ -52,7 +52,16 @@ namespace DSTMod_WildFrost
             saveCollection2.Remove(index);
             __instance.data["curses"] = saveCollection2;
 
-            __instance.cardSelector.TakeCard(entity);
+            var status = entity.statusEffects.Find(r => r is IUpgrade) as IUpgrade;
+            if (status != null)
+            {
+                status.Run();
+            }
+            else
+            {
+                __instance.cardSelector.TakeCard(entity);
+            }
+
             Events.InvokeEntityChosen(entity);
 
             __instance.talker.Say("thanks", 0f, entity.data.title);
@@ -67,11 +76,97 @@ namespace DSTMod_WildFrost
 
             yield return new WaitForSeconds(0.3f);
             __instance.cardController.Enable();
-            //__instance.backButton.SetActive(value: true);
 
             __instance.Back();
             __instance.node.SetCleared();
         }
+    }
+
+    [HarmonyPatch(typeof(CampaignNodeTypeCurseItems), nameof(CampaignNodeTypeCurseItems.SetUp), typeof(CampaignNode))]
+    class PatchNewNodePopulate
+    {
+        static bool Prefix(ref IEnumerator __result, CampaignNodeTypeCurseItems __instance, CampaignNode node)
+        {
+            if (node.type.letter == "=")
+            {
+                __instance.force = new List<CardData>(DSTMod.Instance.DataList<CardData>
+                    ("trapBlueprint", "scienceMachineBlueprint", "firePitBlueprint")
+                    .Select(c => c.Clone()));
+            }
+            else
+            if (node.type.letter == "^")
+            {
+                var charList = GetCharacterCards().ToList();
+
+                List<CardData> list = new List<CardData>
+                {
+                    TryGet<CardData>("goldUpgrade").Clone(),
+                    GetUniqueRandomCard(charList).Clone(),
+                    GetUniqueRandomCard(charList).Clone()
+                };
+                list.Shuffle();
+                __instance.force = list;
+            }
+            return true;
+        }
+        static CardData GetUniqueRandomCard(List<CardData> list)
+        {
+            var choice = list.RandomItem();
+            list.Remove(choice);
+            return choice;
+        }
+        static List<CardData> GetCharacterCards()
+        {
+            var leader = References.LeaderData.original;
+            switch (leader.title)
+            {
+                case "Wendy":
+                    return new List<CardData>()
+                    {
+                        TryGet<CardData>("unyieldingDraught"),
+                        TryGet<CardData>("distilledVengeance"),
+                        TryGet<CardData>("nightshadeNostrum"),
+                        TryGet<CardData>("vigorMortis"),
+                        TryGet<CardData>("revenantRestorative"),
+                        TryGet<CardData>("ghastlyExperience"),
+                    };
+                case "Wortox":
+                    return new List<CardData>()
+                    {
+                        TryGet<CardData>("twintailedHeart"),
+                        TryGet<CardData>("soulJar"),
+                        TryGet<CardData>("immuneSanityUpgarde"),
+                        TryGet<CardData>("knabsack"),
+                    };
+                case "Wolfgang":
+                    return new List<CardData>()
+                    {
+                        TryGet<CardData>("gymUpgrade"),
+                        TryGet<CardData>("gembellUpgrade"),
+                        TryGet<CardData>("whistleUpgrade"),
+                    };
+                case "Wormwood":
+                    return new List<CardData>()
+                    {
+                        TryGet<CardData>("huskUpgrade"),
+                        TryGet<CardData>("saladmander"),
+                        TryGet<CardData>("carrat"),
+                        TryGet<CardData>("bulbousLightbug"),
+                    };
+                case "Winona":
+                    return new List<CardData>()
+                    {
+                        TryGet<CardData>("slowUpgrade"),
+                        TryGet<CardData>("2tapeUpgrade"),
+                        TryGet<CardData>("generator"),
+                        TryGet<CardData>("spotlight"),
+                    };
+                default:
+                    return new List<CardData>() { };
+            }
+        }
+        static T TryGet<T>(string name)
+        where T : DataFile => DSTMod.Instance.TryGet<T>(name);
     }
 
     [HarmonyPatch(typeof(EventRoutineCurseItems), nameof(EventRoutineCurseItems.Populate))]
@@ -79,7 +174,7 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(EventRoutineCurseItems __instance)
         {
-            if (__instance.node.type.letter == "p")
+            if (__instance.node.type.letter == "=" || __instance.node.type.letter == "^")
                 __instance.cardScale = 0.8f;
             return true;
         }
@@ -90,7 +185,7 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, EventRoutineCurseItems __instance)
         {
-            if (__instance.node.type.letter == "p")
+            if (__instance.node.type.letter == "=" || __instance.node.type.letter == "^")
             {
                 __result = Run(__instance);
                 return false;
@@ -128,7 +223,7 @@ namespace DSTMod_WildFrost
             __instance.sequence.owner = __instance.player;
             __instance.cardController.owner = __instance.player;
             __instance.cardSelector.character = __instance.player;
-            CinemaBarSystem.Top.SetScript("Choose a blueprint");
+            CinemaBarSystem.Top.SetScript(GetTitle(__instance));
             if (!__instance.data.Get("analyticsEventSent", @default: false))
             {
                 foreach (Entity item in __instance.cardContainer)
@@ -146,23 +241,17 @@ namespace DSTMod_WildFrost
                 __instance.node.SetCleared();
             }
         }
-    }
-
-    [HarmonyPatch(typeof(CampaignNodeTypeCurseItems), nameof(CampaignNodeTypeCurseItems.SetUp), typeof(CampaignNode))]
-    class PatchNewNodePopulate
-    {
-        static bool Prefix(ref IEnumerator __result, CampaignNodeTypeCurseItems __instance, CampaignNode node)
+        static string GetTitle(EventRoutineCurseItems __instance)
         {
-            if (node.type.letter == "p")
+            switch (__instance.node.type.letter)
             {
-                __instance.force = new List<CardData>()
-                {
-                    DSTMod.Instance.TryGet<CardData>("trapBlueprint"),
-                    DSTMod.Instance.TryGet<CardData>("scienceMachineBlueprint"),
-                    DSTMod.Instance.TryGet<CardData>("firePitBlueprint"),
-                };
+                case "=":
+                    return "Choose a blueprint";
+                case "^":
+                    return "Choose an upgrade or an item";
+                default:
+                    return "";
             }
-            return true;
         }
     }
 }

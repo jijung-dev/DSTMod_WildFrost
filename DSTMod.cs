@@ -54,6 +54,8 @@ namespace DSTMod_WildFrost
             allConstraint.Add("axeOnly", new Scriptable<TargetConstraintHasTrait>());
             allConstraint.Add("beeOnly", new Scriptable<TargetConstraintHasTrait>());
 
+            allConstraint.Add("companionOnly", new Scriptable<TargetConstraintIsCardType>());
+
             allConstraint.Add("buildingOnly", new Scriptable<TargetConstraintHasStatus>());
             allConstraint.Add("clunkerOnly", new Scriptable<TargetConstraintHasStatus>());
             allConstraint.Add("noChestHealth", new Scriptable<TargetConstraintHasStatus>(x => x.not = true));
@@ -69,6 +71,7 @@ namespace DSTMod_WildFrost
             allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wolfgangOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wormwoodOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("wendyOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("noDfly", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noToadstool", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noBoomshroom", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
@@ -82,6 +85,8 @@ namespace DSTMod_WildFrost
             ((TargetConstraintHasTrait)allConstraint["pickaxeOnly"]).trait = TryGet<TraitData>("PickaxeType");
             ((TargetConstraintHasTrait)allConstraint["axeOnly"]).trait = TryGet<TraitData>("AxeType");
             ((TargetConstraintHasTrait)allConstraint["beeOnly"]).trait = TryGet<TraitData>("Bee");
+
+            ((TargetConstraintIsCardType)allConstraint["companionOnly"]).allowedTypes = new[] { TryGet<CardType>("Friendly") };
 
             ((TargetConstraintHasStatus)allConstraint["buildingOnly"]).status = TryGet<StatusEffectData>("Building Health");
             ((TargetConstraintHasStatus)allConstraint["clunkerOnly"]).status = TryGet<StatusEffectData>("Scrap");
@@ -117,6 +122,7 @@ namespace DSTMod_WildFrost
             ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
             ((TargetConstraintIsSpecificCard)allConstraint["wolfgangOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wolfgang") };
             ((TargetConstraintIsSpecificCard)allConstraint["wormwoodOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wormwood") };
+            ((TargetConstraintIsSpecificCard)allConstraint["wendyOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wendy") };
         }
 
         private void CreateModAssets()
@@ -297,12 +303,12 @@ namespace DSTMod_WildFrost
 
         private void InsertNodeViaPreset(ref string[] preset)
         {
-            //See References for the two possible presets.
-            //Lines 0 + 1: Node types
-            //Line 2: Battle Tier (fight 1, fight 2, etc)
-            //Line 3: Zone (Snow Tundra, Ice Caves, Frostlands)
-            char letter = 'S'; //S is for Snowdwell, b is for non-boss, B is for boss.
-            int targetAmount = 1; //Stop after the 1st S.
+            InsertAfterLetter(ref preset, 'S', '=', 1);
+            InsertAfterLetter(ref preset, 'B', '^', 1);
+        }
+
+        private void InsertAfterLetter(ref string[] preset, char letter, char insertChar, int targetAmount)
+        {
             for (int i = 0; i < preset[0].Length; i++)
             {
                 if (preset[0][i] == letter)
@@ -310,10 +316,9 @@ namespace DSTMod_WildFrost
                     targetAmount--;
                     if (targetAmount == 0)
                     {
-                        preset[0] = preset[0].Insert(i + 1, "p");
-                        for (int j = 1; j < preset.Length; j++)
+                        for (int j = 0; j < preset.Length; j++)
                         {
-                            preset[j] = preset[j].Insert(i + 1, preset[j][i].ToString());
+                            preset[j] = preset[j].Insert(i + 1, j == 0 ? insertChar.ToString() : preset[j][i].ToString());
                         }
                         break;
                     }

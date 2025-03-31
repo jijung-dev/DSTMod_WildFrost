@@ -11,16 +11,19 @@ namespace DSTMod_WildFrost
         {
             if (!isHit)
             {
-                var effect = target.FindStatus(effectToReduce);
+                while (count > 0)
+                {
+                    var effect = target.FindStatus(effectToReduce);
 
-                if (!(bool)effect)
-                    yield break;
+                    if (!(bool)effect)
+                        break;
 
-                target.FindStatus(effectToReduce).count -= GetAmount();
-
-                if (target.FindStatus(effectToReduce).count <= 0)
-                    yield return target.FindStatus(effectToReduce).Remove();
-
+                    var count2 = effect.count;
+                    effect.count -= count;
+                    count -= count2;
+                    if (effect.count <= 0)
+                        yield return effect.Remove();
+                }
                 target.PromptUpdate();
             }
             else

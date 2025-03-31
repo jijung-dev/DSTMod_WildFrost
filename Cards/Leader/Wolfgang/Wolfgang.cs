@@ -57,6 +57,41 @@ public class Wolfgang : DataBase
                     data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
                 })
         );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("firebell", "Firebell")
+                .SetSprites("Firebell.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Overheat", 2) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Card Played Add Mightiness To Wolfgang", 2) };
+                })
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("icebell", "Icebell")
+                .SetSprites("Icebell.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Freezing", 2) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Card Played Add Mightiness To Wolfgang", 2) };
+                })
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("gembell", "Gembell")
+                .SetSprites("Gembell.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Mightiness", 5) };
+                    data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
+                })
+        );
     }
 
     protected override void CreateStatusEffect()
@@ -73,9 +108,29 @@ public class Wolfgang : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXOnCounterTurn>("On Counter Turn Increase Max Damage All Allies")
+                .WithText("Increase max <keyword=attack> by <{a}> for allies")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
+                {
+                    data.effectToApply = TryGet<StatusEffectData>("Increase Max Attack");
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self;
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantIncreaseMaxAttack>("Increase Max Attack")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantIncreaseMaxAttack>(data =>
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintDoesDamage>() }
+                )
+        );
+        assets.Add(
+            StatusCopy("On Card Played Add Scrap To Allies", "On Card Played Add Mightiness To Wolfgang")
+                .WithText("Apply <{a}><keyword=dstmod.mightiness> to <card=dstmod.wolfgang>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCardPlayed>(data =>
+                    {
+                        data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
+                        data.effectToApply = TryGet<StatusEffectData>("Mightiness");
+                    }
                 )
         );
     }

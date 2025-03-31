@@ -23,7 +23,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Rock")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.rock><hiddencard=dstmod.chest>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.rock><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -34,7 +34,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Wood")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood><hiddencard=dstmod.chest>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -45,7 +45,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Gold")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.gold><hiddencard=dstmod.chest>")
+                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.gold><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };

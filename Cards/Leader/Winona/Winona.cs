@@ -9,6 +9,7 @@ public class Winona : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("winona", "Winona")
                 .SetSprites("Winona.png", "Wendy_BG.png")
+                .WithText("<hiddencard=dstmod.catapult>".Process())
                 .SetStats(10, 0, 4)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -34,6 +35,23 @@ public class Winona : DataBase
                     data.traits = new List<CardData.TraitStacks>() { TStack("Consumable", 1) };
                 })
         );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("handyRemoteSlow", "Handy Remote")
+                .SetSprites("HandyRemote.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .FreeModify(
+                    delegate(CardData data)
+                    {
+                        data.needsTarget = false;
+                    }
+                )
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Card Played Trigger All Catapult", 1) };
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Consumable Slow", 1) };
+                })
+        );
     }
 
     protected override void CreateStatusEffect()
@@ -53,6 +71,24 @@ public class Winona : DataBase
                     delegate(StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("handyRemote");
+                    }
+                )
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectInstantGainCard>("Instant Gain Handy Remote Slow")
+                .WithText("Gain <card=dstmod.handyRemoteSlow>".Process())
+                .FreeModify(
+                    delegate(StatusEffectData data)
+                    {
+                        data.stackable = false;
+                        data.canBeBoosted = false;
+                    }
+                )
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
+                    delegate(StatusEffectInstantGainCard data)
+                    {
+                        data.cardGain = TryGet<CardData>("handyRemoteSlow");
                     }
                 )
         );

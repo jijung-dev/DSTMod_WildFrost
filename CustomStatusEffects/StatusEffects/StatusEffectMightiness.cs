@@ -9,6 +9,7 @@ public class StatusEffectMightiness : StatusEffectData
     int attack;
     public bool primed;
     public StatusEffectData tempTrait;
+    public int cap = 10;
 
     public override void Init()
     {
@@ -55,9 +56,9 @@ public class StatusEffectMightiness : StatusEffectData
         if (!(bool)apply.effectData || apply.target != target || !(apply.effectData is StatusEffectMightiness))
             return false;
         int current = apply.count + count;
-        if (current >= 10)
+        if (current >= cap)
         {
-            apply.count = 10 - count;
+            apply.count = cap - count;
         }
         Check(current);
         return true;

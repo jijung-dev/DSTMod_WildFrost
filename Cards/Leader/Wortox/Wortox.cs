@@ -47,16 +47,9 @@ public class Wortox : DataBase
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXWhenCardDestroyed>("When Enemy Is Killed Gain Random Soul")
                 .WithText("When an Enemy is killed, Add <card=dstmod.soul> or <card=dstmod.souls> to hand".Process())
-                .FreeModify(
-                    delegate(StatusEffectData data)
-                    {
-                        data.descColorHex = "F99C61";
-                        data.canBeBoosted = false;
-                        data.stackable = false;
-                    }
-                )
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenCardDestroyed>(data =>
                 {
+                    data.descColorHex = "F99C61";
                     data.canBeAlly = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.constraints = new TargetConstraint[] { TryGetConstraint("noChopable"), TryGetConstraint("noMineable") };

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSTMod_WildFrost;
 using HarmonyLib;
 using static Text;
 
@@ -22,7 +23,7 @@ internal static class PatchSetDescription
                 string[] array = text2.Split('=');
                 if (array.Length == 2 && (array[0].Trim() == "card" || array[0].Trim() == "hiddencard"))
                 {
-                    CardData item = AddressableLoader.Get<CardData>("CardData", array[1].Trim());
+                    CardData item = DSTMod.Instance.TryGet<CardData>(array[1].Trim());
                     hashSet.Add(item);
                 }
             }

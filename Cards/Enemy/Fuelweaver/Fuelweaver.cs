@@ -40,7 +40,7 @@ public class Fuelweaver : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("ancientFuelweaver", "Ancient Fuelweaver")
                 .SetSprites("AncientFuelweaver.png", "Wendy_BG.png")
-                .WithText("<hiddencard=dstmod.skullWovenShadow><hiddencard=dstmod.handWovenShadow><hiddencard=dstmod.unseenHand>")
+                .WithText("<hiddencard=dstmod.skullWovenShadow><hiddencard=dstmod.handWovenShadow><hiddencard=dstmod.unseenHand>".Process())
                 .SetStats(40, 6, 5)
                 .WithCardType("Boss")
                 .WithValue(13 * 50)

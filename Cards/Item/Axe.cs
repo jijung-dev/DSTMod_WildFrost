@@ -18,5 +18,18 @@ public class Axe : DataBase
                     }
                 )
         );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("goldenAxe", "Golden Axe")
+                .SetStats(null, 3, 0)
+                .SetSprites("GoldenAxe.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .SubscribeToAfterAllBuildEvent<CardData>(
+                    delegate(CardData data)
+                    {
+                        data.traits = new List<CardData.TraitStacks>() { TStack("AxeType", 1) };
+                    }
+                )
+        );
     }
 }

@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
+using static CardData;
 
 public static class Ext
 {
@@ -43,6 +44,31 @@ public static class Ext
         }
 
         return string.Join("\n", sb.ToString().Split('\n').Where(line => !string.IsNullOrWhiteSpace(line)));
+    }
+    public static StatusEffectStacks[] AddStartEffect(string effectName, int value)
+    {
+        return References.LeaderData.startWithEffects
+            .Concat(new[] { DSTMod.Instance.SStack(effectName, value) })
+            .ToArray();
+    }
+    public static StatusEffectStacks[] AddAttackEffect(string effectName, int value)
+    {
+        return References.LeaderData.attackEffects
+            .Concat(new[] { DSTMod.Instance.SStack(effectName, value) })
+            .ToArray();
+    }
+
+    public static StatusEffectStacks[] RemoveStartEffect(string effectName)
+    {
+        return References.LeaderData.startWithEffects
+            .Where(effect => effect.data != DSTMod.Instance.TryGet<StatusEffectData>(effectName))
+            .ToArray();
+    }
+    public static StatusEffectStacks[] RemoveAttackEffect(string effectName)
+    {
+        return References.LeaderData.attackEffects
+            .Where(effect => effect.data != DSTMod.Instance.TryGet<StatusEffectData>(effectName))
+            .ToArray();
     }
 
     public static T CopyAdd<T>(this GameObject desitation, T org)

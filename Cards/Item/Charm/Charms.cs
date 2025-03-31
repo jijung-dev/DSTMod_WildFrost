@@ -71,7 +71,7 @@ public class Charms : DataBase
                 .WithType(CardUpgradeData.Type.Charm)
                 .WithImage("Icons/PickAxe_Charm.png")
                 .WithTitle("Pick/Axe")
-                .WithText("Gain <keyword=dstmod.pickaxetype> and <keyword=dstmod.axetype> but reduce max <keyword=attack> by 2")
+                .WithText("Gain <keyword=dstmod.pickaxetype> and <keyword=dstmod.axetype> but reduce max <keyword=attack> by 2".Process())
                 .WithTier(4)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
