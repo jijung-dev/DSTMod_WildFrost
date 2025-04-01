@@ -12,11 +12,13 @@ public class Boomshroom : DataBase
                 .SetStats(1, null, 3)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    var type = TryGet<CardType>("Clunker");
-                    type.canRecall = false;
-                    data.cardType = type;
+                    data.cardType = TryGet<CardType>("Clunker");
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Destroy Self After Counter Turn", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Destroy Self After Counter Turn", 1),
+                        SStack("Cannot Recall", 1),
+                    };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Kaboom", 1) };
                 })
         );

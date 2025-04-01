@@ -127,11 +127,10 @@ public class Wolfgang : DataBase
             StatusCopy("On Card Played Add Scrap To Allies", "On Card Played Add Mightiness To Wolfgang")
                 .WithText("Apply <{a}><keyword=dstmod.mightiness> to <card=dstmod.wolfgang>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCardPlayed>(data =>
-                    {
-                        data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
-                        data.effectToApply = TryGet<StatusEffectData>("Mightiness");
-                    }
-                )
+                {
+                    data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
+                    data.effectToApply = TryGet<StatusEffectData>("Mightiness");
+                })
         );
     }
 }

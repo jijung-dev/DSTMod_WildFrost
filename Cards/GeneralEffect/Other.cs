@@ -20,4 +20,9 @@ public class Other : DataBase
         );
         assets.Add(new StatusEffectDataBuilder(mod).Create<StatusEffectResistX>("ByPassHasHealthConstraint").WithType("dstmod.ByPassHasHealth"));
     }
+
+    protected override void CreateOther()
+    {
+        //assets.Add(mod.CardTypeCopy("Friendly", "Friendly").WithCanRecall(false));
+    }
 }

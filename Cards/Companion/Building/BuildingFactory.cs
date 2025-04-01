@@ -112,7 +112,7 @@ public class BuildingFactory : BuildingBase
         );
         assets.Add(
             StatusCopy("While Active Snow Immune To Allies", "While Active Freeze Immune To Allies")
-                .WithText("While active, allies gain immune to <keyword=dstmod.freeze>".Process())
+                .WithText("Allies gain immune to <keyword=dstmod.freeze>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectWhileActiveX>(data =>
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Immune To Freeze");
@@ -121,7 +121,7 @@ public class BuildingFactory : BuildingBase
         );
         assets.Add(
             StatusCopy("While Active Snow Immune To Allies", "While Active Overheat Immune To Allies")
-                .WithText("While active, allies gain immune to <keyword=dstmod.overheat>".Process())
+                .WithText("Allies gain immune to <keyword=dstmod.overheat>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectWhileActiveX>(data =>
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Immune To Overheat");

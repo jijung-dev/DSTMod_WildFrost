@@ -156,6 +156,8 @@ public abstract class BuildingBase : DataBase
             item._resourceRequired.Where(e => e.name != ResourceRequire.Rabbit)
                 .Select(e => mod.SStack("When Destroyed By Hammer Gain " + e.name.ToString(), e.amount))
         );
+
+        statusEffects.Add(SStack("Cannot Recall", 1));
         return statusEffects.ToArray();
     }
 

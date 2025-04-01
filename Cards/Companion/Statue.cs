@@ -22,9 +22,10 @@ public class Statue : DataBase
     {
         assets.Add(
             StatusCopy("When Destroyed Add Health To Allies", "When Destroyed Gain Rock To Chest")
-                .WithText("Gain <{a}><keyword=dstmod.rock> when destroyed".Process())
+                .WithText("Drop <{a}><keyword=dstmod.rock>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
                 {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
                     data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
                     data.effectToApply = TryGet<StatusEffectData>("Rock");

@@ -35,7 +35,12 @@ public class Antlion : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Chest Health", 1), SStack("Immune To Everything", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Chest Health", 1),
+                        SStack("Immune To Everything", 1),
+                        SStack("Cannot Recall", 1),
+                    };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Super Unmovable", 1) };
                 })
         );
@@ -47,9 +52,7 @@ public class Antlion : DataBase
             StatusCopy("Summon Fallow", "Summon Sand Castle")
                 .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
                 {
-                    CardType cardType = TryGet<CardType>("Clunker");
-                    cardType.canRecall = false;
-                    data.setCardType = cardType;
+                    data.setCardType = TryGet<CardType>("Clunker");
                     data.summonCard = TryGet<CardData>("sandCastle");
                 })
         );

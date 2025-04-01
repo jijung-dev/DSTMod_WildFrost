@@ -39,7 +39,7 @@ public class StatusEffectCraft : StatusEffectData
 
     public void CheckAction(ref PlayAction action, ref bool allow)
     {
-        if (running || !target.enabled || target.silenced || !allow || (!(action is ActionTrigger) && !(action is ActionMove)))
+        if (running || !target.enabled || !allow || (!(action is ActionTrigger) && !(action is ActionMove)))
         {
             return;
         }

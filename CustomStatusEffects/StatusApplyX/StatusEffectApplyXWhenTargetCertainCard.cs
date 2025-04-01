@@ -11,7 +11,7 @@ public class StatusEffectApplyXWhenTargetCertainCard : StatusEffectApplyXOnCardP
     {
         if (constraints == null || targets.Any(r => constraints.Any(c => c.Check(r))))
         {
-            if (hasAnimation)
+            if (hasAnimation && entity == target)
             {
                 VFXMod.instance.SFX.TryPlaySoundFromPath(DSTMod.Instance.ImagePath("Heat_Apply.wav"));
                 hasAnimation = false;

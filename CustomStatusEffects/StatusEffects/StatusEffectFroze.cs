@@ -67,5 +67,22 @@ namespace DSTMod_WildFrost
                 yield return Remove();
             }
         }
+
+        public override bool CanTrigger() => target.enabled;
+
+        public override int GetAmount()
+        {
+            if (!target)
+            {
+                return 0;
+            }
+
+            if (!canBeBoosted)
+            {
+                return count;
+            }
+
+            return Mathf.Max(0, Mathf.RoundToInt((count + target.effectBonus) * target.effectFactor));
+        }
     }
 }

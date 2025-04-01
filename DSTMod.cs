@@ -420,6 +420,8 @@ namespace DSTMod_WildFrost
 
         public CardDataBuilder CardCopy(string oldName, string newName) => DataCopy<CardData, CardDataBuilder>(oldName, newName);
 
+        public CardTypeBuilder CardTypeCopy(string oldName, string newName) => DataCopy<CardType, CardTypeBuilder>(oldName, newName);
+
         public CampaignNodeTypeBuilder NodeCopy(string oldName, string newName) =>
             DataCopy<CampaignNodeType, CampaignNodeTypeBuilder>(oldName, newName);
 

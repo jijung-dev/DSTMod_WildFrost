@@ -14,12 +14,15 @@ public class FloorCard : DataBase
                 .SetSprites("Floor.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    CardType cardType = TryGet<CardType>("Clunker");
-                    cardType.canRecall = false;
-                    data.cardType = cardType;
+                    data.cardType = TryGet<CardType>("Clunker");
                     data.canShoveToOtherRow = false;
                     data.isEnemyClunker = false;
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Chest Health", 1), SStack("Immune To Everything", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Chest Health", 1),
+                        SStack("Immune To Everything", 1),
+                        SStack("Cannot Recall", 1),
+                    };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Backline", 1), TStack("Super Unmovable", 1) };
                 })
         );

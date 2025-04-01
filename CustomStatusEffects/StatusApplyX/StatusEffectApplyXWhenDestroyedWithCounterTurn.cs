@@ -1,6 +1,6 @@
 namespace DSTMod_WildFrost
 {
-    public class StatusEffectApplyXWhenDestroyedWithCounterTurn : StatusEffectApplyXWhenDestroyed
+    public class StatusEffectApplyXWhenDestroyedWithCounterTurn : StatusEffectApplyXWhenDestroyedUnNullable
     {
         public StatusEffectData effectToApplyWhenNotOnCounterTurn;
         public StatusEffectData effectToApplyWhenOnCounterTurn;

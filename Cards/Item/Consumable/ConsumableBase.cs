@@ -124,9 +124,9 @@ public abstract class ConsumableBase : DataBase
             var gainText = "Drop <{a}> <card=dstmod." + item._name + ">";
             assets.Add(
                 new StatusEffectDataBuilder(mod)
-                    .Create<StatusEffectApplyXWhenDestroyed>("Gain " + item._title + " When Destroyed")
+                    .Create<StatusEffectApplyXWhenDestroyedUnNullable>("Gain " + item._title + " When Destroyed")
                     .WithText(gainText.Process())
-                    .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
+                    .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
                     {
                         data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
                         data.effectToApply = TryGet<StatusEffectData>("Instant " + item._title + " In Hand");

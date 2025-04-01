@@ -14,7 +14,11 @@ public class SpiderWarrior : DataBase
                 .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1), SStack("MultiHit", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Gain Monster Meat When Destroyed", 1),
+                        SStack("MultiHit", 1),
+                    };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Frontline", 1) };
                 })
         );

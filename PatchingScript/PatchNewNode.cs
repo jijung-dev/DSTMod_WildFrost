@@ -89,12 +89,11 @@ namespace DSTMod_WildFrost
         {
             if (node.type.letter == "=")
             {
-                __instance.force = new List<CardData>(DSTMod.Instance.DataList<CardData>
-                    ("trapBlueprint", "scienceMachineBlueprint", "firePitBlueprint")
-                    .Select(c => c.Clone()));
+                __instance.force = new List<CardData>(
+                    DSTMod.Instance.DataList<CardData>("trapBlueprint", "scienceMachineBlueprint", "firePitBlueprint").Select(c => c.Clone())
+                );
             }
-            else
-            if (node.type.letter == "^")
+            else if (node.type.letter == "^")
             {
                 var charList = GetCharacterCards().ToList();
 
@@ -102,19 +101,21 @@ namespace DSTMod_WildFrost
                 {
                     TryGet<CardData>("goldUpgrade").Clone(),
                     GetUniqueRandomCard(charList).Clone(),
-                    GetUniqueRandomCard(charList).Clone()
+                    GetUniqueRandomCard(charList).Clone(),
                 };
                 list.Shuffle();
                 __instance.force = list;
             }
             return true;
         }
+
         static CardData GetUniqueRandomCard(List<CardData> list)
         {
             var choice = list.RandomItem();
             list.Remove(choice);
             return choice;
         }
+
         static List<CardData> GetCharacterCards()
         {
             var leader = References.LeaderData.original;
@@ -165,8 +166,9 @@ namespace DSTMod_WildFrost
                     return new List<CardData>() { };
             }
         }
+
         static T TryGet<T>(string name)
-        where T : DataFile => DSTMod.Instance.TryGet<T>(name);
+            where T : DataFile => DSTMod.Instance.TryGet<T>(name);
     }
 
     [HarmonyPatch(typeof(EventRoutineCurseItems), nameof(EventRoutineCurseItems.Populate))]
@@ -241,6 +243,7 @@ namespace DSTMod_WildFrost
                 __instance.node.SetCleared();
             }
         }
+
         static string GetTitle(EventRoutineCurseItems __instance)
         {
             switch (__instance.node.type.letter)

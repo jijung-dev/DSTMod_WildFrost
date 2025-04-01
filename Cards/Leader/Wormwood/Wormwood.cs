@@ -10,6 +10,7 @@ public class Wormwood : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("wormwood", "Wormwood")
                 .SetSprites("Wormwood.png", "Wendy_BG.png")
+                .WithText("<keyword=dstmod.leftgroupplant>".Process())
                 .SetStats(null, null, 6)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -20,6 +21,7 @@ public class Wormwood : DataBase
                         SStack("Bloomness", 1),
                         SStack("ByPassHasHealthConstraint", 1),
                         SStack("On Turn Apply Teeth To Self", 1),
+                        SStack("Immune To Heal", 1),
                         SStack("When Overheat Applied To Self Gain Reduce Bloomness Instead", 1),
                         SStack("When Froze Applied To Self Gain Increase Max Counter Instead", 1),
                     };

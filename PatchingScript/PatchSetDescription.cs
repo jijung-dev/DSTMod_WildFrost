@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSTMod_WildFrost;
 using HarmonyLib;
+using UnityEngine;
 using static Text;
 
 [HarmonyPatch(typeof(Text), nameof(Text.GetMentionedCards), typeof(string))]
@@ -66,5 +67,17 @@ internal static class PatchSetDescription2
 
         __result = text;
         return false;
+    }
+}
+
+[HarmonyPatch(typeof(InspectSystem), nameof(InspectSystem.Popup), new Type[] { typeof(KeywordData), typeof(Transform) })]
+internal static class PatchSetPopGroup
+{
+    internal static void Prefix(InspectSystem __instance, KeywordData keyword, Transform group)
+    {
+        if (keyword.name.Contains(DSTMod.Instance.GUID) && keyword.name.Contains("leftgroup"))
+        {
+            group = __instance.leftPopGroup;
+        }
     }
 }

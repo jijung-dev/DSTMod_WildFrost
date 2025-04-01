@@ -52,7 +52,7 @@ public class Freeze : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
                 {
                     data.stackable = false;
-                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Freezing") };
+                    data.immuneTo = new StatusEffectData[] { TryGet<StatusEffectData>("Freezing"), TryGet<StatusEffectData>("Temporary Froze") };
                 })
                 .Subscribe_WithStatusIcon("freeze resist icon")
         );

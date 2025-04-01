@@ -23,6 +23,23 @@ public class Immune : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmune>("Immune To Heal")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
+                {
+                    data.immuneTo = new StatusEffectData[]
+                    {
+                        TryGet<StatusEffectData>("Heal"),
+                        TryGet<StatusEffectData>("Heal (No Ping)"),
+                        TryGet<StatusEffectData>("Increase Max Health"),
+                        TryGet<StatusEffectData>("Increase Max Health (Not Current)"),
+                        TryGet<StatusEffectData>("Set Health"),
+                        TryGet<StatusEffectData>("Set Max Health"),
+                        TryGet<StatusEffectData>("Take Health"),
+                    };
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectImmune>("Immune To Everything")
                 .SubscribeToAfterAllBuildEvent<StatusEffectImmune>(data =>
                 {
