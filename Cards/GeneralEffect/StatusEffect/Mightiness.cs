@@ -75,8 +75,8 @@ public class Mightiness : DataBase
                 .WithTextColour(new Color(0f, 0f, 0f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite(mod.ImagePath("Icons/Mightiness.png"))
-                // .WithApplyVFX(mod.ImagePath("Icons/Heat_Apply.gif"))
-                // .WithApplySFX(mod.ImagePath("Heat_Attack.wav"))
+                .WithApplyVFX(mod.ImagePath("Animations/Mightiness_Apply.gif"))
+                .WithApplySFX(mod.ImagePath("Sounds/Mightiness_Apply.wav"))
                 // .WithEffectDamageSFX(mod.ImagePath("Heat_Attack.wav"))
                 .WithKeywords(iconKeywordOrNull: "mightiness")
         );

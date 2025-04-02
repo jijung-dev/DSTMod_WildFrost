@@ -119,11 +119,9 @@ public class Sanity : DataBase
                 .WithTextColour(new Color(0f, 0f, 0f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                .WithEffectDamageVFX(mod.ImagePath("Icons/Heat_Apply.gif"))
-                .WithEffectDamageSFX(mod.ImagePath("Sanity_Apply.wav"), 0.1f)
-                .WithApplyVFX(mod.ImagePath("Icons/Sanity_Apply.gif"))
-                .WithApplySFX(mod.ImagePath("Sanity_Attack.wav"), 0.1f)
-                //.WithApplySFX(ImagePath("Sanity_Attack.wav"), 0.1f)
+                .WithEffectDamageVFX(mod.ImagePath("Animations/Sanity_Attack.gif"))
+                .WithApplyVFX(mod.ImagePath("Animations/Sanity_Apply.gif"))
+                .WithApplySFX(mod.ImagePath("Sounds/Sanity_Attack.wav"), 0.1f)
                 .WithKeywords(iconKeywordOrNull: "sanity")
         );
         assets.Add(

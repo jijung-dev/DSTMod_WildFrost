@@ -9,8 +9,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
+using WildfrostHopeMod.SFX;
 using WildfrostHopeMod.Utils;
 using WildfrostHopeMod.VFX;
+using static SelectLeader;
 using Extensions = Deadpan.Enums.Engine.Components.Modding.Extensions;
 
 namespace DSTMod_WildFrost
@@ -481,6 +483,10 @@ namespace DSTMod_WildFrost
             base.Load();
             CreateBattleAssets();
             ApplyConstraint();
+            VFXHelper.SFX = new SFXLoader(ImagePath("Sounds"));
+            VFXHelper.SFX.RegisterAllSoundsToGlobal();
+            VFXHelper.VFX = new GIFLoader(this, ImagePath("Animations"));
+            VFXHelper.VFX.RegisterAllAsApplyEffect();
 
             foreach (var (num, battleDataEditor) in battleAssets)
             {

@@ -192,7 +192,6 @@ public class Bloomness : DataBase
                 .WithTextColour(new Color(0f, 0f, 0f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite(mod.ImagePath("Icons/Bloomness.png"))
-                // .WithApplyVFX(mod.ImagePath("Icons/Heat_Apply.gif"))
                 // .WithApplySFX(mod.ImagePath("Heat_Attack.wav"))
                 // .WithEffectDamageSFX(mod.ImagePath("Heat_Attack.wav"))
                 .WithKeywords(iconKeywordOrNull: "bloomness")

@@ -54,7 +54,7 @@ public class Froze : DataBase
             new StatusIconBuilder(mod)
                 .Create(name: "froze icon", statusType: "dst.froze", mod.ImagePath("Icons/Freeze.png"))
                 .WithIconGroupName(StatusIconBuilder.IconGroups.crown)
-                .WithApplySFX(mod.ImagePath("Froze_Apply.wav"))
+                .WithApplySFX(mod.ImagePath("Sounds/Froze_Apply.wav"))
         );
     }
 }

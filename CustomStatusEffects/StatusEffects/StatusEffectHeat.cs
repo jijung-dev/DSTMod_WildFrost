@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using WildfrostHopeMod.VFX;
 
 namespace DSTMod_WildFrost
 {
@@ -93,6 +94,7 @@ namespace DSTMod_WildFrost
                 yield break;
             }
 
+            VFXHelper.SFX.TryPlaySound("Heat_Apply");
             Routine.Clump clump = new Routine.Clump();
 
             Hit hit = new Hit(applier, target, 0) { damageType = "dst.overheating" };

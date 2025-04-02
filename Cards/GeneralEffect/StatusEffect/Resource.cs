@@ -56,7 +56,7 @@ public class Resource : DataBase
                 .WithTextColour(new Color(0.129f, 0.09f, 0.03f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                .WithWhenHitSFX(mod.ImagePath("Rock_Apply.wav"))
+                .WithWhenHitSFX(mod.ImagePath("Sounds/Rock_Hit.wav"))
         );
         assets.Add(
             new StatusIconBuilder(mod)
@@ -65,7 +65,6 @@ public class Resource : DataBase
                 .WithTextColour(new Color(0.129f, 0.09f, 0.03f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                .WithWhenHitSFX(mod.ImagePath("Rock_Apply.wav"))
                 .WithKeywords(iconKeywordOrNull: "gold")
         );
         assets.Add(
@@ -75,7 +74,6 @@ public class Resource : DataBase
                 .WithTextColour(new Color(0.07f, 0.07f, 0.07f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                .WithWhenHitSFX(mod.ImagePath("Rock_Apply.wav"))
                 .WithKeywords(iconKeywordOrNull: "rock")
         );
         assets.Add(
@@ -85,7 +83,6 @@ public class Resource : DataBase
                 .WithTextColour(new Color(0.96f, 0.89f, 0.84f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                .WithWhenHitSFX(mod.ImagePath("Rock_Apply.wav"))
                 .WithKeywords(iconKeywordOrNull: "wood")
         );
     }

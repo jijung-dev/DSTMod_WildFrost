@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Dead;
 using DSTMod_WildFrost;
 using UnityEngine;
+using WildfrostHopeMod.VFX;
 
 public class StatusEffectBloomness : StatusEffectData
 {
@@ -74,6 +75,7 @@ public class StatusEffectBloomness : StatusEffectData
         int amount = healAmount;
         if (amount != 0 && (bool)target && target.enabled && entity == target && count + healAmount < 20)
         {
+            SfxSystem.OneShot("event:/sfx/status_icon/counter_decrease");
             count += amount;
             Check(count);
             target.PromptUpdate();
@@ -131,6 +133,7 @@ public class StatusEffectBloomness : StatusEffectData
         {
             yield break;
         }
+
         foreach (var item in GetStageArray(currentStage))
         {
             var effect = target.FindStatus(item.data);
@@ -143,7 +146,11 @@ public class StatusEffectBloomness : StatusEffectData
         }
 
         Routine.Clump clump = new Routine.Clump();
-        Hit hit = new Hit(applier, target, 0) { damageType = "dst.addStage" };
+        Hit hit = new Hit(applier, target, 0) { damageType = "dst.bloomness" };
+        if (stageID > currentStage)
+        {
+            VFXHelper.SFX.TryPlaySound("Bloomness_Apply");
+        }
 
         foreach (var item in GetStageArray(stageID))
         {

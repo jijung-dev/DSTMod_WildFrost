@@ -67,8 +67,8 @@ public class Freeze : DataBase
                 .WithTextColour(new Color(0f, 0f, 0f, 1f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                .WithApplyVFX(mod.ImagePath("Icons/Freeze_Apply.gif"))
-                .WithApplySFX(mod.ImagePath("Freeze_Apply.wav"))
+                .WithApplyVFX(mod.ImagePath("Animations/Freeze_Apply.gif"))
+                .WithApplySFX(mod.ImagePath("Sounds/Freeze_Apply.wav"))
                 .WithKeywords(iconKeywordOrNull: "freeze")
         );
         assets.Add(

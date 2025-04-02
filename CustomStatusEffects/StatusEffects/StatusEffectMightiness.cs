@@ -3,6 +3,7 @@ using System.Collections;
 using Dead;
 using DSTMod_WildFrost;
 using UnityEngine;
+using WildfrostHopeMod.VFX;
 
 public class StatusEffectMightiness : StatusEffectData
 {
@@ -44,6 +45,7 @@ public class StatusEffectMightiness : StatusEffectData
         if (amount != 0 && (bool)target && target.enabled && entity == target && count > 1)
         {
             count -= amount;
+            SfxSystem.OneShot("event:/sfx/status_icon/counter_decrease");
             Check(count);
             target.PromptUpdate();
         }
@@ -106,10 +108,11 @@ public class StatusEffectMightiness : StatusEffectData
 
     public IEnumerator AddUnmove()
     {
-        if (!this || !target || !target.alive)
+        if (!this || !target || !target.alive || (bool)target.FindStatus(tempTrait))
         {
             yield break;
         }
+        VFXHelper.SFX.TryPlaySound("Mighty_Up");
         Routine.Clump clump = new Routine.Clump();
         Hit hit = new Hit(applier, target, 0) { damageType = "dst.mightiness" };
         hit.AddStatusEffect(tempTrait, 1);

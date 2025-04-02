@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace DSTMod_WildFrost
     public class StatusEffectSanity : StatusEffectData
     {
         [SerializeField]
-        public CardAnimation buildupAnimation = new Scriptable<CardAnimationOverburn>();
+        public CardAnimation buildupAnimation = new Scriptable<CardAnimationShake>();
         public StatusEffectSummon[] shadowEnemy;
         public StatusEffectData summonRan;
 
@@ -46,7 +47,6 @@ namespace DSTMod_WildFrost
             {
                 yield break;
             }
-
             Routine.Clump clump = new Routine.Clump();
 
             Hit hit = new Hit(applier, target, 0) { damageType = "dst.sanity" };
@@ -54,13 +54,15 @@ namespace DSTMod_WildFrost
             hit.AddStatusEffect(summonRan, 1);
             clump.Add(hit.Process());
 
-            //VFXMod.instance.SFX.TryPlaySoundFromPath(DSTMod.Instance.ImagePath("Sanity_Apply.wav"));
+            VFXHelper.SFX.TryPlaySound("Sanity_Apply");
 
-            // if ((bool)buildupAnimation)
-            // {
-            //     yield return buildupAnimation.Routine(target);
-            // }
+            clump.Add(Sequences.Wait(0.3f));
             yield return clump.WaitForEnd();
+
+            if ((bool)buildupAnimation)
+            {
+                yield return buildupAnimation.Routine(target, 0.4f);
+            }
         }
 
         public IEnumerator Clear()
