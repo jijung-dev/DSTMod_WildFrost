@@ -66,9 +66,9 @@ public class Abigail : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenDestroyed>("Gain Abigail Flower When Destroyed")
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("Gain Abigail Flower When Destroyed")
                 .WithText("Drop <card=dstmod.abigailFlower>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
                     data.targetMustBeAlive = false;

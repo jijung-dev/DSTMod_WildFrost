@@ -21,14 +21,16 @@ public class Statue : DataBase
     protected override void CreateStatusEffect()
     {
         assets.Add(
-            StatusCopy("When Destroyed Add Health To Allies", "When Destroyed Gain Rock To Chest")
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("When Destroyed Gain Rock To Chest")
                 .WithText("Drop <{a}><keyword=dstmod.rock>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
                     data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
                     data.effectToApply = TryGet<StatusEffectData>("Rock");
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies;
                     data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );

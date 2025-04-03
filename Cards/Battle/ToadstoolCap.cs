@@ -31,7 +31,7 @@ public class ToadstoolCap : DataBase
                     .StartWavePoolData(4, "Wave 5: Yes?")
                     .ConstructWaves(1, 4, "S", "A") // 1 random rock wood
                     .AddBattleToLoader()
-                    .LoadBattle(6, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(6, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

@@ -31,7 +31,7 @@ public class HoundMound : DataBase
                     .StartWavePoolData(4, "Wave 4: b e r r i e s")
                     .ConstructWaves(3, 5, "HHJ", "RJ", "BJ")
                     .AddBattleToLoader()
-                    .LoadBattle(1, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(1, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

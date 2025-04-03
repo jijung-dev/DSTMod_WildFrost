@@ -15,12 +15,12 @@ namespace DSTMod_WildFrost
             var status = hit.attacker?.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>("Wetness"));
             if ((bool)status)
             {
-                float ran = UnityEngine.Random.Range(1f, 10f);
-                if (ran <= status.count)
+                float probability = status.count / 10f;
+                if (UnityEngine.Random.value < probability)
                 {
+                    VFXHelper.SFX.TryPlaySound("Wetness_Slip");
                     hit.nullified = true;
                 }
-                Debug.LogWarning(ran);
             }
             return true;
         }

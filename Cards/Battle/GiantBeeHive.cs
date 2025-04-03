@@ -32,7 +32,7 @@ public class GiantBeeHive : DataBase
                     .StartWavePoolData(4, "Wave 5: BzzZz")
                     .ConstructWaves(2, 4, "SG", "RG", "RN", "SN") // 1 random wood rock
                     .AddBattleToLoader()
-                    .LoadBattle(4, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(4, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

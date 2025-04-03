@@ -16,13 +16,13 @@ namespace DSTMod_WildFrost
 
             return true;
         }
+
         public override bool RunApplyStatusEvent(StatusEffectApply apply)
         {
             if (apply.applier == target && apply.effectData == effectToApply)
                 apply.target.curveAnimator.Ping();
             return base.RunApplyStatusEvent(apply);
         }
-
 
         public override bool RunEntityDestroyedEvent(Entity entity, DeathType deathType)
         {

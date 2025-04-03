@@ -30,7 +30,7 @@ public class DragonflyNest : DataBase
                     .StartWavePoolData(3, "Wave 4: Cactus yay!!")
                     .ConstructWaves(2, 3, "RC", "TC")
                     .AddBattleToLoader()
-                    .LoadBattle(5, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(5, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

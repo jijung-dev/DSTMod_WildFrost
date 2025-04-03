@@ -7,6 +7,18 @@ public class ConsumableFatory : ConsumableBase
         consumables.AddRange(
             new List<ConsumableInstance>
             {
+                Create(
+                    "durian",
+                    "Durian",
+                    "Durian.png",
+                    SStack(("Teeth", 1), ("Sanity", 2)),
+                    ConsumeType.Food,
+                    "Extra Smelly Durian",
+                    "extraSmellyDurian"
+                ),
+                Create("pepper", "Pepper", "Pepper.png", SStack(("Spice", 1), ("Overheat", 2)), ConsumeType.Food, "Roasted Pepper", "roastedPepper"),
+                Create("potato", "Potato", "Potato.png", SStack(("Heal", 2), ("Shroom", 1)), ConsumeType.Food, "Roasted Potato", "roastedPotato"),
+                Create("asparagus", "Asparagus", "Asparagus.png", SStack(("Heal", 1)), ConsumeType.Food, "Cooked Asparagus", "cookedAsparagus"),
                 Create("honey", "Honey", "Honey.png", SStack(("Heal", 1)), ConsumeType.Food, "Taffy", "taffy"),
                 Create("berries", "Berries", "Berries.png", SStack(("Heal", 1)), ConsumeType.Food, "Roasted Berries", "roastedBerries"),
                 Create(
@@ -63,6 +75,10 @@ public class ConsumableFatory : ConsumableBase
                 ),
                 Create("monsterLasagna", "Monster Lasagna", "MonsterLasagna.png", SStack(("Heal", 2), ("Sanity", 2)), ConsumeType.Cooked),
                 Create("cookedMorsel", "Cooked Morsel", "CookedMorsel.png", SStack(("Heal", 1)), ConsumeType.Cooked),
+                Create("extraSmellyDurian", "Extra Smelly Durian", "ExtraSmellyDurian.png", SStack(("Teeth", 2), ("Sanity", 4)), ConsumeType.Cooked),
+                Create("roastedPepper", "Roasted Pepper", "RoastedPepper.png", SStack(("Spice", 2), ("Overheat", 4)), ConsumeType.Cooked),
+                Create("roastedPotato", "Roasted Potato", "RoastedPotato.png", SStack(("Heal", 2)), ConsumeType.Cooked),
+                Create("cookedAsparagus", "Cooked Asparagus", "CookedAsparagus.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("lightBulb", "Light Bulb", "LightBulb.png", SStack(("Heal", 1)), ConsumeType.Consumable),
                 Create("foliage", "Foliage", "Foliage.png", SStack(("Heal", 1)), ConsumeType.Consumable),
                 Create("lesserGlowBerry", "Lesser Glow Berry", "LesserGlowBerry.png", SStack(("Heal", 2), ("Sanity", 1)), ConsumeType.Consumable),

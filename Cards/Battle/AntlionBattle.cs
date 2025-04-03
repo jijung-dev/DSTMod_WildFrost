@@ -31,7 +31,7 @@ public class AntlionBattle : DataBase
                     .StartWavePoolData(4, "Wave 4: One more cactus")
                     .ConstructWaves(1, 4, "C")
                     .AddBattleToLoader()
-                    .LoadBattle(3, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(3, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

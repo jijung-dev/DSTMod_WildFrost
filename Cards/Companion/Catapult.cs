@@ -60,17 +60,15 @@ public class Catapult : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenDestroyed>("Gain Tape When Destroyed")
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("Gain Tape When Destroyed")
                 .WithText("Drop <card=dstmod.tape>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(
-                    delegate(StatusEffectApplyXWhenDestroyed data)
-                    {
-                        data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
-                        data.targetMustBeAlive = false;
-                        data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-                        data.effectToApply = TryGet<StatusEffectData>("Instant Gain Tape");
-                    }
-                )
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
+                {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop") };
+                    data.targetMustBeAlive = false;
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.effectToApply = TryGet<StatusEffectData>("Instant Gain Tape");
+                })
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)

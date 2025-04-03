@@ -13,7 +13,7 @@ public class StatusEffectApplyXWhenTargetCertainCard : StatusEffectApplyXOnCardP
         {
             if (hasAnimation && entity == target)
             {
-                VFXHelper.SFX.TryPlaySoundFromPath(DSTMod.Instance.ImagePath("Sounds/Heat_Apply.wav"));
+                VFXHelper.SFX.TryPlaySound("Heat_Apply");
                 hasAnimation = false;
             }
 

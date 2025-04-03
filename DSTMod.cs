@@ -71,6 +71,7 @@ namespace DSTMod_WildFrost
             allConstraint.Add("fuelweaverOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("chestOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("moslingOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wolfgangOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wormwoodOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wendyOnly", new Scriptable<TargetConstraintIsSpecificCard>());
@@ -122,6 +123,7 @@ namespace DSTMod_WildFrost
             };
             ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
             ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
+            ((TargetConstraintIsSpecificCard)allConstraint["moslingOnly"]).allowedCards = new CardData[] { TryGet<CardData>("mosling") };
             ((TargetConstraintIsSpecificCard)allConstraint["wolfgangOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wolfgang") };
             ((TargetConstraintIsSpecificCard)allConstraint["wormwoodOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wormwood") };
             ((TargetConstraintIsSpecificCard)allConstraint["wendyOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wendy") };

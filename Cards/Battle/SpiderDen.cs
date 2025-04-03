@@ -30,7 +30,7 @@ public class SpiderDen : DataBase
                     .StartWavePoolData(5, "Wave 5: After Queen")
                     .ConstructWaves(3, 4, "WB", "SSB", "NB")
                     .AddBattleToLoader()
-                    .LoadBattle(0, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(0, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

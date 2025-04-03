@@ -30,7 +30,7 @@ public class DeerclopsBattle : DataBase
                     .StartWavePoolData(3, "Wave 4: b e r r y")
                     .ConstructWaves(1, 3, "E")
                     .AddBattleToLoader()
-                    .LoadBattle(2, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(2, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

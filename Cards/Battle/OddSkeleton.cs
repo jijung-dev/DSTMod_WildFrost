@@ -31,7 +31,7 @@ public class OddSkeleton : DataBase
                     .StartWavePoolData(3, "Wave 4: Little more")
                     .ConstructWaves(1, 4, "S", "R")
                     .AddBattleToLoader()
-                    .LoadBattle(7, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeAll)
+                    .LoadBattle(7, resetAllOnClear: true, "GameModeNormal", BattleStack.Exclusivity.removeUnmodded)
             )
         );
     }

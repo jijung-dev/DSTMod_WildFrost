@@ -27,6 +27,7 @@ public class Wetness : DataBase
                 .Create<StatusEffectWetness>("Wetness")
                 .SubscribeToAfterAllBuildEvent<StatusEffectWetness>(data =>
                 {
+                    data.removeOnDiscard = true;
                     data.type = "dst.wetness";
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsItem>() };
                 })
@@ -43,11 +44,7 @@ public class Wetness : DataBase
                 .WithTextColour(new Color(0.02f, 0.02f, 0.10f))
                 .WithTextShadow(new Color(0f, 0f, 0f, 0.75f))
                 .WithTextboxSprite()
-                //.WithEffectDamageVFX(mod.ImagePath("Icons/Heat_Apply.gif"))
-                //.WithEffectDamageSFX(mod.ImagePath("Sanity_Apply.wav"), 0.1f)
-                //.WithApplyVFX(mod.ImagePath("Icons/Sanity_Apply.gif"))
-                //.WithApplySFX(mod.ImagePath("Sanity_Attack.wav"), 0.1f)
-                //.WithApplySFX(ImagePath("Sanity_Attack.wav"), 0.1f)
+                .WithApplySFX(mod.ImagePath("Sounds/Wetness_Apply.wav"), 0.1f)
                 .WithKeywords(iconKeywordOrNull: "wetness")
         );
     }

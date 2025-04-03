@@ -15,6 +15,16 @@ public class Enraged : DataBase
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)
         );
+        assets.Add(
+            new KeywordDataBuilder(mod)
+                .Create("enraged2")
+                .WithTitle("Enraged")
+                .WithShowName(true)
+                .WithDescription("Gain <Barrage> and increase <keyword=attack> by 1")
+                .WithTitleColour(new Color(1.00f, 0.4f, 0f))
+                .WithBodyColour(new Color(1f, 1f, 1f))
+                .WithCanStack(false)
+        );
     }
 
     protected override void CreateTrait()
