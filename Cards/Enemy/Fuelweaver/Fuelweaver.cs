@@ -90,7 +90,7 @@ public class Fuelweaver : DataBase
         );
         assets.Add(
             StatusCopy("Pre Trigger Copy Effects Of RandomAlly", "Pre Turn Fill Player Board With Floral")
-                .WithText("Before attacking, fill player board with <Florals>")
+                .WithText("Before attacking, fill player's board with <Florals>")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXPreTrigger>(data =>
                 {
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;

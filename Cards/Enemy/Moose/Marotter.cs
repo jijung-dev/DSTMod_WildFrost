@@ -16,7 +16,11 @@ public class Marotter : DataBase
                 .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Turn Apply Wetness To Right Most Item In Hand", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("On Turn Apply Wetness To Right Most Item In Hand", 1),
+                        SStack("Gain Meat When Destroyed", 1),
+                    };
                 })
         );
     }

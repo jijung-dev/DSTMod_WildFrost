@@ -14,6 +14,7 @@ public class StatusEffectNextPhaseExt : StatusEffectData
 
     public bool activated;
     public StatusEffectData byCertainEffect;
+    public bool killSelfWhenApplied;
 
     public override void Init()
     {
@@ -24,6 +25,28 @@ public class StatusEffectNextPhaseExt : StatusEffectData
     {
         Events.OnEntityDisplayUpdated -= EntityDisplayUpdated;
     }
+    public override bool RunBeginEvent()
+    {
+        if (killSelfWhenApplied)
+        {
+            var statusKeys = new[] { "Scrap", "Chest Health", "Building Health" };
+
+            foreach (var key in statusKeys)
+            {
+                var effect = target.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>(key));
+                if (effect != null)
+                {
+                    effect.count = 0;
+                    return base.RunBeginEvent();
+                }
+            }
+
+            target.hp.current = 0;
+        }
+
+        return base.RunBeginEvent();
+    }
+
 
     public void EntityDisplayUpdated(Entity entity)
     {

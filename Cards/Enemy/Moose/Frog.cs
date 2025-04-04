@@ -16,7 +16,11 @@ public class Frog : DataBase
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Turn Apply Wetness To Random Card In Hand", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] 
+                    { 
+                        SStack("On Turn Apply Wetness To Random Card In Hand", 1),
+                        SStack("Gain Frog Legs When Destroyed", 1),
+                    };
                 })
         );
     }
