@@ -13,7 +13,7 @@ public class Varg : DataBase
                 .SetStats(18, 4, 4)
                 .SetTraits(TStack("Wild", 1))
                 .WithCardType("Miniboss")
-                .WithValue(17 * 36)
+                .WithValue(15 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1), SStack("On Counter Turn Summon Hounds", 1) };

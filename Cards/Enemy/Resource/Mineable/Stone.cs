@@ -17,8 +17,8 @@ public class Stone : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceMineable", 1),
-                        SStack("When Destroyed By Pickaxe Gain Rock", 1),
+                        SStack("Scrap", 2),
+                        SStack("When Destroyed Gain Rock To Chest", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mineable", 1) };
                 })

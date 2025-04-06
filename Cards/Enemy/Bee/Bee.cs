@@ -13,7 +13,7 @@ public class Bee : DataBase
                 .SetSprites("Bee.png", "Wendy_BG.png")
                 .SetStats(4, 2, 2)
                 .WithCardType("Enemy")
-                .WithValue(2 * 50)
+                .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Bee", 1) };

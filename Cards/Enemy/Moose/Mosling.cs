@@ -13,7 +13,7 @@ public class Mosling : DataBase
                 .SetSprites("Mosling.png", "Wendy_BG.png")
                 .SetStats(6, 1, 3)
                 .WithCardType("Miniboss")
-                .WithValue(2 * 36)
+                .WithValue(4 * 36)
         );
         assets.Add(
             new CardDataBuilder(mod)

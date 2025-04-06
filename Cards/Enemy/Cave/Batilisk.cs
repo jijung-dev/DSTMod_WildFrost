@@ -12,7 +12,7 @@ public class Batilisk : DataBase
                 .SetSprites("Batilisk.png", "Wendy_BG.png")
                 .SetStats(6, 2, 3)
                 .WithCardType("Enemy")
-                .WithValue(2 * 50)
+                .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Take Health", 2) };

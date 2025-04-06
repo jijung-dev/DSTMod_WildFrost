@@ -17,8 +17,8 @@ public class Tree : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceChopable", 3),
-                        SStack("When Destroyed By Axe Gain Wood", 2),
+                        SStack("Scrap", 4),
+                        SStack("When Destroyed Gain Wood To Chest", 2),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })

@@ -11,10 +11,10 @@ public class MarbleSuit : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("MarbleSuit.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithPools("GeneralItemPool")
                 .WithValue(50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Block", 3) };
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Require Rock", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };

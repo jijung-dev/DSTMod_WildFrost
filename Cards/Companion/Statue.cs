@@ -22,20 +22,6 @@ public class Statue : DataBase
     {
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("When Destroyed Gain Rock To Chest")
-                .WithText("Drop <{a}><keyword=dstmod.rock>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
-                {
-                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
-                    data.canBeBoosted = false;
-                    data.targetMustBeAlive = false;
-                    data.effectToApply = TryGet<StatusEffectData>("Rock");
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies;
-                    data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantGainCard>("Instant Gain Statue In Hand")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(data =>
                 {

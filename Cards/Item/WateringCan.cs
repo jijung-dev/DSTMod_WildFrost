@@ -10,10 +10,10 @@ public class WateringCan : DataBase
                 .SetSprites("WateringCan.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Noomlin", 1), TStack("Barrage", 1))
+                .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Freezing", 1) };
                 })
         );

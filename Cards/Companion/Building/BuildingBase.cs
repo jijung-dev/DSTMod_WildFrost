@@ -99,8 +99,8 @@ public abstract class BuildingBase : DataBase
                         data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };
                         data.attackEffects = new CardData.StatusEffectStacks[]
                         {
-                            SStack("Instant Summon Hammer In Hand", 1),
                             SStack("Build " + item._title, 1),
+                            SStack("Instant Summon Hammer In Hand", 1),
                             SStack("Reduce Chest Health", 1),
                         };
                         data.startWithEffects = GetRequireStatusEffect(item);
@@ -117,6 +117,8 @@ public abstract class BuildingBase : DataBase
                 .Create<StatusEffectNextPhaseExt>("Build " + item._title)
                 .SubscribeToAfterAllBuildEvent<StatusEffectNextPhaseExt>(data =>
                 {
+                    data.type = "dst.build";
+                    data.killSelfWhenApplied = true;
                     data.preventDeath = true;
                     data.nextPhase = TryGet<CardData>(item._name);
                     data.animation = TryGet<StatusEffectNextPhase>("SoulboundBossPhase2").animation;
@@ -154,10 +156,11 @@ public abstract class BuildingBase : DataBase
 
         statusEffects.AddRange(
             item._resourceRequired.Where(e => e.name != ResourceRequire.Rabbit)
-                .Select(e => mod.SStack("When Destroyed By Hammer Gain " + e.name.ToString(), e.amount))
+                .Select(e => mod.SStack("When Destroyed Gain " + e.name.ToString() + " To Chest", e.amount))
         );
 
         statusEffects.Add(SStack("Cannot Recall", 1));
+        statusEffects.Add(SStack("Chest Health", 1));
         return statusEffects.ToArray();
     }
 

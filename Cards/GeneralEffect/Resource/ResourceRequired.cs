@@ -23,7 +23,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Rock")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.rock><hiddencard=dstmod.chest>".Process())
+                .WithText("Require <{a}><keyword=tgestudio.wildfrost.dstmod.rock><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -34,7 +34,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Wood")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.wood><hiddencard=dstmod.chest>".Process())
+                .WithText("Require <{a}><keyword=tgestudio.wildfrost.dstmod.wood><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -45,7 +45,7 @@ public class ResourceRequired : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectCraft>("Require Gold")
-                .WithText("Require <{a}> <keyword=tgestudio.wildfrost.dstmod.gold><hiddencard=dstmod.chest>".Process())
+                .WithText("Require <{a}><keyword=tgestudio.wildfrost.dstmod.gold><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
@@ -76,80 +76,67 @@ public class ResourceRequired : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Hammer Gain Rock")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
+                .Create<StatusEffectApplyXWhenHit>("When Hit By Axe Dies")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
                 {
-                    data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-
-                    data.cardConstrains = new TargetConstraint[] { TryGetConstraint("hammerOnly") };
+                    data.effectToApply = TryGet<StatusEffectData>("Kill");
+                    data.attackerConstraints = new TargetConstraint[] { TryGetConstraint("axeOnly") };
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenHit>("When Hit By Pickaxe Dies")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
+                {
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.effectToApply = TryGet<StatusEffectData>("Kill");
+                    data.attackerConstraints = new TargetConstraint[] { TryGetConstraint("pickaxeOnly") };
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("When Destroyed Gain Rock To Chest")
+                .WithText("Drop <{a}><keyword=dstmod.rock><hiddencard=dstmod.chest>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
+                {
+                    data.doPing = true;
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
+                    data.canBeBoosted = false;
+                    data.targetMustBeAlive = false;
                     data.effectToApply = TryGet<StatusEffectData>("Rock");
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Hammer Gain Gold")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("When Destroyed Gain Gold To Chest")
+                .WithText("Drop <{a}><keyword=dstmod.gold><hiddencard=dstmod.chest>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
                 {
+                    data.doPing = true;
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
+                    data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-
                     data.effectToApply = TryGet<StatusEffectData>("Gold");
-                    data.cardConstrains = new TargetConstraint[] { TryGetConstraint("hammerOnly") };
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Hammer Gain Wood")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("When Destroyed Gain Wood To Chest")
+                .WithText("Drop <{a}><keyword=dstmod.wood><hiddencard=dstmod.chest>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
                 {
+                    data.doPing = true;
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
+                    data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-
                     data.effectToApply = TryGet<StatusEffectData>("Wood");
-                    data.cardConstrains = new TargetConstraint[] { TryGetConstraint("hammerOnly") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Rock")
-                .WithText("Drop <{a}> <keyword=dstmod.rock><hiddencard=dstmod.chest>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
-                {
-                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
-                    data.targetMustBeAlive = false;
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-
-                    data.effectToApply = TryGet<StatusEffectData>("Rock");
-                    data.cardConstrains = new TargetConstraint[] { TryGetConstraint("pickaxeOnly") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Pickaxe Gain Gold")
-                .WithText("Drop <{a}> <keyword=dstmod.gold><hiddencard=dstmod.chest>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
-                {
-                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
-                    data.targetMustBeAlive = false;
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-
-                    data.effectToApply = TryGet<StatusEffectData>("Gold");
-                    data.cardConstrains = new TargetConstraint[] { TryGetConstraint("pickaxeOnly") };
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>("When Destroyed By Axe Gain Wood")
-                .WithText("Drop <{a}> <keyword=dstmod.wood><hiddencard=dstmod.chest>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXToUnitWhenDestroyedByCertainCards>(data =>
-                {
-                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("drop2") };
-                    data.targetMustBeAlive = false;
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-
-                    data.effectToApply = TryGet<StatusEffectData>("Wood");
-                    data.cardConstrains = new TargetConstraint[] { TryGetConstraint("axeOnly") };
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );
     }

@@ -99,9 +99,11 @@ public class Wolfgang : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnCounterTurn>("On Counter Turn Increase Max Damage")
-                .WithText("Increase max <keyword=attack> by <{a}>")
+                .WithText("Increase max <keyword=attack> by 1")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
                 {
+                    data.canBeBoosted = false;
+                    data.stackable = false;
                     data.effectToApply = TryGet<StatusEffectData>("Increase Max Attack");
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                 })
@@ -109,9 +111,11 @@ public class Wolfgang : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnCounterTurn>("On Counter Turn Increase Max Damage All Allies")
-                .WithText("Increase max <keyword=attack> by <{a}> for allies")
+                .WithText("Increase max <keyword=attack> by 1 for allies")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
                 {
+                    data.canBeBoosted = false;
+                    data.stackable = false;
                     data.effectToApply = TryGet<StatusEffectData>("Increase Max Attack");
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self;
                 })

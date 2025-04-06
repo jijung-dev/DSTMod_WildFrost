@@ -11,10 +11,7 @@ public class ShadowChester : DataBase
                 .SetStats(10, null, 0)
                 .WithCardType("Friendly")
                 .SetStartWithEffect(SStack("When Hit Apply Demonize To Attacker", 1))
-                .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                {
-                    data.WithPools(mod.unitPool);
-                })
+                .WithPools("GeneralUnitPool")
         );
     }
 }

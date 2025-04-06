@@ -3,7 +3,7 @@ using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
 using UnityEngine;
 
-public class GhostlyElixirs : DataBase
+public class UpgradeWendy : DataBase
 {
     public override void CreateCard()
     {
@@ -36,7 +36,7 @@ public class GhostlyElixirs : DataBase
                 .SetSprites("NightshadeNostrum.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Spice", 2) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Spice", 3) };
                     data.targetConstraints = new TargetConstraint[] { TryGetConstraint("abigailOnly") };
                 })
         );

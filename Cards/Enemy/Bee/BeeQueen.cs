@@ -14,7 +14,6 @@ public class BeeQueen : DataBase
                 .SetSprites("BeeQueen.png", "Wendy_BG.png")
                 .SetStats(20, 4, 3)
                 .WithCardType("Miniboss")
-                .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Queen Enraged", 1), SStack("ImmuneToSnow", 1) };
@@ -26,7 +25,7 @@ public class BeeQueen : DataBase
                 .SetSprites("BeeQueenEnraged.png", "Wendy_BG.png")
                 .SetStats(25, 2, 5)
                 .WithCardType("Miniboss")
-                .WithValue(13 * 50)
+                .WithValue(23 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]

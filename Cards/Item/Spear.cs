@@ -10,12 +10,6 @@ public class Spear : DataBase
                 .SetSprites("Spear.png", "Wendy_BG.png")
                 .SetStats(null, 3, 0)
                 .WithCardType("Item")
-                .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
-                    {
-                        data.WithPools(mod.itemPool);
-                    }
-                )
         );
     }
 }

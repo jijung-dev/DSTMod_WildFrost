@@ -10,7 +10,7 @@ public class PickaxeType : DataBase
                 .Create("pickaxetype")
                 .WithTitle("Pickaxes")
                 .WithShowName(true)
-                .WithDescription($"Can damage <keyword=tgestudio.wildfrost.dstmod.mineable>")
+                .WithDescription("Can instant kill <keyword=dstmod.mineable>".Process())
                 .WithTitleColour(new Color(0.65f, 0.41f, 0.34f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)

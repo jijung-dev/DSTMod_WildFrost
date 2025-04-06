@@ -9,11 +9,11 @@ public class Pearl : DataBase
                 .CreateUnit("pearl", "Pearl")
                 .SetSprites("Pearl.png", "Wendy_BG.png")
                 .SetTraits(TStack("Fragile", 1))
+                .WithPools("GeneralUnitPool")
                 .SetStats(1, null, 4)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[1] { SStack("On Turn Reduce Counter To Allies", 1) };
                 })
         );

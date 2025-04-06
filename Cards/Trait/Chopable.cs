@@ -11,7 +11,7 @@ public class Chopable : DataBase
                 .Create("chopable")
                 .WithTitle("Chopable")
                 .WithShowName(true)
-                .WithDescription("Can only be damaged by <Axes> cards")
+                .WithDescription("Get instant kill by <Axes>")
                 .WithTitleColour(new Color(0.65f, 0.41f, 0.34f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)
@@ -26,24 +26,12 @@ public class Chopable : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("chopable");
-                    data.effects = new[] { TryGet<StatusEffectData>("Immune To Everything") };
+                    data.effects = new[]
+                    {
+                        TryGet<StatusEffectData>("Building Immune To Everything"),
+                        TryGet<StatusEffectData>("When Hit By Axe Dies"),
+                    };
                 })
-        );
-    }
-
-    protected override void CreateStatusEffect()
-    {
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectResource>("ResourceChopable")
-                .WithIsStatus(true)
-                .SubscribeToAfterAllBuildEvent<StatusEffectResource>(data =>
-                {
-                    data.allowedCards = new TargetConstraint[] { TryGetConstraint("axeOnly") };
-                    data.preventDeath = true;
-                    data.type = "dst.resource";
-                })
-                .Subscribe_WithStatusIcon("resource icon")
         );
     }
 }

@@ -35,14 +35,20 @@ public class Building : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectResource>("Building Health")
-                .SubscribeToAfterAllBuildEvent<StatusEffectResource>(data =>
+                .Create<StatusEffectStealth>("Building Health")
+                .SubscribeToAfterAllBuildEvent<StatusEffectStealth>(data =>
                 {
-                    data.allowedCards = new TargetConstraint[] { TryGetConstraint("hammerOnly") };
                     data.preventDeath = true;
-                    data.type = "dst.resource";
                 })
                 .Subscribe_WithStatusIcon("building icon")
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmuneToEverythingBeside>("Building Immune To Everything")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmuneToEverythingBeside>(data =>
+                {
+                    data.isAllStatus = true;
+                })
         );
     }
 
@@ -58,9 +64,7 @@ public class Building : DataBase
                     {
                         TryGet<StatusEffectData>("Low Priority Position"),
                         TryGet<StatusEffectData>("When Destroyed Summon Floor"),
-                        TryGet<StatusEffectData>("Building Health"),
-                        TryGet<StatusEffectData>("Immune To Everything"),
-                        TryGet<StatusEffectData>("StealthSafe"),
+                        TryGet<StatusEffectData>("Building Immune To Everything"),
                     };
                 })
         );

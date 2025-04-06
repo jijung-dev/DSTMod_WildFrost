@@ -10,10 +10,10 @@ public class FireStaff : DataBase
                 .SetSprites("FireStaff.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Consume", 1), TStack("Aimless", 1))
+                .WithPools("GeneralItemPool")
                 .WithValue(50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 4) };
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Overheat", 2) };
                 })

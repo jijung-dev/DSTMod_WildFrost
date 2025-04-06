@@ -13,7 +13,7 @@ public class GrumbleBee : DataBase
                 .SetSprites("GrumbleBee.png", "Wendy_BG.png")
                 .SetStats(8, 2, 3)
                 .WithCardType("Enemy")
-                .WithValue(2 * 50)
+                .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Bee", 1) };

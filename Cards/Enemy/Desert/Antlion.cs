@@ -13,7 +13,7 @@ public class Antlion : DataBase
                 .SetSprites("Antlion.png", "Wendy_BG.png")
                 .SetStats(30, 5, 3)
                 .WithCardType("Miniboss")
-                .WithValue(13 * 50)
+                .WithValue(20 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
@@ -38,7 +38,7 @@ public class Antlion : DataBase
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Chest Health", 1),
-                        SStack("Immune To Everything", 1),
+                        SStack("Building Immune To Everything", 1),
                         SStack("Cannot Recall", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Super Unmovable", 1) };

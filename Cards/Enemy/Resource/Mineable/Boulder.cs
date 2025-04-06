@@ -17,8 +17,8 @@ public class Boulder : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceMineable", 2),
-                        SStack("When Destroyed By Pickaxe Gain Rock", 2),
+                        SStack("Scrap", 3),
+                        SStack("When Destroyed Gain Rock To Chest", 2),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mineable", 1) };
                 })

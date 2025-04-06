@@ -11,10 +11,10 @@ public class BunnyMan : DataBase
                 .SetSprites("Bunnyman.png", "Wendy_BG.png")
                 .SetStats(8, 4, 3)
                 .WithText("When hit escape to hand and becomes <card=dstmod.bunnymanInjured>".Process())
+                .WithPools("GeneralUnitPool")
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[2]
                     {
                         SStack("After Hit Escape", 1),

@@ -17,9 +17,9 @@ public class SpikyTree : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceChopable", 2),
-                        SStack("When Destroyed By Axe Gain Wood", 1),
-                        SStack("Teeth", 1),
+                        SStack("Scrap", 3),
+                        SStack("When Destroyed Gain Wood To Chest", 1),
+                        SStack("Teeth", 2),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })

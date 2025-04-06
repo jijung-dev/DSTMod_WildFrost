@@ -12,12 +12,12 @@ public class RabbitKing : DataBase
                 .SetSprites("scareRabbit.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.wrathfulRabbitKing><hiddencard=dstmod.benevolentRabbitKing>".Process())
                 .SetTraits(TStack("Fragile", 1))
-                .SetStats(1, null, 8)
+                .WithPools("GeneralUnitPool")
+                .SetStats(1, null, 6)
                 .WithText("<keyword=dstmod.neutral>".Process())
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[2]
                     {
                         SStack("Neutral On Turn Summon BRK On Destroyed Summon WRB", 1),
@@ -30,7 +30,7 @@ public class RabbitKing : DataBase
                 .CreateUnit("wrathfulRabbitKing", "Wrathful Rabbit King")
                 .SetSprites("evilRabbit.png", "Wendy_BG.png")
                 .SetTraits(TStack("Spark", 1))
-                .SetStats(5, 3, 3)
+                .SetStats(6, 4, 5)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -42,7 +42,7 @@ public class RabbitKing : DataBase
                 .CreateUnit("benevolentRabbitKing", "Benevolent Rabbit King")
                 .SetSprites("friendlyRabbit.png", "Wendy_BG.png")
                 .SetTraits(TStack("Spark", 1))
-                .SetStats(5, 3, 3)
+                .SetStats(6, 4, 5)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

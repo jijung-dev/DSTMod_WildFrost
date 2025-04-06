@@ -10,11 +10,11 @@ public class Beefalo : DataBase
                 .CreateUnit("beefalo", "Beefalo")
                 .SetSprites("Beefalo.png", "Wendy_BG.png")
                 .SetTraits(TStack("Knockback", 1), TStack("Pigheaded", 1))
+                .WithPools("GeneralUnitPool")
                 .SetStats(8, 3, 5)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.traits = new List<CardData.TraitStacks>() { TStack("Knockback", 1), TStack("Pigheaded", 1) };
                 })
         );

@@ -11,10 +11,10 @@ public class LuxuryFan : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("LuxuryFan.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithPools("GeneralItemPool")
                 .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Overheat", 3) };
                     data.traits = new System.Collections.Generic.List<CardData.TraitStacks>() { TStack("Barrage", 1) };
                 })

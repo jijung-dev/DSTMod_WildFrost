@@ -10,10 +10,10 @@ public class NightArmor : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("NightArmor.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithPools("GeneralItemPool")
                 .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 4), SStack("Shell", 6) };
                 })
         );

@@ -66,6 +66,7 @@ public class Sanity : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectSanity>(data =>
                 {
                     data.offensive = true;
+                    data.removeOnDiscard = true;
                     data.type = "dst.sanity";
                     data.summonRan = TryGet<StatusEffectData>("Instant Summon Random Shadow Creature");
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintHasHealth>() };

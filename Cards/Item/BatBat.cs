@@ -9,11 +9,11 @@ public class BatBat : DataBase
                 .CreateItem("batBat", "BatBat")
                 .SetStats(null, 4, 0)
                 .SetSprites("BatBat.png", "Wendy_BG.png")
+                .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(40)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.canPlayOnFriendly = false;
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("When Played Apply Heal To Random Ally", 3) };
                 })

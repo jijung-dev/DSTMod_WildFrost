@@ -11,10 +11,10 @@ public class TamoShanter : DataBase
                 .SetStats(null, null, 0)
                 .SetSprites("TamoShanter.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Sanity", 4) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1), TStack("Consume", 1) };
                 })

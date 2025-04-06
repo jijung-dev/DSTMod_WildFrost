@@ -43,6 +43,8 @@ public class Freeze : DataBase
                     data.freezeEffect = TryGet<StatusEffectData>("Freezing");
 
                     data.heatEffect = TryGet<StatusEffectData>("Overheat");
+                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
+                    data.removeOnDiscard = true;
                 })
                 .Subscribe_WithStatusIcon("freeze icon")
         );

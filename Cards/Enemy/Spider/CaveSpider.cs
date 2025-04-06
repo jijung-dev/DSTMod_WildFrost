@@ -11,7 +11,7 @@ public class CaveSpider : DataBase
                 .SetSprites("CaveSpider.png", "Wendy_BG.png")
                 .SetStats(8, 2, 3)
                 .WithCardType("Enemy")
-                .WithValue(300)
+                .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]

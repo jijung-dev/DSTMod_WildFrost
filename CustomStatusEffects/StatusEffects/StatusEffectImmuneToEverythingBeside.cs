@@ -5,20 +5,22 @@ using DSTMod_WildFrost;
 public class StatusEffectImmuneToEverythingBeside : StatusEffectData
 {
     public StatusEffectData[] bypass;
-    public Type bypassType;
+    public string[] bypassType;
+    public bool isAllStatus;
 
     public override bool RunApplyStatusEvent(StatusEffectApply apply)
     {
-        if (
-            (bool)apply.effectData
-            && apply.target == target
-            && !bypass.Contains(apply.effectData)
-            && bypassType != null
-            && apply.effectData.GetType() != bypassType
-        )
+        if ((bool)apply.effectData && apply.target == target)
         {
-            apply.effectData = null;
-            apply.count = 0;
+            if ((isAllStatus && !apply.effectData.isStatus) || bypass.Contains(apply.effectData) || bypassType.Contains(apply.effectData.type))
+            {
+                return true;
+            }
+            else
+            {
+                apply.effectData = null;
+                apply.count = 0;
+            }
         }
         return false;
     }

@@ -12,7 +12,7 @@ public class Buzzard : DataBase
                 .SetStats(5, 2, 4)
                 .SetStartWithEffect(SStack("MultiHit", 1))
                 .WithCardType("Enemy")
-                .WithValue(2 * 50)
+                .WithValue(3 * 36)
         );
     }
 }

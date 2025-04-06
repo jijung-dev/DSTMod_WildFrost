@@ -20,7 +20,7 @@ public class FloorCard : DataBase
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Chest Health", 1),
-                        SStack("Immune To Everything", 1),
+                        SStack("Floor Immune To Everything", 1),
                         SStack("Cannot Recall", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Backline", 1), TStack("Super Unmovable", 1) };
@@ -30,6 +30,19 @@ public class FloorCard : DataBase
 
     protected override void CreateStatusEffect()
     {
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectImmuneToEverythingBeside>("Floor Immune To Everything")
+                .SubscribeToAfterAllBuildEvent<StatusEffectImmuneToEverythingBeside>(data =>
+                {
+                    data.bypassType = new string[] { "dst.build" };
+                    data.bypass = new StatusEffectData[]
+                    {
+                        TryGet<StatusEffectData>("Instant Summon Hammer In Hand"),
+                        TryGet<StatusEffectData>("Reduce Chest Health"),
+                    };
+                })
+        );
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXWhenDestroyed>("When Destroyed Summon Floor")
@@ -57,6 +70,7 @@ public class FloorCard : DataBase
                 .Create<StatusEffectInstantFillSlots>("Instant Summon Floor")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantFillSlots>(data =>
                 {
+                    data.type = "dst.summon";
                     data.withCards = new CardData[] { TryGet<CardData>("floor") };
                     data.slotID = 3;
                 })

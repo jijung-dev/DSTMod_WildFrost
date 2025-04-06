@@ -11,10 +11,7 @@ public class IceChester : DataBase
                 .SetStats(12, null, 0)
                 .WithCardType("Friendly")
                 .SetStartWithEffect(SStack("When Hit Apply Snow To Attacker", 2))
-                .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                {
-                    data.WithPools(mod.unitPool);
-                })
+                .WithPools("GeneralUnitPool")
         );
     }
 }

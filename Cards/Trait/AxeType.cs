@@ -10,7 +10,7 @@ public class AxeType : DataBase
                 .Create("axetype")
                 .WithTitle("Axes")
                 .WithShowName(true)
-                .WithDescription("Can damage <keyword=tgestudio.wildfrost.dstmod.chopable>")
+                .WithDescription("Can instant kill <keyword=dstmod.chopable>".Process())
                 .WithTitleColour(new Color(0.65f, 0.41f, 0.34f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)

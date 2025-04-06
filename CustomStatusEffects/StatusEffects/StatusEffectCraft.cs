@@ -122,7 +122,7 @@ public class StatusEffectCraft : StatusEffectData
         if (removeEffect != null)
         {
             chest.curveAnimator.Ping();
-            yield return chest.FindStatus(removeEffect).RemoveStacks(GetAmount(), false);
+            yield return chest.FindStatus(removeEffect)?.RemoveStacks(GetAmount(), false);
         }
 
         running = false;

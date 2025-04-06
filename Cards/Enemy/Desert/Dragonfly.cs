@@ -12,8 +12,7 @@ public class Dragonfly : DataBase
                 .CreateUnit("dragonfly", "Dragonfly")
                 .SetSprites("Dragonfly.png", "Wendy_BG.png")
                 .SetStats(30, 3, 4)
-                .WithCardType("Boss")
-                .WithValue(13 * 50)
+                .WithCardType("BossSmall")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
@@ -21,6 +20,7 @@ public class Dragonfly : DataBase
                         SStack("Dragonfly Enraged", 1),
                         SStack("When Health Lost Summon Lavae", 1),
                         SStack("Immune To Overheat", 1),
+                        SStack("ImmuneToSnow", 1),
                     };
                 })
         );
@@ -29,8 +29,8 @@ public class Dragonfly : DataBase
                 .CreateUnit("dragonflyEnraged", "Dragonfly Enraged")
                 .SetSprites("DragonflyEnraged.png", "Wendy_BG.png")
                 .SetStats(25, 1, 5)
-                .WithCardType("Boss")
-                .WithValue(13 * 50)
+                .WithCardType("BossSmall")
+                .WithValue(25 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Overheat", 2) };
@@ -40,6 +40,7 @@ public class Dragonfly : DataBase
                         SStack("When Overheat Applied To Self Gain Spice Instead", 1),
                         SStack("Immune To Damage From DFly", 1),
                         SStack("MultiHit", 1),
+                        SStack("ImmuneToSnow", 1),
                     };
                 })
         );

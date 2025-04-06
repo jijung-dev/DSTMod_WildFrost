@@ -16,7 +16,7 @@ public class SporecapCounter : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceChopable", 2),
+                        SStack("Scrap", 2),
                         SStack("While Active Reduce Max Counter To Toadstool", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };

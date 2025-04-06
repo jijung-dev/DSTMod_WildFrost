@@ -9,11 +9,11 @@ public class DarkSword : DataBase
                 .CreateItem("darkSword", "Dark Sword")
                 .SetStats(null, 7, 0)
                 .SetSprites("DarkSword.png", "Wendy_BG.png")
+                .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.canPlayOnFriendly = false;
                     data.canPlayOnHand = false;
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("When Played Apply Sanity To Allies In Row", 4) };

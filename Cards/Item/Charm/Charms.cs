@@ -15,7 +15,11 @@ public class Charms : DataBase
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
-                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
+                    data.targetConstraints = new TargetConstraint[] 
+                    { 
+                        new Scriptable<TargetConstraintIsUnit>(),
+                        new Scriptable<TargetConstraintHasHealth>(),
+                    };
                     data.effects = new CardData.StatusEffectStacks[] { SStack("Immune To Sanity", 1) };
                 })
         );
@@ -30,7 +34,11 @@ public class Charms : DataBase
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
-                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
+                    data.targetConstraints = new TargetConstraint[] 
+                    { 
+                        new Scriptable<TargetConstraintIsUnit>(),
+                        new Scriptable<TargetConstraintHasHealth>(),
+                    };
                     data.effects = new CardData.StatusEffectStacks[] { SStack("Immune To Overheat", 1) };
                 })
         );

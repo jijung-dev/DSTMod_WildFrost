@@ -9,11 +9,11 @@ public class Garland : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("garland", "Garland")
                 .SetSprites("Garland.png", "Wendy_BG.png")
+                .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Sanity", 3) };
                 })
         );

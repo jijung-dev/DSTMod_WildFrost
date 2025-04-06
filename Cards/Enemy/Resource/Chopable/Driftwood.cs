@@ -17,8 +17,8 @@ public class Driftwood : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceChopable", 1),
-                        SStack("When Destroyed By Axe Gain Wood", 1),
+                        SStack("Scrap", 2),
+                        SStack("When Destroyed Gain Wood To Chest", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })

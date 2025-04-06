@@ -13,7 +13,7 @@ public class Moose : DataBase
                 .SetSprites("Moose.png", "Wendy_BG.png")
                 .SetStats(20, 2, 5)
                 .WithCardType("Boss")
-                .WithValue(15 * 36)
+                .WithValue(18 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]

@@ -14,7 +14,7 @@ public class Frostjaw : DataBase
 				.WithText("Dive Down <hiddencard=dstmod.frostjawDived>".Process())
 				.SetStats(20, 2, 4)
 				.WithCardType("Miniboss")
-				.WithValue(18 * 36)
+				.WithValue(20 * 36)
 				.SubscribeToAfterAllBuildEvent<CardData>(data =>
 				{
 					data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Freezing", 2) };

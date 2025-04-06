@@ -10,7 +10,7 @@ public class Lavae : DataBase
                 .SetSprites("Lavae.png", "Wendy_BG.png")
                 .SetStats(5, 2, 3)
                 .WithCardType("Enemy")
-                .WithValue(2 * 50)
+                .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
@@ -48,6 +48,7 @@ public class Lavae : DataBase
             StatusCopy("Instant Summon Fallow", "Instant Summon Lavae")
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantSummon>(data =>
                 {
+                    data.summonPosition = StatusEffectInstantSummon.Position.InFrontOf;
                     data.targetSummon = TryGet<StatusEffectSummon>("Summon Lavae");
                 })
         );

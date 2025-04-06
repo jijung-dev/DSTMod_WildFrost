@@ -9,10 +9,10 @@ public class LogSuit : DataBase
                 .CreateItem("logSuit", "Log Suit")
                 .SetSprites("LogSuit.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shell", 5) };
                 })
         );

@@ -12,7 +12,7 @@ public class RottenPotato : DataBase
                 .CreateUnit("rottenPotato", "Rotten Giant Potato")
                 .SetSprites("RottenPotato.png", "Wendy_BG.png")
                 .WithText("Destroy Self")
-                .SetStats(6, null, 5)
+                .SetStats(4, null, 5)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

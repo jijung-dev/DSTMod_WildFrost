@@ -8,11 +8,11 @@ public class FriendlyFly : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("friendlyFly", "Friendly Fly")
                 .SetSprites("FriendFly.png", "Wendy_BG.png")
+                .WithPools("GeneralUnitPool")
                 .SetStats(2, null, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("On Turn Boost Random Ally Effect", 1) };
                 })
         );

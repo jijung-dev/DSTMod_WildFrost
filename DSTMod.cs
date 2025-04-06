@@ -55,10 +55,10 @@ namespace DSTMod_WildFrost
             allConstraint.Add("pickaxeOnly", new Scriptable<TargetConstraintHasTrait>());
             allConstraint.Add("axeOnly", new Scriptable<TargetConstraintHasTrait>());
             allConstraint.Add("beeOnly", new Scriptable<TargetConstraintHasTrait>());
+            allConstraint.Add("buildingOnly", new Scriptable<TargetConstraintHasTrait>());
 
             allConstraint.Add("companionOnly", new Scriptable<TargetConstraintIsCardType>());
 
-            allConstraint.Add("buildingOnly", new Scriptable<TargetConstraintHasStatus>());
             allConstraint.Add("clunkerOnly", new Scriptable<TargetConstraintHasStatus>());
             allConstraint.Add("noChestHealth", new Scriptable<TargetConstraintHasStatus>(x => x.not = true));
             allConstraint.Add("noBuilding", new Scriptable<TargetConstraintHasStatus>(x => x.not = true));
@@ -88,10 +88,10 @@ namespace DSTMod_WildFrost
             ((TargetConstraintHasTrait)allConstraint["pickaxeOnly"]).trait = TryGet<TraitData>("PickaxeType");
             ((TargetConstraintHasTrait)allConstraint["axeOnly"]).trait = TryGet<TraitData>("AxeType");
             ((TargetConstraintHasTrait)allConstraint["beeOnly"]).trait = TryGet<TraitData>("Bee");
+            ((TargetConstraintHasTrait)allConstraint["buildingOnly"]).trait = TryGet<TraitData>("Building");
 
             ((TargetConstraintIsCardType)allConstraint["companionOnly"]).allowedTypes = new[] { TryGet<CardType>("Friendly") };
 
-            ((TargetConstraintHasStatus)allConstraint["buildingOnly"]).status = TryGet<StatusEffectData>("Building Health");
             ((TargetConstraintHasStatus)allConstraint["clunkerOnly"]).status = TryGet<StatusEffectData>("Scrap");
             ((TargetConstraintHasStatus)allConstraint["noBuilding"]).status = TryGet<StatusEffectData>("Building Health");
             ((TargetConstraintHasStatus)allConstraint["noChestHealth"]).status = TryGet<StatusEffectData>("Chest Health");
@@ -162,9 +162,8 @@ namespace DSTMod_WildFrost
                             Inventory inventory = new Scriptable<Inventory>();
                             inventory.deck.list = DataList<CardData>(
                                     "spear",
+                                    "spear",
                                     "pickaxe",
-                                    "pickaxe",
-                                    "axe",
                                     "axe",
                                     "hamBat",
                                     "iceStaff",

@@ -11,10 +11,7 @@ public class Glommer : DataBase
                 .SetStats(3, null, 6)
                 .WithCardType("Friendly")
                 .SetStartWithEffect(SStack("On Turn Add Attack To Allies", 2))
-                .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                {
-                    data.WithPools(mod.unitPool);
-                })
+                .WithPools("GeneralUnitPool")
         );
     }
 }

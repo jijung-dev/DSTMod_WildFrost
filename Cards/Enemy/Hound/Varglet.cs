@@ -17,7 +17,7 @@ public class Varglet : DataBase
                     data.traits = new List<CardData.TraitStacks>() { TStack("Wild", 1), TStack("Smackback", 1) };
                 })
                 .WithCardType("Enemy")
-                .WithValue(8 * 36)
+                .WithValue(6 * 36)
         );
     }
 }

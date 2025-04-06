@@ -16,7 +16,7 @@ public class SporecapSnow : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceChopable", 2),
+                        SStack("Scrap", 2),
                         SStack("On Turn Apply Snow To RandomEnemy", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };

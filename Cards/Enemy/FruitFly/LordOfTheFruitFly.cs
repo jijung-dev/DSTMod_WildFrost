@@ -11,9 +11,9 @@ public class LordOfTheFruitFly : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("lordFruitFly", "Lord of the Fruit Flies")
                 .SetSprites("LordOfTheFruitFlies.png", "Wendy_BG.png")
-                .SetStats(20, 1, 3)
+                .SetStats(15, 1, 3)
                 .WithCardType("Miniboss")
-                .WithValue(15 * 36)
+                .WithValue(13 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shroom", 1) };
@@ -25,9 +25,9 @@ public class LordOfTheFruitFly : DataBase
                 .CreateUnit("fruitFly", "Fruit Fly")
                 .SetSprites("FruitFly.png", "Wendy_BG.png")
                 .WithText("Double the target's <keyword=shroom>")
-                .SetStats(6, 1, 3)
+                .SetStats(4, 1, 4)
                 .WithCardType("Enemy")
-                .WithValue(4 * 36)
+                .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Double Shroom", 1) };

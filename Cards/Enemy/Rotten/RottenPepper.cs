@@ -11,7 +11,7 @@ public class RottenPepper : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("rottenPepper", "Rotten Giant Pepper")
                 .SetSprites("RottenPepper.png", "Wendy_BG.png")
-                .SetStats(4, 0, 3)
+                .SetStats(2, 0, 3)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

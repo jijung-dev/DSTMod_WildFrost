@@ -9,9 +9,9 @@ public class Fuelweaver : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("forestFuelweaver", "Forest Fuelweaver")
                 .SetSprites("ForestFuelweaver.png", "Wendy_BG.png")
-                .SetStats(30, null, 5)
+                .WithText("<hiddencard=dstmod.fern><hiddencard=dstmod.mysteriousPlant><hiddencard=dstmod.lightFlower>".Process())
+                .SetStats(40, null, 4)
                 .WithCardType("Boss")
-                .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
@@ -20,6 +20,7 @@ public class Fuelweaver : DataBase
                         SStack("Pre Turn Fill Player Board With Floral", 1),
                         SStack("On Turn Apply Sanity To Everything", 4),
                         SStack("Immune To Sanity", 1),
+                        SStack("ImmuneToSnow", 1),
                     };
                 })
         );
@@ -27,13 +28,18 @@ public class Fuelweaver : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("caveFuelweaver", "Cave Fuelweaver")
                 .SetSprites("CaveFuelweaver.png", "Wendy_BG.png")
-                .SetStats(30, 3, 3)
+                .SetStats(50, 5, 3)
                 .WithCardType("Boss")
-                .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 3) };
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("AncientFuelweaver", 1), SStack("Immune To Sanity", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 4) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("AncientFuelweaver", 1),
+                        SStack("When Deployed Fill Board With Cave Enemies", 1),
+                        SStack("Immune To Sanity", 1),
+                        SStack("ImmuneToSnow", 1),
+                    };
                 })
         );
         assets.Add(
@@ -41,9 +47,8 @@ public class Fuelweaver : DataBase
                 .CreateUnit("ancientFuelweaver", "Ancient Fuelweaver")
                 .SetSprites("AncientFuelweaver.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.skullWovenShadow><hiddencard=dstmod.handWovenShadow><hiddencard=dstmod.unseenHand>".Process())
-                .SetStats(40, 6, 5)
+                .SetStats(60, 6, 5)
                 .WithCardType("Boss")
-                .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 5) };
@@ -51,6 +56,7 @@ public class Fuelweaver : DataBase
                     {
                         SStack("On Turn Fill Board With Woven Shadow", 1),
                         SStack("Immune To Sanity", 1),
+                        SStack("ImmuneToSnow", 1),
                     };
                 })
         );
@@ -86,6 +92,28 @@ public class Fuelweaver : DataBase
                         TryGet<CardData>("lightFlower"),
                     };
                     data.spawnBoard = StatusEffectInstantFillBoardExt.Board.Player;
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectInstantFillBoardExt>("Fill Enemy Board With Cave Enemies")
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantFillBoardExt>(data =>
+                {
+                    data.isEnemy = true;
+                    data.withCards = new CardData[]
+                    {
+                        TryGet<CardData>("caveSpider"),
+                        TryGet<CardData>("batilisk"),
+                    };
+                    data.spawnBoard = StatusEffectInstantFillBoardExt.Board.Enemy;
+                })
+        );
+        assets.Add(
+            StatusCopy("When Deployed Fill Board (Final Boss)", "When Deployed Fill Board With Cave Enemies")
+            .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDeployed>(data =>
+                {
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.effectToApply = TryGet<StatusEffectData>("Fill Enemy Board With Cave Enemies");
                 })
         );
         assets.Add(

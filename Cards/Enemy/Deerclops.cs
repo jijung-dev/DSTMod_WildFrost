@@ -13,7 +13,7 @@ public class Deerclops : DataBase
                 .SetStats(30, 4, 4)
                 .SetTraits(TStack("Knockback", 1))
                 .WithCardType("Boss")
-                .WithValue(13 * 50)
+                .WithValue(18 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Freezing", 2), SStack("Sanity", 2) };

@@ -11,6 +11,7 @@ public class TallBird : DataBase
                 .CreateUnit("tallbirdEgg", "Tallbird Egg")
                 .SetSprites("TallBirdEgg.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.smallbird>".Process())
+                .WithPools("GeneralUnitPool")
                 .SetStats(1, null, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

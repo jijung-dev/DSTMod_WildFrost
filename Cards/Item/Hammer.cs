@@ -14,7 +14,7 @@ public class Hammer : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1), TStack("HammerType", 1) };
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Building Health", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Chest Health", 1) };
 
                     data.targetConstraints = new TargetConstraint[] { TryGetConstraint("buildingOnly") };
                 })

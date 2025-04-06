@@ -11,10 +11,9 @@ public class EyeOfTerror : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("eyeOfTerror", "Eye Of Terror")
                 .SetSprites("EyeOfTerror.png", "Wendy_BG.png")
-                .WithText("Take <1><keyword=health>")
-                .SetStats(25, 0, 3)
+                .WithText("Take 1<keyword=health>")
+                .SetStats(15, 0, 3)
                 .WithCardType("Miniboss")
-                .WithValue(15 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Take Health", 1) };
@@ -30,8 +29,8 @@ public class EyeOfTerror : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("eyeOfTerrorEnraged", "Eye Of Terror Enraged")
                 .SetSprites("EyeOfTerrorEnraged.png", "Wendy_BG.png")
-                .WithText("Take <1><keyword=health>")
-                .SetStats(20, 1, 3)
+                .WithText("Take 1<keyword=health>")
+                .SetStats(15, 1, 3)
                 .WithCardType("Miniboss")
                 .WithValue(15 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -52,7 +51,7 @@ public class EyeOfTerror : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXEveryYHealthLost>("When Health Lost Summon Egg Of Terror")
-                .WithText("When every <5><keyword=health> is lost, summon <card=dstmod.eggOfTerror>".Process())
+                .WithText("When every 5<keyword=health> is lost, summon <card=dstmod.eggOfTerror>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXEveryYHealthLost>(data =>
                 {
                     data.healthLost = 5;

@@ -10,6 +10,7 @@ public class BlowDart : DataBase
                 .CreateItem("blowDart", "BlowDart")
                 .SetStats(null, null, 0)
                 .SetSprites("BlowDart.png", "Wendy_BG.png")
+                .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(70)
                 .SubscribeToAfterAllBuildEvent<CardData>(

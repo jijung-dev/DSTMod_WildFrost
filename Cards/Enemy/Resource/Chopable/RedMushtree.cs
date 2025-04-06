@@ -17,8 +17,8 @@ public class RedMushtree : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceChopable", 2),
-                        SStack("When Destroyed By Axe Gain Wood", 1),
+                        SStack("Scrap", 3),
+                        SStack("When Destroyed Gain Wood To Chest", 1),
                         SStack("Gain Red Cap When Destroyed", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };

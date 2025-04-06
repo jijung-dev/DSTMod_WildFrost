@@ -17,9 +17,9 @@ public class TallStalagmite : DataBase
                     data.isEnemyClunker = true;
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("ResourceMineable", 2),
-                        SStack("When Destroyed By Pickaxe Gain Rock", 2),
-                        SStack("When Destroyed By Pickaxe Gain Gold", 1),
+                        SStack("Scrap", 4),
+                        SStack("When Destroyed Gain Rock To Chest", 2),
+                        SStack("When Destroyed Gain Gold To Chest", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mineable", 1) };
                 })

@@ -22,7 +22,7 @@ public class RedHound : DataBase
                     data.traits = new List<CardData.TraitStacks>() { TStack("Wild", 1) };
                 })
                 .WithCardType("Enemy")
-                .WithValue(4 * 36)
+                .WithValue(3 * 36)
         );
     }
 

@@ -11,7 +11,7 @@ public class Mineable : DataBase
                 .Create("mineable")
                 .WithTitle("Mineable")
                 .WithShowName(true)
-                .WithDescription("Can only be damaged by <Pickaxes> cards")
+                .WithDescription("Get instant kill by <Pickaxes>")
                 .WithTitleColour(new Color(0.65f, 0.41f, 0.34f))
                 .WithBodyColour(new Color(1f, 1f, 1f))
                 .WithCanStack(false)
@@ -26,24 +26,12 @@ public class Mineable : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("mineable");
-                    data.effects = new[] { TryGet<StatusEffectData>("Immune To Everything") };
+                    data.effects = new[] 
+                    { 
+                        TryGet<StatusEffectData>("Building Immune To Everything"), 
+                        TryGet<StatusEffectData>("When Hit By Pickaxe Dies"), 
+                    };
                 })
-        );
-    }
-
-    protected override void CreateStatusEffect()
-    {
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectResource>("ResourceMineable")
-                .WithIsStatus(true)
-                .SubscribeToAfterAllBuildEvent<StatusEffectResource>(data =>
-                {
-                    data.allowedCards = new TargetConstraint[] { TryGetConstraint("pickaxeOnly") };
-                    data.preventDeath = true;
-                    data.type = "dst.resource";
-                })
-                .Subscribe_WithStatusIcon("resource icon")
         );
     }
 }

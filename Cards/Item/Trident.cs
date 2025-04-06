@@ -11,10 +11,10 @@ public class Trident : DataBase
                 .SetSprites("Trident.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetStartWithEffect(SStack("Hit All Enemies", 1))
+                .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.itemPool);
                     data.needsTarget = false;
                 })
         );

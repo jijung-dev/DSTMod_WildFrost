@@ -43,6 +43,7 @@ public class Froze : DataBase
                     data.affectedBySnow = false;
                     data.stackable = false;
                     data.type = "dst.froze";
+                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
                 })
         );
         assets.Add(new StatusEffectDataBuilder(mod).Create<StatusEffectFroze>("Froze").Subscribe_WithStatusIcon("froze icon"));

@@ -13,7 +13,7 @@ public class BeeHive : DataBase
                 .SetSprites("Beehive.png", "Wendy_BG.png")
                 .SetStats(8, null, 0)
                 .WithCardType("Enemy")
-                .WithValue(2 * 50)
+                .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]

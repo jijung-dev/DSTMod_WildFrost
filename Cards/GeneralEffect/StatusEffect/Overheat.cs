@@ -38,6 +38,7 @@ public class Overheat : DataBase
                 .Create<StatusEffectHeat>("Overheat")
                 .SubscribeToAfterAllBuildEvent<StatusEffectHeat>(data =>
                 {
+                    data.removeOnDiscard = true;
                     data.type = "dst.overheat";
                     data.overheatingEffect = TryGet<StatusEffectData>("Lose Half Health");
                     data.freezeEffect = TryGet<StatusEffectData>("Freezing");

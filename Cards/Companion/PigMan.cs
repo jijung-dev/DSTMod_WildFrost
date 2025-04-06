@@ -9,11 +9,11 @@ public class PigMan : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("pigman", "Pig")
                 .SetSprites("Pig.png", "Wendy_BG.png")
+                .WithPools("GeneralUnitPool")
                 .SetStats(6, 4, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.traits = new List<CardData.TraitStacks>() { TStack("Smackback", 1), TStack("Pigheaded", 1) };
                 })
         );

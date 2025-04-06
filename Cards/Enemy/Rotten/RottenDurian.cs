@@ -11,7 +11,7 @@ public class RottenDurian : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("rottenDurian", "Rotten Giant Durian")
                 .SetSprites("RottenDurian.png", "Wendy_BG.png")
-                .SetStats(8, null, 0)
+                .SetStats(6, null, 0)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

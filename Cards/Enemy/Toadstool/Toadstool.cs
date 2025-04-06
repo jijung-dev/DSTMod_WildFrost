@@ -10,7 +10,6 @@ public class Toadstool : DataBase
                 .SetSprites("Toadstool.png", "Wendy_BG.png")
                 .SetStats(30, null, 5)
                 .WithCardType("Miniboss")
-                .WithValue(13 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
@@ -19,6 +18,7 @@ public class Toadstool : DataBase
                         SStack("On Turn Lose Fill Board With Boomshroom", 1),
                         SStack("On Turn Fill Board With Boomshroom", 1),
                         SStack("Immune To Shroom", 1),
+                        SStack("ImmuneToSnow", 1),
                     };
                 })
         );
@@ -26,9 +26,9 @@ public class Toadstool : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("toadstoolEnraged", "Toadstool Enraged")
                 .SetSprites("ToadstoolEnraged.png", "Wendy_BG.png")
-                .SetStats(30, 1, 5)
+                .SetStats(20, 1, 5)
                 .WithCardType("Miniboss")
-                .WithValue(13 * 50)
+                .WithValue(28 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shroom", 2) };
@@ -38,6 +38,7 @@ public class Toadstool : DataBase
                         SStack("When Shroom Applied To Self Heal Instead", 4),
                         SStack("When Deployed Fill Enemy Board With Sporecaps", 1),
                         SStack("Immune To Damage From Toadstool", 1),
+                        SStack("ImmuneToSnow", 1),
                     };
                 })
         );

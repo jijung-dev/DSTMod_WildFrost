@@ -8,11 +8,13 @@ public class Pickaxe : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("pickaxe", "Pickaxe")
-                .SetStats(null, 1, 0)
+                .SetStats(null, 2, 0)
                 .SetSprites("Pickaxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
+                .WithPools("GeneralItemPool")
+                .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeType", 1) };
                     }
@@ -25,9 +27,9 @@ public class Pickaxe : DataBase
                 .SetSprites("GoldenPickaxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
-                        data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeType", 1) };
+                        data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeType", 1), TStack("Barrage", 1) };
                     }
                 )
         );
