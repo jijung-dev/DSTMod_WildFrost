@@ -14,7 +14,7 @@ public class NightArmor : DataBase
                 .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 4), SStack("Shell", 6) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Sanity", 4), SStack("Shell", 8) };
                 })
         );
     }

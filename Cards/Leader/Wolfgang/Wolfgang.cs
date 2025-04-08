@@ -10,7 +10,7 @@ public class Wolfgang : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("wolfgang", "Wolfgang")
                 .SetSprites("Wolfgang.png", "Wendy_BG.png")
-                .SetStats(10, 4, 5)
+                .SetStats(8, 4, 5)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

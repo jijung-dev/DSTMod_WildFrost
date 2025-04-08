@@ -12,7 +12,7 @@ public class TwinOfTerror : DataBase
                 .CreateUnit("retinazor", "Retinazor")
                 .SetSprites("Retinazor.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
-                .SetStats(30, 0, 6)
+                .SetStats(21, 0, 6)
                 .WithCardType("Miniboss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -30,7 +30,7 @@ public class TwinOfTerror : DataBase
                 .CreateUnit("retinazorEnraged", "Retinazor Enraged")
                 .SetSprites("RetinazorEnraged.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
-                .SetStats(21, 1, 5)
+                .SetStats(18, 1, 5)
                 .WithCardType("Miniboss")
                 .WithValue(11 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

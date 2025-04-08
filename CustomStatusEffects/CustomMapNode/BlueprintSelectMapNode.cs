@@ -40,8 +40,8 @@ public class BlueprintSelectMapNode : DataBase
                         uiText.SetString(key, "Wagstaff's Factory");
                         mapNode.label.GetComponentInChildren<LocalizeStringEvent>().StringReference = uiText.GetString(key);
 
-                        mapNode.spriteOptions = new Sprite[] { mod.ScaledSprite("Icons/BlueprintSelect.png", 150) };
-                        mapNode.clearedSpriteOptions = new Sprite[] { mod.ScaledSprite("Icons/BlueprintSelect.png", 150) };
+                        mapNode.spriteOptions = new Sprite[] { mod.ScaledSprite("Nodes/BlueprintSelect.png", 150) };
+                        mapNode.clearedSpriteOptions = new Sprite[] { mod.ScaledSprite("Nodes/BlueprintSelect.png", 150) };
 
                         GameObject nodeObject = mapNode.gameObject;
                         nodeObject.transform.SetParent(DSTMod.prefabHolder.transform);

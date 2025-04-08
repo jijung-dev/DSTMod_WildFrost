@@ -14,6 +14,7 @@ using static CardData;
 
 public static class Ext
 {
+    public static List<CardData> blueprints = new List<CardData>();
     public static string Process(this string text)
     {
         return Regex.Replace(

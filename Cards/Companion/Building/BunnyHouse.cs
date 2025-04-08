@@ -10,10 +10,10 @@ public class BunnyHouse : DataBase
                 .CreateUnit("bunnyHouse", "Rabbit Hutch")
                 .SetSprites("BunnyManHouse.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
+                .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 12)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Instant Summon Bunnyman", 1) };
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {

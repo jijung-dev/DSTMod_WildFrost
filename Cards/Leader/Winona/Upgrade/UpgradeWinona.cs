@@ -22,7 +22,7 @@ public class UpgradeWinona : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("2tapeUpgrade", "Upgrade")
-                .WithText("Gain 2 <card=dstmod.tape>".Process())
+                .WithText("Gain 2 <card=dstmod.tape><hiddencard=dstmod.catapult>".Process())
                 .SetStats(null, null, 0)
                 .SetSprites("2TapeUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")

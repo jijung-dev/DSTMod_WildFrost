@@ -10,11 +10,11 @@ public class Gunpowder : DataBase
                 .CreateUnit("gunpowder", "Gunpowder")
                 .SetSprites("Gunpowder.png", "Wendy_BG.png")
                 .WithText("Destroy Self")
+                .WithPools("GeneralUnitPool")
                 .WithCardType("Clunker")
                 .SetStats(null, null, 3)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.traits = new List<CardData.TraitStacks>() { TStack("Explode", 5) };
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {

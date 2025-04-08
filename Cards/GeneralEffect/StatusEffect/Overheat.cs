@@ -43,7 +43,14 @@ public class Overheat : DataBase
                     data.overheatingEffect = TryGet<StatusEffectData>("Lose Half Health");
                     data.freezeEffect = TryGet<StatusEffectData>("Freezing");
                     data.frozeEffect = TryGet<StatusEffectData>("Temporary Froze");
-                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintHasHealth>() };
+                    data.targetConstraints = new TargetConstraint[]
+                    {
+                        new Scriptable<TargetConstraintOr>(r => r.constraints = new TargetConstraint[]
+                        {
+                            new Scriptable<TargetConstraintHasHealth>(),
+                            new Scriptable<TargetConstraintHasStatusType>(a => a.statusType = "dst.froze"),
+                        })
+                    };
                 })
                 .Subscribe_WithStatusIcon("overheat icon")
         );

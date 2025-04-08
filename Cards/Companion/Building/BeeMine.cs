@@ -10,10 +10,10 @@ public class BeeMine : DataBase
                 .CreateUnit("beeMine", "Bee Mine")
                 .SetSprites("BeeMine.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
+                .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 0)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Require Wood", 1),

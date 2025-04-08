@@ -11,7 +11,8 @@ public class EggOfTerror : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("eggOfTerror", "Egg Of Terror")
                 .SetSprites("EggOfTerror.png", "Wendy_BG.png")
-                .SetStats(2, null, 1)
+                .WithText("<hiddencard=dstmod.suspiciousPeeper>".Process())
+                .SetStats(2, null, 2)
                 .WithCardType("Enemy")
                 .WithValue(1 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

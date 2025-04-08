@@ -15,8 +15,8 @@ public class Charms : DataBase
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
-                    data.targetConstraints = new TargetConstraint[] 
-                    { 
+                    data.targetConstraints = new TargetConstraint[]
+                    {
                         new Scriptable<TargetConstraintIsUnit>(),
                         new Scriptable<TargetConstraintHasHealth>(),
                     };
@@ -34,8 +34,8 @@ public class Charms : DataBase
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
-                    data.targetConstraints = new TargetConstraint[] 
-                    { 
+                    data.targetConstraints = new TargetConstraint[]
+                    {
                         new Scriptable<TargetConstraintIsUnit>(),
                         new Scriptable<TargetConstraintHasHealth>(),
                     };
@@ -80,7 +80,7 @@ public class Charms : DataBase
                 .WithImage("Icons/PickAxe_Charm.png")
                 .WithTitle("Pick/Axe")
                 .WithText("Gain <keyword=dstmod.pickaxetype> and <keyword=dstmod.axetype> but reduce max <keyword=attack> by 2".Process())
-                .WithTier(4)
+                .WithTier(3)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
                     data.effects = new CardData.StatusEffectStacks[] { SStack("Reduce Attack", 2) };
@@ -90,6 +90,24 @@ public class Charms : DataBase
                         new Scriptable<TargetConstraintIsUnit>(),
                         new Scriptable<TargetConstraintDoesDamage>(),
                     };
+                })
+        );
+        assets.Add(
+            new CardUpgradeDataBuilder(mod)
+                .Create("CardUpgradeGoldenBlueprint")
+                .AddPool("GeneralCharmPool")
+                .WithType(CardUpgradeData.Type.Charm)
+                .WithImage("Icons/GoldenBlueprintCharm.png")
+                .WithTitle("Golden Blueprint")
+                .WithText("<keyword=dstmod.blueprint> lose the requirement".Process())
+                .WithTier(4)
+                .SubscribeToAfterAllBuildEvent(data =>
+                {
+                    data.targetConstraints = new TargetConstraint[]
+                    {
+                        new Scriptable<TargetConstraintHasTrait>(r => r.trait = TryGet<TraitData>("Blueprint")),
+                    };
+                    data.scripts = new CardScript[] { new Scriptable<CardScriptRemoveRequirement>() };
                 })
         );
     }

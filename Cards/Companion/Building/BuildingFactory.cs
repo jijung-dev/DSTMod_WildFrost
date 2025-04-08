@@ -60,7 +60,7 @@ public class BuildingFactory : BuildingBase
                     "iceFlingomatic",
                     "Ice Flingomatic",
                     "IceFlingomatic.png",
-                    SStack(("While Active Overheat Immune To Allies", 1), ("On Turn Snow Random Enemies", 3)),
+                    SStack(("While Active Overheat Immune To Allies", 1), ("On Turn Apply Snow To RandomEnemy", 3)),
                     null,
                     new[] { (ResourceRequire.Rock, 2), (ResourceRequire.Wood, 1), (ResourceRequire.Gold, 1) },
                     new[] { 0, 0, 5 }
@@ -156,16 +156,6 @@ public class BuildingFactory : BuildingBase
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Instant Gain Statue In Hand");
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-                })
-        );
-        assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXOnTurn>("On Turn Snow Random Enemies")
-                .WithText("Apply <{a}><keyword=snow> to a random enemy")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
-                {
-                    data.effectToApply = TryGet<StatusEffectData>("Snow");
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.RandomEnemy;
                 })
         );
     }

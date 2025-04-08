@@ -10,10 +10,10 @@ public class Campfire : DataBase
                 .CreateUnit("campfire", "Campfire")
                 .SetSprites("Campfire.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
+                .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 0)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Require Wood", 1),

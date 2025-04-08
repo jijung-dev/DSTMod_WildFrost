@@ -21,7 +21,7 @@ public class RottenPotato : DataBase
                     {
                         SStack("Gain Potato When Destroyed", 1),
                         SStack("Destroy Self After Counter Turn", 1),
-                        SStack("When Destroyed Apply Shroom To Enemies", 1),
+                        SStack("When Destroyed Apply Shroom To Random Enemy", 2),
                     };
                 })
         );
@@ -30,12 +30,12 @@ public class RottenPotato : DataBase
     protected override void CreateStatusEffect()
     {
         assets.Add(
-            StatusCopy("When Destroyed Apply Spice To Allies", "When Destroyed Apply Shroom To Enemies")
+            StatusCopy("When Destroyed Apply Spice To Allies", "When Destroyed Apply Shroom To Random Enemy")
                 .WithText("When destroyed, apply <{a}><keyword=shroom> to enemies ")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Shroom");
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.RandomEnemy;
                 })
         );
     }

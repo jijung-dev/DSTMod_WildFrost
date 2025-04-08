@@ -95,75 +95,81 @@ namespace DSTMod_WildFrost
             }
             else if (node.type.letter == "^")
             {
-                var charList = GetCharacterCards().ToList();
+                var charList = GetCharacterCards();
+                var generalList = DSTMod.Instance.DataList<CardData>
+                (
+                    "goldUpgrade",
+                    "blingsUpgrade",
+                    "pickAxeUpgrade",
+                    "charmUpgrade",
+                    "blueprintUpgrade"
+                );
 
-                List<CardData> list = new List<CardData>
-                {
-                    TryGet<CardData>("goldUpgrade").Clone(),
-                    GetUniqueRandomCard(charList).Clone(),
-                    GetUniqueRandomCard(charList).Clone(),
-                };
+                List<CardData> list = new List<CardData>();
+                list.AddRange(charList);
+                list.AddRange(generalList);
                 list.Shuffle();
-                __instance.force = list;
+
+                List<CardData> list2 = new List<CardData>
+                {
+                    list[0],
+                    list[1],
+                    list[2],
+                };
+
+                __instance.force = list2;
             }
             return true;
         }
 
-        static CardData GetUniqueRandomCard(List<CardData> list)
-        {
-            var choice = list.RandomItem();
-            list.Remove(choice);
-            return choice;
-        }
-
-        static List<CardData> GetCharacterCards()
+        static CardData[] GetCharacterCards()
         {
             var leader = References.LeaderData.original;
             switch (leader.title)
             {
                 case "Wendy":
-                    return new List<CardData>()
-                    {
-                        TryGet<CardData>("unyieldingDraught"),
-                        TryGet<CardData>("distilledVengeance"),
-                        TryGet<CardData>("nightshadeNostrum"),
-                        TryGet<CardData>("vigorMortis"),
-                        TryGet<CardData>("revenantRestorative"),
-                        TryGet<CardData>("ghastlyExperience"),
-                    };
+                    return DSTMod.Instance.DataList<CardData>
+                    (
+                        "unyieldingDraught",
+                        "distilledVengeance",
+                        "nightshadeNostrum",
+                        "vigorMortis",
+                        "revenantRestorative",
+                        "ghastlyExperience"
+                    );
                 case "Wortox":
-                    return new List<CardData>()
-                    {
-                        TryGet<CardData>("twintailedHeart"),
-                        TryGet<CardData>("soulJar"),
-                        TryGet<CardData>("immuneSanityUpgarde"),
-                        TryGet<CardData>("knabsack"),
-                    };
+                    return DSTMod.Instance.DataList<CardData>
+                    (
+                        "twintailedHeart",
+                        "soulJar",
+                        "immuneSanityUpgarde",
+                        "knabsack"
+                    );
                 case "Wolfgang":
-                    return new List<CardData>()
-                    {
-                        TryGet<CardData>("gymUpgrade"),
-                        TryGet<CardData>("gembellUpgrade"),
-                        TryGet<CardData>("whistleUpgrade"),
-                    };
+                    return DSTMod.Instance.DataList<CardData>
+                    (
+                        "gymUpgrade",
+                        "gembellUpgrade",
+                        "whistleUpgrade"
+                    );
                 case "Wormwood":
-                    return new List<CardData>()
-                    {
-                        TryGet<CardData>("huskUpgrade"),
-                        TryGet<CardData>("saladmander"),
-                        TryGet<CardData>("carrat"),
-                        TryGet<CardData>("bulbousLightbug"),
-                    };
+                    return DSTMod.Instance.DataList<CardData>
+                    (
+                        "huskUpgrade",
+                        "saladmander",
+                        "carrat",
+                        "bulbousLightbug"
+                    );
                 case "Winona":
-                    return new List<CardData>()
-                    {
-                        TryGet<CardData>("slowUpgrade"),
-                        TryGet<CardData>("2tapeUpgrade"),
-                        TryGet<CardData>("generator"),
-                        TryGet<CardData>("spotlight"),
-                    };
+                    return DSTMod.Instance.DataList<CardData>
+                    (
+                        "slowUpgrade",
+                        "2tapeUpgrade",
+                        "generator",
+                        "spotlight"
+                    );
                 default:
-                    return new List<CardData>() { };
+                    return DSTMod.Instance.DataList<CardData>();
             }
         }
 

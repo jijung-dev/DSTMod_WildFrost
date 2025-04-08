@@ -31,7 +31,7 @@ public class Rockjaw : DataBase
                 .CreateUnit("rockjawDived", "Rockjaw Dived")
                 .SetSprites("RockjawDived.png", "Wendy_BG.png")
                 .WithText("Dive up <hiddencard=dstmod.rockjaw>".Process())
-                .SetStats(0, 0, 3)
+                .SetStats(0, 0, 2)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

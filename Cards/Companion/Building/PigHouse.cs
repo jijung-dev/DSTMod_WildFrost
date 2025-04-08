@@ -10,10 +10,10 @@ public class PigHouse : DataBase
                 .CreateUnit("pigHouse", "Pig House")
                 .SetSprites("PigHouse.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
+                .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 12)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.WithPools(mod.unitPool);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Instant Summon Pig", 1) };
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {

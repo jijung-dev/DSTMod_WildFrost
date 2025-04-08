@@ -16,7 +16,7 @@ public class LordOfTheFruitFly : DataBase
                 .WithValue(13 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shroom", 1) };
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shroom", 2) };
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Hit All Enemies", 1) };
                 })
         );
@@ -30,6 +30,7 @@ public class LordOfTheFruitFly : DataBase
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Shroom", 1) };
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Double Shroom", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Aimless", 1) };
                 })

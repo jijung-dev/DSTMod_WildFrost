@@ -15,6 +15,7 @@ public class ResourceRequired : DataBase
                 .WithText("Require <{a}> <card=dstmod.rabbit>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
+                    data.type = "dst.require";
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
                     data.requireType = NoTargetTypeExt.RequireRabbit;
                     data.requireCard = TryGet<CardData>("rabbit");
@@ -26,6 +27,7 @@ public class ResourceRequired : DataBase
                 .WithText("Require <{a}><keyword=tgestudio.wildfrost.dstmod.rock><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
+                    data.type = "dst.require";
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
                     data.requireType = NoTargetTypeExt.RequireRock;
                     data.removeEffect = TryGet<StatusEffectData>("Rock");
@@ -37,6 +39,7 @@ public class ResourceRequired : DataBase
                 .WithText("Require <{a}><keyword=tgestudio.wildfrost.dstmod.wood><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
+                    data.type = "dst.require";
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
                     data.requireType = NoTargetTypeExt.RequireWood;
                     data.removeEffect = TryGet<StatusEffectData>("Wood");
@@ -48,6 +51,7 @@ public class ResourceRequired : DataBase
                 .WithText("Require <{a}><keyword=tgestudio.wildfrost.dstmod.gold><hiddencard=dstmod.chest>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectCraft>(data =>
                 {
+                    data.type = "dst.require";
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("require") };
                     data.requireType = NoTargetTypeExt.RequireGold;
                     data.removeEffect = TryGet<StatusEffectData>("Gold");
@@ -76,8 +80,8 @@ public class ResourceRequired : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenHit>("When Hit By Axe Dies")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
+                .Create<StatusEffectApplyXWhenHitUnNullable>("When Hit By Axe Dies")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHitUnNullable>(data =>
                 {
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.effectToApply = TryGet<StatusEffectData>("Kill");
@@ -86,8 +90,8 @@ public class ResourceRequired : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenHit>("When Hit By Pickaxe Dies")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
+                .Create<StatusEffectApplyXWhenHitUnNullable>("When Hit By Pickaxe Dies")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHitUnNullable>(data =>
                 {
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.effectToApply = TryGet<StatusEffectData>("Kill");

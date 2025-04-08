@@ -87,13 +87,12 @@ public abstract class BuildingBase : DataBase
                     .CreateItem(item._name + "Blueprint", item._title + " Blueprint")
                     .WithText($"Place <card=dstmod.{item._name}><hiddencard=dstmod.floor>".Process())
                     .SetSprites("Blueprint.png", "Wendy_BG.png")
+                    .WithPools("GeneralItemPool")
                     .WithCardType("Item")
                     .WithValue(GetResourcePrice(item))
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
-                        if (item._isPool)
-                            data.WithPools(mod.itemPool);
-
+                        Ext.blueprints.Add(data);
                         data.targetConstraints = new TargetConstraint[] { mod.TryGetConstraint("floorOnly") };
 
                         data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };

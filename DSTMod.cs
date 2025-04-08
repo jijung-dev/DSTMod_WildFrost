@@ -69,6 +69,7 @@ namespace DSTMod_WildFrost
             allConstraint.Add("toadstoolOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("sandCastleOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("fuelweaverOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("klausOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("chestOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("moslingOnly", new Scriptable<TargetConstraintIsSpecificCard>());
@@ -110,6 +111,7 @@ namespace DSTMod_WildFrost
             };
             ((TargetConstraintIsSpecificCard)allConstraint["sandCastleOnly"]).allowedCards = new CardData[] { TryGet<CardData>("sandCastle") };
             ((TargetConstraintIsSpecificCard)allConstraint["fuelweaverOnly"]).allowedCards = new CardData[] { TryGet<CardData>("ancientFuelweaver") };
+            ((TargetConstraintIsSpecificCard)allConstraint["klausOnly"]).allowedCards = new CardData[] { TryGet<CardData>("klaus"), TryGet<CardData>("klausEnraged") };
             ((TargetConstraintIsSpecificCard)allConstraint["chestOnly"]).allowedCards = new CardData[] { TryGet<CardData>("chest") };
             ((TargetConstraintIsSpecificCard)allConstraint["noDfly"]).allowedCards = new CardData[]
             {
@@ -332,12 +334,13 @@ namespace DSTMod_WildFrost
         // TODO: Custom starting deck for leader
         public IEnumerator CampaignInit()
         {
-            if (References.PlayerData?.classData.ModAdded != this)
-                yield break;
-
             References.LeaderData.startWithEffects = References
                 .LeaderData.startWithEffects.Concat(new[] { SStack("Summon Chest Before Battle", 1), SStack("Summon Floor Before Battle", 1) })
                 .ToArray();
+                
+            if (References.PlayerData?.classData.ModAdded != this)
+                yield break;
+
 
             if (References.LeaderData.original == TryGet<CardData>("wendy"))
             {

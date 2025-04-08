@@ -39,6 +39,7 @@ public class Froze : DataBase
                 .Create<StatusEffectTemporaryTrait>("Temporary Froze")
                 .SubscribeToAfterAllBuildEvent<StatusEffectTemporaryTrait>(data =>
                 {
+                    data.removeOnDiscard = true;
                     data.trait = TryGet<TraitData>("Froze");
                     data.affectedBySnow = false;
                     data.stackable = false;
