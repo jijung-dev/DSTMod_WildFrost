@@ -7,7 +7,7 @@ public class PanFlute : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("panFlute", "Pan Flute")
-                .SetSprites("PanFlute.png", "Wendy_BG.png")
+                .SetCardSprites("PanFlute.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(50)

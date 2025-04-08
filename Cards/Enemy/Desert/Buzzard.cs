@@ -7,7 +7,7 @@ public class Buzzard : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("buzzard", "Buzzard")
-                .SetSprites("Buzzard.png", "Wendy_BG.png")
+                .SetCardSprites("Buzzard.png", "Wendy_BG.png")
                 .SetTraits(TStack("Aimless", 1))
                 .SetStats(5, 2, 4)
                 .SetStartWithEffect(SStack("MultiHit", 1))

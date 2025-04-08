@@ -7,7 +7,7 @@ public class Torch : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("torch", "Torch")
-                .SetSprites("Torch.png", "Wendy_BG.png")
+                .SetCardSprites("Torch.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Noomlin", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

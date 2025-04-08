@@ -8,7 +8,7 @@ public class DarkSword : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("darkSword", "Dark Sword")
                 .SetStats(null, 7, 0)
-                .SetSprites("DarkSword.png", "Wendy_BG.png")
+                .SetCardSprites("DarkSword.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(50)

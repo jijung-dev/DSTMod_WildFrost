@@ -9,7 +9,7 @@ public class Deerclops : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("deerclops", "Deerclops")
-                .SetSprites("Deerclops.png", "Wendy_BG.png")
+                .SetBossSprites("Deerclops.png", "Wendy_BG.png")
                 .SetStats(30, 4, 4)
                 .SetTraits(TStack("Knockback", 1))
                 .WithCardType("Boss")

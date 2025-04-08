@@ -7,7 +7,7 @@ public class FriendlyFly : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("friendlyFly", "Friendly Fly")
-                .SetSprites("FriendFly.png", "Wendy_BG.png")
+                .SetCardSprites("FriendFly.png", "Wendy_BG.png")
                 .WithPools("GeneralUnitPool")
                 .SetStats(2, null, 6)
                 .WithCardType("Friendly")

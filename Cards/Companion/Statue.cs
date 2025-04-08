@@ -8,7 +8,7 @@ public class Statue : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("statue", "Statue")
-                .SetSprites("Statue.png", "Wendy_BG.png")
+                .SetCardSprites("Statue.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .SetStats(null, null, 0)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

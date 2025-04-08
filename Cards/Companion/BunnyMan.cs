@@ -8,7 +8,7 @@ public class BunnyMan : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("bunnyman", "Bunnyman")
-                .SetSprites("Bunnyman.png", "Wendy_BG.png")
+                .SetCardSprites("Bunnyman.png", "Wendy_BG.png")
                 .SetStats(8, 4, 3)
                 .WithText("When hit escape to hand and becomes <card=dstmod.bunnymanInjured>".Process())
                 .WithPools("GeneralUnitPool")
@@ -25,7 +25,7 @@ public class BunnyMan : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("bunnymanInjured", "Bunnyman Injured")
-                .SetSprites("BunnymanInjured.png", "Wendy_BG.png")
+                .SetCardSprites("BunnymanInjured.png", "Wendy_BG.png")
                 .SetTraits(TStack("Smackback", 1))
                 .SetStats(6, 1, 0)
                 .WithCardType("Friendly")

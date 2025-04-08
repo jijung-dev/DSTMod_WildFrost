@@ -9,7 +9,7 @@ public class Driftwood : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("driftwood", "Driftwood")
                 .SetStats(null, null, 0)
-                .SetSprites("Driftwood.png", "Wendy_BG.png")
+                .SetCardSprites("Driftwood.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

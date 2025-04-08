@@ -9,7 +9,7 @@ public class Vargling : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("vargling", "Vargling")
                 .IsPet("", true)
-                .SetSprites("Vargling.png", "Wendy_BG.png")
+                .SetCardSprites("Vargling.png", "Wendy_BG.png")
                 .SetStartWithEffect(SStack("MultiHit", 1))
                 .SetStats(5, 2, 3)
                 .WithCardType("Friendly")

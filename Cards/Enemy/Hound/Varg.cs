@@ -9,7 +9,7 @@ public class Varg : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("varg", "Varg")
-                .SetSprites("Varg.png", "Wendy_BG.png")
+                .SetBossSprites("Varg.png", "Wendy_BG.png")
                 .SetStats(18, 4, 4)
                 .SetTraits(TStack("Wild", 1))
                 .WithCardType("Miniboss")

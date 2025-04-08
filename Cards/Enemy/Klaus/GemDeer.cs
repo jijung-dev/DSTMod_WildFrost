@@ -10,7 +10,7 @@ public class GemDeer : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("redGemDeer", "Red Gem Deer")
-				.SetSprites("RedGemDeer.png", "Wendy_BG.png")
+				.SetCardSprites("RedGemDeer.png", "Wendy_BG.png")
 				.SetStats(10, 1, 3)
 				.WithCardType("Enemy")
 				.WithValue(6 * 36)
@@ -27,7 +27,7 @@ public class GemDeer : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("blueGemDeer", "Blue Gem Deer")
-				.SetSprites("BlueGemDeer.png", "Wendy_BG.png")
+				.SetCardSprites("BlueGemDeer.png", "Wendy_BG.png")
 				.SetStats(10, 1, 3)
 				.WithCardType("Enemy")
 				.WithValue(6 * 36)

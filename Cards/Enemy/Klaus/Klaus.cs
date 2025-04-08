@@ -10,7 +10,7 @@ public class Klaus : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("klaus", "Klaus")
-                .SetSprites("Klaus.png", "Wendy_BG.png")
+                .SetBossSprites("Klaus.png", "Wendy_BG.png")
                 .SetStats(20, 5, 4)
                 .WithCardType("Boss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -25,7 +25,7 @@ public class Klaus : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("klausEnraged", "Klaus Enraged")
-                .SetSprites("KlausEnraged.png", "Wendy_BG.png")
+                .SetBossSprites("KlausEnraged.png", "Wendy_BG.png")
                 .SetStats(15, 5, 4)
                 .WithCardType("Boss")
                 .WithValue(25 * 36)

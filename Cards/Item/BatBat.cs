@@ -8,7 +8,7 @@ public class BatBat : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("batBat", "BatBat")
                 .SetStats(null, 4, 0)
-                .SetSprites("BatBat.png", "Wendy_BG.png")
+                .SetCardSprites("BatBat.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(40)

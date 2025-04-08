@@ -10,7 +10,7 @@ public class KillerBee : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("killerBee", "Killer Bee")
-                .SetSprites("KillerBee.png", "Wendy_BG.png")
+                .SetCardSprites("KillerBee.png", "Wendy_BG.png")
                 .SetStats(6, 2, 4)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)

@@ -8,7 +8,7 @@ public class Gunpowder : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("gunpowder", "Gunpowder")
-                .SetSprites("Gunpowder.png", "Wendy_BG.png")
+                .SetCardSprites("Gunpowder.png", "Wendy_BG.png")
                 .WithText("Destroy Self")
                 .WithPools("GeneralUnitPool")
                 .WithCardType("Clunker")

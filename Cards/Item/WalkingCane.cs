@@ -8,7 +8,7 @@ public class WalkingCane : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("walkingCane", "Walking Cane")
                 .SetDamage(1)
-                .SetSprites("WalkingCane.png", "Wendy_BG.png")
+                .SetCardSprites("WalkingCane.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

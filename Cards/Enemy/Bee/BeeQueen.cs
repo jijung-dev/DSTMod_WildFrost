@@ -11,7 +11,7 @@ public class BeeQueen : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("beeQueen", "Bee Queen")
                 .WithText("The Queens Of All <keyword=dstmod.bee>".Process())
-                .SetSprites("BeeQueen.png", "Wendy_BG.png")
+                .SetBossSprites("BeeQueen.png", "Wendy_BG.png")
                 .SetStats(20, 4, 3)
                 .WithCardType("Miniboss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -22,7 +22,7 @@ public class BeeQueen : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("beeQueenEnraged", "Bee Queen Enraged")
-                .SetSprites("BeeQueenEnraged.png", "Wendy_BG.png")
+                .SetBossSprites("BeeQueenEnraged.png", "Wendy_BG.png")
                 .SetStats(25, 2, 5)
                 .WithCardType("Miniboss")
                 .WithValue(23 * 36)

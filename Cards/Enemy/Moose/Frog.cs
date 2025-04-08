@@ -10,14 +10,14 @@ public class Frog : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("frog", "Frog")
-                .SetSprites("Frog.png", "Wendy_BG.png")
+                .SetCardSprites("Frog.png", "Wendy_BG.png")
                 .SetStats(4, 1, 3)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] 
-                    { 
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
                         SStack("On Turn Apply Wetness To Random Card In Hand", 1),
                         SStack("Gain Frog Legs When Destroyed", 1),
                     };

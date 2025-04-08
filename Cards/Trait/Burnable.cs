@@ -10,7 +10,7 @@ public class Burnable : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("burntTree", "Burnt Tree")
                 .SetStats(null, null, 0)
-                .SetSprites("Stick.png", "Wendy_BG.png")
+                .SetCardSprites("Stick.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(2 * 50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

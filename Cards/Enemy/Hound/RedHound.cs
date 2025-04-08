@@ -9,7 +9,7 @@ public class RedHound : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("redHound", "Red Hound")
-                .SetSprites("HoundFire.png", "Wendy_BG.png")
+                .SetCardSprites("HoundFire.png", "Wendy_BG.png")
                 .SetStats(5, 1, 3)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

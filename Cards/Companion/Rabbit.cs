@@ -8,7 +8,7 @@ public class Rabbit : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("rabbit", "Rabbit")
-                .SetSprites("Rabbit.png", "Wendy_BG.png")
+                .SetCardSprites("Rabbit.png", "Wendy_BG.png")
                 .SetStats(2, null, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

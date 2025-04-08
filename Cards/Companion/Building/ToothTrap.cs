@@ -8,7 +8,7 @@ public class ToothTrap : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("toothTrap", "Tooth Trap")
-                .SetSprites("ToothTrap.png", "Wendy_BG.png")
+                .SetCardSprites("ToothTrap.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithPools("GeneralUnitPool")
                 .SetStats(null, 1, 0)

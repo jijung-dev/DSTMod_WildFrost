@@ -8,12 +8,12 @@ public class Charcoal : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("charcoal", "Charcoal")
-                .SetSprites("Charcoal.png", "Wendy_BG.png")
+                .SetCardSprites("Charcoal.png", "Wendy_BG.png")
                 .SetStats(null, null, 0)
                 .WithCardType("Item")
                 .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Double Overheat", 1) };
                         data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1), TStack("Consume", 1) };

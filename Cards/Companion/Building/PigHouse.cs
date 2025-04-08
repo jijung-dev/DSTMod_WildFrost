@@ -8,7 +8,7 @@ public class PigHouse : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("pigHouse", "Pig House")
-                .SetSprites("PigHouse.png", "Wendy_BG.png")
+                .SetCardSprites("PigHouse.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 12)

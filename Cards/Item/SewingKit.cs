@@ -7,7 +7,7 @@ public class SewingKit : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("sewingKit", "Sewing Kit")
-                .SetSprites("SewingKit.png", "Wendy_BG.png")
+                .SetCardSprites("SewingKit.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(30)

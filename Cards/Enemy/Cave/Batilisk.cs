@@ -9,7 +9,7 @@ public class Batilisk : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("batilisk", "Batilisk")
                 .WithText("Take <2><keyword=health>")
-                .SetSprites("Batilisk.png", "Wendy_BG.png")
+                .SetCardSprites("Batilisk.png", "Wendy_BG.png")
                 .SetStats(6, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)

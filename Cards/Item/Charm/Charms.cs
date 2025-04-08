@@ -48,7 +48,7 @@ public class Charms : DataBase
                 .AddPool("GeneralCharmPool")
                 .WithType(CardUpgradeData.Type.Charm)
                 .WithImage("Icons/Beefalo_Charm.png")
-                .WithTitle("Chilled Amulet")
+                .WithTitle("Beefalo Hat")
                 .WithText("Gain <keyword=dstmod.freezeresist>".Process())
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>

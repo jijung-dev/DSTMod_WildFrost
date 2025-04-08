@@ -9,7 +9,7 @@ public class Hammer : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("hammer", "Hammer")
                 .SetStats(null, null, 0)
-                .SetSprites("Hammer.png", "Wendy_BG.png")
+                .SetCardSprites("Hammer.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

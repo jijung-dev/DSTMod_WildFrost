@@ -14,6 +14,10 @@ using WildfrostHopeMod.Utils;
 using WildfrostHopeMod.VFX;
 using static SelectLeader;
 using Extensions = Deadpan.Enums.Engine.Components.Modding.Extensions;
+using UnityEngine.AddressableAssets;
+using UnityEngine.AddressableAssets.ResourceLocators;
+using System.IO;
+using UnityEngine.U2D;
 
 namespace DSTMod_WildFrost
 {
@@ -41,6 +45,19 @@ namespace DSTMod_WildFrost
         public override string Description => "A mod that get idea from don't starve";
         public override TMP_SpriteAsset SpriteAsset => spriteAsset;
         internal static TMP_SpriteAsset spriteAsset;
+
+        public static string CatalogFolder
+            => Path.Combine(Instance.ModDirectory, "Windows");
+
+        // A helpful shortcut
+        public static string CatalogPath
+            => Path.Combine(CatalogFolder, "catalog.json");
+
+        public static SpriteAtlas Cards;
+        public static SpriteAtlas Bosses;
+        public static SpriteAtlas Leaders;
+        public static SpriteAtlas Other;
+
 
         public Dictionary<string, TargetConstraint> allConstraint = new Dictionary<string, TargetConstraint>();
 
@@ -146,9 +163,10 @@ namespace DSTMod_WildFrost
             unitPool = CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
             #region Tribe
             //Add Tribe
+            Sprite flagSprite = DSTMod.Other.GetSprite("DSTFlag");
             assets.Add(
                 TribeCopy("Magic", "DST")
-                    .WithFlag("Images/DSTFlag.png")
+                    .WithFlag(flagSprite)
                     .WithSelectSfxEvent(FMODUnity.RuntimeManager.PathToEventReference("event:/sfx/card/summon"))
                     .SubscribeToAfterAllBuildEvent(
                         (data) =>
@@ -205,7 +223,7 @@ namespace DSTMod_WildFrost
                 new CardDataBuilder(this)
                     .CreateItem("sanityStick99", "Sanity Stick")
                     .SetStats(null, null, 0)
-                    .SetSprites("Stick.png", "Wendy_BG.png")
+                    .SetCardSprites("Stick.png", "Wendy_BG.png")
                     .SetTraits(TStack("Zoomlin", 1))
                     .WithCardType("Item")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -217,7 +235,7 @@ namespace DSTMod_WildFrost
                 new CardDataBuilder(this)
                     .CreateItem("freezingStick99", "Freezing Stick")
                     .SetStats(null, null, 0)
-                    .SetSprites("Stick.png", "Wendy_BG.png")
+                    .SetCardSprites("Stick.png", "Wendy_BG.png")
                     .SetTraits(TStack("Zoomlin", 1))
                     .WithCardType("Item")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -229,7 +247,7 @@ namespace DSTMod_WildFrost
                 new CardDataBuilder(this)
                     .CreateItem("freezingStick1", "Freezing Stick")
                     .SetStats(null, null, 0)
-                    .SetSprites("Stick.png", "Wendy_BG.png")
+                    .SetCardSprites("Stick.png", "Wendy_BG.png")
                     .SetTraits(TStack("Zoomlin", 1))
                     .WithCardType("Item")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -241,7 +259,7 @@ namespace DSTMod_WildFrost
                 new CardDataBuilder(this)
                     .CreateItem("sanityStick1", "Sanity Stick")
                     .SetStats(null, null, 0)
-                    .SetSprites("Stick.png", "Wendy_BG.png")
+                    .SetCardSprites("Stick.png", "Wendy_BG.png")
                     .WithCardType("Item")
                     .SetTraits(TStack("Zoomlin", 1))
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -253,7 +271,7 @@ namespace DSTMod_WildFrost
                 new CardDataBuilder(this)
                     .CreateItem("overheatingStick99", "Overheat Stick")
                     .SetStats(null, null, 0)
-                    .SetSprites("Stick.png", "Wendy_BG.png")
+                    .SetCardSprites("Stick.png", "Wendy_BG.png")
                     .SetTraits(TStack("Zoomlin", 1))
                     .WithCardType("Item")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -265,7 +283,7 @@ namespace DSTMod_WildFrost
                 new CardDataBuilder(this)
                     .CreateItem("overheatingStick1", "Overheat Stick")
                     .SetStats(null, null, 0)
-                    .SetSprites("Stick.png", "Wendy_BG.png")
+                    .SetCardSprites("Stick.png", "Wendy_BG.png")
                     .SetTraits(TStack("Zoomlin", 1))
                     .WithCardType("Item")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -337,7 +355,7 @@ namespace DSTMod_WildFrost
             References.LeaderData.startWithEffects = References
                 .LeaderData.startWithEffects.Concat(new[] { SStack("Summon Chest Before Battle", 1), SStack("Summon Floor Before Battle", 1) })
                 .ToArray();
-                
+
             if (References.PlayerData?.classData.ModAdded != this)
                 yield break;
 
@@ -472,12 +490,22 @@ namespace DSTMod_WildFrost
         public override void Load()
         {
             Instance = this;
+            if (!Addressables.ResourceLocators.Any(r => r is ResourceLocationMap map && map.LocatorId == CatalogPath))
+            {
+                Addressables.LoadContentCatalogAsync(CatalogPath).WaitForCompletion();
+            }
+            Cards = (SpriteAtlas)Addressables.LoadAssetAsync<UnityEngine.Object>($"Assets/{GUID}/Cards.spriteatlas").WaitForCompletion();
+            Leaders = (SpriteAtlas)Addressables.LoadAssetAsync<UnityEngine.Object>($"Assets/{GUID}/Leaders.spriteatlas").WaitForCompletion();
+            Bosses = (SpriteAtlas)Addressables.LoadAssetAsync<UnityEngine.Object>($"Assets/{GUID}/Bosses.spriteatlas").WaitForCompletion();
+            Other = (SpriteAtlas)Addressables.LoadAssetAsync<UnityEngine.Object>($"Assets/{GUID}/Other.spriteatlas").WaitForCompletion();
+
             if (!preLoaded)
             {
                 spriteAsset = HopeUtils.CreateSpriteAsset(Title, directoryWithPNGs: ImagePath("Icons"));
                 CreateTargetConstraint();
                 CreateModAssets();
             }
+
 
             prefabHolder = new GameObject(GUID);
             UnityEngine.Object.DontDestroyOnLoad(prefabHolder);

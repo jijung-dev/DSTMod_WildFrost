@@ -8,7 +8,7 @@ public class Trident : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("trident", "Strident Trident")
                 .SetStats(null, 2, 0)
-                .SetSprites("Trident.png", "Wendy_BG.png")
+                .SetCardSprites("Trident.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetStartWithEffect(SStack("Hit All Enemies", 1))
                 .WithPools("GeneralItemPool")

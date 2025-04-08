@@ -10,7 +10,7 @@ public class Frostjaw : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("frostjaw", "Frostjaw")
-				.SetSprites("Frostjaw.png", "Wendy_BG.png")
+				.SetBossSprites("Frostjaw.png", "Wendy_BG.png")
 				.WithText("Dive Down <hiddencard=dstmod.frostjawDived>".Process())
 				.SetStats(25, 2, 4)
 				.WithCardType("Miniboss")
@@ -29,7 +29,7 @@ public class Frostjaw : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("frostjawDived", "Frostjaw Dived")
-				.SetSprites("FrostjawDived.png", "Wendy_BG.png")
+				.SetCardSprites("FrostjawDived.png", "Wendy_BG.png")
 				.WithText("Dive Up <hiddencard=dstmod.frostjaw>".Process())
 				.SetStats(0, 0, 2)
 				.WithCardType("Miniboss")

@@ -10,7 +10,7 @@ public class Pengull : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("pengull", "Pengull")
-				.SetSprites("Pengull.png", "Wendy_BG.png")
+				.SetCardSprites("Pengull.png", "Wendy_BG.png")
 				.SetStats(4, 2, 2)
 				.WithCardType("Enemy")
 				.WithValue(2 * 36)

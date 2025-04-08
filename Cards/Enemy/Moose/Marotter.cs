@@ -10,7 +10,7 @@ public class Marotter : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("marotter", "Marotter")
-                .SetSprites("Marotter.png", "Wendy_BG.png")
+                .SetCardSprites("Marotter.png", "Wendy_BG.png")
                 .SetStats(6, 2, 4)
                 .WithCardType("Enemy")
                 .WithValue(4 * 36)

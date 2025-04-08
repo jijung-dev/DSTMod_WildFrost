@@ -9,7 +9,7 @@ public class Wormwood : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("wormwood", "Wormwood")
-                .SetSprites("Wormwood.png", "Wendy_BG.png")
+                .SetLeaderSprites("Wormwood.png", "Wendy_BG.png")
                 .WithText("<keyword=dstmod.leftgroupplant>".Process())
                 .SetStats(null, null, 6)
                 .WithCardType("Leader")
@@ -31,7 +31,7 @@ public class Wormwood : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("compostWrap", "Compost Wrap")
-                .SetSprites("CompostWrap.png", "Wendy_BG.png")
+                .SetCardSprites("CompostWrap.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

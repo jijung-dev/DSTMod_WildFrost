@@ -9,7 +9,7 @@ public class Varglet : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("varglet", "Varglet")
-                .SetSprites("Varglet.png", "Wendy_BG.png")
+                .SetCardSprites("Varglet.png", "Wendy_BG.png")
                 .SetStats(8, 3, 5)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

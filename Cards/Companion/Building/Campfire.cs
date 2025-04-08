@@ -8,7 +8,7 @@ public class Campfire : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("campfire", "Campfire")
-                .SetSprites("Campfire.png", "Wendy_BG.png")
+                .SetCardSprites("Campfire.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 0)

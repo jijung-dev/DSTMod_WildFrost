@@ -9,7 +9,7 @@ public class TallBird : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("tallbirdEgg", "Tallbird Egg")
-                .SetSprites("TallBirdEgg.png", "Wendy_BG.png")
+                .SetCardSprites("TallBirdEgg.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.smallbird>".Process())
                 .WithPools("GeneralUnitPool")
                 .SetStats(1, null, 6)
@@ -27,11 +27,11 @@ public class TallBird : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("smallbird", "Smallbird")
                 .WithText("<hiddencard=dstmod.smallishTallbird>".Process())
-                .SetSprites("SmallBird.png", "Wendy_BG.png")
+                .SetCardSprites("SmallBird.png", "Wendy_BG.png")
                 .SetStats(3, 2, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[3]
                         {
@@ -46,11 +46,11 @@ public class TallBird : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("smallishTallbird", "Smallish Tallbird")
                 .WithText("<hiddencard=dstmod.tallbird>".Process())
-                .SetSprites("SmallishBird.png", "Wendy_BG.png")
+                .SetCardSprites("SmallishBird.png", "Wendy_BG.png")
                 .SetStats(5, 3, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[3]
                         {
@@ -64,11 +64,11 @@ public class TallBird : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("tallbird", "Tallbird")
-                .SetSprites("TallBird.png", "Wendy_BG.png")
+                .SetCardSprites("TallBird.png", "Wendy_BG.png")
                 .SetStats(8, 2, 4)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1), SStack("Trigger When Ally Is Hit", 1) };
                     }

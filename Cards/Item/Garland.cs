@@ -8,7 +8,7 @@ public class Garland : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("garland", "Garland")
-                .SetSprites("Garland.png", "Wendy_BG.png")
+                .SetCardSprites("Garland.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(30)

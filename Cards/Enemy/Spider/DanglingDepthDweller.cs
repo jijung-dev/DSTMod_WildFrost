@@ -8,7 +8,7 @@ public class DanglingDepthDweller : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("danglingDepthDweller", "Dangling Depth Dweller")
-				.SetSprites("DanglingDepthDweller.png", "Wendy_BG.png")
+				.SetCardSprites("DanglingDepthDweller.png", "Wendy_BG.png")
 				.SetStats(6, 2, 4)
 				.WithCardType("Enemy")
 				.WithValue(3 * 36)
@@ -41,15 +41,15 @@ public class DanglingDepthDweller : DataBase
 				})
 		);
 		assets.Add(
-            new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXWhenHit>("When Hit Summon Dangling Depth Dweller")
+			new StatusEffectDataBuilder(mod)
+				.Create<StatusEffectApplyXWhenHit>("When Hit Summon Dangling Depth Dweller")
 				.WithText("When hit, summon <card=dstmod.danglingDepthDweller>".Process())
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
-                {
+				.SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
+				{
 					data.targetMustBeAlive = false;
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
-                    data.effectToApply = TryGet<StatusEffectData>("Instant Summon Dangling Depth Dweller");
-                })
-        );
+					data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+					data.effectToApply = TryGet<StatusEffectData>("Instant Summon Dangling Depth Dweller");
+				})
+		);
 	}
 }

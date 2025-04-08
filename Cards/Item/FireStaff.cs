@@ -7,7 +7,7 @@ public class FireStaff : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("fireStaff", "Fire Staff")
-                .SetSprites("FireStaff.png", "Wendy_BG.png")
+                .SetCardSprites("FireStaff.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Consume", 1), TStack("Aimless", 1))
                 .WithPools("GeneralItemPool")

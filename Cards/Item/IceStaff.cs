@@ -7,7 +7,7 @@ public class IceStaff : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("iceStaff", "Ice Staff")
-                .SetSprites("IceStaff.png", "Wendy_BG.png")
+                .SetCardSprites("IceStaff.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

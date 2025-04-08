@@ -7,7 +7,7 @@ public class Pearl : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("pearl", "Pearl")
-                .SetSprites("Pearl.png", "Wendy_BG.png")
+                .SetCardSprites("Pearl.png", "Wendy_BG.png")
                 .SetTraits(TStack("Fragile", 1))
                 .WithPools("GeneralUnitPool")
                 .SetStats(1, null, 4)

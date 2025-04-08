@@ -9,7 +9,7 @@ public class Pickaxe : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("pickaxe", "Pickaxe")
                 .SetStats(null, 2, 0)
-                .SetSprites("Pickaxe.png", "Wendy_BG.png")
+                .SetCardSprites("Pickaxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(30)
@@ -24,7 +24,7 @@ public class Pickaxe : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("goldenPickaxe", "Golden Pickaxe")
                 .SetStats(null, 2, 0)
-                .SetSprites("GoldenPickaxe.png", "Wendy_BG.png")
+                .SetCardSprites("GoldenPickaxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate (CardData data)

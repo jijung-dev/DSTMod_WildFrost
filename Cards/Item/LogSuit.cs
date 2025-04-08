@@ -7,7 +7,7 @@ public class LogSuit : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("logSuit", "Log Suit")
-                .SetSprites("LogSuit.png", "Wendy_BG.png")
+                .SetCardSprites("LogSuit.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(30)

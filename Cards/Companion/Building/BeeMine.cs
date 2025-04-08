@@ -8,7 +8,7 @@ public class BeeMine : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("beeMine", "Bee Mine")
-                .SetSprites("BeeMine.png", "Wendy_BG.png")
+                .SetCardSprites("BeeMine.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 0)

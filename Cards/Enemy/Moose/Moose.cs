@@ -10,7 +10,7 @@ public class Moose : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("moose", "Moose")
-                .SetSprites("Moose.png", "Wendy_BG.png")
+                .SetBossSprites("Moose.png", "Wendy_BG.png")
                 .SetStats(20, 2, 5)
                 .WithCardType("Boss")
                 .WithValue(18 * 36)
@@ -34,7 +34,7 @@ public class Moose : DataBase
                 .Create<StatusEffectApplyXWhenCertainAllyIsHit>("Trigger When Mosling Is Hit")
                 .WithText("Trigger when <card=dstmod.mosling> is hit".Process())
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.isReaction = true;
                         data.stackable = false;

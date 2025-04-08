@@ -9,7 +9,7 @@ public class Hound : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("hound", "Hound")
-                .SetSprites("Hound.png", "Wendy_BG.png")
+                .SetCardSprites("Hound.png", "Wendy_BG.png")
                 .SetStats(4, 1, 3)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)

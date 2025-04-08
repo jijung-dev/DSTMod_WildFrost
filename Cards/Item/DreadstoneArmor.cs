@@ -8,7 +8,7 @@ public class DreadstoneArmor : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("dreadstoneArmor", "Dreadstone Armor")
                 .SetStats(null, 1, 0)
-                .SetSprites("DreadstoneArmor.png", "Wendy_BG.png")
+                .SetCardSprites("DreadstoneArmor.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(60)

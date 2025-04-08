@@ -7,7 +7,7 @@ public class Spear : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("spear", "Spear")
-                .SetSprites("Spear.png", "Wendy_BG.png")
+                .SetCardSprites("Spear.png", "Wendy_BG.png")
                 .SetStats(null, 3, 0)
                 .WithCardType("Item")
         );

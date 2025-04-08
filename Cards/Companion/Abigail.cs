@@ -9,7 +9,7 @@ public class Abigail : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("abigail", "Abigail")
-                .SetSprites("Abigail.png", "Abigail_BG.png")
+                .SetCardSprites("Abigail.png", "Abigail_BG.png")
                 .SetStats(5, 2, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -25,7 +25,7 @@ public class Abigail : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("abigailFlower", "Abigail's Flower")
-                .SetSprites("abigailFlower.png", "Wendy_BG.png")
+                .SetCardSprites("abigailFlower.png", "Wendy_BG.png")
                 .FreeModify(
                     delegate(CardData data)
                     {

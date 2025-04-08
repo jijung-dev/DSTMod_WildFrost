@@ -10,10 +10,10 @@ public class TwintailedHeart : DataBase
                 .CreateItem("twintailedHeart", "Twintailed Heart")
                 .SetStats(null, null, 0)
                 .WithText("Apply <keyword=noomlin> to a companion card in hand")
-                .SetSprites("TwintailedHeart.png", "Wendy_BG.png")
+                .SetCardSprites("TwintailedHeart.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.canPlayOnHand = true;
                         data.canPlayOnBoard = false;

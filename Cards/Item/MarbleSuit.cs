@@ -9,7 +9,7 @@ public class MarbleSuit : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("marbleSuit", "Marble Suit")
                 .SetStats(null, null, 0)
-                .SetSprites("MarbleSuit.png", "Wendy_BG.png")
+                .SetCardSprites("MarbleSuit.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(50)

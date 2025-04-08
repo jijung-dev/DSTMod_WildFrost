@@ -10,7 +10,7 @@ public class EggOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("eggOfTerror", "Egg Of Terror")
-                .SetSprites("EggOfTerror.png", "Wendy_BG.png")
+                .SetCardSprites("EggOfTerror.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.suspiciousPeeper>".Process())
                 .SetStats(2, null, 2)
                 .WithCardType("Enemy")
@@ -28,7 +28,7 @@ public class EggOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("suspiciousPeeper", "Suspicious Peeper")
-                .SetSprites("SuspiciousPeeper.png", "Wendy_BG.png")
+                .SetCardSprites("SuspiciousPeeper.png", "Wendy_BG.png")
                 .SetStats(4, 0, 4)
                 .WithCardType("Enemy")
                 .WithValue(1 * 36)

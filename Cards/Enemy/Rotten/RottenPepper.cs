@@ -10,7 +10,7 @@ public class RottenPepper : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("rottenPepper", "Rotten Giant Pepper")
-                .SetSprites("RottenPepper.png", "Wendy_BG.png")
+                .SetCardSprites("RottenPepper.png", "Wendy_BG.png")
                 .SetStats(2, 0, 3)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)

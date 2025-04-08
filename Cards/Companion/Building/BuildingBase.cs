@@ -74,7 +74,7 @@ public abstract class BuildingBase : DataBase
                     .SetHealth(item._stats[0] == 0 ? (int?)null : item._stats[0])
                     .SetDamage(item._stats[1] == 0 ? (int?)null : item._stats[1])
                     .SetCounter(item._stats[2])
-                    .SetSprites(item._spriteName, "Wendy_BG.png")
+                    .SetCardSprites(item._spriteName, "Wendy_BG.png")
                     .WithCardType("Clunker")
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
@@ -86,7 +86,7 @@ public abstract class BuildingBase : DataBase
                 new CardDataBuilder(mod)
                     .CreateItem(item._name + "Blueprint", item._title + " Blueprint")
                     .WithText($"Place <card=dstmod.{item._name}><hiddencard=dstmod.floor>".Process())
-                    .SetSprites("Blueprint.png", "Wendy_BG.png")
+                    .SetCardSprites("Blueprint.png", "Wendy_BG.png")
                     .WithPools("GeneralItemPool")
                     .WithCardType("Item")
                     .WithValue(GetResourcePrice(item))

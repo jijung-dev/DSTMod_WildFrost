@@ -9,7 +9,7 @@ public class SpikyTree : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("spikyTree", "Spiky Tree")
                 .SetStats(null, null, 0)
-                .SetSprites("SpikyTree.png", "Wendy_BG.png")
+                .SetCardSprites("SpikyTree.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

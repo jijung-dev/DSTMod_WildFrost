@@ -10,7 +10,7 @@ public class BlueprintUpgrade : DataBase
 				.CreateItem("blueprintUpgrade", "Upgrade")
 				.WithText("Gain a random <keyword=dstmod.blueprint>".Process())
 				.SetStats(null, null, 0)
-				.SetSprites("RandomBlueprintUpgrade.png", "Wendy_BG.png")
+				.SetCardSprites("RandomBlueprintUpgrade.png", "Wendy_BG.png")
 				.WithCardType("Item")
 				.SubscribeToAfterAllBuildEvent<CardData>(
 					delegate (CardData data)

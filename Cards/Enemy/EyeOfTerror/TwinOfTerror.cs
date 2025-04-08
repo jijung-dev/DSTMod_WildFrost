@@ -10,7 +10,7 @@ public class TwinOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("retinazor", "Retinazor")
-                .SetSprites("Retinazor.png", "Wendy_BG.png")
+                .SetBossSprites("Retinazor.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
                 .SetStats(21, 0, 6)
                 .WithCardType("Miniboss")
@@ -28,7 +28,7 @@ public class TwinOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("retinazorEnraged", "Retinazor Enraged")
-                .SetSprites("RetinazorEnraged.png", "Wendy_BG.png")
+                .SetBossSprites("RetinazorEnraged.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
                 .SetStats(18, 1, 5)
                 .WithCardType("Miniboss")
@@ -44,10 +44,10 @@ public class TwinOfTerror : DataBase
                     data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
                 })
         );
-		assets.Add(
+        assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("spazmatism", "Spazmatism")
-                .SetSprites("Spazmatism.png", "Wendy_BG.png")
+                .SetBossSprites("Spazmatism.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
                 .SetStats(25, 2, 4)
                 .WithCardType("Miniboss")
@@ -56,7 +56,7 @@ public class TwinOfTerror : DataBase
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Take Health", 1) };
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-						SStack("MultiHit", 1),
+                        SStack("MultiHit", 1),
                         SStack("Spazmatism Enraged", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
@@ -65,7 +65,7 @@ public class TwinOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("spazmatismEnraged", "Spazmatism Enraged")
-                .SetSprites("SpazmatismEnraged.png", "Wendy_BG.png")
+                .SetBossSprites("SpazmatismEnraged.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
                 .SetStats(20, 2, 3)
                 .WithCardType("Miniboss")
@@ -95,7 +95,7 @@ public class TwinOfTerror : DataBase
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                 })
         );
-		assets.Add(
+        assets.Add(
             StatusCopy("FrenzyBossPhase2", "Spazmatism Enraged")
                 .SubscribeToAfterAllBuildEvent<StatusEffectNextPhase>(data =>
                 {

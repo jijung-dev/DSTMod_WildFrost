@@ -10,7 +10,7 @@ public class RottenPotato : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("rottenPotato", "Rotten Giant Potato")
-                .SetSprites("RottenPotato.png", "Wendy_BG.png")
+                .SetCardSprites("RottenPotato.png", "Wendy_BG.png")
                 .WithText("Destroy Self")
                 .SetStats(4, null, 5)
                 .WithCardType("Enemy")

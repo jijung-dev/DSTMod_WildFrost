@@ -66,6 +66,27 @@ public static class Ext
     {
         return References.LeaderData.attackEffects.Where(effect => effect.data != DSTMod.Instance.TryGet<StatusEffectData>(effectName)).ToArray();
     }
+    public static CardDataBuilder SetCardSprites(this CardDataBuilder builder, string mainSpriteName, string backgroundSpriteName)
+    {
+        Sprite mainSprite = DSTMod.Cards.GetSprite(mainSpriteName.Replace(".png", ""));
+        Sprite backgroundSprite = DSTMod.Other.GetSprite(backgroundSpriteName.Replace(".png", ""));
+
+        return builder.SetSprites(mainSprite, backgroundSprite);
+    }
+    public static CardDataBuilder SetLeaderSprites(this CardDataBuilder builder, string mainSpriteName, string backgroundSpriteName)
+    {
+        Sprite mainSprite = DSTMod.Leaders.GetSprite(mainSpriteName.Replace(".png", ""));
+        Sprite backgroundSprite = DSTMod.Other.GetSprite(backgroundSpriteName.Replace(".png", ""));
+
+        return builder.SetSprites(mainSprite, backgroundSprite);
+    }
+    public static CardDataBuilder SetBossSprites(this CardDataBuilder builder, string mainSpriteName, string backgroundSpriteName)
+    {
+        Sprite mainSprite = DSTMod.Bosses.GetSprite(mainSpriteName.Replace(".png", ""));
+        Sprite backgroundSprite = DSTMod.Other.GetSprite(backgroundSpriteName.Replace(".png", ""));
+
+        return builder.SetSprites(mainSprite, backgroundSprite);
+    }
 
     public static T CopyAdd<T>(this GameObject desitation, T org)
         where T : Component

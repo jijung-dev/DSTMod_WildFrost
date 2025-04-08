@@ -7,7 +7,7 @@ public class IceChester : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("iceChester", "Ice Chester")
-                .SetSprites("IceChester.png", "Wendy_BG.png")
+                .SetCardSprites("IceChester.png", "Wendy_BG.png")
                 .SetStats(12, null, 0)
                 .WithCardType("Friendly")
                 .SetStartWithEffect(SStack("When Hit Apply Snow To Attacker", 2))

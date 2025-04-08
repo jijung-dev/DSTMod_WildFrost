@@ -8,7 +8,7 @@ public class Broodling : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("broodling", "Broodling")
                 .IsPet("", true)
-                .SetSprites("Broodling.png", "Wendy_BG.png")
+                .SetCardSprites("Broodling.png", "Wendy_BG.png")
                 .SetStats(6, 1, 5)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

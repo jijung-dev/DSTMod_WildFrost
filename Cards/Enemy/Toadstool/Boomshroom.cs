@@ -8,7 +8,7 @@ public class Boomshroom : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("boomshroom", "Boomshroom")
-                .SetSprites("Boomshroom.png", "Wendy_BG.png")
+                .SetCardSprites("Boomshroom.png", "Wendy_BG.png")
                 .SetStats(1, null, 3)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

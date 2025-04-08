@@ -7,7 +7,7 @@ public class Lavae : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("lavae", "Lavae")
-                .SetSprites("Lavae.png", "Wendy_BG.png")
+                .SetCardSprites("Lavae.png", "Wendy_BG.png")
                 .SetStats(5, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)

@@ -10,7 +10,7 @@ public class Wortox : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("wortox", "Wortox")
                 .WithCardType("Leader")
-                .SetSprites("Wortox.png", "Wendy_BG.png")
+                .SetLeaderSprites("Wortox.png", "Wendy_BG.png")
                 .SetStats(10, 4, 4)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -21,7 +21,7 @@ public class Wortox : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("souls", "Souls")
-                .SetSprites("Souls.png", "Wendy_BG.png")
+                .SetCardSprites("Souls.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Consumable", 1) };
@@ -32,7 +32,7 @@ public class Wortox : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("soul", "Soul")
-                .SetSprites("Soul.png", "Wendy_BG.png")
+                .SetCardSprites("Soul.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Consumable", 1) };

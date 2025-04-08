@@ -10,7 +10,7 @@ public class Glacier : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("glacier", "Glacier")
-				.SetSprites("Glacier.png", "Wendy_BG.png")
+				.SetCardSprites("Glacier.png", "Wendy_BG.png")
 				.SetStats(null, null, 0)
 				.WithCardType("Clunker")
 				.WithValue(2 * 36)

@@ -9,7 +9,7 @@ public class SporecapAttack : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("sporecapAttack", "Sporecap Attack")
                 .SetStats(null, null, 0)
-                .SetSprites("Sporecap.png", "Wendy_BG.png")
+                .SetCardSprites("Sporecap.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

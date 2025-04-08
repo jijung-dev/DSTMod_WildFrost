@@ -8,7 +8,7 @@ public class FootballHelmet : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("footballHelmet", "Football Helmet")
                 .SetStats(null, null, 0)
-                .SetSprites("FootballHelmet.png", "Wendy_BG.png")
+                .SetCardSprites("FootballHelmet.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(30)

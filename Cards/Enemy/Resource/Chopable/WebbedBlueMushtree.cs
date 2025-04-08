@@ -9,7 +9,7 @@ public class WebbedBlueMushtree : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("webbedBlueMushtree", "Webbed Blue Mushtree")
                 .SetStats(null, null, 0)
-                .SetSprites("WebbedBlueMushtree.png", "Wendy_BG.png")
+                .SetCardSprites("WebbedBlueMushtree.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

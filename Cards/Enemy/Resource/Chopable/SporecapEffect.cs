@@ -9,7 +9,7 @@ public class SporecapEffect : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("sporecapIncreaseEffect", "Sporecap Effect")
                 .SetStats(null, null, 0)
-                .SetSprites("Sporecap.png", "Wendy_BG.png")
+                .SetCardSprites("Sporecap.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

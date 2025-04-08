@@ -9,7 +9,7 @@ public class SmallTree : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("smallTree", "Small Tree")
                 .SetStats(null, null, 0)
-                .SetSprites("SmallTree.png", "Wendy_BG.png")
+                .SetCardSprites("SmallTree.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

@@ -11,10 +11,10 @@ public class UpgradeWormwood : DataBase
                 .CreateItem("huskUpgrade", "Bramble Husk Upgrade")
                 .WithText("Increase <keyword=teeth> applied by 1".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("HuskUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("HuskUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Husk", 1) };
                     }
@@ -23,7 +23,7 @@ public class UpgradeWormwood : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("saladmander", "Saladmander")
-                .SetSprites("Saladmander.png", "Wendy_BG.png")
+                .SetCardSprites("Saladmander.png", "Wendy_BG.png")
                 .SetStats(8, 3, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -38,7 +38,7 @@ public class UpgradeWormwood : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("carrat", "Carrat")
-                .SetSprites("Carrat.png", "Wendy_BG.png")
+                .SetCardSprites("Carrat.png", "Wendy_BG.png")
                 .SetStats(2, null, 5)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -53,7 +53,7 @@ public class UpgradeWormwood : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("bulbousLightbug", "Bulbous Lightbug")
-                .SetSprites("BulbousLightbug.png", "Wendy_BG.png")
+                .SetCardSprites("BulbousLightbug.png", "Wendy_BG.png")
                 .SetStats(1, null, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -76,7 +76,7 @@ public class UpgradeWormwood : DataBase
                 .Create<StatusEffectApplyXWhenCertainAllyIsHit>("Trigger When Wormwood Is Hit")
                 .WithText("Trigger when <card=dstmod.wormwood> is hit".Process())
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.isReaction = true;
                         data.stackable = false;

@@ -10,7 +10,7 @@ public class LordOfTheFruitFly : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("lordFruitFly", "Lord of the Fruit Flies")
-                .SetSprites("LordOfTheFruitFlies.png", "Wendy_BG.png")
+                .SetCardSprites("LordOfTheFruitFlies.png", "Wendy_BG.png")
                 .SetStats(15, 1, 3)
                 .WithCardType("Miniboss")
                 .WithValue(13 * 36)
@@ -23,7 +23,7 @@ public class LordOfTheFruitFly : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("fruitFly", "Fruit Fly")
-                .SetSprites("FruitFly.png", "Wendy_BG.png")
+                .SetCardSprites("FruitFly.png", "Wendy_BG.png")
                 .WithText("Double the target's <keyword=shroom>")
                 .SetStats(4, 1, 4)
                 .WithCardType("Enemy")

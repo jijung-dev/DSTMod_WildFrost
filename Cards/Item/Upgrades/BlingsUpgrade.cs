@@ -10,10 +10,10 @@ public class BlingsUpgrade : DataBase
                 .CreateItem("blingsUpgrade", "Upgrade")
                 .WithText("Gain 100 <keyword=blings>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("BlingUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("BlingUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Blings Upgrade", 1) };
                     }

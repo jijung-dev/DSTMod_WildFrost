@@ -9,7 +9,7 @@ public class KittyKit : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("kittykit", "Kittykit")
                 .IsPet("", true)
-                .SetSprites("Kittykit.png", "Wendy_BG.png")
+                .SetCardSprites("Kittykit.png", "Wendy_BG.png")
                 .WithText("Gain 3-6<keyword=blings>")
                 .SetTraits(TStack("Greed", 1))
                 .SetAttackEffect(SStack("Gain Gold Range (3-6)", 1))

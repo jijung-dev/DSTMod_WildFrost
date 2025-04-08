@@ -8,7 +8,7 @@ public class Beefalo : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("beefalo", "Beefalo")
-                .SetSprites("Beefalo.png", "Wendy_BG.png")
+                .SetCardSprites("Beefalo.png", "Wendy_BG.png")
                 .SetTraits(TStack("Knockback", 1), TStack("Pigheaded", 1))
                 .WithPools("GeneralUnitPool")
                 .SetStats(8, 3, 5)

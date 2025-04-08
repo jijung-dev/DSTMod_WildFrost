@@ -10,7 +10,7 @@ public class Slurper : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("slurper", "Slurper")
-                .SetSprites("Slurper.png", "Wendy_BG.png")
+                .SetCardSprites("Slurper.png", "Wendy_BG.png")
                 .SetStats(6, 2, 2)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)

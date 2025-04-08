@@ -7,7 +7,7 @@ public class Glommer : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("glommer", "Glommer")
-                .SetSprites("Glommer.png", "Wendy_BG.png")
+                .SetCardSprites("Glommer.png", "Wendy_BG.png")
                 .SetStats(3, null, 6)
                 .WithCardType("Friendly")
                 .SetStartWithEffect(SStack("On Turn Add Attack To Allies", 2))

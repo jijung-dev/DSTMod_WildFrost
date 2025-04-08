@@ -10,7 +10,7 @@ public class CharmUpgrade : DataBase
 				.CreateItem("charmUpgrade", "Upgrade")
 				.WithText("Leader gain a random charm".Process())
 				.SetStats(null, null, 0)
-				.SetSprites("RandomCharmUpgrade.png", "Wendy_BG.png")
+				.SetCardSprites("RandomCharmUpgrade.png", "Wendy_BG.png")
 				.WithCardType("Item")
 				.SubscribeToAfterAllBuildEvent<CardData>(
 					delegate (CardData data)

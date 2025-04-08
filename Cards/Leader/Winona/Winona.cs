@@ -8,7 +8,7 @@ public class Winona : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("winona", "Winona")
-                .SetSprites("Winona.png", "Wendy_BG.png")
+                .SetLeaderSprites("Winona.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.catapult>".Process())
                 .SetStats(10, 0, 4)
                 .WithCardType("Leader")
@@ -21,10 +21,10 @@ public class Winona : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("handyRemote", "Handy Remote")
-                .SetSprites("HandyRemote.png", "Wendy_BG.png")
+                .SetCardSprites("HandyRemote.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .FreeModify(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.needsTarget = false;
                     }
@@ -38,10 +38,10 @@ public class Winona : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("handyRemoteSlow", "Handy Remote")
-                .SetSprites("HandyRemote.png", "Wendy_BG.png")
+                .SetCardSprites("HandyRemote.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .FreeModify(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.needsTarget = false;
                     }
@@ -61,14 +61,14 @@ public class Winona : DataBase
                 .Create<StatusEffectInstantGainCard>("Instant Gain Handy Remote")
                 .WithText("Gain <card=dstmod.handyRemote>".Process())
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate(StatusEffectInstantGainCard data)
+                    delegate (StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("handyRemote");
                     }
@@ -79,14 +79,14 @@ public class Winona : DataBase
                 .Create<StatusEffectInstantGainCard>("Instant Gain Handy Remote Slow")
                 .WithText("Gain <card=dstmod.handyRemoteSlow>".Process())
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate(StatusEffectInstantGainCard data)
+                    delegate (StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("handyRemoteSlow");
                     }

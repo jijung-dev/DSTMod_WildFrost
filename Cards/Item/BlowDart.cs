@@ -9,12 +9,12 @@ public class BlowDart : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("blowDart", "BlowDart")
                 .SetStats(null, null, 0)
-                .SetSprites("BlowDart.png", "Wendy_BG.png")
+                .SetCardSprites("BlowDart.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithCardType("Item")
                 .WithValue(70)
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Random Snow Fire Shroom", 4) };
                         data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };

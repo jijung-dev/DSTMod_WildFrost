@@ -9,7 +9,7 @@ public class Tree : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("tree", "Tree")
                 .SetStats(null, null, 0)
-                .SetSprites("Tree.png", "Wendy_BG.png")
+                .SetCardSprites("Tree.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

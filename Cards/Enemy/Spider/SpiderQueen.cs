@@ -9,7 +9,7 @@ public class SpiderQueen : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("spiderQueen", "Spider Queen")
-                .SetSprites("SpiderQueen.png", "Wendy_BG.png")
+                .SetBossSprites("SpiderQueen.png", "Wendy_BG.png")
                 .SetStats(15, 2, 4)
                 .SetTraits(TStack("Smackback", 1))
                 .WithCardType("Miniboss")

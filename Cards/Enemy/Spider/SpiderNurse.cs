@@ -8,7 +8,7 @@ public class SpiderNurse : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("spiderNurse", "Spider Nurse")
-                .SetSprites("SpiderNurse.png", "Wendy_BG.png")
+                .SetCardSprites("SpiderNurse.png", "Wendy_BG.png")
                 .SetStats(5, 1, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)

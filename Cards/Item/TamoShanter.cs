@@ -9,7 +9,7 @@ public class TamoShanter : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("tamoShanter", "Tam o\' Shanter")
                 .SetStats(null, null, 0)
-                .SetSprites("TamoShanter.png", "Wendy_BG.png")
+                .SetCardSprites("TamoShanter.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(30)

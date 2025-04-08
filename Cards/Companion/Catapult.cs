@@ -8,7 +8,7 @@ public class Catapult : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("catapult", "Catapult")
-                .SetSprites("Catapult.png", "Wendy_BG.png")
+                .SetCardSprites("Catapult.png", "Wendy_BG.png")
                 .SetStats(null, 3, 0)
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -26,7 +26,7 @@ public class Catapult : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("tape", "Trusty Tape")
-                .SetSprites("Tape.png", "Wendy_BG.png")
+                .SetCardSprites("Tape.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .FreeModify(
                     delegate(CardData data)

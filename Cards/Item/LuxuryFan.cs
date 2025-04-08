@@ -9,7 +9,7 @@ public class LuxuryFan : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("luxuryFan", "Luxury Fan")
                 .SetStats(null, null, 0)
-                .SetSprites("LuxuryFan.png", "Wendy_BG.png")
+                .SetCardSprites("LuxuryFan.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(60)

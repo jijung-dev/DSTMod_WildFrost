@@ -9,7 +9,7 @@ public class SeaStack : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("seaStack", "Sea Stack")
                 .SetStats(null, null, 0)
-                .SetSprites("SeaStack.png", "Wendy_BG.png")
+                .SetCardSprites("SeaStack.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

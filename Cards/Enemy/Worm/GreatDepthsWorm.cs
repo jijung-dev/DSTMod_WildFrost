@@ -7,7 +7,7 @@ public class GreatDepthsWorm : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("greatDepthsWormHead", "Great Depths Worm Head")
-				.SetSprites("GreatDepthsWormHead.png", "Wendy_BG.png")
+				.SetBossSprites("GreatDepthsWormHead.png", "Wendy_BG.png")
 				.SetStats(30, 3, 8)
 				.WithCardType("Miniboss")
 				.WithValue(7 * 36)
@@ -24,7 +24,7 @@ public class GreatDepthsWorm : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("greatDepthsWormBody", "Great Depths Worm Body")
-				.SetSprites("GreatDepthsWormBody.png", "Wendy_BG.png")
+				.SetBossSprites("GreatDepthsWormBody.png", "Wendy_BG.png")
 				.SetStats(20, null, 0)
 				.WithCardType("Miniboss")
 				.WithValue(7 * 36)
@@ -40,7 +40,7 @@ public class GreatDepthsWorm : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("greatDepthsWormTail", "Great Depths Worm Tail")
-				.SetSprites("GreatDepthsWormTail.png", "Wendy_BG.png")
+				.SetBossSprites("GreatDepthsWormTail.png", "Wendy_BG.png")
 				.SetStats(30, null, 6)
 				.WithCardType("Miniboss")
 				.WithValue(7 * 36)

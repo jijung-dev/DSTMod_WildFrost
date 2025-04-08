@@ -9,7 +9,7 @@ public class WovenShadow : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("skullWovenShadow", "Skull Woven Shadow")
-                .SetSprites("SkullWovenShadow.png", "Wendy_BG.png")
+                .SetCardSprites("SkullWovenShadow.png", "Wendy_BG.png")
                 .WithCardType("Enemy")
                 .SetStats(1, null, 4)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -24,7 +24,7 @@ public class WovenShadow : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("handWovenShadow", "Hand Woven Shadow")
-                .SetSprites("HandWovenShadow.png", "Wendy_BG.png")
+                .SetCardSprites("HandWovenShadow.png", "Wendy_BG.png")
                 .WithCardType("Enemy")
                 .SetStats(1, null, 4)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -39,7 +39,7 @@ public class WovenShadow : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("unseenHand", "Unseen Hand")
-                .SetSprites("UnseenHand.png", "Wendy_BG.png")
+                .SetCardSprites("UnseenHand.png", "Wendy_BG.png")
                 .WithCardType("Enemy")
                 .SetStats(1, null, 0)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

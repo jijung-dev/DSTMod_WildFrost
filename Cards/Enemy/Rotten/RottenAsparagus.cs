@@ -10,7 +10,7 @@ public class RottenAsparagus : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("rottenAsparagus", "Rotten Giant Asparagus")
-                .SetSprites("RottenAsparagus.png", "Wendy_BG.png")
+                .SetCardSprites("RottenAsparagus.png", "Wendy_BG.png")
                 .SetStats(2, null, 4)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)

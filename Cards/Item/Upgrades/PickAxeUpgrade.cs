@@ -10,10 +10,10 @@ public class PickAxeUpgrade : DataBase
                 .CreateItem("pickAxeUpgrade", "Upgrade")
                 .WithText("Gain 1 <card=dstmod.pickaxe> and 1 <card=dstmod.axe>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("PickAxeUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("PickAxeUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("PickAxe Upgrade", 1) };
                     }

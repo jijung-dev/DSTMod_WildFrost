@@ -7,7 +7,7 @@ public class MysteriousPlant : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("mysteriousPlant", "Mysterious Plant")
-                .SetSprites("MysteriousPlant.png", "Wendy_BG.png")
+                .SetCardSprites("MysteriousPlant.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
                 .SetStats(1, null, 0)
                 .WithValue(1 * 36)

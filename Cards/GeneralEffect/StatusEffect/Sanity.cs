@@ -11,7 +11,7 @@ public class Sanity : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("crawlingHorror", "Crawling Horror")
-                .SetSprites("CrawlingHorror.png", "Wendy_BG.png")
+                .SetCardSprites("CrawlingHorror.png", "Wendy_BG.png")
                 .SetStats(8, 2, 4)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -23,7 +23,7 @@ public class Sanity : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("terrorbeak", "Terrorbeak")
-                .SetSprites("TerrorBeak.png", "Wendy_BG.png")
+                .SetCardSprites("TerrorBeak.png", "Wendy_BG.png")
                 .SetStats(5, 4, 3)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

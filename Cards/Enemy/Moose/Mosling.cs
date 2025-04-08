@@ -10,7 +10,7 @@ public class Mosling : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("mosling", "Mosling")
-                .SetSprites("Mosling.png", "Wendy_BG.png")
+                .SetCardSprites("Mosling.png", "Wendy_BG.png")
                 .SetStats(6, 1, 3)
                 .WithCardType("Miniboss")
                 .WithValue(4 * 36)
@@ -18,7 +18,7 @@ public class Mosling : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("mooseEgg", "Moose Egg")
-                .SetSprites("MooseEgg.png", "Wendy_BG.png")
+                .SetCardSprites("MooseEgg.png", "Wendy_BG.png")
                 .SetStats(null, null, 4)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

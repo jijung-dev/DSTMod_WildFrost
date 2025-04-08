@@ -8,7 +8,7 @@ public class Wendy : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("wendy", "Wendy")
-                .SetSprites("Wendy.png", "Wendy_BG.png")
+                .SetLeaderSprites("Wendy.png", "Wendy_BG.png")
                 .SetStats(8, 2, 3)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -16,7 +16,6 @@ public class Wendy : DataBase
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mourning Glory", 1) };
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        //SStack("When Deployed Summon Abigail", 1),
                         SStack("When Abigail Destroyed Mourning Glory", 1),
                     };
                     data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade(), LeaderExt.AddRandomHealth(0, 1) };

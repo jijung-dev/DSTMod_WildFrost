@@ -10,10 +10,10 @@ public class UpgradeWinona : DataBase
                 .CreateItem("slowUpgrade", "Upgrade")
                 .WithText("<card=dstmod.winona> reduce max <keyword=counter> by 2 but <card=dstmod.handyRemote> lose <keyword=noomlin>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("SlowUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("SlowUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Slow", 1) };
                     }
@@ -24,10 +24,10 @@ public class UpgradeWinona : DataBase
                 .CreateItem("2tapeUpgrade", "Upgrade")
                 .WithText("Gain 2 <card=dstmod.tape><hiddencard=dstmod.catapult>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("2TapeUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("2TapeUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Tape", 1) };
                     }
@@ -36,7 +36,7 @@ public class UpgradeWinona : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("generator", "Generator")
-                .SetSprites("Generator.png", "Wendy_BG.png")
+                .SetCardSprites("Generator.png", "Wendy_BG.png")
                 .SetStats(null, null, 8)
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -52,7 +52,7 @@ public class UpgradeWinona : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("spotlight", "Spotlight")
-                .SetSprites("Spotlight.png", "Wendy_BG.png")
+                .SetCardSprites("Spotlight.png", "Wendy_BG.png")
                 .SetStats(null, null, 5)
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

@@ -10,10 +10,10 @@ public class BoosterShot : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("boosterShot", "Booster Shot")
-                .SetSprites("BoosterShot.png", "Wendy_BG.png")
+                .SetCardSprites("BoosterShot.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };
                         data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Increase Max Health", 2) };

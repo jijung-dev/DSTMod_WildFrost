@@ -9,7 +9,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("wolfgang", "Wolfgang")
-                .SetSprites("Wolfgang.png", "Wendy_BG.png")
+                .SetLeaderSprites("Wolfgang.png", "Wendy_BG.png")
                 .SetStats(8, 4, 5)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -26,7 +26,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("dumbbell", "Dumbbell")
-                .SetSprites("Dumbbell.png", "Wendy_BG.png")
+                .SetCardSprites("Dumbbell.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -37,7 +37,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("goldenDumbbell", "Golden Dumbbell")
-                .SetSprites("GoldenDumbbell.png", "Wendy_BG.png")
+                .SetCardSprites("GoldenDumbbell.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -48,7 +48,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("marbell", "Marbell")
-                .SetSprites("Marbell.png", "Wendy_BG.png")
+                .SetCardSprites("Marbell.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -60,7 +60,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("firebell", "Firebell")
-                .SetSprites("Firebell.png", "Wendy_BG.png")
+                .SetCardSprites("Firebell.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -72,7 +72,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("icebell", "Icebell")
-                .SetSprites("Icebell.png", "Wendy_BG.png")
+                .SetCardSprites("Icebell.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -84,7 +84,7 @@ public class Wolfgang : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("gembell", "Gembell")
-                .SetSprites("Gembell.png", "Wendy_BG.png")
+                .SetCardSprites("Gembell.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

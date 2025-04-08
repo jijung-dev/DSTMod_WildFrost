@@ -10,7 +10,7 @@ public class Antlion : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("antlion", "Antlion")
-                .SetSprites("Antlion.png", "Wendy_BG.png")
+                .SetBossSprites("Antlion.png", "Wendy_BG.png")
                 .SetStats(30, 5, 3)
                 .WithCardType("Miniboss")
                 .WithValue(20 * 36)
@@ -29,7 +29,7 @@ public class Antlion : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("sandCastle", "Sand Castle")
-                .SetSprites("SandCastle.png", "Wendy_BG.png")
+                .SetCardSprites("SandCastle.png", "Wendy_BG.png")
                 .SetStats(null, null, 0)
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

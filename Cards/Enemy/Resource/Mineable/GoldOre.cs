@@ -9,7 +9,7 @@ public class GoldOre : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("goldOre", "Gold Ore")
                 .SetStats(null, null, 0)
-                .SetSprites("GoldOre.png", "Wendy_BG.png")
+                .SetCardSprites("GoldOre.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

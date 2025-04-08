@@ -8,7 +8,7 @@ public class CaveSpider : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("caveSpider", "Cave Spider")
-                .SetSprites("CaveSpider.png", "Wendy_BG.png")
+                .SetCardSprites("CaveSpider.png", "Wendy_BG.png")
                 .SetStats(8, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)

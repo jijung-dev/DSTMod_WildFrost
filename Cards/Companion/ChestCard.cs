@@ -9,7 +9,7 @@ public class ChestCard : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("chest", "Chest")
-                .SetSprites("Chest.png", "Abigail_BG.png")
+                .SetCardSprites("Chest.png", "Abigail_BG.png")
                 .SetStats(null, null, 0)
                 .WithText(
                     "Store <keyword=tgestudio.wildfrost.dstmod.rock> and <keyword=tgestudio.wildfrost.dstmod.wood> and <keyword=tgestudio.wildfrost.dstmod.gold>"

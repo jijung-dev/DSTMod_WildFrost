@@ -10,10 +10,10 @@ public class UpgradeWolfgang : DataBase
                 .CreateItem("gymUpgrade", "Mighty Gym Upgrade")
                 .WithText("Increase <keyword=dstmod.mightiness> cap to 15 stacks".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("GymUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("GymUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Gym", 1) };
                     }
@@ -24,10 +24,10 @@ public class UpgradeWolfgang : DataBase
                 .CreateItem("gembellUpgrade", "Gembells Upgrade")
                 .WithText("Gain <card=dstmod.firebell> and <card=dstmod.icebell> and <card=dstmod.gembell>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("GembellUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("GembellUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Gembell", 1) };
                     }
@@ -40,10 +40,10 @@ public class UpgradeWolfgang : DataBase
                     "<card=dstmod.wolfgang> now increase max <keyword=attack> to all allies instead but increase <card=dstmod.wolfgang> max <keyword=counter> by 3".Process()
                 )
                 .SetStats(null, null, 0)
-                .SetSprites("WhistleUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("WhistleUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Whistle", 1) };
                     }

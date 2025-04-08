@@ -11,7 +11,7 @@ public class FloorCard : DataBase
                 .CreateUnit("floor", "Building Floor")
                 .SetStats(null, null, 0)
                 .WithText("Place <keyword=tgestudio.wildfrost.dstmod.building> on this platform")
-                .SetSprites("Floor.png", "Wendy_BG.png")
+                .SetCardSprites("Floor.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.cardType = TryGet<CardType>("Clunker");

@@ -8,7 +8,7 @@ public class JuicyBerryBush : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("juicyBerryBush", "Juicy Berry Bush")
                 .SetStats(5, null, 0)
-                .SetSprites("JuicyBerryBush.png", "Wendy_BG.png")
+                .SetCardSprites("JuicyBerryBush.png", "Wendy_BG.png")
                 .WithCardType("Friendly")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

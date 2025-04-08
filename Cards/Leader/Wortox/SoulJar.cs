@@ -9,7 +9,7 @@ public class SoulJar : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("souls2", "Souls")
-                .SetSprites("Souls.png", "Wendy_BG.png")
+                .SetCardSprites("Souls.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Cooked", 1) };
@@ -20,7 +20,7 @@ public class SoulJar : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("soul2", "Soul")
-                .SetSprites("Soul.png", "Wendy_BG.png")
+                .SetCardSprites("Soul.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Cooked", 1) };

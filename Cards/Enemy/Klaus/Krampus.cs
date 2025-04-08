@@ -10,7 +10,7 @@ public class Krampus : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("krampus", "Krampus")
-				.SetSprites("Krampus.png", "Wendy_BG.png")
+				.SetCardSprites("Krampus.png", "Wendy_BG.png")
 				.SetStats(2, null, 4)
 				.WithCardType("Enemy")
 				.WithValue(3 * 36)

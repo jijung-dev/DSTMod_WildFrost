@@ -10,7 +10,7 @@ public class Rockjaw : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("rockjaw", "Rockjaw")
-                .SetSprites("Rockjaw.png", "Wendy_BG.png")
+                .SetCardSprites("Rockjaw.png", "Wendy_BG.png")
                 .WithText("Dive down <hiddencard=dstmod.rockjawDived>".Process())
                 .SetStats(8, 2, 4)
                 .WithCardType("Enemy")
@@ -29,7 +29,7 @@ public class Rockjaw : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("rockjawDived", "Rockjaw Dived")
-                .SetSprites("RockjawDived.png", "Wendy_BG.png")
+                .SetCardSprites("RockjawDived.png", "Wendy_BG.png")
                 .WithText("Dive up <hiddencard=dstmod.rockjaw>".Process())
                 .SetStats(0, 0, 2)
                 .WithCardType("Enemy")

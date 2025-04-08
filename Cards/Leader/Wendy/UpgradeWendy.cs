@@ -11,7 +11,7 @@ public class UpgradeWendy : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("unyieldingDraught", "Unyielding Draught")
                 .WithText("<keyword=dstmod.ghostlyelixirs><hiddencard=dstmod.abigail>".Process())
-                .SetSprites("UnyieldingDraught.png", "Wendy_BG.png")
+                .SetCardSprites("UnyieldingDraught.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Block", 2) };
@@ -22,7 +22,7 @@ public class UpgradeWendy : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("distilledVengeance", "Distilled Vengeance")
                 .WithText("<keyword=dstmod.ghostlyelixirs><hiddencard=dstmod.abigail>".Process())
-                .SetSprites("DistilledVengeance.png", "Wendy_BG.png")
+                .SetCardSprites("DistilledVengeance.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Teeth", 3) };
@@ -33,7 +33,7 @@ public class UpgradeWendy : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("nightshadeNostrum", "Nightshade Nostrum")
                 .WithText("<keyword=dstmod.ghostlyelixirs><hiddencard=dstmod.abigail>".Process())
-                .SetSprites("NightshadeNostrum.png", "Wendy_BG.png")
+                .SetCardSprites("NightshadeNostrum.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Spice", 3) };
@@ -44,7 +44,7 @@ public class UpgradeWendy : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("vigorMortis", "Vigor Mortis Upgrade")
                 .WithText("Reduce <card=dstmod.wendy> max <keyword=counter> by 1".Process())
-                .SetSprites("VigorMortis.png", "Wendy_BG.png")
+                .SetCardSprites("VigorMortis.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Vigor Mortis", 1) };
@@ -54,7 +54,7 @@ public class UpgradeWendy : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("revenantRestorative", "Revenant Restorative")
                 .WithText("<keyword=dstmod.ghostlyelixirs><hiddencard=dstmod.abigail>".Process())
-                .SetSprites("RevenantRestorative.png", "Wendy_BG.png")
+                .SetCardSprites("RevenantRestorative.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Heal", 99) };
@@ -65,7 +65,7 @@ public class UpgradeWendy : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("ghastlyExperience", "Ghastly Experience")
                 .WithText("Reset <keyword=dstmod.mourningglory> to 1".Process())
-                .SetSprites("GhastlyExperience.png", "Wendy_BG.png")
+                .SetCardSprites("GhastlyExperience.png", "Wendy_BG.png")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Mourning Glory", 99) };

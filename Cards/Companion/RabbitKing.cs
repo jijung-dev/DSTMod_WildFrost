@@ -9,7 +9,7 @@ public class RabbitKing : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("fortuitousRabbit", "Fortuitous Rabbit")
-                .SetSprites("scareRabbit.png", "Wendy_BG.png")
+                .SetCardSprites("scareRabbit.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.wrathfulRabbitKing><hiddencard=dstmod.benevolentRabbitKing>".Process())
                 .SetTraits(TStack("Fragile", 1))
                 .WithPools("GeneralUnitPool")
@@ -28,7 +28,7 @@ public class RabbitKing : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("wrathfulRabbitKing", "Wrathful Rabbit King")
-                .SetSprites("evilRabbit.png", "Wendy_BG.png")
+                .SetCardSprites("evilRabbit.png", "Wendy_BG.png")
                 .SetTraits(TStack("Spark", 1))
                 .SetStats(6, 4, 5)
                 .WithCardType("Enemy")
@@ -40,7 +40,7 @@ public class RabbitKing : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("benevolentRabbitKing", "Benevolent Rabbit King")
-                .SetSprites("friendlyRabbit.png", "Wendy_BG.png")
+                .SetCardSprites("friendlyRabbit.png", "Wendy_BG.png")
                 .SetTraits(TStack("Spark", 1))
                 .SetStats(6, 4, 5)
                 .WithCardType("Friendly")

@@ -9,7 +9,7 @@ public class TallStalagmite : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("tallStalagmite", "Tall Stalagmite")
                 .SetStats(null, null, 0)
-                .SetSprites("TallStalagmite.png", "Wendy_BG.png")
+                .SetCardSprites("TallStalagmite.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

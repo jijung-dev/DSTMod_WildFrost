@@ -10,10 +10,10 @@ public class UpgradeWortox : DataBase
                 .CreateItem("soulJar", "Soul Jar Upgrade")
                 .WithText("<card=dstmod.soul> and <card=dstmod.souls> is now <keyword=dstmod.cooked>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("SoulJar.png", "Wendy_BG.png")
+                .SetCardSprites("SoulJar.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Soul Jar", 1) };
                     }
@@ -24,10 +24,10 @@ public class UpgradeWortox : DataBase
                 .CreateItem("immuneSanityUpgarde", "Upgrade")
                 .WithText("<card=dstmod.wortox> gain <keyword=dstmod.sanityresist>".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("ImmuneSanityUpgrade.png", "Wendy_BG.png")
+                .SetCardSprites("ImmuneSanityUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Immune To Sanity", 1) };
                     }
@@ -38,10 +38,10 @@ public class UpgradeWortox : DataBase
                 .CreateItem("knabsack", "Knabsack Upgrade")
                 .WithText("<card=dstmod.wortox> gain <Hit All Enemies> but reduce <keyword=attack> by 2".Process())
                 .SetStats(null, null, 0)
-                .SetSprites("Knabsack.png", "Wendy_BG.png")
+                .SetCardSprites("Knabsack.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Knabsack", 1) };
                     }

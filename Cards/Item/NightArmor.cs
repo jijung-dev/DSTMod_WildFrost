@@ -8,7 +8,7 @@ public class NightArmor : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("nightArmor", "Night Armor")
                 .SetStats(null, null, 0)
-                .SetSprites("NightArmor.png", "Wendy_BG.png")
+                .SetCardSprites("NightArmor.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .WithPools("GeneralItemPool")
                 .WithValue(60)

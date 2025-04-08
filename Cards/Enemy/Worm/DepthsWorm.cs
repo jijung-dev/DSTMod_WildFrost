@@ -10,7 +10,7 @@ public class DepthsWorm : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("depthsWorm", "Depths Worm")
-				.SetSprites("DepthsWorm.png", "Wendy_BG.png")
+				.SetCardSprites("DepthsWorm.png", "Wendy_BG.png")
 				.WithText("Dive down <hiddencard=dstmod.depthsWormDived>".Process())
 				.SetStats(8, 4, 3)
 				.WithCardType("Enemy")
@@ -27,7 +27,7 @@ public class DepthsWorm : DataBase
 		assets.Add(
 			new CardDataBuilder(mod)
 				.CreateUnit("depthsWormDived", "Depths Worm Dived")
-				.SetSprites("DepthsWormDived.png", "Wendy_BG.png")
+				.SetCardSprites("DepthsWormDived.png", "Wendy_BG.png")
 				.WithText("Dive up <hiddencard=dstmod.depthsWorm>".Process())
 				.SetStats(0, 0, 3)
 				.WithCardType("Enemy")

@@ -10,7 +10,7 @@ public class BeeHive : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("beehive", "Beehive")
-                .SetSprites("Beehive.png", "Wendy_BG.png")
+                .SetCardSprites("Beehive.png", "Wendy_BG.png")
                 .SetStats(8, null, 0)
                 .WithCardType("Enemy")
                 .WithValue(4 * 36)

@@ -4,13 +4,13 @@ public class FriendFly : DataBase
 {
     public override void CreateCard()
     {
-        assets.Add(new CardDataBuilder(mod).CreateUnit("chester", "Chester").SetSprites("Chester.png", "Wendy_BG.png").SetStats(15, null, 0));
+        assets.Add(new CardDataBuilder(mod).CreateUnit("chester", "Chester").SetCardSprites("Chester.png", "Wendy_BG.png").SetStats(15, null, 0));
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("eyeBone", "Eye Bone")
                 .IsPet("", true)
                 .WithCardType("Item")
-                .SetSprites("EyeBone.png", "Wendy_BG.png")
+                .SetCardSprites("EyeBone.png", "Wendy_BG.png")
                 .SetTraits(TStack("Consume", 1))
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

@@ -8,7 +8,7 @@ public class BunnyHouse : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("bunnyHouse", "Rabbit Hutch")
-                .SetSprites("BunnyManHouse.png", "Wendy_BG.png")
+                .SetCardSprites("BunnyManHouse.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 12)

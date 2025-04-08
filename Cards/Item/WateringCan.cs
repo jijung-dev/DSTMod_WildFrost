@@ -7,7 +7,7 @@ public class WateringCan : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateItem("wateringCan", "Watering Can")
-                .SetSprites("WateringCan.png", "Wendy_BG.png")
+                .SetCardSprites("WateringCan.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SetTraits(TStack("Noomlin", 1), TStack("Barrage", 1))
                 .WithPools("GeneralItemPool")

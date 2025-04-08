@@ -10,7 +10,7 @@ public class EyeOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("eyeOfTerror", "Eye Of Terror")
-                .SetSprites("EyeOfTerror.png", "Wendy_BG.png")
+                .SetBossSprites("EyeOfTerror.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
                 .SetStats(15, 0, 3)
                 .WithCardType("Miniboss")
@@ -28,7 +28,7 @@ public class EyeOfTerror : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("eyeOfTerrorEnraged", "Eye Of Terror Enraged")
-                .SetSprites("EyeOfTerrorEnraged.png", "Wendy_BG.png")
+                .SetBossSprites("EyeOfTerrorEnraged.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
                 .SetStats(15, 1, 3)
                 .WithCardType("Miniboss")

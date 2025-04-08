@@ -9,7 +9,7 @@ public class Stone : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("stone", "Stone")
                 .SetStats(null, null, 0)
-                .SetSprites("Stone.png", "Wendy_BG.png")
+                .SetCardSprites("Stone.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

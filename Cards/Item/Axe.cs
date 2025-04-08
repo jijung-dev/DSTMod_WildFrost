@@ -9,7 +9,7 @@ public class Axe : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("axe", "Axe")
                 .SetStats(null, 2, 0)
-                .SetSprites("Axe.png", "Wendy_BG.png")
+                .SetCardSprites("Axe.png", "Wendy_BG.png")
                 .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .WithCardType("Item")
@@ -24,7 +24,7 @@ public class Axe : DataBase
             new CardDataBuilder(mod)
                 .CreateItem("goldenAxe", "Golden Axe")
                 .SetStats(null, 2, 0)
-                .SetSprites("GoldenAxe.png", "Wendy_BG.png")
+                .SetCardSprites("GoldenAxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate (CardData data)

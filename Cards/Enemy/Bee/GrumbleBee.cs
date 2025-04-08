@@ -10,7 +10,7 @@ public class GrumbleBee : DataBase
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("grumbleBee", "Grumble Bee")
-                .SetSprites("GrumbleBee.png", "Wendy_BG.png")
+                .SetCardSprites("GrumbleBee.png", "Wendy_BG.png")
                 .SetStats(8, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
