@@ -25,7 +25,7 @@ public class HamBat : DataBase
                 .Create<StatusEffectApplyXOnCardPlayed>("On Card Played Reduce Attack")
                 .WithText("Reduce <keyword=attack> by <{a}> when played")
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.canBeBoosted = false;
                     }

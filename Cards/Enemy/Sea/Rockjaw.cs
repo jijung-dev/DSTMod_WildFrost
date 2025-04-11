@@ -89,6 +89,7 @@ public class Rockjaw : DataBase
                 })
         );
     }
+
     protected override void CreateKeyword()
     {
         assets.Add(
@@ -106,5 +107,4 @@ public class Rockjaw : DataBase
                 .SubscribeToAfterAllBuildEvent(data => data.panelSprite = TryGet<KeywordData>("Active").panelSprite)
         );
     }
-
 }

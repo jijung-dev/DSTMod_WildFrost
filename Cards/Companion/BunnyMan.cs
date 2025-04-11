@@ -26,7 +26,6 @@ public class BunnyMan : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("bunnymanInjured", "Bunnyman Injured")
                 .SetCardSprites("BunnymanInjured.png", "Wendy_BG.png")
-                .SetTraits(TStack("Smackback", 1))
                 .SetStats(6, 1, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

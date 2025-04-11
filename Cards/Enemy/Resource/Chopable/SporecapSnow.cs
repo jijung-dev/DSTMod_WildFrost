@@ -14,11 +14,7 @@ public class SporecapSnow : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Scrap", 2),
-                        SStack("On Turn Apply Snow To RandomEnemy", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 2), SStack("On Turn Apply Snow To RandomEnemy", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })
         );

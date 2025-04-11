@@ -14,7 +14,7 @@ public class Axe : DataBase
                 .WithValue(30)
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("AxeType", 1) };
                     }
@@ -27,7 +27,7 @@ public class Axe : DataBase
                 .SetCardSprites("GoldenAxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("AxeType", 1), TStack("Barrage", 1) };
                     }

@@ -15,11 +15,7 @@ public class Driftwood : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Scrap", 2),
-                        SStack("When Destroyed Gain Wood To Chest", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 2), SStack("When Destroyed Gain Wood To Chest", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })
         );

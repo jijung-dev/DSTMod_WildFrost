@@ -14,7 +14,7 @@ public class Pickaxe : DataBase
                 .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeType", 1) };
                     }
@@ -27,7 +27,7 @@ public class Pickaxe : DataBase
                 .SetCardSprites("GoldenPickaxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeType", 1), TStack("Barrage", 1) };
                     }

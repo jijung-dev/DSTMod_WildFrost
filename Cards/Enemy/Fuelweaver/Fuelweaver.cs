@@ -100,17 +100,13 @@ public class Fuelweaver : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantFillBoardExt>(data =>
                 {
                     data.isEnemy = true;
-                    data.withCards = new CardData[]
-                    {
-                        TryGet<CardData>("caveSpider"),
-                        TryGet<CardData>("batilisk"),
-                    };
+                    data.withCards = new CardData[] { TryGet<CardData>("caveSpider"), TryGet<CardData>("batilisk") };
                     data.spawnBoard = StatusEffectInstantFillBoardExt.Board.Enemy;
                 })
         );
         assets.Add(
             StatusCopy("When Deployed Fill Board (Final Boss)", "When Deployed Fill Board With Cave Enemies")
-            .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDeployed>(data =>
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDeployed>(data =>
                 {
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.effectToApply = TryGet<StatusEffectData>("Fill Enemy Board With Cave Enemies");

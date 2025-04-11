@@ -13,7 +13,7 @@ public class TwintailedHeart : DataBase
                 .SetCardSprites("TwintailedHeart.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.canPlayOnHand = true;
                         data.canPlayOnBoard = false;

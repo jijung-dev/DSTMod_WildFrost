@@ -31,7 +31,7 @@ public class TallBird : DataBase
                 .SetStats(3, 2, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[3]
                         {
@@ -50,7 +50,7 @@ public class TallBird : DataBase
                 .SetStats(5, 3, 6)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[3]
                         {
@@ -68,7 +68,7 @@ public class TallBird : DataBase
                 .SetStats(8, 2, 4)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1), SStack("Trigger When Ally Is Hit", 1) };
                     }

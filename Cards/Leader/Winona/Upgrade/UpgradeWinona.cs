@@ -13,7 +13,7 @@ public class UpgradeWinona : DataBase
                 .SetCardSprites("SlowUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Slow", 1) };
                     }
@@ -27,7 +27,7 @@ public class UpgradeWinona : DataBase
                 .SetCardSprites("2TapeUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Tape", 1) };
                     }

@@ -15,6 +15,7 @@ using static CardData;
 public static class Ext
 {
     public static List<CardData> blueprints = new List<CardData>();
+
     public static string Process(this string text)
     {
         return Regex.Replace(
@@ -66,6 +67,7 @@ public static class Ext
     {
         return References.LeaderData.attackEffects.Where(effect => effect.data != DSTMod.Instance.TryGet<StatusEffectData>(effectName)).ToArray();
     }
+
     public static CardDataBuilder SetCardSprites(this CardDataBuilder builder, string mainSpriteName, string backgroundSpriteName)
     {
         Sprite mainSprite = DSTMod.Cards.GetSprite(mainSpriteName.Replace(".png", ""));
@@ -73,6 +75,7 @@ public static class Ext
 
         return builder.SetSprites(mainSprite, backgroundSprite);
     }
+
     public static CardDataBuilder SetLeaderSprites(this CardDataBuilder builder, string mainSpriteName, string backgroundSpriteName)
     {
         Sprite mainSprite = DSTMod.Leaders.GetSprite(mainSpriteName.Replace(".png", ""));
@@ -80,6 +83,7 @@ public static class Ext
 
         return builder.SetSprites(mainSprite, backgroundSprite);
     }
+
     public static CardDataBuilder SetBossSprites(this CardDataBuilder builder, string mainSpriteName, string backgroundSpriteName)
     {
         Sprite mainSprite = DSTMod.Bosses.GetSprite(mainSpriteName.Replace(".png", ""));

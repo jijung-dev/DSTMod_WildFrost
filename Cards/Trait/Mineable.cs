@@ -26,10 +26,10 @@ public class Mineable : DataBase
                 .SubscribeToAfterAllBuildEvent<TraitData>(data =>
                 {
                     data.keyword = TryGet<KeywordData>("mineable");
-                    data.effects = new[] 
-                    { 
-                        TryGet<StatusEffectData>("Building Immune To Everything"), 
-                        TryGet<StatusEffectData>("When Hit By Pickaxe Dies"), 
+                    data.effects = new[]
+                    {
+                        TryGet<StatusEffectData>("Building Immune To Everything"),
+                        TryGet<StatusEffectData>("When Hit By Pickaxe Dies"),
                     };
                 })
         );

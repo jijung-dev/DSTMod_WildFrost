@@ -13,7 +13,7 @@ public class UpgradeWortox : DataBase
                 .SetCardSprites("SoulJar.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Soul Jar", 1) };
                     }
@@ -27,7 +27,7 @@ public class UpgradeWortox : DataBase
                 .SetCardSprites("ImmuneSanityUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Immune To Sanity", 1) };
                     }
@@ -41,7 +41,7 @@ public class UpgradeWortox : DataBase
                 .SetCardSprites("Knabsack.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Knabsack", 1) };
                     }

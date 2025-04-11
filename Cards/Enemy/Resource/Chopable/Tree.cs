@@ -15,11 +15,7 @@ public class Tree : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Scrap", 4),
-                        SStack("When Destroyed Gain Wood To Chest", 2),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 4), SStack("When Destroyed Gain Wood To Chest", 2) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })
         );

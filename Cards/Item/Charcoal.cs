@@ -13,7 +13,7 @@ public class Charcoal : DataBase
                 .WithCardType("Item")
                 .WithValue(60)
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Double Overheat", 1) };
                         data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1), TStack("Consume", 1) };

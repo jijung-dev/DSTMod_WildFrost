@@ -96,8 +96,7 @@ namespace DSTMod_WildFrost
             else if (node.type.letter == "^")
             {
                 var charList = GetCharacterCards();
-                var generalList = DSTMod.Instance.DataList<CardData>
-                (
+                var generalList = DSTMod.Instance.DataList<CardData>(
                     "goldUpgrade",
                     "blingsUpgrade",
                     "pickAxeUpgrade",
@@ -110,12 +109,7 @@ namespace DSTMod_WildFrost
                 list.AddRange(generalList);
                 list.Shuffle();
 
-                List<CardData> list2 = new List<CardData>
-                {
-                    list[0],
-                    list[1],
-                    list[2],
-                };
+                List<CardData> list2 = new List<CardData> { list[0], list[1], list[2] };
 
                 __instance.force = list2;
             }
@@ -128,8 +122,7 @@ namespace DSTMod_WildFrost
             switch (leader.title)
             {
                 case "Wendy":
-                    return DSTMod.Instance.DataList<CardData>
-                    (
+                    return DSTMod.Instance.DataList<CardData>(
                         "unyieldingDraught",
                         "distilledVengeance",
                         "nightshadeNostrum",
@@ -138,36 +131,13 @@ namespace DSTMod_WildFrost
                         "ghastlyExperience"
                     );
                 case "Wortox":
-                    return DSTMod.Instance.DataList<CardData>
-                    (
-                        "twintailedHeart",
-                        "soulJar",
-                        "immuneSanityUpgarde",
-                        "knabsack"
-                    );
+                    return DSTMod.Instance.DataList<CardData>("twintailedHeart", "soulJar", "immuneSanityUpgarde", "knabsack");
                 case "Wolfgang":
-                    return DSTMod.Instance.DataList<CardData>
-                    (
-                        "gymUpgrade",
-                        "gembellUpgrade",
-                        "whistleUpgrade"
-                    );
+                    return DSTMod.Instance.DataList<CardData>("gymUpgrade", "gembellUpgrade", "whistleUpgrade");
                 case "Wormwood":
-                    return DSTMod.Instance.DataList<CardData>
-                    (
-                        "huskUpgrade",
-                        "saladmander",
-                        "carrat",
-                        "bulbousLightbug"
-                    );
+                    return DSTMod.Instance.DataList<CardData>("huskUpgrade", "saladmander", "carrat", "bulbousLightbug");
                 case "Winona":
-                    return DSTMod.Instance.DataList<CardData>
-                    (
-                        "slowUpgrade",
-                        "2tapeUpgrade",
-                        "generator",
-                        "spotlight"
-                    );
+                    return DSTMod.Instance.DataList<CardData>("slowUpgrade", "2tapeUpgrade", "generator", "spotlight");
                 default:
                     return DSTMod.Instance.DataList<CardData>();
             }

@@ -24,7 +24,7 @@ public class Winona : DataBase
                 .SetCardSprites("HandyRemote.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .FreeModify(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.needsTarget = false;
                     }
@@ -41,7 +41,7 @@ public class Winona : DataBase
                 .SetCardSprites("HandyRemote.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .FreeModify(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.needsTarget = false;
                     }
@@ -61,14 +61,14 @@ public class Winona : DataBase
                 .Create<StatusEffectInstantGainCard>("Instant Gain Handy Remote")
                 .WithText("Gain <card=dstmod.handyRemote>".Process())
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate (StatusEffectInstantGainCard data)
+                    delegate(StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("handyRemote");
                     }
@@ -79,14 +79,14 @@ public class Winona : DataBase
                 .Create<StatusEffectInstantGainCard>("Instant Gain Handy Remote Slow")
                 .WithText("Gain <card=dstmod.handyRemoteSlow>".Process())
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate (StatusEffectInstantGainCard data)
+                    delegate(StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("handyRemoteSlow");
                     }

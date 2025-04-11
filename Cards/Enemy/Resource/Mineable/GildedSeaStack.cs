@@ -15,11 +15,7 @@ public class GildedSeaStack : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Scrap", 3),
-                        SStack("When Destroyed Gain Gold To Chest", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 3), SStack("When Destroyed Gain Gold To Chest", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mineable", 1) };
                 })
         );

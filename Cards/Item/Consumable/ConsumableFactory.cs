@@ -21,9 +21,25 @@ public class ConsumableFatory : ConsumableBase
                 Create("asparagus", "Asparagus", "Asparagus.png", SStack(("Heal", 1)), ConsumeType.Food, "Cooked Asparagus", "cookedAsparagus"),
                 Create("honey", "Honey", "Honey.png", SStack(("Heal", 1)), ConsumeType.Food, "Taffy", "taffy"),
                 Create("meat", "Meat", "Meat.png", SStack(("Heal", 2), ("Sanity", 2)), ConsumeType.Food, "Cooked Meat", "cookedMeat"),
-                Create("frogLegs", "Frog Legs", "FrogLegs.png", SStack(("Heal", 1), ("Sanity", 2)), ConsumeType.Food, "Cooked Frog Legs", "cookedFrogLegs"),
+                Create(
+                    "frogLegs",
+                    "Frog Legs",
+                    "FrogLegs.png",
+                    SStack(("Heal", 1), ("Sanity", 2)),
+                    ConsumeType.Food,
+                    "Cooked Frog Legs",
+                    "cookedFrogLegs"
+                ),
                 Create("egg", "Egg", "Egg.png", SStack(("Heal", 1)), ConsumeType.Food, "Cooked Egg", "cookedEgg"),
-                Create("kelpFronds", "Kelp Fronds", "KelpFronds.png", SStack(("Heal", 1)), ConsumeType.Food, "Cooked Kelp Fronds", "cookedKelpFronds"),
+                Create(
+                    "kelpFronds",
+                    "Kelp Fronds",
+                    "KelpFronds.png",
+                    SStack(("Heal", 1)),
+                    ConsumeType.Food,
+                    "Cooked Kelp Fronds",
+                    "cookedKelpFronds"
+                ),
                 Create("berries", "Berries", "Berries.png", SStack(("Heal", 1)), ConsumeType.Food, "Roasted Berries", "roastedBerries"),
                 Create(
                     "juicyBerries",
@@ -63,7 +79,7 @@ public class ConsumableFatory : ConsumableBase
                     "Monster Lasagna",
                     "monsterLasagna"
                 ),
-                Create("morsel", "Morsel", "Morsel.png", SStack(("Heal", 1),("Sanity", 1)), ConsumeType.Food, "Cooked Morsel", "cookedMorsel"),
+                Create("morsel", "Morsel", "Morsel.png", SStack(("Heal", 1), ("Sanity", 1)), ConsumeType.Food, "Cooked Morsel", "cookedMorsel"),
                 Create("taffy", "Taffy", "Taffy.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("cookedMeat", "Cooked Meat", "CookedMeat.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("cookedFrogLegs", "Cooked Frog Legs", "CookedFrogLegs.png", SStack(("Heal", 1)), ConsumeType.Cooked),

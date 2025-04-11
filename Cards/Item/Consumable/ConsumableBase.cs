@@ -72,7 +72,7 @@ public abstract class ConsumableBase : DataBase
                     .SetCardSprites(item._spriteName, "Wendy_BG.png")
                     .WithCardType("Item")
                     .FreeModify(
-                        delegate (CardData data)
+                        delegate(CardData data)
                         {
                             data.canPlayOnEnemy = false;
                         }

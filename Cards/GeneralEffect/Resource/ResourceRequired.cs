@@ -109,7 +109,8 @@ public class ResourceRequired : DataBase
                     data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
                     data.effectToApply = TryGet<StatusEffectData>("Rock");
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyToFlags =
+                        StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
                     data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );
@@ -124,7 +125,8 @@ public class ResourceRequired : DataBase
                     data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
                     data.effectToApply = TryGet<StatusEffectData>("Gold");
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyToFlags =
+                        StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
                     data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );
@@ -139,7 +141,8 @@ public class ResourceRequired : DataBase
                     data.canBeBoosted = false;
                     data.targetMustBeAlive = false;
                     data.effectToApply = TryGet<StatusEffectData>("Wood");
-                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
+                    data.applyToFlags =
+                        StatusEffectApplyX.ApplyToFlags.Allies | StatusEffectApplyX.ApplyToFlags.Self | StatusEffectApplyX.ApplyToFlags.Enemies;
                     data.applyConstraints = new TargetConstraint[] { TryGetConstraint("chestOnly") };
                 })
         );

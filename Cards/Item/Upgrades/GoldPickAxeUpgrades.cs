@@ -13,7 +13,7 @@ public class GoldPickAxeUpgrades : DataBase
                 .SetCardSprites("GoldUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gold Upgrade", 1) };
                     }

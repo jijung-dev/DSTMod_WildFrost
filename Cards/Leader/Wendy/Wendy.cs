@@ -14,10 +14,7 @@ public class Wendy : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mourning Glory", 1) };
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("When Abigail Destroyed Mourning Glory", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("When Abigail Destroyed Mourning Glory", 1) };
                     data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade(), LeaderExt.AddRandomHealth(0, 1) };
                 })
         );

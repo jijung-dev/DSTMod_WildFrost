@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using BattleEditor;
 using Deadpan.Enums.Engine.Components.Modding;
 using HarmonyLib;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.Localization.Tables;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 using WildfrostHopeMod.SFX;
 using WildfrostHopeMod.Utils;
 using WildfrostHopeMod.VFX;
 using static SelectLeader;
 using Extensions = Deadpan.Enums.Engine.Components.Modding.Extensions;
-using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
-using System.IO;
-using UnityEngine.U2D;
 
 namespace DSTMod_WildFrost
 {
@@ -46,18 +46,15 @@ namespace DSTMod_WildFrost
         public override TMP_SpriteAsset SpriteAsset => spriteAsset;
         internal static TMP_SpriteAsset spriteAsset;
 
-        public static string CatalogFolder
-            => Path.Combine(Instance.ModDirectory, "Windows");
+        public static string CatalogFolder => Path.Combine(Instance.ModDirectory, "Windows");
 
         // A helpful shortcut
-        public static string CatalogPath
-            => Path.Combine(CatalogFolder, "catalog.json");
+        public static string CatalogPath => Path.Combine(CatalogFolder, "catalog.json");
 
         public static SpriteAtlas Cards;
         public static SpriteAtlas Bosses;
         public static SpriteAtlas Leaders;
         public static SpriteAtlas Other;
-
 
         public Dictionary<string, TargetConstraint> allConstraint = new Dictionary<string, TargetConstraint>();
 
@@ -93,6 +90,8 @@ namespace DSTMod_WildFrost
             allConstraint.Add("wolfgangOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wormwoodOnly", new Scriptable<TargetConstraintIsSpecificCard>());
             allConstraint.Add("wendyOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("charlieOnly", new Scriptable<TargetConstraintIsSpecificCard>());
+            allConstraint.Add("noCharlie", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noDfly", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noToadstool", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
             allConstraint.Add("noBoomshroom", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
@@ -128,7 +127,12 @@ namespace DSTMod_WildFrost
             };
             ((TargetConstraintIsSpecificCard)allConstraint["sandCastleOnly"]).allowedCards = new CardData[] { TryGet<CardData>("sandCastle") };
             ((TargetConstraintIsSpecificCard)allConstraint["fuelweaverOnly"]).allowedCards = new CardData[] { TryGet<CardData>("ancientFuelweaver") };
-            ((TargetConstraintIsSpecificCard)allConstraint["klausOnly"]).allowedCards = new CardData[] { TryGet<CardData>("klaus"), TryGet<CardData>("klausEnraged") };
+            ((TargetConstraintIsSpecificCard)allConstraint["klausOnly"]).allowedCards = new CardData[]
+            {
+                TryGet<CardData>("klaus"),
+                TryGet<CardData>("klausEnraged"),
+                TryGet<CardData>("winterKlaus"),
+            };
             ((TargetConstraintIsSpecificCard)allConstraint["chestOnly"]).allowedCards = new CardData[] { TryGet<CardData>("chest") };
             ((TargetConstraintIsSpecificCard)allConstraint["noDfly"]).allowedCards = new CardData[]
             {
@@ -141,6 +145,8 @@ namespace DSTMod_WildFrost
                 TryGet<CardData>("toadstoolEnraged"),
             };
             ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
+            ((TargetConstraintIsSpecificCard)allConstraint["noCharlie"]).allowedCards = new CardData[] { TryGet<CardData>("charlie") };
+            ((TargetConstraintIsSpecificCard)allConstraint["charlieOnly"]).allowedCards = new CardData[] { TryGet<CardData>("charlie") };
             ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
             ((TargetConstraintIsSpecificCard)allConstraint["moslingOnly"]).allowedCards = new CardData[] { TryGet<CardData>("mosling") };
             ((TargetConstraintIsSpecificCard)allConstraint["wolfgangOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wolfgang") };
@@ -359,7 +365,6 @@ namespace DSTMod_WildFrost
             if (References.PlayerData?.classData.ModAdded != this)
                 yield break;
 
-
             if (References.LeaderData.original == TryGet<CardData>("wendy"))
             {
                 References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("abigailFlower").Select(c => c.Clone()));
@@ -505,7 +510,6 @@ namespace DSTMod_WildFrost
                 CreateTargetConstraint();
                 CreateModAssets();
             }
-
 
             prefabHolder = new GameObject(GUID);
             UnityEngine.Object.DontDestroyOnLoad(prefabHolder);

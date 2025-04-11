@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
+using UnityEngine;
 
 public class Varg : DataBase
 {
@@ -13,6 +14,7 @@ public class Varg : DataBase
                 .SetStats(18, 4, 4)
                 .SetTraits(TStack("Wild", 1))
                 .WithCardType("Miniboss")
+                .WithText("<keyword=dstmod.alphahound><hiddencard=dstmod.hound><hiddencard=dstmod.redHound><hiddencard=dstmod.blueHound>".Process())
                 .WithValue(15 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -21,14 +23,28 @@ public class Varg : DataBase
         );
     }
 
+    protected override void CreateKeyword()
+    {
+        assets.Add(
+            new KeywordDataBuilder(mod)
+                .Create("alphahound")
+                .WithTitle("Alpha Hound")
+                .WithShowName(true)
+                .WithDescription(
+                    "When <keyword=counter> reaches 0 summon <card=dstmod.hound> or <card=dstmod.redHound> or <card=dstmod.blueHound>".Process()
+                )
+                .WithTitleColour(new Color(0.83f, 0.83f, 0.83f))
+                .WithNoteColour(new Color(0.65f, 0.65f, 0.65f))
+                .WithBodyColour(new Color(1f, 1f, 1f))
+                .WithCanStack(false)
+        );
+    }
+
     protected override void CreateStatusEffect()
     {
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnCounterTurn>("On Counter Turn Summon Hounds")
-                .WithText(
-                    "When <keyword=counter> reaches 0 summon <card=dstmod.hound> or <card=dstmod.redHound> or <card=dstmod.blueHound>".Process()
-                )
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
                 {
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;

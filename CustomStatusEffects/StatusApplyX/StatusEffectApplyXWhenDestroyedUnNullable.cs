@@ -21,6 +21,7 @@ public class StatusEffectApplyXWhenDestroyedUnNullable : StatusEffectApplyXWhenD
         return Mathf.Max(0, Mathf.RoundToInt((count + target.effectBonus) * target.effectFactor));
     }
 }
+
 public class StatusEffectApplyXWhenHitUnNullable : StatusEffectApplyXWhenHit
 {
     public override bool TargetSilenced() => false;

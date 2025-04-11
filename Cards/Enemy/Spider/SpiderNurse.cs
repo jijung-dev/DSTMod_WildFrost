@@ -14,7 +14,11 @@ public class SpiderNurse : DataBase
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1), SStack("On Turn Heal Allies", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Gain Monster Meat When Destroyed", 1),
+                        SStack("On Turn Heal Allies", 1),
+                    };
                 })
         );
     }

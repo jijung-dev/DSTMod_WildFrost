@@ -14,7 +14,7 @@ public class UpgradeWormwood : DataBase
                 .SetCardSprites("HuskUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Husk", 1) };
                     }
@@ -76,7 +76,7 @@ public class UpgradeWormwood : DataBase
                 .Create<StatusEffectApplyXWhenCertainAllyIsHit>("Trigger When Wormwood Is Hit")
                 .WithText("Trigger when <card=dstmod.wormwood> is hit".Process())
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.isReaction = true;
                         data.stackable = false;

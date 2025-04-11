@@ -13,7 +13,7 @@ public class BlingsUpgrade : DataBase
                 .SetCardSprites("BlingUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Blings Upgrade", 1) };
                     }

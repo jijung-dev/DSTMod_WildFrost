@@ -13,7 +13,7 @@ public class UpgradeWolfgang : DataBase
                 .SetCardSprites("GymUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Gym", 1) };
                     }
@@ -27,7 +27,7 @@ public class UpgradeWolfgang : DataBase
                 .SetCardSprites("GembellUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Gembell", 1) };
                     }
@@ -43,7 +43,7 @@ public class UpgradeWolfgang : DataBase
                 .SetCardSprites("WhistleUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Upgrade Whistle", 1) };
                     }

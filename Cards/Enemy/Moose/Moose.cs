@@ -34,7 +34,7 @@ public class Moose : DataBase
                 .Create<StatusEffectApplyXWhenCertainAllyIsHit>("Trigger When Mosling Is Hit")
                 .WithText("Trigger when <card=dstmod.mosling> is hit".Process())
                 .FreeModify(
-                    delegate (StatusEffectData data)
+                    delegate(StatusEffectData data)
                     {
                         data.isReaction = true;
                         data.stackable = false;

@@ -54,11 +54,7 @@ public class TwinOfTerror : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Take Health", 1) };
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("MultiHit", 1),
-                        SStack("Spazmatism Enraged", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 1), SStack("Spazmatism Enraged", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
                 })
         );
@@ -73,10 +69,7 @@ public class TwinOfTerror : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Take Health", 1) };
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("MultiHit", 2),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("MultiHit", 2) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
                 })
         );

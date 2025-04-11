@@ -14,7 +14,7 @@ public class BlowDart : DataBase
                 .WithCardType("Item")
                 .WithValue(70)
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Random Snow Fire Shroom", 4) };
                         data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };

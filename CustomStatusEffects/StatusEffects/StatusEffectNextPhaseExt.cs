@@ -25,6 +25,7 @@ public class StatusEffectNextPhaseExt : StatusEffectData
     {
         Events.OnEntityDisplayUpdated -= EntityDisplayUpdated;
     }
+
     public override bool RunBeginEvent()
     {
         if (killSelfWhenApplied)
@@ -46,7 +47,6 @@ public class StatusEffectNextPhaseExt : StatusEffectData
 
         return base.RunBeginEvent();
     }
-
 
     public void EntityDisplayUpdated(Entity entity)
     {

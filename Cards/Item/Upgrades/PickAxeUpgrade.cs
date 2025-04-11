@@ -13,7 +13,7 @@ public class PickAxeUpgrade : DataBase
                 .SetCardSprites("PickAxeUpgrade.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate (CardData data)
+                    delegate(CardData data)
                     {
                         data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("PickAxe Upgrade", 1) };
                     }

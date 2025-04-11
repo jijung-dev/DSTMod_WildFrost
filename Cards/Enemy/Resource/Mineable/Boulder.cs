@@ -15,11 +15,7 @@ public class Boulder : DataBase
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.isEnemyClunker = true;
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Scrap", 3),
-                        SStack("When Destroyed Gain Rock To Chest", 2),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Scrap", 3), SStack("When Destroyed Gain Rock To Chest", 2) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Mineable", 1) };
                 })
         );

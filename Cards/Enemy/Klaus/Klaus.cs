@@ -15,11 +15,7 @@ public class Klaus : DataBase
                 .WithCardType("Boss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Klaus Enraged", 1),
-                        SStack("ImmuneToSnow", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Klaus Enraged", 1), SStack("ImmuneToSnow", 1) };
                 })
         );
         assets.Add(
@@ -31,11 +27,7 @@ public class Klaus : DataBase
                 .WithValue(25 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[]
-                    {
-                        SStack("Hit All Enemies", 1),
-                        SStack("ImmuneToSnow", 1),
-                    };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Hit All Enemies", 1), SStack("ImmuneToSnow", 1) };
                 })
         );
     }

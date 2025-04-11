@@ -7,6 +7,7 @@ public class StatusEffectUpgradeGym : StatusEffectData, IUpgrade
     {
         References.LeaderData.startWithEffects = Ext.AddStartEffect("Upgrade Gym", 1);
     }
+
     public override bool RunBeginEvent()
     {
         var effect = target.FindStatus(DSTMod.Instance.TryGet<StatusEffectData>("Mightiness")) as StatusEffectMightiness;
@@ -16,6 +17,4 @@ public class StatusEffectUpgradeGym : StatusEffectData, IUpgrade
         }
         return true;
     }
-
 }
-
