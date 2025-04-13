@@ -32,7 +32,7 @@ public class CrystalDeerclops : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("iceHound", "Ice Hound")
                 .SetCardSprites("HoundIce.png", "Wendy_BG.png")
-                .SetStats(6, 2, 3)
+                .SetStats(6, 2, 4)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

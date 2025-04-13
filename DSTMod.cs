@@ -42,7 +42,28 @@ namespace DSTMod_WildFrost
 
         public override string Title => "Don't Frostbite";
 
-        public override string Description => "A mod that get idea from don't starve";
+        public override string Description =>
+            "What did Maxwell do this time? The survivors got brought to the infinite freezing winter??!! "
+            + "\n"
+            + "\n"
+            + "\n"
+            + "\n"
+            + "[h1] DON'T FROSTBITE [/h1]"
+            + "A mod that based of the game Don't Starve Together\n"
+            + "\n"
+            + "\n"
+            + "[h3] This mod added [/h3]"
+            + "[list]\n"
+            + "[*] 5 Leaders with different starting items\n"
+            + "[*] New Custom Battles\n"
+            + "[*] Pets, Companions, Items, Charms\n"
+            + "[*] New Resource System\n"
+            + "[/list]"
+            + "And more to comes!!"
+            + "\n"
+            + "\n"
+            + "If you found any bug/ glitch/ crash please tell me down the comment or the game discord #mod-development @nubboiz\n"
+            + "Thanks for playing :3";
         public override TMP_SpriteAsset SpriteAsset => spriteAsset;
         internal static TMP_SpriteAsset spriteAsset;
 

@@ -18,7 +18,7 @@ public class Marotter : DataBase
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("On Turn Apply Wetness To Right Most Item In Hand", 1),
+                        SStack("On Turn Apply Wetness To Right Most Item In Hand", 2),
                         SStack("Gain Meat When Destroyed", 1),
                     };
                 })

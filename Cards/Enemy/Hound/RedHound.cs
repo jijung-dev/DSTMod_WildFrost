@@ -10,13 +10,13 @@ public class RedHound : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("redHound", "Red Hound")
                 .SetCardSprites("HoundFire.png", "Wendy_BG.png")
-                .SetStats(5, 1, 3)
+                .SetStats(5, 2, 3)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Gain Monster Meat When Destroyed", 1),
-                        SStack("When Destroyed Overheat All Enemies", 3),
+                        SStack("When Destroyed Overheat All Enemies", 2),
                         SStack("MultiHit", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Wild", 1) };

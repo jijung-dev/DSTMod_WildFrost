@@ -34,7 +34,7 @@ public class PossesedVarg : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("horrorHound", "Horror Hound")
                 .SetCardSprites("HorrorHound.png", "Wendy_BG.png")
-                .SetStats(5, 1, 3)
+                .SetStats(5, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

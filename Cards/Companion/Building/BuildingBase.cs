@@ -95,7 +95,13 @@ public abstract class BuildingBase : DataBase
                         Ext.blueprints.Add(data);
                         data.targetConstraints = new TargetConstraint[] { mod.TryGetConstraint("floorOnly") };
 
-                        data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1) };
+                        data.traits = new List<CardData.TraitStacks>()
+                        {
+                            TStack("Blueprint", 1),
+                            TStack("Consume", 1),
+                            TStack("Zoomlin", 1),
+                            TStack("Longshot", 1),
+                        };
                         data.attackEffects = new CardData.StatusEffectStacks[]
                         {
                             SStack("Build " + item._title, 1),

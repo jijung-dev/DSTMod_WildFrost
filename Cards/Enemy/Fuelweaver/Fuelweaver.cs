@@ -100,7 +100,13 @@ public class Fuelweaver : DataBase
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantFillBoardExt>(data =>
                 {
                     data.isEnemy = true;
-                    data.withCards = new CardData[] { TryGet<CardData>("caveSpider"), TryGet<CardData>("batilisk") };
+                    data.withCards = new CardData[]
+                    {
+                        TryGet<CardData>("caveSpider"),
+                        TryGet<CardData>("batilisk"),
+                        TryGet<CardData>("spitter"),
+                        TryGet<CardData>("danglingDepthDweller"),
+                    };
                     data.spawnBoard = StatusEffectInstantFillBoardExt.Board.Enemy;
                 })
         );

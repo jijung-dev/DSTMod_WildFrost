@@ -11,7 +11,7 @@ public class Pengull : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("pengull", "Pengull")
                 .SetCardSprites("Pengull.png", "Wendy_BG.png")
-                .SetStats(4, 2, 2)
+                .SetStats(6, 2, 2)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

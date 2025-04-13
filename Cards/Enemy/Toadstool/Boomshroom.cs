@@ -9,7 +9,7 @@ public class Boomshroom : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("boomshroom", "Boomshroom")
                 .SetCardSprites("Boomshroom.png", "Wendy_BG.png")
-                .SetStats(1, null, 3)
+                .SetStats(1, null, 2)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.cardType = TryGet<CardType>("Clunker");

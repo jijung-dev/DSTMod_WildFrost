@@ -18,7 +18,7 @@ public class Frog : DataBase
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("On Turn Apply Wetness To Random Card In Hand", 1),
+                        SStack("On Turn Apply Wetness To Random Card In Hand", 3),
                         SStack("Gain Frog Legs When Destroyed", 1),
                     };
                 })

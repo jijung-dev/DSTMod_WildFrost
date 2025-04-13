@@ -11,7 +11,7 @@ public class DamagedRook : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("damagedRook", "Damaged Rook")
                 .SetCardSprites("DamagedRook.png", "Wendy_BG.png")
-                .SetStats(15, 3, 4)
+                .SetStats(12, 3, 4)
                 .WithCardType("Enemy")
                 .WithValue(5 * 36)
                 .SetTraits(TStack("Barrage", 1))

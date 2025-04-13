@@ -9,7 +9,7 @@ public class Buzzard : DataBase
                 .CreateUnit("buzzard", "Buzzard")
                 .SetCardSprites("Buzzard.png", "Wendy_BG.png")
                 .SetTraits(TStack("Aimless", 1))
-                .SetStats(5, 2, 4)
+                .SetStats(6, 2, 4)
                 .SetStartWithEffect(SStack("MultiHit", 1))
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
