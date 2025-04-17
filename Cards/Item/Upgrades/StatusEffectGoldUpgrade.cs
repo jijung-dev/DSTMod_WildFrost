@@ -9,10 +9,10 @@ public class StatusEffectGoldUpgrade : StatusEffectData, IUpgrade
 
     public void Run()
     {
-        deck = References.Player.data.inventory.deck.list;
+        deck = new List<CardData>(References.Player.data.inventory.deck.list);
         int pick = 0;
         int axe = 0;
-        foreach (var item in deck)
+        foreach (var item in References.Player.data.inventory.deck.list)
         {
             if (item.name == DSTMod.Instance.TryGet<CardData>("pickaxe").name)
             {
@@ -33,5 +33,6 @@ public class StatusEffectGoldUpgrade : StatusEffectData, IUpgrade
         {
             deck.Add(DSTMod.Instance.TryGet<CardData>("goldenAxe"));
         }
+        References.Player.data.inventory.deck.list = deck;
     }
 }

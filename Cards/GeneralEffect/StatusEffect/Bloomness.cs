@@ -53,7 +53,7 @@ public class Bloomness : DataBase
         );
         assets.Add(
             new KeywordDataBuilder(mod)
-                .Create("leftgroupplant")
+                .Create("plant")
                 .WithTitle("Plant")
                 .WithShowName(true)
                 .WithDescription(

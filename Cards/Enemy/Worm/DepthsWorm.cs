@@ -12,7 +12,7 @@ public class DepthsWorm : DataBase
                 .CreateUnit("depthsWorm", "Depths Worm")
                 .SetCardSprites("DepthsWorm.png", "Wendy_BG.png")
                 .WithText("Dive down <hiddencard=dstmod.depthsWormDived>".Process())
-                .SetStats(8, 4, 3)
+                .SetStats(10, 4, 3)
                 .WithCardType("Enemy")
                 .WithValue(6 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -20,7 +20,7 @@ public class DepthsWorm : DataBase
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Gain Lesser Glow Berry When Destroyed", 1),
-                        SStack("Pre Turn Apply Dive Down Depths Worm To Self", 1),
+                        SStack("On Turn Apply Dive Down Depths Worm To Self", 1),
                     };
                 })
         );
@@ -29,7 +29,7 @@ public class DepthsWorm : DataBase
                 .CreateUnit("depthsWormDived", "Depths Worm Dived")
                 .SetCardSprites("DepthsWormDived.png", "Wendy_BG.png")
                 .WithText("Dive up <hiddencard=dstmod.depthsWorm>".Process())
-                .SetStats(0, 0, 3)
+                .SetStats(null, null, 3)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -37,7 +37,7 @@ public class DepthsWorm : DataBase
                     {
                         SStack("Chest Health", 1),
                         SStack("Dive Up Depths Worm", 1),
-                        SStack("Pre Turn Apply Reduce Chest Health To Self", 1),
+                        SStack("On Turn Apply Reduce Chest Health To Self", 1),
                     };
                 })
         );
@@ -68,8 +68,8 @@ public class DepthsWorm : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXPreCounterTurn>("Pre Turn Apply Dive Down Depths Worm To Self")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXPreCounterTurn>(data =>
+                .Create<StatusEffectApplyXOnCounterTurn>("On Turn Apply Dive Down Depths Worm To Self")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
                 {
                     data.doPing = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;

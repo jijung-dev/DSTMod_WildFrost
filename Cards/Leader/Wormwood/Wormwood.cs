@@ -10,7 +10,7 @@ public class Wormwood : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("wormwood", "Wormwood")
                 .SetLeaderSprites("Wormwood.png", "Wendy_BG.png")
-                .WithText("<keyword=dstmod.leftgroupplant>".Process())
+                .WithText("<keyword=dstmod.plant>".Process())
                 .SetStats(null, null, 6)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

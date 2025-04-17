@@ -8,7 +8,7 @@ public class Lavae : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("lavae", "Lavae")
                 .SetCardSprites("Lavae.png", "Wendy_BG.png")
-                .SetStats(5, 2, 3)
+                .SetStats(5, 3, 3)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

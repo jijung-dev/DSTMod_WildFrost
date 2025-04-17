@@ -23,7 +23,7 @@ public class Pearl : DataBase
     {
         assets.Add(
             StatusCopy("On Turn Add Attack To Allies", "On Turn Reduce Counter To Allies")
-                .WithText("Reduce <keyword=counter> by <{a}> to all allies")
+                .WithText("Count down <keyword=counter> by <{a}> to all allies")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
                 {
                     data.canBeBoosted = false;

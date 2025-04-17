@@ -22,7 +22,7 @@ public class Rockjaw : DataBase
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("When Destroyed Gain Rock To Chest", 1),
-                        SStack("Pre Turn Apply Dive Down Rockjaw To Self", 1),
+                        SStack("On Turn Apply Dive Down Rockjaw To Self", 1),
                     };
                 })
         );
@@ -31,7 +31,7 @@ public class Rockjaw : DataBase
                 .CreateUnit("rockjawDived", "Rockjaw Dived")
                 .SetCardSprites("RockjawDived.png", "Wendy_BG.png")
                 .WithText("Dive up <hiddencard=dstmod.rockjaw>".Process())
-                .SetStats(0, 0, 2)
+                .SetStats(null, null, 2)
                 .WithCardType("Enemy")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -39,7 +39,8 @@ public class Rockjaw : DataBase
                     {
                         SStack("Chest Health", 1),
                         SStack("Dive Up Rockjaw", 1),
-                        SStack("Pre Turn Apply Reduce Chest Health To Self", 1),
+                        SStack("Building Immune To Everything", 1),
+                        SStack("On Turn Apply Reduce Chest Health To Self", 1),
                     };
                 })
         );
@@ -52,10 +53,10 @@ public class Rockjaw : DataBase
                 .Create<StatusEffectNextPhaseExt>("Dive Down Rockjaw")
                 .SubscribeToAfterAllBuildEvent<StatusEffectNextPhaseExt>(data =>
                 {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("divedown") };
                     data.killSelfWhenApplied = true;
                     data.preventDeath = true;
                     data.nextPhase = TryGet<CardData>("rockjawDived");
-                    data.animation = new Scriptable<CardAnimationPing>();
                 })
         );
         assets.Add(
@@ -65,13 +66,12 @@ public class Rockjaw : DataBase
                 {
                     data.preventDeath = true;
                     data.nextPhase = TryGet<CardData>("rockjaw");
-                    data.animation = new Scriptable<CardAnimationPing>();
                 })
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXPreTurn>("Pre Turn Apply Reduce Chest Health To Self")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXPreTurn>(data =>
+                .Create<StatusEffectApplyXOnCounterTurn>("On Turn Apply Reduce Chest Health To Self")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
                 {
                     data.doPing = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
@@ -80,9 +80,10 @@ public class Rockjaw : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectApplyXPreCounterTurn>("Pre Turn Apply Dive Down Rockjaw To Self")
-                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXPreCounterTurn>(data =>
+                .Create<StatusEffectApplyXOnCounterTurn>("On Turn Apply Dive Down Rockjaw To Self")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnCounterTurn>(data =>
                 {
+                    data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("divedown") };
                     data.doPing = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.effectToApply = TryGet<StatusEffectData>("Dive Down Rockjaw");
@@ -95,7 +96,7 @@ public class Rockjaw : DataBase
         assets.Add(
             new KeywordDataBuilder(mod)
                 .Create("divedown")
-                .WithDescription("\"Dive down\" restore full <keyword=health>")
+                .WithDescription("\"Dive down\" restore full <keyword=health> and became untargetable")
                 .WithTitleColour(new Color(0.2588235f, 0.06666667f, 0.1294118f, 1f))
                 .WithBodyColour(new Color(0.4313726f, 0.2f, 0.1921569f, 1f))
                 .WithPanelColour(new Color(0.9058824f, 0.8274511f, 0.6784314f, 0.9411765f))

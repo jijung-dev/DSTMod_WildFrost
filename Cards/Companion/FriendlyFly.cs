@@ -23,7 +23,7 @@ public class FriendlyFly : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnTurn>("On Turn Boost Random Ally Effect")
-                .WithText("Boost random ally effect by <{a}>")
+                .WithText("Boost random ally effect by 1")
                 .FreeModify(
                     delegate(StatusEffectData data)
                     {

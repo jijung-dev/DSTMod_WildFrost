@@ -70,6 +70,10 @@ public class ActionChangePhaseExt : PlayAction
         yield return entity.display.UpdateData(doPing: true);
         entity.alive = true;
         yield return StatusEffectSystem.EntityEnableEvent(entity);
+
+        if (entity.hp.max <= 0) entity.data.hasHealth = false;
+        if (entity.damage.max <= 0) entity.data.hasAttack = false;
+
         PauseMenu.Unblock();
         DeckpackBlocker.Unblock();
     }

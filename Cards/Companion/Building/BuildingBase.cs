@@ -100,7 +100,6 @@ public abstract class BuildingBase : DataBase
                             TStack("Blueprint", 1),
                             TStack("Consume", 1),
                             TStack("Zoomlin", 1),
-                            TStack("Longshot", 1),
                         };
                         data.attackEffects = new CardData.StatusEffectStacks[]
                         {

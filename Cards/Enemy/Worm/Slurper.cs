@@ -11,7 +11,7 @@ public class Slurper : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("slurper", "Slurper")
                 .SetCardSprites("Slurper.png", "Wendy_BG.png")
-                .SetStats(6, 2, 2)
+                .SetStats(10, 3, 2)
                 .WithCardType("Enemy")
                 .WithValue(2 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

@@ -79,7 +79,7 @@ public class ConsumableFatory : ConsumableBase
                     "Monster Lasagna",
                     "monsterLasagna"
                 ),
-                Create("morsel", "Morsel", "Morsel.png", SStack(("Heal", 1), ("Sanity", 1)), ConsumeType.Food, "Cooked Morsel", "cookedMorsel"),
+                Create("morsel", "Morsel", "Morsel.png", SStack(("Heal", 2), ("Sanity", 1)), ConsumeType.Food, "Cooked Morsel", "cookedMorsel"),
                 Create("taffy", "Taffy", "Taffy.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("cookedMeat", "Cooked Meat", "CookedMeat.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("cookedFrogLegs", "Cooked Frog Legs", "CookedFrogLegs.png", SStack(("Heal", 1)), ConsumeType.Cooked),
@@ -98,7 +98,7 @@ public class ConsumableFatory : ConsumableBase
                     ConsumeType.Cooked
                 ),
                 Create("monsterLasagna", "Monster Lasagna", "MonsterLasagna.png", SStack(("Heal", 2), ("Sanity", 2)), ConsumeType.Cooked),
-                Create("cookedMorsel", "Cooked Morsel", "CookedMorsel.png", SStack(("Heal", 1)), ConsumeType.Cooked),
+                Create("cookedMorsel", "Cooked Morsel", "CookedMorsel.png", SStack(("Heal", 2)), ConsumeType.Cooked),
                 Create("extraSmellyDurian", "Extra Smelly Durian", "ExtraSmellyDurian.png", SStack(("Teeth", 2), ("Sanity", 4)), ConsumeType.Cooked),
                 Create("roastedPepper", "Roasted Pepper", "RoastedPepper.png", SStack(("Spice", 2), ("Overheat", 4)), ConsumeType.Cooked),
                 Create("roastedPotato", "Roasted Potato", "RoastedPotato.png", SStack(("Heal", 2)), ConsumeType.Cooked),

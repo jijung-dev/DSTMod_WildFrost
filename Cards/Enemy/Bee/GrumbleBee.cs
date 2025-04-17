@@ -11,7 +11,7 @@ public class GrumbleBee : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("grumbleBee", "Grumble Bee")
                 .SetCardSprites("GrumbleBee.png", "Wendy_BG.png")
-                .SetStats(8, 2, 3)
+                .SetStats(10, 3, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

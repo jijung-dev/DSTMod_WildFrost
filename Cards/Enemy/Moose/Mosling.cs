@@ -29,6 +29,7 @@ public class Mosling : DataBase
                         SStack("Chest Health", 1),
                         SStack("On Counter Turn Fill Board With Mosling", 1),
                         SStack("Destroy Self After Counter Turn", 1),
+                        SStack("Building Immune To Everything", 1),
                     };
                 })
         );

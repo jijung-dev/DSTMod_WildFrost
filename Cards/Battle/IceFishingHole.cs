@@ -12,7 +12,7 @@ public class IceFishingHole : DataBase
                     .SetNameRef("Ice Fishing Hole")
                     .EnemyDictionary(
                         ('B', "bullKelp"),
-                        ('F', "frostjaw"),
+                        ('F', "frostjawDived"),
                         ('R', "rockjawDived"),
                         ('L', "glacier"),
                         ('P', "pengull"),

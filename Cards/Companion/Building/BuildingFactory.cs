@@ -93,7 +93,7 @@ public class BuildingFactory : BuildingBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnTurn>("On Turn Reduce Counter Allies")
-                .WithText("Reduce <keyword=counter> by <{a}> for allies")
+                .WithText("Count down <keyword=counter> by <{a}> for allies")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Reduce Counter");

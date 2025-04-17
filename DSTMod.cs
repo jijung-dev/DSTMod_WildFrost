@@ -68,8 +68,6 @@ namespace DSTMod_WildFrost
         internal static TMP_SpriteAsset spriteAsset;
 
         public static string CatalogFolder => Path.Combine(Instance.ModDirectory, "Windows");
-
-        // A helpful shortcut
         public static string CatalogPath => Path.Combine(CatalogFolder, "catalog.json");
 
         public static SpriteAtlas Cards;
@@ -79,100 +77,100 @@ namespace DSTMod_WildFrost
 
         public Dictionary<string, TargetConstraint> allConstraint = new Dictionary<string, TargetConstraint>();
 
+        public static string[] spriteStrings = { "Frame", "NameTag", "Mask", "FrameOutline", "DescriptionBox" };
+
         public RewardPool itemPool;
         public RewardPool unitPool;
 
         private void CreateTargetConstraint()
         {
-            allConstraint.Add("noChopable", new Scriptable<TargetConstraintHasTrait>(x => x.not = true));
-            allConstraint.Add("noMineable", new Scriptable<TargetConstraintHasTrait>(x => x.not = true));
-            allConstraint.Add("hammerOnly", new Scriptable<TargetConstraintHasTrait>());
-            allConstraint.Add("pickaxeOnly", new Scriptable<TargetConstraintHasTrait>());
-            allConstraint.Add("axeOnly", new Scriptable<TargetConstraintHasTrait>());
-            allConstraint.Add("beeOnly", new Scriptable<TargetConstraintHasTrait>());
-            allConstraint.Add("buildingOnly", new Scriptable<TargetConstraintHasTrait>());
+            void AddTraitConstraint(string key, bool not = false) =>
+                allConstraint.Add(key, new Scriptable<TargetConstraintHasTrait>(x => x.not = not));
 
-            allConstraint.Add("companionOnly", new Scriptable<TargetConstraintIsCardType>());
+            void AddStatusConstraint(string key, bool not = false) =>
+                allConstraint.Add(key, new Scriptable<TargetConstraintHasStatus>(x => x.not = not));
 
-            allConstraint.Add("clunkerOnly", new Scriptable<TargetConstraintHasStatus>());
-            allConstraint.Add("noChestHealth", new Scriptable<TargetConstraintHasStatus>(x => x.not = true));
-            allConstraint.Add("noBuilding", new Scriptable<TargetConstraintHasStatus>(x => x.not = true));
+            void AddSpecificCardConstraint(string key, bool not = false) =>
+                allConstraint.Add(key, new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = not));
 
-            allConstraint.Add("abigailOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("floorOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("dflyOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("toadstoolOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("sandCastleOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("fuelweaverOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("klausOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("chestOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("catapultOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("moslingOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("wolfgangOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("wormwoodOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("wendyOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("charlieOnly", new Scriptable<TargetConstraintIsSpecificCard>());
-            allConstraint.Add("noCharlie", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
-            allConstraint.Add("noDfly", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
-            allConstraint.Add("noToadstool", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
-            allConstraint.Add("noBoomshroom", new Scriptable<TargetConstraintIsSpecificCard>(x => x.not = true));
+            void AddCardTypeConstraint(string key, bool not = false) =>
+                allConstraint.Add(key, new Scriptable<TargetConstraintIsCardType>(x => x.not = not));
+
+
+            AddTraitConstraint("noChopable", true);
+            AddTraitConstraint("noMineable", true);
+            AddTraitConstraint("hammerOnly");
+            AddTraitConstraint("pickaxeOnly");
+            AddTraitConstraint("axeOnly");
+            AddTraitConstraint("beeOnly");
+            AddTraitConstraint("buildingOnly");
+
+            AddCardTypeConstraint("companionOnly");
+
+            AddStatusConstraint("clunkerOnly");
+            AddStatusConstraint("noChestHealth", true);
+            AddStatusConstraint("noBuilding", true);
+
+            string[] specificOnlyKeys = {
+                "abigailOnly", "floorOnly", "dflyOnly", "toadstoolOnly", "sandCastleOnly",
+                "fuelweaverOnly", "klausOnly", "chestOnly", "catapultOnly", "moslingOnly",
+                "wolfgangOnly", "wormwoodOnly", "wendyOnly", "charlieOnly"
+            };
+            foreach (var key in specificOnlyKeys)
+                AddSpecificCardConstraint(key);
+
+            AddSpecificCardConstraint("noCharlie", true);
+            AddSpecificCardConstraint("noDfly", true);
+            AddSpecificCardConstraint("noToadstool", true);
+            AddSpecificCardConstraint("noBoomshroom", true);
         }
 
         private void ApplyConstraint()
         {
-            ((TargetConstraintHasTrait)allConstraint["noChopable"]).trait = TryGet<TraitData>("Chopable");
-            ((TargetConstraintHasTrait)allConstraint["noMineable"]).trait = TryGet<TraitData>("Mineable");
-            ((TargetConstraintHasTrait)allConstraint["hammerOnly"]).trait = TryGet<TraitData>("HammerType");
-            ((TargetConstraintHasTrait)allConstraint["pickaxeOnly"]).trait = TryGet<TraitData>("PickaxeType");
-            ((TargetConstraintHasTrait)allConstraint["axeOnly"]).trait = TryGet<TraitData>("AxeType");
-            ((TargetConstraintHasTrait)allConstraint["beeOnly"]).trait = TryGet<TraitData>("Bee");
-            ((TargetConstraintHasTrait)allConstraint["buildingOnly"]).trait = TryGet<TraitData>("Building");
+            void SetTrait(string key, string traitName) =>
+        ((TargetConstraintHasTrait)allConstraint[key]).trait = TryGet<TraitData>(traitName);
 
-            ((TargetConstraintIsCardType)allConstraint["companionOnly"]).allowedTypes = new[] { TryGet<CardType>("Friendly") };
+            void SetStatus(string key, string statusName) =>
+                ((TargetConstraintHasStatus)allConstraint[key]).status = TryGet<StatusEffectData>(statusName);
 
-            ((TargetConstraintHasStatus)allConstraint["clunkerOnly"]).status = TryGet<StatusEffectData>("Scrap");
-            ((TargetConstraintHasStatus)allConstraint["noBuilding"]).status = TryGet<StatusEffectData>("Building Health");
-            ((TargetConstraintHasStatus)allConstraint["noChestHealth"]).status = TryGet<StatusEffectData>("Chest Health");
+            void SetCards(string key, params string[] cardNames) =>
+                ((TargetConstraintIsSpecificCard)allConstraint[key]).allowedCards = cardNames.Select(TryGet<CardData>).ToArray();
 
-            ((TargetConstraintIsSpecificCard)allConstraint["abigailOnly"]).allowedCards = new CardData[] { TryGet<CardData>("abigail") };
-            ((TargetConstraintIsSpecificCard)allConstraint["floorOnly"]).allowedCards = new CardData[] { TryGet<CardData>("floor") };
-            ((TargetConstraintIsSpecificCard)allConstraint["dflyOnly"]).allowedCards = new CardData[]
-            {
-                TryGet<CardData>("dragonfly"),
-                TryGet<CardData>("dragonflyEnraged"),
-            };
-            ((TargetConstraintIsSpecificCard)allConstraint["toadstoolOnly"]).allowedCards = new CardData[]
-            {
-                TryGet<CardData>("toadstool"),
-                TryGet<CardData>("toadstoolEnraged"),
-            };
-            ((TargetConstraintIsSpecificCard)allConstraint["sandCastleOnly"]).allowedCards = new CardData[] { TryGet<CardData>("sandCastle") };
-            ((TargetConstraintIsSpecificCard)allConstraint["fuelweaverOnly"]).allowedCards = new CardData[] { TryGet<CardData>("ancientFuelweaver") };
-            ((TargetConstraintIsSpecificCard)allConstraint["klausOnly"]).allowedCards = new CardData[]
-            {
-                TryGet<CardData>("klaus"),
-                TryGet<CardData>("klausEnraged"),
-                TryGet<CardData>("winterKlaus"),
-            };
-            ((TargetConstraintIsSpecificCard)allConstraint["chestOnly"]).allowedCards = new CardData[] { TryGet<CardData>("chest") };
-            ((TargetConstraintIsSpecificCard)allConstraint["noDfly"]).allowedCards = new CardData[]
-            {
-                TryGet<CardData>("dragonfly"),
-                TryGet<CardData>("dragonflyEnraged"),
-            };
-            ((TargetConstraintIsSpecificCard)allConstraint["noToadstool"]).allowedCards = new CardData[]
-            {
-                TryGet<CardData>("toadstool"),
-                TryGet<CardData>("toadstoolEnraged"),
-            };
-            ((TargetConstraintIsSpecificCard)allConstraint["noBoomshroom"]).allowedCards = new CardData[] { TryGet<CardData>("boomshroom") };
-            ((TargetConstraintIsSpecificCard)allConstraint["noCharlie"]).allowedCards = new CardData[] { TryGet<CardData>("charlie") };
-            ((TargetConstraintIsSpecificCard)allConstraint["charlieOnly"]).allowedCards = new CardData[] { TryGet<CardData>("charlie") };
-            ((TargetConstraintIsSpecificCard)allConstraint["catapultOnly"]).allowedCards = new CardData[] { TryGet<CardData>("catapult") };
-            ((TargetConstraintIsSpecificCard)allConstraint["moslingOnly"]).allowedCards = new CardData[] { TryGet<CardData>("mosling") };
-            ((TargetConstraintIsSpecificCard)allConstraint["wolfgangOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wolfgang") };
-            ((TargetConstraintIsSpecificCard)allConstraint["wormwoodOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wormwood") };
-            ((TargetConstraintIsSpecificCard)allConstraint["wendyOnly"]).allowedCards = new CardData[] { TryGet<CardData>("wendy") };
+            void SetCardType(string key, params string[] cardTypes) =>
+                ((TargetConstraintIsCardType)allConstraint[key]).allowedTypes = cardTypes.Select(TryGet<CardType>).ToArray();
+
+            SetTrait("noChopable", "Chopable");
+            SetTrait("noMineable", "Mineable");
+            SetTrait("hammerOnly", "HammerType");
+            SetTrait("pickaxeOnly", "PickaxeType");
+            SetTrait("axeOnly", "AxeType");
+            SetTrait("beeOnly", "Bee");
+            SetTrait("buildingOnly", "Building");
+
+            SetCardType("companionOnly", "Friendly");
+
+            SetStatus("clunkerOnly", "Scrap");
+            SetStatus("noChestHealth", "Chest Health");
+            SetStatus("noBuilding", "Building Health");
+
+            SetCards("abigailOnly", "abigail");
+            SetCards("floorOnly", "floor");
+            SetCards("dflyOnly", "dragonfly", "dragonflyEnraged");
+            SetCards("toadstoolOnly", "toadstool", "toadstoolEnraged");
+            SetCards("sandCastleOnly", "sandCastle");
+            SetCards("fuelweaverOnly", "ancientFuelweaver");
+            SetCards("klausOnly", "klaus", "klausEnraged", "winterKlaus");
+            SetCards("chestOnly", "chest");
+            SetCards("catapultOnly", "catapult");
+            SetCards("moslingOnly", "mosling");
+            SetCards("wolfgangOnly", "wolfgang");
+            SetCards("wormwoodOnly", "wormwood");
+            SetCards("wendyOnly", "wendy");
+            SetCards("charlieOnly", "charlie");
+            SetCards("noCharlie", "charlie");
+            SetCards("noDfly", "dragonfly", "dragonflyEnraged");
+            SetCards("noToadstool", "toadstool", "toadstoolEnraged");
+            SetCards("noBoomshroom", "boomshroom");
         }
 
         private void CreateModAssets()
@@ -188,6 +186,7 @@ namespace DSTMod_WildFrost
 
             itemPool = CreateRewardPool("DstItemPool", "Items", DataList<CardData>());
             unitPool = CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
+
             #region Tribe
             //Add Tribe
             Sprite flagSprite = DSTMod.Other.GetSprite("DSTFlag");
@@ -219,122 +218,21 @@ namespace DSTMod_WildFrost
                                     "torch"
                                 )
                                 .ToList();
-                            //inventory.upgrades.Add(TryGet<CardUpgradeData>("CardUpgradeCritical"));
                             data.startingInventory = inventory;
-
-                            //RewardPool charmPool = CreateRewardPool("DrawCharmPool", "Charms", DataList<CardUpgradeData>(
-                            //    "CardUpgradeTrash",
-                            //    "CardUpgradeInk", "CardUpgradeOverload",
-                            //    "CardUpgradeMime", "CardUpgradeShellBecomesSpice",
-                            //    "CardUpgradeAimless"));
 
                             data.rewardPools = new RewardPool[]
                             {
                                 unitPool,
                                 itemPool,
-                                //charmPool,
                                 Extensions.GetRewardPool("GeneralUnitPool"),
                                 Extensions.GetRewardPool("GeneralItemPool"),
                                 Extensions.GetRewardPool("GeneralCharmPool"),
                                 Extensions.GetRewardPool("GeneralModifierPool"),
-                                //Extensions.GetRewardPool("SnowUnitPool"),
-                                //Extensions.GetRewardPool("SnowCharmPool"),
                             };
                         }
                     )
             );
             #endregion
-
-            #region Testing Stuffs
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("sanityStick99", "Sanity Stick")
-                    .SetStats(null, null, 0)
-                    .SetCardSprites("Stick.png", "Wendy_BG.png")
-                    .SetTraits(TStack("Zoomlin", 1))
-                    .WithCardType("Item")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Sanity", 99) };
-                    })
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("freezingStick99", "Freezing Stick")
-                    .SetStats(null, null, 0)
-                    .SetCardSprites("Stick.png", "Wendy_BG.png")
-                    .SetTraits(TStack("Zoomlin", 1))
-                    .WithCardType("Item")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Freezing", 99) };
-                    })
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("freezingStick1", "Freezing Stick")
-                    .SetStats(null, null, 0)
-                    .SetCardSprites("Stick.png", "Wendy_BG.png")
-                    .SetTraits(TStack("Zoomlin", 1))
-                    .WithCardType("Item")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Freezing", 1) };
-                    })
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("sanityStick1", "Sanity Stick")
-                    .SetStats(null, null, 0)
-                    .SetCardSprites("Stick.png", "Wendy_BG.png")
-                    .WithCardType("Item")
-                    .SetTraits(TStack("Zoomlin", 1))
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Sanity", 1) };
-                    })
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("overheatingStick99", "Overheat Stick")
-                    .SetStats(null, null, 0)
-                    .SetCardSprites("Stick.png", "Wendy_BG.png")
-                    .SetTraits(TStack("Zoomlin", 1))
-                    .WithCardType("Item")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Overheat", 99) };
-                    })
-            );
-            assets.Add(
-                new CardDataBuilder(this)
-                    .CreateItem("overheatingStick1", "Overheat Stick")
-                    .SetStats(null, null, 0)
-                    .SetCardSprites("Stick.png", "Wendy_BG.png")
-                    .SetTraits(TStack("Zoomlin", 1))
-                    .WithCardType("Item")
-                    .SubscribeToAfterAllBuildEvent<CardData>(data =>
-                    {
-                        data.attackEffects = new CardData.StatusEffectStacks[1] { SStack("Overheat", 1) };
-                    })
-            );
-            #endregion
-
-            //TODO: Make the map node more immersive?
-
-            // Texture2D texture2D = ImagePath("Nodes/FuelweaverNode.png").ToTex();
-            // Sprite sprite = Sprite.Create(texture2D, new Rect(0f, 0f, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 100);
-
-            // assets.Add(
-            //     NodeCopy("CampaignNodeFinalBoss", "CampaignNodeFinalBossTest")
-            //     .FreeModify(
-            //         delegate (CampaignNodeType data)
-            //         {
-            //             data.mapNodePrefab.spriteOptions[0] = sprite;
-            //             data.mapNodeSprite = sprite;
-            //         }
-            //     )
-            // );
 
             preLoaded = true;
         }
@@ -349,6 +247,19 @@ namespace DSTMod_WildFrost
                     battleAssets.AddRange(instance.CreateBattleAsset());
                 }
             }
+        }
+        public void CreateCustomCardFrames()
+        {
+            //Somewhere else, possibleSprites is defined like this:
+            //public string[] possibleSprites = new string[] { "Frame", "NameTag", "Mask", "FrameOutline", "DescriptionBox" };
+            // The full list of changeables can be found in CardCustomFrameSetter as well  
+            Dictionary<string, Sprite> dictionary = new Dictionary<string, Sprite>();
+            foreach (var names in spriteStrings)
+            {
+                //Using a very specific naming convention here. You don't have to, but the code will look slightly longer.
+                dictionary[names] = ImagePath($"Leader{names}.png").ToSprite();
+            }
+            CustomCardFrameSystem.AddCustomFrame("dst.leader", "Friendly", dictionary);
         }
 
         private void InsertNodeViaPreset(ref string[] preset)
@@ -376,7 +287,6 @@ namespace DSTMod_WildFrost
             }
         }
 
-        // TODO: Custom starting deck for leader
         public IEnumerator CampaignInit()
         {
             References.LeaderData.startWithEffects = References
@@ -406,33 +316,6 @@ namespace DSTMod_WildFrost
             }
         }
 
-        // {
-        //     // Only applies if the selected tribe is from this mod
-        //     if (References.PlayerData?.classData.ModAdded != this)
-        //         yield break;
-
-        //     if (References.LeaderData.original == TryGet<CardData>("NakedGnomeFriendly"))
-        //     {
-        //         Debug.LogError("Forgot someone?");
-        //         References.PlayerData.inventory.deck.list.AddRange(
-        //             DataList<CardData>(
-        //                 "NakedGnomeFriendly",
-        //                 "NakedGnomeFriendly",
-        //                 "NakedGnomeFriendly"
-        //                 ).Select(c => c.Clone())
-        //             );
-        //     }
-        //     if (References.LeaderData.original == TryGet<CardData>("sasha idk"))
-        //     {
-        //         References.PlayerData.inventory.deck.list.AddRange(
-        //             DataList<CardData>(
-        //                 "Nova",
-        //                 "SunRod",
-        //                 "Foxee"
-        //                 ).Select(c => c.Clone())
-        //             );
-        //     }
-        // }
         public override List<T> AddAssets<T, Y>()
         {
             if (assets.OfType<T>().Any())
@@ -467,10 +350,6 @@ namespace DSTMod_WildFrost
                 );
             return data;
         }
-
-        public CardDataBuilder CardCopy(string oldName, string newName) => DataCopy<CardData, CardDataBuilder>(oldName, newName);
-
-        public CardTypeBuilder CardTypeCopy(string oldName, string newName) => DataCopy<CardType, CardTypeBuilder>(oldName, newName);
 
         public CampaignNodeTypeBuilder NodeCopy(string oldName, string newName) =>
             DataCopy<CampaignNodeType, CampaignNodeTypeBuilder>(oldName, newName);
@@ -529,6 +408,7 @@ namespace DSTMod_WildFrost
             {
                 spriteAsset = HopeUtils.CreateSpriteAsset(Title, directoryWithPNGs: ImagePath("Icons"));
                 CreateTargetConstraint();
+                CreateCustomCardFrames();
                 CreateModAssets();
             }
 
@@ -538,17 +418,21 @@ namespace DSTMod_WildFrost
 
             SpriteAsset.RegisterSpriteAsset();
             base.Load();
+
             CreateBattleAssets();
+            foreach (var (num, battleDataEditor) in battleAssets)
+            {
+                battleDataEditor.ToggleBattle(true);
+            }
+            
             ApplyConstraint();
+
             VFXHelper.SFX = new SFXLoader(ImagePath("Sounds"));
             VFXHelper.SFX.RegisterAllSoundsToGlobal();
             VFXHelper.VFX = new GIFLoader(this, ImagePath("Animations"));
             VFXHelper.VFX.RegisterAllAsApplyEffect();
 
-            foreach (var (num, battleDataEditor) in battleAssets)
-            {
-                battleDataEditor.ToggleBattle(true);
-            }
+            
 
             CreateLocalizedStrings();
             Events.OnEntityCreated += FixImage;
@@ -576,7 +460,7 @@ namespace DSTMod_WildFrost
             SpriteAsset.UnRegisterSpriteAsset();
 
             GameMode gameMode = TryGet<GameMode>("GameModeNormal");
-            gameMode.classes = RemoveNulls(gameMode.classes); //Without this, a non-restarted game would crash on tribe selection
+            gameMode.classes = RemoveNulls(gameMode.classes);
             UnloadFromClasses();
         }
 

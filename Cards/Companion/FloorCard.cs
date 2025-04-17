@@ -40,6 +40,11 @@ public class FloorCard : DataBase
                     {
                         TryGet<StatusEffectData>("Instant Summon Hammer In Hand"),
                         TryGet<StatusEffectData>("Reduce Chest Health"),
+                        TryGet<StatusEffectData>("Cannot Recall"),
+                        TryGet<StatusEffectData>("Chest Health"),
+                        TryGet<StatusEffectData>("Low Priority Position"),
+                        TryGet<StatusEffectData>("Unshovable"),
+                        TryGet<StatusEffectData>("Unmovable"),
                     };
                 })
         );

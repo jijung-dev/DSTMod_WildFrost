@@ -9,7 +9,7 @@ public class Spitter : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("spitter", "Spitter")
                 .SetCardSprites("Spitter.png", "Wendy_BG.png")
-                .SetStats(6, 1, 3)
+                .SetStats(6, 2, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

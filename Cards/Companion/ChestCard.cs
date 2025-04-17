@@ -41,6 +41,11 @@ public class ChestCard : DataBase
                         TryGet<StatusEffectData>("Rock"),
                         TryGet<StatusEffectData>("Gold"),
                         TryGet<StatusEffectData>("Wood"),
+                        TryGet<StatusEffectData>("Cannot Recall"),
+                        TryGet<StatusEffectData>("Chest Health"),
+                        TryGet<StatusEffectData>("Low Priority Position"),
+                        TryGet<StatusEffectData>("Unshovable"),
+                        TryGet<StatusEffectData>("Unmovable"),
                     };
                 })
         );

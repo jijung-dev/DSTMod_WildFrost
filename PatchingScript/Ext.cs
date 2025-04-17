@@ -30,6 +30,11 @@ public static class Ext
             }
         );
     }
+    public static CardDataBuilder AddLeaderFrame(this CardDataBuilder cardData)
+    {
+        CustomCardFrameSystem.LeaderCards.Add(cardData._data.name);
+        return cardData;
+    }
 
     public static string RemoveHidden(string text)
     {
@@ -90,33 +95,6 @@ public static class Ext
         Sprite backgroundSprite = DSTMod.Other.GetSprite(backgroundSpriteName.Replace(".png", ""));
 
         return builder.SetSprites(mainSprite, backgroundSprite);
-    }
-
-    public static T CopyAdd<T>(this GameObject desitation, T org)
-        where T : Component
-    {
-        Type type = org.GetType();
-        Component copy = desitation.AddComponent(type);
-
-        FieldInfo[] fields = type.GetFields();
-        foreach (var field in fields)
-        {
-            field.SetValue(copy, field.GetValue(org));
-        }
-
-        return copy as T;
-    }
-
-    public static T Copy<T>(this T desitation, T org)
-        where T : Component
-    {
-        FieldInfo[] fields = org.GetType().GetFields();
-        foreach (var field in fields)
-        {
-            field.SetValue(desitation, field.GetValue(org));
-        }
-
-        return desitation;
     }
 
     public static void PopupText(Entity entity, NoTargetTypeExt requireType)

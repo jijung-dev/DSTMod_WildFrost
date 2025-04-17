@@ -11,7 +11,7 @@ public class PigHouse : DataBase
                 .SetCardSprites("PigHouse.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
                 .WithPools("GeneralUnitPool")
-                .SetStats(null, null, 12)
+                .SetStats(null, null, 8)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Instant Summon Pig", 1) };

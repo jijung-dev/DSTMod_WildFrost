@@ -31,7 +31,7 @@ public class RottenPotato : DataBase
     {
         assets.Add(
             StatusCopy("When Destroyed Apply Spice To Allies", "When Destroyed Apply Shroom To Random Enemy")
-                .WithText("When destroyed, apply <{a}><keyword=shroom> to enemies ")
+                .WithText("When destroyed, apply <{a}><keyword=shroom> to a random enemy ")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyed>(data =>
                 {
                     data.effectToApply = TryGet<StatusEffectData>("Shroom");

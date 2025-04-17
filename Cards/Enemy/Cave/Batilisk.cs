@@ -10,7 +10,7 @@ public class Batilisk : DataBase
                 .CreateUnit("batilisk", "Batilisk")
                 .WithText("Take <2><keyword=health>")
                 .SetCardSprites("Batilisk.png", "Wendy_BG.png")
-                .SetStats(6, 2, 3)
+                .SetStats(8, 3, 3)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

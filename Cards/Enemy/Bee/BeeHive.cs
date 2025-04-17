@@ -11,7 +11,7 @@ public class BeeHive : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("beehive", "Beehive")
                 .SetCardSprites("Beehive.png", "Wendy_BG.png")
-                .SetStats(8, null, 0)
+                .SetStats(10, null, 0)
                 .WithCardType("Enemy")
                 .WithValue(4 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
