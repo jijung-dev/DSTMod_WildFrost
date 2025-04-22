@@ -6,7 +6,6 @@ public class GiantBeeHive : DataBase
     {
         battleAssets.Add(
             (
-                4,
                 new BattleDataEditor(mod, "BeeQueen", 0)
                     .SetSprite("Nodes/BeeQueenHiveNode.png")
                     .SetNameRef("Giant Beehive")

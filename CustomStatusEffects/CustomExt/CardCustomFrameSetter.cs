@@ -43,7 +43,10 @@ namespace DSTMod_WildFrost
         //Rather than outright replacing the CardFrameSetter, it's easier just to "extend" it
         public virtual void Load(int num)
         {
-            if (cardFrameSetter.loaded) { return; }
+            if (cardFrameSetter.loaded)
+            {
+                return;
+            }
 
             cardFrameSetter.Load(num);
 
@@ -76,7 +79,7 @@ namespace DSTMod_WildFrost
                 }
             }
 
-            //Description isn't dynamically set, so we can set it during the card creation 
+            //Description isn't dynamically set, so we can set it during the card creation
             if (sprites.ContainsKey("Description"))
             {
                 AddressableTieredSpriteLoader nameTag = cardFrameSetter.spriteSetters.FirstOrDefault(s => s.name == "NameTag");
@@ -91,12 +94,13 @@ namespace DSTMod_WildFrost
 
         public virtual Sprite GetSprite(string name, int num) => sprites.ContainsKey(name + num) ? sprites[name + num] : sprites[name];
 
-
         //If you extend this class, these methods might be useful
         public virtual void CreateCallback() { } //Occurs when the card is first created; might be useless.
-        public virtual void GetCallback() { } //Occurs when the card is being reused by another card
-        public virtual void PoolCallback() { } //Occurs when the card is no longer needs to be on-screen
-        public virtual void DestroyCallback() { } //Occurs when the card is destroyed (OnDestroy also works)
 
+        public virtual void GetCallback() { } //Occurs when the card is being reused by another card
+
+        public virtual void PoolCallback() { } //Occurs when the card is no longer needs to be on-screen
+
+        public virtual void DestroyCallback() { } //Occurs when the card is destroyed (OnDestroy also works)
     }
 }

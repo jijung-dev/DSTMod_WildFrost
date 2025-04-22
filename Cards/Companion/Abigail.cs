@@ -24,6 +24,22 @@ public class Abigail : DataBase
         );
         assets.Add(
             new CardDataBuilder(mod)
+                .CreateUnit("abigailEnemy", "Abigail")
+                .SetCardSprites("Abigail.png", "Abigail_BG.png")
+                .SetStats(20, 4, 0)
+                .WithCardType("Friendly")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Trigger When Wendy Attacks", 1),
+                        SStack("When Destroyed Respawn", 1),
+                    };
+                })
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
                 .CreateItem("abigailFlower", "Abigail's Flower")
                 .SetCardSprites("abigailFlower.png", "Wendy_BG.png")
                 .FreeModify(
@@ -74,6 +90,17 @@ public class Abigail : DataBase
                     data.targetMustBeAlive = false;
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.effectToApply = TryGet<StatusEffectData>("Instant Gain Abigail Flower");
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenDestroyedUnNullable>("When Destroyed Respawn")
+                .WithText("Resummon when destroyed")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDestroyedUnNullable>(data =>
+                {
+                    data.targetMustBeAlive = false;
+                    data.effectToApply = TryGet<StatusEffectData>("Instant Summon Abigail Enemy");
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                 })
         );
         assets.Add(

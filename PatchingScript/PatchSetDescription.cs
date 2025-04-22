@@ -38,6 +38,8 @@ internal static class PatchSetDescription
 [HarmonyPatch(typeof(Text), nameof(Text.Process), new Type[] { typeof(string), typeof(int), typeof(float), typeof(ColourProfileHex) })]
 internal static class PatchSetDescription2
 {
-    static void Prefix(ref string original) { original = Ext.RemoveHidden(original).Trim(); }
+    static void Prefix(ref string original)
+    {
+        original = Ext.RemoveHidden(original).Trim();
+    }
 }
-

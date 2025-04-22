@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using UnityEngine;
 
 public class BunnyMan : DataBase
 {
@@ -63,6 +64,16 @@ public class BunnyMan : DataBase
         );
         assets.Add(
             new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenHit>("After Hit Summon BunnymanInjured")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
+                {
+                    data.targetMustBeAlive = false;
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                    data.effectToApply = TryGet<StatusEffectData>("Instant Summon Bunnyman Injured In Hand");
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectGainCardWhenHit>("After Hit Summon Bunnyman Injured In Hand")
                 .SubscribeToAfterAllBuildEvent<StatusEffectGainCardWhenHit>(data =>
                 {
@@ -79,5 +90,22 @@ public class BunnyMan : DataBase
                     data.effectToApply = TryGet<StatusEffectData>("Increase Attack & Health");
                 })
         );
+    }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptRemovePassiveEffect>(r =>
+            {
+                r.toRemove = new StatusEffectData[] { TryGet<StatusEffectData>("After Hit Summon Bunnyman Injured In Hand") };
+            }),
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("After Hit Summon BunnymanInjured");
+                r.countRange = new Vector2Int(1, 1);
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("bunnyman"), scripts.ToArray());
     }
 }

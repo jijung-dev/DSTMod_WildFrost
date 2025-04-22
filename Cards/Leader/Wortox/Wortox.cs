@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
+using UnityEngine;
 
 public class Wortox : DataBase
 {
@@ -94,5 +95,22 @@ public class Wortox : DataBase
                     data.effectToApply = TryGet<StatusEffectData>("Heal");
                 })
         );
+    }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("On Card Played Heal To Allies");
+                r.countRange = new Vector2Int(3, 4);
+            }),
+            new Scriptable<CardScriptRemovePassiveEffect>(r =>
+            {
+                r.toRemove = new StatusEffectData[] { TryGet<StatusEffectData>("When Enemy Is Killed Gain Random Soul") };
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("wortox"), scripts.ToArray());
     }
 }

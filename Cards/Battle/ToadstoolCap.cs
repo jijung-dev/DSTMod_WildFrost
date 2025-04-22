@@ -6,7 +6,6 @@ public class ToadstoolCap : DataBase
     {
         battleAssets.Add(
             (
-                6,
                 new BattleDataEditor(mod, "ToadStool", 0)
                     .SetSprite("Nodes/ToadstoolNode.png")
                     .SetNameRef("Toadstool Cap")

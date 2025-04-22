@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 using HarmonyLib;
 using UnityEngine;
 using static CardData;
@@ -82,25 +83,38 @@ public abstract class BuildingBase : DataBase
                         data.traits = GetBuildingTrait(item);
                     })
             );
+            if (!item._isPool)
+            {
+                assets.Add(
+                    new CardDataBuilder(mod)
+                        .CreateUnit(item._name + "norequired", item._title)
+                        .SetHealth(item._stats[0] == 0 ? (int?)null : item._stats[0])
+                        .SetDamage(item._stats[1] == 0 ? (int?)null : item._stats[1])
+                        .SetCounter(item._stats[2])
+                        .SetCardSprites(item._spriteName, "Wendy_BG.png")
+                        .WithCardType("Clunker")
+                        .WithValue(GetResourcePrice(item))
+                        .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                        {
+                            data.WithPools(DSTMod.Instance.unitWithoutResource);
+                            data.startWithEffects = GetBuildingStatusEffectNoRequired(item);
+                        })
+                );
+            }
             assets.Add(
                 new CardDataBuilder(mod)
                     .CreateItem(item._name + "Blueprint", item._title + " Blueprint")
                     .WithText($"Place <card=dstmod.{item._name}><hiddencard=dstmod.floor>".Process())
                     .SetCardSprites("Blueprint.png", "Wendy_BG.png")
-                    .WithPools("GeneralItemPool")
                     .WithCardType("Item")
                     .WithValue(GetResourcePrice(item))
                     .SubscribeToAfterAllBuildEvent<CardData>(data =>
                     {
                         Ext.blueprints.Add(data);
                         data.targetConstraints = new TargetConstraint[] { mod.TryGetConstraint("floorOnly") };
+                        data.WithPools(DSTMod.Instance.itemWithResource);
 
-                        data.traits = new List<CardData.TraitStacks>()
-                        {
-                            TStack("Blueprint", 1),
-                            TStack("Consume", 1),
-                            TStack("Zoomlin", 1),
-                        };
+                        data.traits = new List<CardData.TraitStacks>() { TStack("Blueprint", 1), TStack("Consume", 1), TStack("Zoomlin", 1) };
                         data.attackEffects = new CardData.StatusEffectStacks[]
                         {
                             SStack("Build " + item._title, 1),
@@ -165,6 +179,16 @@ public abstract class BuildingBase : DataBase
 
         statusEffects.Add(SStack("Cannot Recall", 1));
         statusEffects.Add(SStack("Chest Health", 1));
+        return statusEffects.ToArray();
+    }
+
+    StatusEffectStacks[] GetBuildingStatusEffectNoRequired(BuildingInstance item)
+    {
+        List<StatusEffectStacks> statusEffects = new List<StatusEffectStacks>();
+        if (item._withEffects != null)
+            statusEffects.AddRange(item._withEffects?.Select(e => mod.SStack(e.name, e.amount)));
+
+        statusEffects.Add(SStack("Scrap", 5 - item._resourceRequired.Length));
         return statusEffects.ToArray();
     }
 

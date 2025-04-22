@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
+using UnityEngine;
 
 public class Wormwood : DataBase
 {
@@ -19,9 +20,7 @@ public class Wormwood : DataBase
                     {
                         SStack("Teeth", 3),
                         SStack("Bloomness", 1),
-                        SStack("ByPassHasHealthConstraint", 1),
                         SStack("On Turn Apply Teeth To Self", 1),
-                        SStack("Immune To Heal", 1),
                         SStack("When Overheat Applied To Self Gain Reduce Bloomness Instead", 1),
                         SStack("When Froze Applied To Self Gain Increase Max Counter Instead", 1),
                     };
@@ -82,5 +81,28 @@ public class Wormwood : DataBase
                     data.stackable = true;
                 })
         );
+    }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("Bloomness");
+                r.countRange = new Vector2Int(7, 10);
+            }),
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("Block");
+                r.countRange = new Vector2Int(2, 3);
+            }),
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("Teeth");
+                r.countRange = new Vector2Int(2, 3);
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("wormwood"), scripts.ToArray());
     }
 }

@@ -6,7 +6,6 @@ public class HoundMound : DataBase
     {
         battleAssets.Add(
             (
-                1,
                 new BattleDataEditor(mod, "Dog Spawner", 0)
                     .SetSprite("Nodes/HoundNode.png")
                     .SetNameRef("Hound Mound")

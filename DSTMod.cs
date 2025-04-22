@@ -13,6 +13,8 @@ using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.Localization.Tables;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using WildfrostHopeMod;
+using WildfrostHopeMod.Configs;
 using WildfrostHopeMod.SFX;
 using WildfrostHopeMod.Utils;
 using WildfrostHopeMod.VFX;
@@ -26,7 +28,13 @@ namespace DSTMod_WildFrost
         public static DSTMod Instance;
 
         public static List<object> assets = new List<object>();
-        public static List<(int, BattleDataEditor)> battleAssets = new List<(int, BattleDataEditor)>();
+        public static List<BattleDataEditor> battleAssets = new List<BattleDataEditor>();
+
+        [ConfigManagerTitle("Toggle Custom Battle")]
+        [ConfigManagerDesc("When off all resource system is also off, this mod recommended to play with this on")]
+        [ConfigItem(true, "", "Toggle Custom Battle")]
+        [ConfigOptions]
+        public bool isBattleOn;
         public static GameObject prefabHolder;
         private bool preLoaded = false;
 
@@ -38,7 +46,7 @@ namespace DSTMod_WildFrost
 
         public override string GUID => "tgestudio.wildfrost.dstmod";
 
-        public override string[] Depends => new string[] { "hope.wildfrost.vfx", "mhcdc9.wildfrost.battle" };
+        public override string[] Depends => new string[] { "hope.wildfrost.vfx", "mhcdc9.wildfrost.battle", "hope.wildfrost.configs" };
 
         public override string Title => "Don't Frostbite";
 
@@ -79,8 +87,15 @@ namespace DSTMod_WildFrost
 
         public static string[] spriteStrings = { "Frame", "NameTag", "Mask", "FrameOutline", "DescriptionBox" };
 
-        public RewardPool itemPool;
-        public RewardPool unitPool;
+        public List<(DataFile, RewardPool)> resourceStuffs = new List<(DataFile, RewardPool)>();
+        public static List<FinalBossCardModifier> cardModifierAssets = new List<FinalBossCardModifier>();
+
+        public RewardPool itemWithResource;
+        public RewardPool itemWithoutResource;
+        public RewardPool unitWithResource;
+        public RewardPool unitWithoutResource;
+        public RewardPool charmWithResource;
+        public RewardPool charmWithoutResource;
 
         private void CreateTargetConstraint()
         {
@@ -96,7 +111,6 @@ namespace DSTMod_WildFrost
             void AddCardTypeConstraint(string key, bool not = false) =>
                 allConstraint.Add(key, new Scriptable<TargetConstraintIsCardType>(x => x.not = not));
 
-
             AddTraitConstraint("noChopable", true);
             AddTraitConstraint("noMineable", true);
             AddTraitConstraint("hammerOnly");
@@ -108,13 +122,27 @@ namespace DSTMod_WildFrost
             AddCardTypeConstraint("companionOnly");
 
             AddStatusConstraint("clunkerOnly");
+            AddStatusConstraint("mineableOnly");
+            AddStatusConstraint("chopableOnly");
             AddStatusConstraint("noChestHealth", true);
             AddStatusConstraint("noBuilding", true);
 
-            string[] specificOnlyKeys = {
-                "abigailOnly", "floorOnly", "dflyOnly", "toadstoolOnly", "sandCastleOnly",
-                "fuelweaverOnly", "klausOnly", "chestOnly", "catapultOnly", "moslingOnly",
-                "wolfgangOnly", "wormwoodOnly", "wendyOnly", "charlieOnly"
+            string[] specificOnlyKeys =
+            {
+                "abigailOnly",
+                "floorOnly",
+                "dflyOnly",
+                "toadstoolOnly",
+                "sandCastleOnly",
+                "fuelweaverOnly",
+                "klausOnly",
+                "chestOnly",
+                "catapultOnly",
+                "moslingOnly",
+                "wolfgangOnly",
+                "wormwoodOnly",
+                "wendyOnly",
+                "charlieOnly",
             };
             foreach (var key in specificOnlyKeys)
                 AddSpecificCardConstraint(key);
@@ -127,8 +155,7 @@ namespace DSTMod_WildFrost
 
         private void ApplyConstraint()
         {
-            void SetTrait(string key, string traitName) =>
-        ((TargetConstraintHasTrait)allConstraint[key]).trait = TryGet<TraitData>(traitName);
+            void SetTrait(string key, string traitName) => ((TargetConstraintHasTrait)allConstraint[key]).trait = TryGet<TraitData>(traitName);
 
             void SetStatus(string key, string statusName) =>
                 ((TargetConstraintHasStatus)allConstraint[key]).status = TryGet<StatusEffectData>(statusName);
@@ -146,14 +173,18 @@ namespace DSTMod_WildFrost
             SetTrait("axeOnly", "AxeType");
             SetTrait("beeOnly", "Bee");
             SetTrait("buildingOnly", "Building");
+            // SetTrait("mineableOnly", "MineableNoRequired");
+            // SetTrait("chopableOnly", "ChopableNoRequired");
 
             SetCardType("companionOnly", "Friendly");
 
             SetStatus("clunkerOnly", "Scrap");
             SetStatus("noChestHealth", "Chest Health");
             SetStatus("noBuilding", "Building Health");
+            SetStatus("mineableOnly", "Temporary Mineable");
+            SetStatus("chopableOnly", "Temporary Chopable");
 
-            SetCards("abigailOnly", "abigail");
+            SetCards("abigailOnly", "abigail", "abigailEnemy");
             SetCards("floorOnly", "floor");
             SetCards("dflyOnly", "dragonfly", "dragonflyEnraged");
             SetCards("toadstoolOnly", "toadstool", "toadstoolEnraged");
@@ -161,7 +192,7 @@ namespace DSTMod_WildFrost
             SetCards("fuelweaverOnly", "ancientFuelweaver");
             SetCards("klausOnly", "klaus", "klausEnraged", "winterKlaus");
             SetCards("chestOnly", "chest");
-            SetCards("catapultOnly", "catapult");
+            SetCards("catapultOnly", "catapult", "catapultnorequired");
             SetCards("moslingOnly", "mosling");
             SetCards("wolfgangOnly", "wolfgang");
             SetCards("wormwoodOnly", "wormwood");
@@ -184,12 +215,16 @@ namespace DSTMod_WildFrost
                 }
             }
 
-            itemPool = CreateRewardPool("DstItemPool", "Items", DataList<CardData>());
-            unitPool = CreateRewardPool("DstUnitPool", "Units", DataList<CardData>());
-
             #region Tribe
             //Add Tribe
             Sprite flagSprite = DSTMod.Other.GetSprite("DSTFlag");
+            itemWithResource = CreateRewardPool("DSTItemPoolR", "Items", DataList<DataFile>());
+            unitWithResource = CreateRewardPool("DSTUnitPoolR", "Units", DataList<DataFile>());
+            charmWithResource = CreateRewardPool("DSTCharmPoolR", "Charms", DataList<DataFile>());
+            itemWithoutResource = CreateRewardPool("DSTItemPool", "Items", DataList<DataFile>());
+            unitWithoutResource = CreateRewardPool("DSTUnitPool", "Units", DataList<DataFile>());
+            charmWithoutResource = CreateRewardPool("DSTCharmPool", "Charms", DataList<DataFile>());
+
             assets.Add(
                 TribeCopy("Magic", "DST")
                     .WithFlag(flagSprite)
@@ -206,24 +241,11 @@ namespace DSTMod_WildFrost
                             data.leaders = DataList<CardData>("wendy", "wortox", "winona", "wolfgang", "wormwood");
 
                             Inventory inventory = new Scriptable<Inventory>();
-                            inventory.deck.list = DataList<CardData>(
-                                    "spear",
-                                    "spear",
-                                    "pickaxe",
-                                    "axe",
-                                    "hamBat",
-                                    "iceStaff",
-                                    "boosterShot",
-                                    "walkingCane",
-                                    "torch"
-                                )
-                                .ToList();
+                            inventory.deck.list = DataList<CardData>("spear", "spear", "hamBat", "iceStaff", "boosterShot", "walkingCane").ToList();
                             data.startingInventory = inventory;
 
                             data.rewardPools = new RewardPool[]
                             {
-                                unitPool,
-                                itemPool,
                                 Extensions.GetRewardPool("GeneralUnitPool"),
                                 Extensions.GetRewardPool("GeneralItemPool"),
                                 Extensions.GetRewardPool("GeneralCharmPool"),
@@ -248,11 +270,33 @@ namespace DSTMod_WildFrost
                 }
             }
         }
+
+        private void CreateFinalBossSwap()
+        {
+            BattleData finalBoss = TryGet<BattleData>("Final Boss");
+            if (finalBoss.generationScript is BattleGenerationScriptFinalBoss generationScript)
+            {
+                var settings = generationScript?.settings;
+                var cardModifiers = settings.cardModifiers;
+                var subclass = DataBase.subclasses;
+                foreach (Type type in subclass)
+                {
+                    if (Activator.CreateInstance(type) is DataBase instance)
+                    {
+                        var item = instance.CreateFinalSwap();
+                        if (item != null)
+                            cardModifierAssets.Add(item);
+                    }
+                }
+                settings.cardModifiers = CollectionExtensions.AddRangeToArray<FinalBossCardModifier>(cardModifiers, cardModifierAssets.ToArray());
+            }
+        }
+
         public void CreateCustomCardFrames()
         {
             //Somewhere else, possibleSprites is defined like this:
             //public string[] possibleSprites = new string[] { "Frame", "NameTag", "Mask", "FrameOutline", "DescriptionBox" };
-            // The full list of changeables can be found in CardCustomFrameSetter as well  
+            // The full list of changeables can be found in CardCustomFrameSetter as well
             Dictionary<string, Sprite> dictionary = new Dictionary<string, Sprite>();
             foreach (var names in spriteStrings)
             {
@@ -264,8 +308,11 @@ namespace DSTMod_WildFrost
 
         private void InsertNodeViaPreset(ref string[] preset)
         {
-            InsertAfterLetter(ref preset, 'S', '=', 1);
-            InsertAfterLetter(ref preset, 'B', '^', 1);
+            if (isBattleOn)
+            {
+                InsertAfterLetter(ref preset, 'S', '=', 1);
+                InsertAfterLetter(ref preset, 'B', '^', 1);
+            }
         }
 
         private void InsertAfterLetter(ref string[] preset, char letter, char insertChar, int targetAmount)
@@ -289,31 +336,70 @@ namespace DSTMod_WildFrost
 
         public IEnumerator CampaignInit()
         {
-            References.LeaderData.startWithEffects = References
-                .LeaderData.startWithEffects.Concat(new[] { SStack("Summon Chest Before Battle", 1), SStack("Summon Floor Before Battle", 1) })
-                .ToArray();
+            if (isBattleOn)
+            {
+                References.LeaderData.startWithEffects = References
+                    .LeaderData.startWithEffects.Concat(new[] { SStack("Summon Chest Before Battle", 1), SStack("Summon Floor Before Battle", 1) })
+                    .ToArray();
+
+                if (References.PlayerData != null)
+                    References.PlayerData.classData.rewardPools = References
+                        .PlayerData.classData.rewardPools.Concat(new[] { itemWithResource, unitWithResource, charmWithResource })
+                        .ToArray();
+            }
+            else
+            {
+                if (References.PlayerData != null)
+                    References.PlayerData.classData.rewardPools = References
+                        .PlayerData.classData.rewardPools.Concat(new[] { itemWithoutResource, unitWithoutResource, charmWithoutResource })
+                        .ToArray();
+            }
 
             if (References.PlayerData?.classData.ModAdded != this)
                 yield break;
 
+            List<CardData> addCards = new List<CardData>();
+
+            if (!isBattleOn)
+            {
+                addCards.AddRange(DataList<CardData>("pickaxenorequired", "axenorequired", "logSuit").Select(c => c.Clone()));
+            }
+            else
+            {
+                addCards.AddRange(DataList<CardData>("pickaxe", "axe", "torch").Select(c => c.Clone()));
+            }
+
             if (References.LeaderData.original == TryGet<CardData>("wendy"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("abigailFlower").Select(c => c.Clone()));
+                addCards.AddRange(DataList<CardData>("abigailFlower").Select(c => c.Clone()));
             }
             if (References.LeaderData.original == TryGet<CardData>("winona"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("catapult", "catapult").Select(c => c.Clone()));
+                if (isBattleOn)
+                {
+                    addCards.AddRange(DataList<CardData>("catapult", "catapult").Select(c => c.Clone()));
+                }
+                else
+                {
+                    addCards.AddRange(DataList<CardData>("catapultnorequired", "catapultnorequired").Select(c => c.Clone()));
+                }
             }
             if (References.LeaderData.original == TryGet<CardData>("wolfgang"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(
-                    DataList<CardData>("dumbbell", "dumbbell", "goldenDumbbell", "marbell").Select(c => c.Clone())
-                );
+                if (isBattleOn)
+                {
+                    addCards.AddRange(DataList<CardData>("dumbbell", "dumbbell", "goldenDumbbell", "marbell").Select(c => c.Clone()));
+                }
+                else
+                {
+                    addCards.AddRange(DataList<CardData>("dumbbell", "dumbbell", "goldenDumbbell", "marbellnorequired").Select(c => c.Clone()));
+                }
             }
             if (References.LeaderData.original == TryGet<CardData>("wormwood"))
             {
-                References.PlayerData.inventory.deck.list.AddRange(DataList<CardData>("compostWrap").Select(c => c.Clone()));
+                addCards.AddRange(DataList<CardData>("compostWrap").Select(c => c.Clone()));
             }
+            References.PlayerData.inventory.deck.list.AddRange(addCards);
         }
 
         public override List<T> AddAssets<T, Y>()
@@ -420,11 +506,9 @@ namespace DSTMod_WildFrost
             base.Load();
 
             CreateBattleAssets();
-            foreach (var (num, battleDataEditor) in battleAssets)
-            {
-                battleDataEditor.ToggleBattle(true);
-            }
-            
+            CreateFinalBossSwap();
+            ToggleBattle();
+
             ApplyConstraint();
 
             VFXHelper.SFX = new SFXLoader(ImagePath("Sounds"));
@@ -432,21 +516,33 @@ namespace DSTMod_WildFrost
             VFXHelper.VFX = new GIFLoader(this, ImagePath("Animations"));
             VFXHelper.VFX.RegisterAllAsApplyEffect();
 
-            
-
             CreateLocalizedStrings();
             Events.OnEntityCreated += FixImage;
             Events.OnCampaignInit += CampaignInit;
             Events.OnCampaignLoadPreset += InsertNodeViaPreset;
+            ConfigManager.GetConfigSection(this).OnConfigChanged += ConfigChanged;
 
             GameMode gameMode = TryGet<GameMode>("GameModeNormal");
             gameMode.classes = gameMode.classes.Append(TryGet<ClassData>("DST")).ToArray();
         }
 
+        void ToggleBattle()
+        {
+            foreach (var battleDataEditor in battleAssets)
+            {
+                battleDataEditor.ToggleBattle(isBattleOn);
+            }
+        }
+
+        private void ConfigChanged(ConfigItem arg0, object arg1)
+        {
+            ToggleBattle();
+        }
+
         public override void Unload()
         {
             base.Unload();
-            foreach (var (num, battleDataEditor) in battleAssets)
+            foreach (var battleDataEditor in battleAssets)
             {
                 battleDataEditor.ToggleBattle(false);
             }

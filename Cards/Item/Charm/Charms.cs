@@ -1,4 +1,5 @@
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class Charms : DataBase
 {
@@ -26,7 +27,6 @@ public class Charms : DataBase
         assets.Add(
             new CardUpgradeDataBuilder(mod)
                 .Create("CardUpgradeOverheatResist")
-                .AddPool("GeneralCharmPool")
                 .WithType(CardUpgradeData.Type.Charm)
                 .WithImage("Icons/Chill_Charm.png")
                 .WithTitle("Chilled Amulet")
@@ -34,6 +34,7 @@ public class Charms : DataBase
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
+                    data.WithPools(DSTMod.Instance.charmWithResource);
                     data.targetConstraints = new TargetConstraint[]
                     {
                         new Scriptable<TargetConstraintIsUnit>(),
@@ -45,7 +46,6 @@ public class Charms : DataBase
         assets.Add(
             new CardUpgradeDataBuilder(mod)
                 .Create("CardUpgradeFreezeResist")
-                .AddPool("GeneralCharmPool")
                 .WithType(CardUpgradeData.Type.Charm)
                 .WithImage("Icons/Beefalo_Charm.png")
                 .WithTitle("Beefalo Hat")
@@ -53,6 +53,7 @@ public class Charms : DataBase
                 .WithTier(2)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
+                    data.WithPools(DSTMod.Instance.charmWithResource);
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
                     data.effects = new CardData.StatusEffectStacks[] { SStack("Immune To Freeze", 1) };
                 })
@@ -69,13 +70,13 @@ public class Charms : DataBase
                 .SetEffects(SStack("ImmuneToSnow", 1))
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
+                    data.WithPools(DSTMod.Instance.charmWithResource);
                     data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintIsUnit>() };
                 })
         );
         assets.Add(
             new CardUpgradeDataBuilder(mod)
                 .Create("CardUpgradePickAndAxe")
-                .AddPool("GeneralCharmPool")
                 .WithType(CardUpgradeData.Type.Charm)
                 .WithImage("Icons/PickAxe_Charm.png")
                 .WithTitle("Pick/Axe")
@@ -83,8 +84,51 @@ public class Charms : DataBase
                 .WithTier(3)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
+                    data.WithPools(DSTMod.Instance.charmWithResource);
                     data.effects = new CardData.StatusEffectStacks[] { SStack("Reduce Attack", 2) };
                     data.giveTraits = new CardData.TraitStacks[] { TStack("PickaxeType", 1), TStack("AxeType", 1) };
+                    data.targetConstraints = new TargetConstraint[]
+                    {
+                        new Scriptable<TargetConstraintIsUnit>(),
+                        new Scriptable<TargetConstraintDoesDamage>(),
+                    };
+                })
+        );
+        assets.Add(
+            new CardUpgradeDataBuilder(mod)
+                .Create("CardUpgradeGoldenPickaxe")
+                .WithType(CardUpgradeData.Type.Charm)
+                .WithImage("Icons/GoldenPickaxe_Charm.png")
+                .WithTitle("Golden Pickaxe")
+                .WithText("Gain <keyword=dstmod.pickaxetypenorequired> but reduce max <keyword=attack> by 2".Process())
+                .WithTier(2)
+                .SubscribeToAfterAllBuildEvent(data =>
+                {
+                    data.WithPools(DSTMod.Instance.charmWithoutResource);
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Temporary Mineable", 1) };
+                    data.effects = new CardData.StatusEffectStacks[] { SStack("Reduce Attack", 2) };
+                    data.giveTraits = new CardData.TraitStacks[] { TStack("PickaxeTypeNoRequired", 1) };
+                    data.targetConstraints = new TargetConstraint[]
+                    {
+                        new Scriptable<TargetConstraintIsUnit>(),
+                        new Scriptable<TargetConstraintDoesDamage>(),
+                    };
+                })
+        );
+        assets.Add(
+            new CardUpgradeDataBuilder(mod)
+                .Create("CardUpgradeGoldenAxe")
+                .WithType(CardUpgradeData.Type.Charm)
+                .WithImage("Icons/GoldenAxe_Charm.png")
+                .WithTitle("Golden Axe")
+                .WithText("Gain <keyword=dstmod.axetypenorequired> but reduce max <keyword=attack> by 2".Process())
+                .WithTier(2)
+                .SubscribeToAfterAllBuildEvent(data =>
+                {
+                    data.WithPools(DSTMod.Instance.charmWithoutResource);
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Temporary Mineable", 1) };
+                    data.effects = new CardData.StatusEffectStacks[] { SStack("Reduce Attack", 2) };
+                    data.giveTraits = new CardData.TraitStacks[] { TStack("AxeTypeNoRequired", 1) };
                     data.targetConstraints = new TargetConstraint[]
                     {
                         new Scriptable<TargetConstraintIsUnit>(),
@@ -103,6 +147,7 @@ public class Charms : DataBase
                 .WithTier(4)
                 .SubscribeToAfterAllBuildEvent(data =>
                 {
+                    data.WithPools(DSTMod.Instance.charmWithResource);
                     data.targetConstraints = new TargetConstraint[]
                     {
                         new Scriptable<TargetConstraintHasTrait>(r => r.trait = TryGet<TraitData>("Blueprint")),

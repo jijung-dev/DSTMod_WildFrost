@@ -6,7 +6,6 @@ public class OddSkeleton : DataBase
     {
         battleAssets.Add(
             (
-                7,
                 new BattleDataEditor(mod, "Fuelweaver", 0)
                     .SetSprite("Nodes/FuelweaverNode.png", 200)
                     .SetNameRef("Odd Skeleton")

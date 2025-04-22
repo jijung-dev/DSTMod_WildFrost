@@ -16,6 +16,8 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, EventRoutineCurseItems __instance, Entity entity)
         {
+            if (!DSTMod.Instance.isBattleOn)
+                return true;
             if (__instance.node.type.letter == "=" || __instance.node.type.letter == "^")
             {
                 __result = TakeCard(__instance, entity);
@@ -87,11 +89,16 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, CampaignNodeTypeCurseItems __instance, CampaignNode node)
         {
+            if (!DSTMod.Instance.isBattleOn)
+                return true;
             if (node.type.letter == "=")
             {
-                __instance.force = new List<CardData>(
-                    DSTMod.Instance.DataList<CardData>("trapBlueprint", "scienceMachineBlueprint", "firePitBlueprint").Select(c => c.Clone())
-                );
+                var list2 = DSTMod
+                    .Instance.DataList<CardData>("trapBlueprint", "scienceMachineBlueprint", "firePitBlueprint", "crockPotBlueprint", "tentBlueprint")
+                    .Select(c => c.Clone());
+                CardData[] picked = list2.RandomItems(3);
+
+                __instance.force = new List<CardData>(picked);
             }
             else if (node.type.letter == "^")
             {
@@ -107,11 +114,8 @@ namespace DSTMod_WildFrost
                 List<CardData> list = new List<CardData>();
                 list.AddRange(charList);
                 list.AddRange(generalList);
-                list.Shuffle();
 
-                List<CardData> list2 = new List<CardData> { list[0], list[1], list[2] };
-
-                __instance.force = list2;
+                __instance.force = list.RandomItems(3).ToList();
             }
             return true;
         }
@@ -152,6 +156,8 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(EventRoutineCurseItems __instance)
         {
+            if (!DSTMod.Instance.isBattleOn)
+                return true;
             if (__instance.node.type.letter == "=" || __instance.node.type.letter == "^")
                 __instance.cardScale = 0.8f;
             return true;
@@ -163,6 +169,8 @@ namespace DSTMod_WildFrost
     {
         static bool Prefix(ref IEnumerator __result, EventRoutineCurseItems __instance)
         {
+            if (!DSTMod.Instance.isBattleOn)
+                return true;
             if (__instance.node.type.letter == "=" || __instance.node.type.letter == "^")
             {
                 __result = Run(__instance);

@@ -50,6 +50,7 @@ public class Overheat : DataBase
                             {
                                 new Scriptable<TargetConstraintHasHealth>(),
                                 new Scriptable<TargetConstraintHasStatusType>(a => a.statusType = "dst.froze"),
+                                new Scriptable<TargetConstraintHasStatusType>(a => a.statusType = "dst.bloomness"),
                             }
                         ),
                     };

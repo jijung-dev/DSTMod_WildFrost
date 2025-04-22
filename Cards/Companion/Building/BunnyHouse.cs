@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class BunnyHouse : DataBase
 {
@@ -10,11 +11,11 @@ public class BunnyHouse : DataBase
                 .CreateUnit("bunnyHouse", "Rabbit Hutch")
                 .SetCardSprites("BunnyManHouse.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
-                .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 12)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Instant Summon Bunnyman", 1) };
+                    data.WithPools(DSTMod.Instance.unitWithResource);
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Require Wood", 2),

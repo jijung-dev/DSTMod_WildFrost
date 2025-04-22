@@ -104,4 +104,16 @@ public class Winona : DataBase
                 })
         );
     }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptRemoveAttackEffect>(r =>
+            {
+                r.toRemove = new StatusEffectData[] { TryGet<StatusEffectData>("Instant Gain Handy Remote") };
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("winona"), scripts.ToArray());
+    }
 }

@@ -6,7 +6,6 @@ public class AntlionBattle : DataBase
     {
         battleAssets.Add(
             (
-                3,
                 new BattleDataEditor(mod, "Antlion", 0)
                     .SetSprite("Nodes/AntlionNode.png")
                     .SetNameRef("Desert")

@@ -5,11 +5,13 @@ using System.Reflection;
 using BattleEditor;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
+using UnityEngine;
 
 public abstract class DataBase
 {
     protected List<object> assets = new List<object>();
-    protected List<(int, BattleDataEditor)> battleAssets = new List<(int, BattleDataEditor)>();
+    protected List<BattleDataEditor> battleAssets = new List<BattleDataEditor>();
+    protected (CardData, CardScript[]) finalSwapAsset;
 
     public static readonly List<Type> subclasses;
 
@@ -45,6 +47,8 @@ public abstract class DataBase
 
     protected virtual void CreateBattle() { }
 
+    protected virtual void CreateFinalSwapAsset() { }
+
     public List<object> CreateAssest()
     {
         CreateStatusEffect();
@@ -56,7 +60,21 @@ public abstract class DataBase
         return assets;
     }
 
-    public List<(int, BattleDataEditor)> CreateBattleAsset()
+    public FinalBossCardModifier CreateFinalSwap()
+    {
+        CreateFinalSwapAsset();
+        if (finalSwapAsset.Item1 == null)
+            return null;
+
+        FinalBossCardModifier cardModifier = new Scriptable<FinalBossCardModifier>(r =>
+            r.card = finalSwapAsset.Item1 ?? throw new Exception("WHAT Where card")
+        );
+        var scripts = finalSwapAsset.Item2;
+        cardModifier.runAll = scripts ?? throw new Exception("WHAT NO SCRIPT???");
+        return cardModifier;
+    }
+
+    public List<BattleDataEditor> CreateBattleAsset()
     {
         CreateBattle();
         return battleAssets;

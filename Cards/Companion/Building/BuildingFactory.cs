@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class BuildingFactory : BuildingBase
 {
@@ -34,8 +35,7 @@ public class BuildingFactory : BuildingBase
                     SStack(("While Active Freeze Immune To Allies", 1)),
                     null,
                     new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 1) },
-                    new[] { 0, 0, 0 },
-                    false
+                    new[] { 0, 0, 0 }
                 ),
                 Create(
                     "tent",
@@ -44,7 +44,8 @@ public class BuildingFactory : BuildingBase
                     SStack(("On Turn Reduce Sanity Allies", 2), ("On Turn Heal Allies", 1)),
                     null,
                     new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 2) },
-                    new[] { 0, 0, 4 }
+                    new[] { 0, 0, 4 },
+                    false
                 ),
                 Create(
                     "trap",
@@ -53,8 +54,7 @@ public class BuildingFactory : BuildingBase
                     SStack(("On Turn Summon Rabbit In Hand", 1)),
                     null,
                     new[] { (ResourceRequire.Rock, 1), (ResourceRequire.Wood, 1) },
-                    new[] { 0, 0, 5 },
-                    false
+                    new[] { 0, 0, 5 }
                 ),
                 Create(
                     "iceFlingomatic",
@@ -84,6 +84,26 @@ public class BuildingFactory : BuildingBase
                     new[] { 0, 0, 8 }
                 ),
             }
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateUnit("prestihatitatornorequired", "Prestihatitator")
+                .SetHealth(null)
+                .SetDamage(null)
+                .SetCounter(3)
+                .SetCardSprites("Prestihatitator.png", "Wendy_BG.png")
+                .WithCardType("Clunker")
+                .WithValue(100)
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.WithPools(DSTMod.Instance.unitWithoutResource);
+                    data.startWithEffects = new CardData.StatusEffectStacks[]
+                    {
+                        SStack("Scrap", 1),
+                        SStack("While Active Increase Attack To Allies", 3),
+                        SStack("On Turn Apply Sanity Allies", 3),
+                    };
+                })
         );
         base.CreateCard();
     }

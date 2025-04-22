@@ -6,7 +6,6 @@ public class GlowBerry : DataBase
     {
         battleAssets.Add(
             (
-                6,
                 new BattleDataEditor(mod, "DepthWorm", 0)
                     .SetSprite("Nodes/GlowBerryNode.png")
                     .SetNameRef("Glow Berry?")

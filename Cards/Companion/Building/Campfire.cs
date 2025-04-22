@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class Campfire : DataBase
 {
@@ -10,10 +11,10 @@ public class Campfire : DataBase
                 .CreateUnit("campfire", "Campfire")
                 .SetCardSprites("Campfire.png", "Wendy_BG.png")
                 .WithCardType("Clunker")
-                .WithPools("GeneralUnitPool")
                 .SetStats(null, null, 0)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(DSTMod.Instance.unitWithResource);
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
                         SStack("Require Wood", 1),

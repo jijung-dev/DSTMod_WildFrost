@@ -6,7 +6,6 @@ public class LootStash : DataBase
     {
         battleAssets.Add(
             (
-                5,
                 new BattleDataEditor(mod, "Klaus", 0)
                     .SetSprite("Nodes/LootStashNode.png")
                     .SetNameRef("Loot Stash")

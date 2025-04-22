@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
+using UnityEngine;
 
 public class Catapult : DataBase
 {
@@ -20,6 +22,19 @@ public class Catapult : DataBase
                         SStack("Immune To Summoned", 1),
                         SStack("Scrap", 2),
                     };
+                    data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade() };
+                })
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateUnit("catapultnorequired", "Catapult")
+                .SetCardSprites("Catapult.png", "Wendy_BG.png")
+                .SetStats(null, 3, 0)
+                .WithCardType("Clunker")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.traits = new List<CardData.TraitStacks>() { TStack("Smackback", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Immune To Summoned", 1), SStack("Scrap", 3) };
                     data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade() };
                 })
         );
@@ -87,5 +102,34 @@ public class Catapult : DataBase
                     }
                 )
         );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectTriggerWhenCertainAllyAttacks>("Trigger When Winona Attacks")
+                .WithText("Trigger when <card=dstmod.winona> attacks".Process())
+                .WithCanBeBoosted(false)
+                .FreeModify(data =>
+                {
+                    data.isReaction = true;
+                    data.stackable = false;
+                })
+                .SubscribeToAfterAllBuildEvent<StatusEffectTriggerWhenCertainAllyAttacks>(data =>
+                {
+                    data.allyInRow = false;
+                    data.ally = TryGet<CardData>("winona");
+                })
+        );
+    }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("Trigger When Winona Attacks");
+                r.countRange = new Vector2Int(1, 1);
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("catapultnorequired"), scripts.ToArray());
     }
 }

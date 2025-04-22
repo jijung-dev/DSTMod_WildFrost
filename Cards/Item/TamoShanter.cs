@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class TamoShanter : DataBase
 {
@@ -11,10 +12,10 @@ public class TamoShanter : DataBase
                 .SetStats(null, null, 0)
                 .SetCardSprites("TamoShanter.png", "Wendy_BG.png")
                 .WithCardType("Item")
-                .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(DSTMod.Instance.itemWithResource);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Reduce Sanity", 4) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Barrage", 1), TStack("Consume", 1) };
                 })

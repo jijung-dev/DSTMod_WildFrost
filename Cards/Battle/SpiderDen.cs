@@ -6,7 +6,6 @@ public class SpiderDen : DataBase
     {
         battleAssets.Add(
             (
-                0,
                 new BattleDataEditor(mod, "Spider Den", 0)
                     .SetSprite("Nodes/SpiderNode.png")
                     .SetNameRef("Spider Den")

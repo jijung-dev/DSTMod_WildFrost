@@ -6,7 +6,6 @@ public class LordOfTheFruitFlyBattle : DataBase
     {
         battleAssets.Add(
             (
-                0,
                 new BattleDataEditor(mod, "LordFruitFly", 0)
                     .SetSprite("Nodes/FruitFlyFruitNode.png")
                     .SetNameRef("Lord of the Fruit Flies")

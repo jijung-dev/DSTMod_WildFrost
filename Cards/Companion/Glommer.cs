@@ -10,7 +10,7 @@ public class Glommer : DataBase
                 .SetCardSprites("Glommer.png", "Wendy_BG.png")
                 .SetStats(3, null, 6)
                 .WithCardType("Friendly")
-                .SetStartWithEffect(SStack("On Turn Add Attack To Allies", 2))
+                .SetStartWithEffect(SStack("On Turn Add Attack To Allies", 1))
                 .WithPools("GeneralUnitPool")
         );
     }

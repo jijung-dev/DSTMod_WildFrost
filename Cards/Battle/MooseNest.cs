@@ -6,7 +6,6 @@ public class MooseNest : DataBase
     {
         battleAssets.Add(
             (
-                2,
                 new BattleDataEditor(mod, "MooseNest", 0)
                     .SetSprite("Nodes/MooseNestNode.png")
                     .SetNameRef("Moose Nest")

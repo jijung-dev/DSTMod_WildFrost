@@ -30,6 +30,7 @@ public static class Ext
             }
         );
     }
+
     public static CardDataBuilder AddLeaderFrame(this CardDataBuilder cardData)
     {
         CustomCardFrameSystem.LeaderCards.Add(cardData._data.name);

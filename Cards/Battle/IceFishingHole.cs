@@ -6,7 +6,6 @@ public class IceFishingHole : DataBase
     {
         battleAssets.Add(
             (
-                3,
                 new BattleDataEditor(mod, "Ice Fishing Hole", 0)
                     .SetSprite("Nodes/IceFishingHoleNode.png")
                     .SetNameRef("Ice Fishing Hole")

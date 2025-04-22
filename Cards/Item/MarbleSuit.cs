@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class MarbleSuit : DataBase
 {
@@ -11,10 +12,10 @@ public class MarbleSuit : DataBase
                 .SetStats(null, null, 0)
                 .SetCardSprites("MarbleSuit.png", "Wendy_BG.png")
                 .WithCardType("Item")
-                .WithPools("GeneralItemPool")
                 .WithValue(50)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
+                    data.WithPools(DSTMod.Instance.itemWithResource);
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Block", 3) };
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Require Rock", 1) };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };

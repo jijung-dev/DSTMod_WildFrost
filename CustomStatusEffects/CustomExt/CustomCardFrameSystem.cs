@@ -1,14 +1,14 @@
-﻿using HarmonyLib;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using HarmonyLib;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Pool;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 /* Change Checklist:
  * - Changed namespace?
@@ -25,6 +25,7 @@ namespace DSTMod_WildFrost
         #region CHANGEABLE
 
         public static List<string> LeaderCards = new List<string>();
+
         //This method is the criteria for which cards get custom frames.
         internal static bool TryGetSpecialFrame(CardData data, out string frame)
         {
@@ -47,19 +48,21 @@ namespace DSTMod_WildFrost
         // - Not including a key will make the element default to the basePrefab
         //maxLevel: If the base CardType has multiple frame types (e.g. base, chiseled, golden), this number should match the highest index among them.
         // - Item, Clunker, Friendly: 2 (default)
-        // - Leader, Enemy, Miniboss: 0 
+        // - Leader, Enemy, Miniboss: 0
         public static void AddCustomFrame(string frameName, string basePrefabName, Dictionary<string, Sprite> dictionary, int maxLevel = 2)
         {
-                AddCustomFrame<CardCustomFrameSetter>(frameName, basePrefabName, dictionary, maxLevel);
+            AddCustomFrame<CardCustomFrameSetter>(frameName, basePrefabName, dictionary, maxLevel);
         }
 
         //More general version
-        public static void AddCustomFrame<T>(string frameName, string basePrefabName, Dictionary<string, Sprite> dictionary, int maxLevel = 2) where T: CardCustomFrameSetter
+        public static void AddCustomFrame<T>(string frameName, string basePrefabName, Dictionary<string, Sprite> dictionary, int maxLevel = 2)
+            where T : CardCustomFrameSetter
         {
             References.instance.StartCoroutine(AddFrameToPool<T>(frameName, basePrefabName, dictionary, maxLevel));
         }
 
-        public static IEnumerator AddFrameToPool<T>(string frameName, string basePrefab, Dictionary<string, Sprite> dictionary, int maxLevel = 2) where T: CardCustomFrameSetter
+        public static IEnumerator AddFrameToPool<T>(string frameName, string basePrefab, Dictionary<string, Sprite> dictionary, int maxLevel = 2)
+            where T : CardCustomFrameSetter
         {
             Transform t = CardManager.instance.transform;
             CardType friendly = DSTMod.Instance.TryGet<CardType>(basePrefab); //Replace CustomCardFrames with your main mod class.
@@ -71,17 +74,16 @@ namespace DSTMod_WildFrost
             T newSetter = prefab.AddComponent<T>();
             newSetter.Init(dictionary, frameName);
 
-
             GameObject.DontDestroyOnLoad(prefab);
-            ObjectPool<Card> pool = new ObjectPool<Card>(() =>
-            {
-                GameObject obj = GameObject.Instantiate(prefab, CardManager.startPos, Quaternion.identity, t);
-                obj.GetComponent<T>().Init(dictionary, frameName);
-                obj.GetComponent<T>().CreateCallback();
-                return obj.GetComponent<Card>();
-
-            },
-                delegate (Card card)
+            ObjectPool<Card> pool = new ObjectPool<Card>(
+                () =>
+                {
+                    GameObject obj = GameObject.Instantiate(prefab, CardManager.startPos, Quaternion.identity, t);
+                    obj.GetComponent<T>().Init(dictionary, frameName);
+                    obj.GetComponent<T>().CreateCallback();
+                    return obj.GetComponent<Card>();
+                },
+                delegate(Card card)
                 {
                     card.OnGetFromPool();
                     card.entity.OnGetFromPool();
@@ -90,7 +92,8 @@ namespace DSTMod_WildFrost
                     card.transform.localScale = Vector3.one;
                     card.GetComponent<T>().GetCallback();
                     card.gameObject.SetActive(value: true);
-                }, delegate (Card card)
+                },
+                delegate(Card card)
                 {
                     card.transform.SetParent(t);
                     card.OnReturnToPool();
@@ -98,11 +101,16 @@ namespace DSTMod_WildFrost
                     Events.InvokeCardPooled(card);
                     card.gameObject.SetActive(value: false);
                     card.GetComponent<T>().PoolCallback();
-                }, delegate (Card card)
+                },
+                delegate(Card card)
                 {
                     card.GetComponent<T>().DestroyCallback();
                     UnityEngine.Object.Destroy(card.gameObject);
-                }, collectionCheck: false, 10, 20);
+                },
+                collectionCheck: false,
+                10,
+                20
+            );
             for (int i = 0; i <= maxLevel; i++)
             {
                 CardManager.cardPools[frameName + i.ToString()] = pool;
@@ -112,8 +120,6 @@ namespace DSTMod_WildFrost
 
             Debug.Log($"Custom Card Frame: {frameName}");
         }
-
-        
 
         #region PATCHES
 
@@ -142,11 +148,7 @@ namespace DSTMod_WildFrost
         }
 
         [HarmonyPrefix]
-        [HarmonyPatch(typeof(CardManager), nameof(CardManager.ReturnToPool), new Type[]
-        {
-            typeof(Entity),
-            typeof(Card)
-        })]
+        [HarmonyPatch(typeof(CardManager), nameof(CardManager.ReturnToPool), new Type[] { typeof(Entity), typeof(Card) })]
         static bool PatchReturnToPool(Entity entity, Card card, ref bool __result)
         {
             if (GameManager.End || entity.inCardPool)

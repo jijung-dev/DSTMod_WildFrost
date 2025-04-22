@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\VTP\Desktop\DSTMod_WildFrost\OutPut\</OutputPath>
+    <OutputPath>E:\Code\GameModding\DSTMod_WildFrost\OutPut\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -446,6 +446,9 @@
     </Reference>
     <Reference Include="WildfrostHopeMod.Utils">
       <HintPath>D:\SteamLibrary\steamapps\workshop\content\1811990\3157544232\WildfrostHopeMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Config Manager">
+      <HintPath>D:\SteamLibrary\steamapps\workshop\content\1811990\3175889529\Config Manager.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

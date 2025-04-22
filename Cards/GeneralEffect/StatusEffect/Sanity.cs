@@ -69,7 +69,16 @@ public class Sanity : DataBase
                     data.removeOnDiscard = true;
                     data.type = "dst.sanity";
                     data.summonRan = TryGet<StatusEffectData>("Instant Summon Random Shadow Creature");
-                    data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintHasHealth>() };
+                    data.targetConstraints = new TargetConstraint[]
+                    {
+                        new Scriptable<TargetConstraintOr>(r =>
+                            r.constraints = new TargetConstraint[]
+                            {
+                                new Scriptable<TargetConstraintHasHealth>(),
+                                new Scriptable<TargetConstraintHasStatusType>(a => a.statusType = "dst.bloomness"),
+                            }
+                        ),
+                    };
                 })
                 .Subscribe_WithStatusIcon("sanity icon")
         );

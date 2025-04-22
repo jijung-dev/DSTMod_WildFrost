@@ -5,8 +5,5 @@ using UnityEngine;
 
 namespace DSTMod_WildFrost
 {
-    public class StatusEffectApplyXPreCounterTurn : StatusEffectApplyX
-    {
-        
-    }
+    public class StatusEffectApplyXPreCounterTurn : StatusEffectApplyX { }
 }

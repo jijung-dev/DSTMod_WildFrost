@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using UnityEngine;
 
 public class Wendy : DataBase
 {
@@ -30,5 +31,44 @@ public class Wendy : DataBase
                     data.summonCard = TryGet<CardData>("abigail");
                 })
         );
+        assets.Add(
+            StatusCopy("Summon Fallow", "Summon Abigail Enemy")
+                .WithText("Summon <card=dstmod.abigail>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectSummon>(data =>
+                {
+                    data.summonCard = TryGet<CardData>("abigailEnemy");
+                })
+        );
+        assets.Add(
+            StatusCopy("Instant Summon Fallow", "Instant Summon Abigail Enemy")
+                .WithText("Summon <card=dstmod.abigail>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectInstantSummon>(data =>
+                {
+                    data.summonPosition = StatusEffectInstantSummon.Position.InFrontOf;
+                    data.targetSummon = TryGet<StatusEffectSummon>("Summon Abigail Enemy");
+                })
+        );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenDeployed>("When Deployed Summon Abigail Enemy")
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenDeployed>(data =>
+                {
+                    data.effectToApply = TryGet<StatusEffectData>("Instant Summon Abigail Enemy");
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                })
+        );
+    }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("When Deployed Summon Abigail Enemy");
+                r.countRange = new Vector2Int(1, 1);
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("wendy"), scripts.ToArray());
     }
 }

@@ -6,7 +6,6 @@ public class CorruptedTerrarium : DataBase
     {
         battleAssets.Add(
             (
-                4,
                 new BattleDataEditor(mod, "TwinsOfTerror", 0)
                     .SetSprite("Nodes/CorruptedTerrariumNode.png")
                     .SetNameRef("Corrupted Terrarium")

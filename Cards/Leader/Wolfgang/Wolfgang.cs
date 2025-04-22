@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
+using UnityEngine;
 
 public class Wolfgang : DataBase
 {
@@ -54,6 +55,17 @@ public class Wolfgang : DataBase
                 {
                     data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Spice", 3), SStack("Mightiness", 5) };
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Require Rock", 1) };
+                    data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
+                })
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("marbellnorequired", "Marbell")
+                .SetCardSprites("Marbell.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .SubscribeToAfterAllBuildEvent<CardData>(data =>
+                {
+                    data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Spice", 2), SStack("Mightiness", 3) };
                     data.targetConstraints = new TargetConstraint[] { TryGetConstraint("wolfgangOnly") };
                 })
         );
@@ -136,5 +148,28 @@ public class Wolfgang : DataBase
                     data.effectToApply = TryGet<StatusEffectData>("Mightiness");
                 })
         );
+        assets.Add(
+            new StatusEffectDataBuilder(mod)
+                .Create<StatusEffectApplyXWhenHit>("When Hit Apply Mightiness To Self")
+                .WithText("When hit gain <{a}><keyword=dstmod.mightiness>".Process())
+                .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenHit>(data =>
+                {
+                    data.effectToApply = TryGet<StatusEffectData>("Mightiness");
+                    data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
+                })
+        );
+    }
+
+    protected override void CreateFinalSwapAsset()
+    {
+        var scripts = new List<CardScript>
+        {
+            new Scriptable<CardScriptAddPassiveEffect>(r =>
+            {
+                r.effect = TryGet<StatusEffectData>("When Hit Apply Mightiness To Self");
+                r.countRange = new Vector2Int(3, 3);
+            }),
+        };
+        finalSwapAsset = (TryGet<CardData>("wolfgang"), scripts.ToArray());
     }
 }

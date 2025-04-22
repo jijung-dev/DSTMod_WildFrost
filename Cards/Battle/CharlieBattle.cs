@@ -6,7 +6,6 @@ public class CharlieBattle : DataBase
     {
         battleAssets.Add(
             (
-                8,
                 new BattleDataEditor(mod, "CharlieBattle", 0)
                     .SetSprite("Nodes/CharlieNode.png", 200)
                     .SetNameRef("Charlie")

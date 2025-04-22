@@ -6,7 +6,6 @@ public class DragonflyNest : DataBase
     {
         battleAssets.Add(
             (
-                5,
                 new BattleDataEditor(mod, "DragonFly", 0)
                     .SetSprite("Nodes/DragonflyNestNode.png")
                     .SetNameRef("Dragonfly Nest")

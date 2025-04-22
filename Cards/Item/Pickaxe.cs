@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Deadpan.Enums.Engine.Components.Modding;
+using DSTMod_WildFrost;
 
 public class Pickaxe : DataBase
 {
@@ -11,12 +12,27 @@ public class Pickaxe : DataBase
                 .SetStats(null, 2, 0)
                 .SetCardSprites("Pickaxe.png", "Wendy_BG.png")
                 .WithCardType("Item")
-                .WithPools("GeneralItemPool")
                 .WithValue(30)
                 .SubscribeToAfterAllBuildEvent<CardData>(
                     delegate(CardData data)
                     {
+                        data.WithPools(DSTMod.Instance.itemWithResource);
                         data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeType", 1) };
+                    }
+                )
+        );
+        assets.Add(
+            new CardDataBuilder(mod)
+                .CreateItem("pickaxenorequired", "Pickaxe")
+                .SetStats(null, 2, 0)
+                .SetCardSprites("Pickaxe.png", "Wendy_BG.png")
+                .WithCardType("Item")
+                .WithValue(30)
+                .SubscribeToAfterAllBuildEvent<CardData>(
+                    delegate(CardData data)
+                    {
+                        data.attackEffects = new CardData.StatusEffectStacks[] { SStack("Temporary Mineable", 1) };
+                        data.traits = new List<CardData.TraitStacks>() { TStack("PickaxeTypeNoRequired", 1) };
                     }
                 )
         );
