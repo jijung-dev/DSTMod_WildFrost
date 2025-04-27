@@ -12,7 +12,7 @@ public class ShadowAligned : DataBase
                 .Create("shadow")
                 .WithTitle("Shadow Aligned")
                 .WithShowName(true)
-                .WithDescription("Can't be recalled, stealth, immune to everything, reduce by 1 when a Boss is killed")
+                .WithDescription("Stealth, immune to everything, reduce by 1 when a Boss is killed")
                 .WithTitleColour(new Color(0.83f, 0.83f, 0.83f))
                 .WithNoteColour(new Color(0.65f, 0.65f, 0.65f))
                 .WithBodyColour(new Color(1f, 1f, 1f))

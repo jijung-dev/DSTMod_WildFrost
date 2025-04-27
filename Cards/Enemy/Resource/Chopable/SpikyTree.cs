@@ -19,7 +19,7 @@ public class SpikyTree : DataBase
                     {
                         SStack("Scrap", 3),
                         SStack("When Destroyed Gain Wood To Chest", 1),
-                        SStack("Teeth", 2),
+                        SStack("Teeth", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Chopable", 1) };
                 })

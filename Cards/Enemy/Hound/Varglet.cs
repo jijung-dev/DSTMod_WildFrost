@@ -11,7 +11,7 @@ public class Varglet : DataBase
                 .CreateUnit("varglet", "Varglet")
                 .SetCardSprites("Varglet.png", "Wendy_BG.png")
                 .WithText("<keyword=dstmod.alphahound><hiddencard=dstmod.hound><hiddencard=dstmod.redHound><hiddencard=dstmod.blueHound>".Process())
-                .SetStats(10, 3, 5)
+                .SetStats(6, 3, 5)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Gain Monster Meat When Destroyed", 1) };

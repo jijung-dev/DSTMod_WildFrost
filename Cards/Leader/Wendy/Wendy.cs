@@ -10,7 +10,8 @@ public class Wendy : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("wendy", "Wendy")
                 .SetLeaderSprites("Wendy.png", "Wendy_BG.png")
-                .SetStats(8, 2, 3)
+                .WithText("<hiddencard=dstmod.abigailFlower><hiddencard=dstmod.abigail>".Process())
+                .SetStats(10, 4, 3)
                 .WithCardType("Leader")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

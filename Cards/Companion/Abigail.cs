@@ -10,7 +10,7 @@ public class Abigail : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("abigail", "Abigail")
                 .SetCardSprites("Abigail.png", "Abigail_BG.png")
-                .SetStats(5, 2, 0)
+                .SetStats(6, 2, 0)
                 .WithCardType("Friendly")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -43,18 +43,18 @@ public class Abigail : DataBase
                 .CreateItem("abigailFlower", "Abigail's Flower")
                 .SetCardSprites("abigailFlower.png", "Wendy_BG.png")
                 .FreeModify(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.playOnSlot = true;
                         data.canPlayOnEnemy = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<CardData>(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
-                        data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1) };
+                        data.traits = new List<CardData.TraitStacks>() { TStack("Consume", 1), TStack("Noomlin", 1) };
                         data.startWithEffects = new CardData.StatusEffectStacks[1] { SStack("Summon Abigail", 1) };
-                        data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade() };
+                        data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade("CrownCursed") };
                     }
                 )
         );
@@ -67,7 +67,7 @@ public class Abigail : DataBase
                 .Create<StatusEffectTriggerWhenCertainAllyAttacks>("Trigger When Wendy Attacks")
                 .WithText("Trigger when <card=dstmod.wendy> attacks".Process())
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.isReaction = true;
                         data.stackable = false;
@@ -107,14 +107,14 @@ public class Abigail : DataBase
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantGainCard>("Instant Gain Abigail Flower")
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate(StatusEffectInstantGainCard data)
+                    delegate (StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("abigailFlower");
                     }

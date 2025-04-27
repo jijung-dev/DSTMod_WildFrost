@@ -11,7 +11,7 @@ public class DamagedKnight : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("damagedKnight", "Damaged Knight")
                 .SetCardSprites("DamagedKnight.png", "Wendy_BG.png")
-                .SetStats(10, 4, 3)
+                .SetStats(8, 4, 3)
                 .WithCardType("Enemy")
                 .WithValue(5 * 36)
         );

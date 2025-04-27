@@ -9,7 +9,7 @@ public class SpiderNurse : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("spiderNurse", "Spider Nurse")
                 .SetCardSprites("SpiderNurse.png", "Wendy_BG.png")
-                .SetStats(6, 1, 3)
+                .SetStats(5, 1, 4)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

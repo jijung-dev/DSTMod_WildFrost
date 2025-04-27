@@ -12,7 +12,7 @@ public class TwinOfTerror : DataBase
                 .CreateUnit("retinazor", "Retinazor")
                 .SetBossSprites("Retinazor.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
-                .SetStats(21, 0, 6)
+                .SetStats(18, 0, 6)
                 .WithCardType("Miniboss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -30,7 +30,7 @@ public class TwinOfTerror : DataBase
                 .CreateUnit("retinazorEnraged", "Retinazor Enraged")
                 .SetBossSprites("RetinazorEnraged.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
-                .SetStats(18, 1, 5)
+                .SetStats(15, 1, 5)
                 .WithCardType("Miniboss")
                 .WithValue(11 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -49,7 +49,7 @@ public class TwinOfTerror : DataBase
                 .CreateUnit("spazmatism", "Spazmatism")
                 .SetBossSprites("Spazmatism.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
-                .SetStats(25, 2, 4)
+                .SetStats(20, 2, 4)
                 .WithCardType("Miniboss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -63,7 +63,7 @@ public class TwinOfTerror : DataBase
                 .CreateUnit("spazmatismEnraged", "Spazmatism Enraged")
                 .SetBossSprites("SpazmatismEnraged.png", "Wendy_BG.png")
                 .WithText("Take 1<keyword=health>")
-                .SetStats(20, 2, 3)
+                .SetStats(15, 2, 3)
                 .WithCardType("Miniboss")
                 .WithValue(12 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

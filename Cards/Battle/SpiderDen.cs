@@ -19,13 +19,13 @@ public class SpiderDen : DataBase
                         ('T', "smallTree")
                     )
                     .StartWavePoolData(0, "Wave 1: His")
-                    .ConstructWaves(5, 0, "SRTSB", "BTRSS") // 1 wood 1 rock
+                    .ConstructWaves(5, 0, "RTSB", "BTRS") // 1 wood 1 rock
                     .StartWavePoolData(1, "Wave 2: Hiss")
                     .ConstructWaves(2, 2, "WB", "NB")
                     .StartWavePoolData(3, "Wave 3: Hisss")
-                    .ConstructWaves(3, 2, "STN", "SRW", "STW", "SRN") // 1 random wood or rock
+                    .ConstructWaves(3, 2, "TN", "RW", "TW", "RN") // 1 random wood or rock
                     .StartWavePoolData(4, "Wave 4: QUEEN ")
-                    .ConstructWaves(3, 3, "SNQ", "SQN", "WSQ")
+                    .ConstructWaves(3, 3, "NQ", "QN", "WQ")
                     .StartWavePoolData(5, "Wave 5: After Queen")
                     .ConstructWaves(3, 4, "WB", "SSB", "NB")
                     .AddBattleToLoader()

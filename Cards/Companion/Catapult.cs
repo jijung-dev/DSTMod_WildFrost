@@ -11,7 +11,7 @@ public class Catapult : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("catapult", "Catapult")
                 .SetCardSprites("Catapult.png", "Wendy_BG.png")
-                .SetStats(null, 3, 0)
+                .SetStats(null, 4, 0)
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -22,20 +22,20 @@ public class Catapult : DataBase
                         SStack("Immune To Summoned", 1),
                         SStack("Scrap", 2),
                     };
-                    data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade() };
+                    data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade("CrownCursed") };
                 })
         );
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("catapultnorequired", "Catapult")
                 .SetCardSprites("Catapult.png", "Wendy_BG.png")
-                .SetStats(null, 3, 0)
+                .SetStats(null, 4, 0)
                 .WithCardType("Clunker")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.traits = new List<CardData.TraitStacks>() { TStack("Smackback", 1) };
                     data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Immune To Summoned", 1), SStack("Scrap", 3) };
-                    data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade() };
+                    data.createScripts = new CardScript[] { LeaderExt.GiveUpgrade("CrownCursed") };
                 })
         );
         assets.Add(
@@ -44,7 +44,7 @@ public class Catapult : DataBase
                 .SetCardSprites("Tape.png", "Wendy_BG.png")
                 .WithCardType("Item")
                 .FreeModify(
-                    delegate(CardData data)
+                    delegate (CardData data)
                     {
                         data.playOnSlot = true;
                         data.canPlayOnEnemy = false;
@@ -89,14 +89,14 @@ public class Catapult : DataBase
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectInstantGainCard>("Instant Gain Tape")
                 .FreeModify(
-                    delegate(StatusEffectData data)
+                    delegate (StatusEffectData data)
                     {
                         data.stackable = false;
                         data.canBeBoosted = false;
                     }
                 )
                 .SubscribeToAfterAllBuildEvent<StatusEffectInstantGainCard>(
-                    delegate(StatusEffectInstantGainCard data)
+                    delegate (StatusEffectInstantGainCard data)
                     {
                         data.cardGain = TryGet<CardData>("tape");
                     }

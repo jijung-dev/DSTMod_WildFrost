@@ -65,11 +65,8 @@ public class WovenShadow : DataBase
 
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectResource>("Shadow Shield")
-                .SubscribeToAfterAllBuildEvent<StatusEffectResource>(data =>
-                {
-                    data.allowedCards = new TargetConstraint[] { TryGetConstraint("fuelweaverOnly") };
-                })
+                .Create<StatusEffectImmuneToDamage>("Shadow Shield")
+                .WithText("Immune To Damage")
         );
         assets.Add(
             StatusCopy("Temporary Aimless", "Temporary Shadow Shield")

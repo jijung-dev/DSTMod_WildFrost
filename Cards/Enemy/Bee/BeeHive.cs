@@ -35,6 +35,7 @@ public class BeeHive : DataBase
                 .WithText("After ally <keyword=dstmod.bee> is hit summon <card=dstmod.killerBee>".Process())
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXWhenUnitIsHit>(data =>
                 {
+                    data.affectedBySnow = true;
                     data.effectToApply = TryGet<StatusEffectData>("Trigger");
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                     data.unitConstraints = new TargetConstraint[] { TryGetConstraint("beeOnly") };
@@ -45,6 +46,7 @@ public class BeeHive : DataBase
                 .Create<StatusEffectApplyXPreTrigger>("Summon Killer Bee PreTrigger")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXPreTrigger>(data =>
                 {
+                    data.affectedBySnow = true;
                     data.effectToApply = TryGet<StatusEffectData>("Instant Summon Killer Bee");
                     data.applyToFlags = StatusEffectApplyX.ApplyToFlags.Self;
                 })
@@ -52,7 +54,6 @@ public class BeeHive : DataBase
         assets.Add(
             new StatusEffectDataBuilder(mod)
                 .Create<StatusEffectApplyXOnTurn>("On Turn Apply Ink To Self")
-                .WithIsReaction(true)
                 .WithText("then apply <{a}><keyword=null> to self")
                 .SubscribeToAfterAllBuildEvent<StatusEffectApplyXOnTurn>(data =>
                 {

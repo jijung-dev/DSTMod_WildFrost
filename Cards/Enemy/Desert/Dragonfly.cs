@@ -11,7 +11,7 @@ public class Dragonfly : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("dragonfly", "Dragonfly")
                 .SetBossSprites("Dragonfly.png", "Wendy_BG.png")
-                .SetStats(30, 3, 4)
+                .SetStats(22, 3, 4)
                 .WithCardType("BossSmall")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -28,7 +28,7 @@ public class Dragonfly : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("dragonflyEnraged", "Dragonfly Enraged")
                 .SetBossSprites("DragonflyEnraged.png", "Wendy_BG.png")
-                .SetStats(25, 1, 5)
+                .SetStats(20, 1, 5)
                 .WithCardType("BossSmall")
                 .WithValue(25 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

@@ -101,6 +101,7 @@ public class Bloomness : DataBase
                 .Create<StatusEffectOngoingReduceMaxCounter>("Ongoing Reduce Max Counter")
                 .SubscribeToAfterAllBuildEvent<StatusEffectOngoingReduceMaxCounter>(data =>
                 {
+                    data.canBeBoosted = false;
                     //data.targetConstraints = new TargetConstraint[] { new Scriptable<TargetConstraintDoesAttack>() };
                 })
         );
@@ -108,6 +109,7 @@ public class Bloomness : DataBase
             StatusCopy("While Active Teeth To Allies", "While Active Reduce Max Counter To Allies")
                 .SubscribeToAfterAllBuildEvent<StatusEffectWhileActiveX>(data =>
                 {
+                    data.canBeBoosted = false;
                     data.hiddenKeywords = null;
                     data.textKey = null;
                     data.affectsSelf = false;
@@ -125,6 +127,7 @@ public class Bloomness : DataBase
             StatusCopy("While Active Teeth To Allies", "While Active Reduce Max Counter To Self")
                 .SubscribeToAfterAllBuildEvent<StatusEffectWhileActiveX>(data =>
                 {
+                    data.canBeBoosted = false;
                     data.hiddenKeywords = null;
                     data.textKey = null;
                     data.effectToApply = TryGet<StatusEffectData>("Ongoing Reduce Max Counter");
@@ -136,6 +139,7 @@ public class Bloomness : DataBase
             StatusCopy("Temporary Aimless", "Temporary Bloom I")
                 .SubscribeToAfterAllBuildEvent<StatusEffectTemporaryTrait>(data =>
                 {
+                    data.canBeBoosted = false;
                     data.trait = TryGet<TraitData>("Bloom I");
                 })
         );
@@ -143,6 +147,7 @@ public class Bloomness : DataBase
             StatusCopy("Temporary Aimless", "Temporary Bloom II")
                 .SubscribeToAfterAllBuildEvent<StatusEffectTemporaryTrait>(data =>
                 {
+                    data.canBeBoosted = false;
                     data.trait = TryGet<TraitData>("Bloom II");
                 })
         );
@@ -150,6 +155,7 @@ public class Bloomness : DataBase
             StatusCopy("Temporary Aimless", "Temporary Bloom III")
                 .SubscribeToAfterAllBuildEvent<StatusEffectTemporaryTrait>(data =>
                 {
+                    data.canBeBoosted = false;
                     data.trait = TryGet<TraitData>("Bloom III");
                 })
         );

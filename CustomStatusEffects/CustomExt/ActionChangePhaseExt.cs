@@ -72,9 +72,11 @@ public class ActionChangePhaseExt : PlayAction
         yield return StatusEffectSystem.EntityEnableEvent(entity);
 
         if (entity.hp.max <= 0)
-            entity.data.hasHealth = false;
+            entity.display.healthIcon?.Destroy();
         if (entity.damage.max <= 0)
-            entity.data.hasAttack = false;
+            entity.display.damageIcon?.Destroy();
+        if (entity.counter.max <= 0)
+            entity.display.counterIcon?.Destroy();
 
         PauseMenu.Unblock();
         DeckpackBlocker.Unblock();

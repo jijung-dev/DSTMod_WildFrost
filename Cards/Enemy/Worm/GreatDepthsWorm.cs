@@ -8,14 +8,14 @@ public class GreatDepthsWorm : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("greatDepthsWormHead", "Great Depths Worm Head")
                 .SetBossSprites("GreatDepthsWormHead.png", "Wendy_BG.png")
-                .SetStats(30, 3, 8)
+                .SetStats(20, 3, 12)
                 .WithCardType("Miniboss")
                 .WithValue(7 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("Teeth", 3),
+                        SStack("Teeth", 2),
                         SStack("On Turn Eat A Random Enemy", 1),
                         SStack("ImmuneToSnow", 1),
                     };
@@ -25,19 +25,19 @@ public class GreatDepthsWorm : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("greatDepthsWormBody", "Great Depths Worm Body")
                 .SetBossSprites("GreatDepthsWormBody.png", "Wendy_BG.png")
-                .SetStats(20, null, 0)
+                .SetStats(10, null, 0)
                 .WithCardType("Miniboss")
                 .WithValue(7 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
-                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Teeth", 2), SStack("While Active Head Immune To Damage", 1) };
+                    data.startWithEffects = new CardData.StatusEffectStacks[] { SStack("Teeth", 1), SStack("While Active Head Immune To Damage", 1) };
                 })
         );
         assets.Add(
             new CardDataBuilder(mod)
                 .CreateUnit("greatDepthsWormTail", "Great Depths Worm Tail")
                 .SetBossSprites("GreatDepthsWormTail.png", "Wendy_BG.png")
-                .SetStats(30, null, 6)
+                .SetStats(15, null, 7)
                 .WithCardType("Miniboss")
                 .WithValue(7 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
@@ -56,17 +56,8 @@ public class GreatDepthsWorm : DataBase
     {
         assets.Add(
             new StatusEffectDataBuilder(mod)
-                .Create<StatusEffectResource>("Immune To Damage")
-                .SubscribeToAfterAllBuildEvent<StatusEffectResource>(data =>
-                {
-                    data.allowedCards = new TargetConstraint[]
-                    {
-                        new Scriptable<TargetConstraintIsSpecificCard>(card =>
-                        {
-                            card.allowedCards = new CardData[] { TryGet<CardData>("greatDepthsWormHead") };
-                        }),
-                    };
-                })
+                .Create<StatusEffectImmuneToDamage>("Immune To Damage")
+                .WithText("Immune To Damage")
         );
         assets.Add(
             StatusCopy("While Active Teeth To Allies", "While Active Head Immune To Damage")

@@ -9,7 +9,7 @@ public class StatusEffectApplyXWhenTargetCertainCard : StatusEffectApplyXOnCardP
 
     public override bool RunCardPlayedEvent(Entity entity, Entity[] targets)
     {
-        if (constraints == null || targets.Any(r => constraints.Any(c => c.Check(r))))
+        if (targets?.Any(r => r != null && constraints.Any(c => c.Check(r))) ?? false)
         {
             if (hasAnimation && entity == target)
             {

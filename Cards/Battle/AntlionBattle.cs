@@ -22,10 +22,10 @@ public class AntlionBattle : DataBase
                     .StartWavePoolData(0, "Wave 1: Sand")
                     .ConstructWaves(4, 0, "RCSB", "RCSH") // 1 wood 2 rock
                     .StartWavePoolData(1, "Wave 2: Lots of breaking")
-                    .ConstructWaves(4, 2, "HHGT", "HHGS", "BBGS", "BBGT") // 1 gold 1 random wood rock
+                    .ConstructWaves(4, 2, "HHGT", "HHGS", "BGS", "BGT") // 1 gold 1 random wood rock
                     .StartWavePoolData(2, "Wave 3: C A C T I")
                     .ConstructWaves(4, 2, "CBSC", "CHSC") // 1 wood
-                    .StartWavePoolData(3, "Wave 4: Ant")
+                    .StartWavePoolData(3, "Wave 4: Antlion")
                     .ConstructWaves(3, 3, "HBA", "BHA")
                     .StartWavePoolData(4, "Wave 4: One more cactus")
                     .ConstructWaves(1, 4, "C")

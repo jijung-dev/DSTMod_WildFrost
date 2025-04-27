@@ -10,7 +10,7 @@ public class Fuelweaver : DataBase
                 .CreateUnit("forestFuelweaver", "Forest Fuelweaver")
                 .SetBossSprites("ForestFuelweaver.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.fern><hiddencard=dstmod.mysteriousPlant><hiddencard=dstmod.lightFlower>".Process())
-                .SetStats(40, null, 4)
+                .SetStats(30, null, 4)
                 .WithCardType("Boss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -28,7 +28,7 @@ public class Fuelweaver : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("caveFuelweaver", "Cave Fuelweaver")
                 .SetBossSprites("CaveFuelweaver.png", "Wendy_BG.png")
-                .SetStats(50, 5, 3)
+                .SetStats(40, 5, 3)
                 .WithCardType("Boss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {
@@ -47,7 +47,7 @@ public class Fuelweaver : DataBase
                 .CreateUnit("ancientFuelweaver", "Ancient Fuelweaver")
                 .SetBossSprites("AncientFuelweaver.png", "Wendy_BG.png")
                 .WithText("<hiddencard=dstmod.skullWovenShadow><hiddencard=dstmod.handWovenShadow><hiddencard=dstmod.unseenHand>".Process())
-                .SetStats(60, 6, 5)
+                .SetStats(50, 6, 5)
                 .WithCardType("Boss")
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>
                 {

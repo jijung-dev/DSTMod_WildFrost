@@ -50,6 +50,7 @@ public class Mightiness : DataBase
                 .Create<StatusEffectMightiness>("Mightiness")
                 .SubscribeToAfterAllBuildEvent<StatusEffectMightiness>(data =>
                 {
+                    data.canBeBoosted = false;
                     data.hiddenKeywords = new KeywordData[] { TryGet<KeywordData>("mighty"), TryGet<KeywordData>("wimpy") };
                     data.tempTrait = TryGet<StatusEffectData>("Temporary Super Unmovable");
                     data.type = "dst.mightiness";

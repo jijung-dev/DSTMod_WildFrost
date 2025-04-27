@@ -1,5 +1,7 @@
 using Deadpan.Enums.Engine.Components.Modding;
 using DSTMod_WildFrost;
+using UnityEngine;
+using WildfrostHopeMod.VFX;
 
 public class Charms : DataBase
 {
@@ -61,7 +63,6 @@ public class Charms : DataBase
         assets.Add(
             new CardUpgradeDataBuilder(mod)
                 .Create("CardUpgradeSnowResist")
-                //.AddPool("GeneralCharmPool")
                 .WithType(CardUpgradeData.Type.Charm)
                 .WithImage("Icons/Thermal_Charm.png")
                 .WithTitle("Thermal Stone")
@@ -156,4 +157,17 @@ public class Charms : DataBase
                 })
         );
     }
+	protected override void CreateIcon()
+	{
+		assets.Add(
+            new StatusIconBuilder(mod)
+                .Create(name: "snow immune icon", statusType: "snowimmune", mod.ImagePath("Icons/Snow_Resist.png"))
+                .WithIconGroupName(StatusIconBuilder.IconGroups.counter)
+                .WithTextboxSprite()
+                // .WithApplySFX(mod.ImagePath("Heat_Attack.wav"))
+                // .WithEffectDamageSFX(mod.ImagePath("Heat_Attack.wav"))
+                .WithKeywords(iconKeywordOrNull: "immunetosnow")
+        );
+	}
+
 }

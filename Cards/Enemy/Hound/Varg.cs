@@ -11,7 +11,7 @@ public class Varg : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("varg", "Varg")
                 .SetBossSprites("Varg.png", "Wendy_BG.png")
-                .SetStats(18, 4, 4)
+                .SetStats(15, 3, 4)
                 .SetTraits(TStack("Wild", 1))
                 .WithCardType("Miniboss")
                 .WithText("<keyword=dstmod.alphahound><hiddencard=dstmod.hound><hiddencard=dstmod.redHound><hiddencard=dstmod.blueHound>".Process())

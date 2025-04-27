@@ -29,7 +29,7 @@ public class EggOfTerror : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("suspiciousPeeper", "Suspicious Peeper")
                 .SetCardSprites("SuspiciousPeeper.png", "Wendy_BG.png")
-                .SetStats(6, 0, 4)
+                .SetStats(4, 0, 5)
                 .WithCardType("Enemy")
                 .WithValue(1 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

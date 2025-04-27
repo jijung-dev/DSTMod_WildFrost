@@ -12,7 +12,7 @@ public class Frostjaw : DataBase
                 .CreateUnit("frostjaw", "Frostjaw")
                 .SetBossSprites("Frostjaw.png", "Wendy_BG.png")
                 .WithText("Dive Down <hiddencard=dstmod.frostjawDived>".Process())
-                .SetStats(25, 5, 4)
+                .SetStats(20, 3, 5)
                 .WithCardType("Miniboss")
                 .WithValue(20 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

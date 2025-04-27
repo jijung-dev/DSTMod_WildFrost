@@ -9,7 +9,7 @@ public class DanglingDepthDweller : DataBase
             new CardDataBuilder(mod)
                 .CreateUnit("danglingDepthDweller", "Dangling Depth Dweller")
                 .SetCardSprites("DanglingDepthDweller.png", "Wendy_BG.png")
-                .SetStats(6, 2, 4)
+                .SetStats(4, 2, 4)
                 .WithCardType("Enemy")
                 .WithValue(3 * 36)
                 .SubscribeToAfterAllBuildEvent<CardData>(data =>

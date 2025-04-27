@@ -16,7 +16,7 @@ public class Spitter : DataBase
                 {
                     data.startWithEffects = new CardData.StatusEffectStacks[]
                     {
-                        SStack("MultiHit", 2),
+                        SStack("MultiHit", 1),
                         SStack("Gain Monster Meat When Destroyed", 1),
                     };
                     data.traits = new List<CardData.TraitStacks>() { TStack("Backline", 1) };
